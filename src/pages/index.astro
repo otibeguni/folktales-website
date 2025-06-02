@@ -1,11 +1,43 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import Card from '@/components/Card.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const data = [
+  {
+    title: 'Card 1',
+    description: 'Description 1',
+    tags: ['Tag 1', 'Tag 2'],
+  },
+  {
+    title: 'Card 2',
+    description: 'Description 2',
+    tags: ['Tag 3', 'Tag 4'],
+  },
+  {
+    title: 'Card 3',
+    description: 'Description 3',
+    tags: ['Tag 5', 'Tag 6'],
+  },
+  {
+    title: 'Card 4',
+    description: 'Description 4',
+    tags: ['Tag 7', 'Tag 8'],
+  },
+];
 ---
 
 <Layout>
-  <Welcome />
+  <div
+    class="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0"
+  >
+    {
+      data.map((card) => (
+        <Card
+          title={card.title}
+          description={card.description}
+          tags={card.tags}
+        />
+      ))
+    }
+  </div>
 </Layout>

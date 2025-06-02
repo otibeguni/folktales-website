@@ -1,0 +1,15 @@
+---
+const { title, description, tags } = Astro.props;
+---
+
+<div class="card bg-base-100 card-md shadow-sm">
+  <div class="card-body">
+    <h2 class="card-title">{title}</h2>
+    <p>
+      {description}
+    </p>
+    <div class="card-actions justify-end">
+      {tags.map((tag: string) => <div class="badge badge-outline">{tag}</div>)}
+    </div>
+  </div>
+</div>
