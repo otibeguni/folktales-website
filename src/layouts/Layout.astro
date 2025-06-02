@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import Footer from '@/components/Footer.astro';
 import Navbar from '@/components/Navbar.astro';
 ---
 
@@ -14,8 +15,9 @@ import Navbar from '@/components/Navbar.astro';
   </head>
   <body>
     <Navbar />
-    <main class="container mx-auto py-8">
+    <main class="container mx-auto py-12">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>

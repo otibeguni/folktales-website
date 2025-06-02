@@ -3,8 +3,9 @@ import Card from '@/components/Card.astro';
 import Layout from '@/layouts/Layout.astro';
 import type { IStory } from '@/types';
 
-const stories: Array<{ frontmatter: IStory }> = Object.values(
-  import.meta.glob('../stories/*.md', { eager: true }),
+const maxStories = 12;
+const storiesEn: Array<{ frontmatter: IStory }> = Object.values(
+  import.meta.glob('../stories/en/*.md', { eager: true }),
 );
 ---
 
@@ -13,13 +14,15 @@ const stories: Array<{ frontmatter: IStory }> = Object.values(
     class="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0"
   >
     {
-      stories.map(({ frontmatter }) => (
-        <Card
-          title={frontmatter.title}
-          category={frontmatter.category}
-          slug={frontmatter.slug}
-        />
-      ))
+      storiesEn
+        .slice(0, maxStories)
+        .map(({ frontmatter }) => (
+          <Card
+            title={frontmatter.title}
+            category={frontmatter.category}
+            slug={frontmatter.slug}
+          />
+        ))
     }
   </div>
 </Layout>
