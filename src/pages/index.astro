@@ -1,29 +1,11 @@
 ---
 import Card from '@/components/Card.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
+import type { IStory } from '@/types';
 
-const data = [
-  {
-    title: 'Card 1',
-    description: 'Description 1',
-    tags: ['Tag 1', 'Tag 2'],
-  },
-  {
-    title: 'Card 2',
-    description: 'Description 2',
-    tags: ['Tag 3', 'Tag 4'],
-  },
-  {
-    title: 'Card 3',
-    description: 'Description 3',
-    tags: ['Tag 5', 'Tag 6'],
-  },
-  {
-    title: 'Card 4',
-    description: 'Description 4',
-    tags: ['Tag 7', 'Tag 8'],
-  },
-];
+const stories: Array<{ frontmatter: IStory }> = Object.values(
+  import.meta.glob('../stories/*.md', { eager: true }),
+);
 ---
 
 <Layout>
@@ -31,11 +13,11 @@ const data = [
     class="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0"
   >
     {
-      data.map((card) => (
+      stories.map(({ frontmatter }) => (
         <Card
-          title={card.title}
-          description={card.description}
-          tags={card.tags}
+          title={frontmatter.title}
+          category={frontmatter.category}
+          slug={frontmatter.slug}
         />
       ))
     }

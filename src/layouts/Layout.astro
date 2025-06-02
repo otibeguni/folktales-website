@@ -6,19 +6,6 @@ import Navbar from '@/components/Navbar.astro';
 <!doctype html>
 <html lang="en">
   <head>
-    <script is:inline>
-      if (localStorage.getItem('theme') === null) {
-        document.documentElement.setAttribute('data-theme', 'light');
-      } else
-        document.documentElement.setAttribute(
-          'data-theme',
-          localStorage.getItem('theme'),
-        );
-    </script>
-    <script>
-      import { themeChange } from 'theme-change';
-      themeChange();
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

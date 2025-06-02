@@ -1,15 +1,12 @@
 ---
-const { title, description, tags } = Astro.props;
+const { title, category, slug } = Astro.props;
 ---
 
 <div class="card bg-base-100 card-md shadow-sm">
   <div class="card-body">
-    <h2 class="card-title">{title}</h2>
+    <a href={`/stories/${slug}`} class="card-title">{title}</a>
     <p>
-      {description}
+      {category}
     </p>
-    <div class="card-actions justify-end">
-      {tags.map((tag: string) => <div class="badge badge-outline">{tag}</div>)}
-    </div>
   </div>
 </div>

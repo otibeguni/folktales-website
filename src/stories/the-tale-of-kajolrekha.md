@@ -1,0 +1,33 @@
+---
+title: The tale of Kajolrekha
+title_bn: কাজলরেখার পালা
+category: Bengali Folktale
+collection: Mymensingh Geetika
+related_links: Kajolrekha - Audio Summary (Kajolrekha%20-%20Audio%20Summary%2025937e0f305c4825babd210208867446.md)
+slug: the-tale-of-kajolrekha
+language: en
+---
+
+## English
+
+Once upon a time in the enchanting Land of the Tides, there lived a merchant named Dhoneshhor. He had a son and a lovely daughter named Kajolrekha. Dhoneshhor, however, had a weakness for gambling, which eventually led to the loss of all his wealth. In the past, he possessed seven boatloads of paddy, but now, none remained. Forced to resort to begging, he wandered from one place to another in search of a better life.
+
+During his travels, Dhoneshhor encountered a wise monk who owned a mystical fortune-telling bird named Shukpakhi. The monk, sensing Dhoneshhor's plight, generously handed him the magical bird. He instructed Dhoneshhor to follow the bird's guidance faithfully, assuring him that by doing so, he would recover his lost wealth.
+
+Following the bird's advice, the merchant successfully regained all his lost wealth within a year. With his fortunes restored, he began contemplating the marriage of his daughter. Wanting to know her future, he turned to the Shukhpakhi for guidance. However, the mystical bird delivered unsettling news. The prophecy revealed that Kajolrekha was destined to marry a corpse hidden in the forest. Dhoneshhor, though devastated by this revelation, had no choice but to accept her fate as per the monk's instructions.
+
+A few days later, Dhoneshhor embarked on his usual merchant voyage. While navigating through a thick jungle, Kajolrekha noticed an abandoned temple that seemed to beckon her. Leaving the boat, she entered the temple, and as soon as she stepped in, the doors closed and locked behind her. Despite her efforts, she couldn't open them. Meanwhile, Dhoneshhor searched for his missing daughter. Kajolrekha shouted from inside the temple, but even her father couldn't open the doors from outside. Frustrated, he asked her to describe the inside. Tearfully, she revealed a grim scene – a young man's corpse pierced with hundreds of needles. Dhoneshhor realized this was the prophesized corpse. With a heavy heart, he left Kajolrekha trapped and continued his journey.
+
+The idea of his daughter alone in the forest with only a corpse was heartbreaking for Dhoneshhor. Yet, he had no say in the matter. Unaware of this, a few days later, another monk arrived to see Kajorekha. With a simple touch, the doors opened for the monk, and the poor girl fell to his feet, sobbing. The monk comforted Kajolrekha, explaining that the corpse belonged to a prince. If she removed all the needles and brushed his eyes with tree sap, he would come back to life. However, the monk warned her not to reveal her identity to the prince under any circumstances, as it would lead to his permanent death. The monk assured her that when the time was right, he would come and formally introduce the prince to Kajolrekha. With that, the monk set off on his way.
+
+Following the monk's advice, Kajolrekha spent a week removing needles from the corpse. On the seventh day, she took a break and went for a bath. Nearby, a poor man offered his daughter as a slave in exchange for Kajolrekha's gold bangle. Feeling sorry for them, she bought the girl, named her Konkondashi, and told her to prepare tree sap in the temple.
+
+Once inside, intrigued by curiosity, Konkondashi removed the remaining needles and applied tree sap to the corpse's eyes. This awakened the prince from his death-like slumber. Grateful to Konkondashi, he inquired about her identity. Seizing the moment, the slave girl lied, introducing herself as Kajolrekha. Just then, the real Kajolrekha finished her bath and entered the temple. Before she could react, the imposter introduced her as a slave named Konkondashi. Though tempted to protest, Kajolrekha remembered the monk's advice - she must not reveal her true identity. So, she played along, assuming the role of Konkondashi, the slave girl.
+
+The trio left the forest, with the prince leading them to his kingdom. There, he married the fake Kajolrekha, now posing as a princess. However, the prince found no joy in the marriage due to the lack of manners and etiquette in his supposed wife. Meanwhile, he was impressed by the real Kajolrekha, playing the role of a slave. As days passed, the prince's interest waned in his wife, and he confessed his love for the true Kajolrekha.
+
+One day, the prince and the king had to rush to a foreign land, leaving the fake princess in charge. Konkondashi messed up her responsibilities, causing a big problem for the kingdom. Kajolrekha had to step in to fix things. When the king and his son returned, they found it strange that the princess couldn't run the kingdom, but a servant (Kajolrekha) did it well. They tested Konkondashi and Kajolrekha, proving that Kajolrekha was actually the high-born daughter. However, Konkondashi didn't take losing well. She convinced the prince that Kajolrekha was having an affair with his best friend. The heartbroken prince then banished his friend and Kajolrekha from the kingdom.
+
+During their journey, the prince's friend admitted he had a crush on Kajolrekha. He tried to force himself on her, and when she refused, he ordered the ship to sail to his home. Scared, she prayed for help, and miraculously, an island rose from the sea, trapping the ship. Afraid of God's wrath, the prince's friend left Kajolrekha on the deserted island. Luckily, another ship passed by. The captain, a young and wealthy merchant, saw her, rescued her, and brought her home.
+
+Upon reaching the captain's home, Kajolrekha discovered that the man was none other than her own brother, Rotnesshor. Abiding by her promise to the Shukhpakhi, she kept her true identity a secret. When Rotnesshor proposed to marry her, she couldn't refuse without revealing who she really was. The wedding day saw the gathering of wealthy men, princes, and kings from distant lands, including Kajolrekha's true love, the prince, and his fake princess. However, just before Rotnesshor and Kajolrekha could exchange vows, Shukhpakhi mysteriously appeared. He disclosed Kajolrekha's true identity and exposed Konkondashi's deceit. Feeling embarrassed, Rotnesshor handed Kajolrekha to the prince. The two lovers embraced, while the king's men escorted Konkondashi away.
