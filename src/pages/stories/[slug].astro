@@ -17,9 +17,18 @@ export async function getStaticPaths() {
 }
 const { story } = Astro.props;
 const { frontmatter, default: Content } = story;
+const currentUrl = Astro.url.href;
 ---
 
-<Layout>
+<Layout
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: frontmatter.title,
+    author: frontmatter.source,
+    url: currentUrl,
+  }}
+>
   <article class="prose mx-auto max-w-3xl px-4 py-12">
     <h1 class="mb-4 text-5xl leading-16">{frontmatter.title}</h1>
     <span class="badge badge-soft badge-primary">

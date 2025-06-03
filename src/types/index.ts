@@ -15,6 +15,7 @@ export interface IStory {
   category: string;
   slug: string;
   language: string;
+  source: string;
 }
 
 export interface IStoryList {
