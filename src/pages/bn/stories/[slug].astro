@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const stories: Array<{
     frontmatter: IStory;
     default: any;
-  }> = Object.values(import.meta.glob('@/stories/en/*.md', { eager: true }));
+  }> = Object.values(import.meta.glob('@/stories/bn/*.md', { eager: true }));
   return stories.map((story) => ({
     params: { slug: story.frontmatter.slug },
     props: { story },
