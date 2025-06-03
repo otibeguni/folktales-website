@@ -1,0 +1,14 @@
+---
+import { type IFilterSelect } from '@/types';
+
+const { label, options } = Astro.props as IFilterSelect;
+---
+
+<select class="select min-w-full lg:min-w-[200px]">
+  <option disabled selected>{label}</option>
+  {
+    options.map((option) => (
+      <option value={option.value}>{option.label}</option>
+    ))
+  }
+</select>
