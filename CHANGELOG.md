@@ -4,11 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.0.5](https://github.com/otibeguni/folktales-website/compare/v0.0.4...v0.0.5) (2025-06-03)
 
-
 ### Bug Fixes
 
-* link on story-card ([150fc19](https://github.com/otibeguni/folktales-website/commit/150fc19bb261a52ceff23efea28ba070b0fc5690))
-* remove bn language ([b310b5f](https://github.com/otibeguni/folktales-website/commit/b310b5f04c62ce0a4bf0fa864f8302aead429093))
+- link on story-card ([150fc19](https://github.com/otibeguni/folktales-website/commit/150fc19bb261a52ceff23efea28ba070b0fc5690))
+- remove bn language ([b310b5f](https://github.com/otibeguni/folktales-website/commit/b310b5f04c62ce0a4bf0fa864f8302aead429093))
 
 ### [0.0.4](https://github.com/otibeguni/folktales-website/compare/v0.0.3...v0.0.4) (2025-06-03)
 
