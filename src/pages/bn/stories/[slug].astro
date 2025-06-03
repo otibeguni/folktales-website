@@ -1,21 +1,15 @@
 ---
-import i18next, { changeLanguage } from 'i18next';
+import { changeLanguage } from 'i18next';
 import Layout from '@/layouts/Layout.astro';
 import type { IStory } from '@/types';
 
-changeLanguage('bn');
+changeLanguage('en');
 
 export async function getStaticPaths() {
-  const currentLanguage = i18next.language;
-  const storiesEn: Array<{
-    frontmatter: IStory;
-    default: any;
-  }> = Object.values(import.meta.glob('@/stories/en/*.md', { eager: true }));
-  const storiesBn: Array<{
+  const stories: Array<{
     frontmatter: IStory;
     default: any;
   }> = Object.values(import.meta.glob('@/stories/bn/*.md', { eager: true }));
-  const stories = currentLanguage === 'bn' ? storiesBn : storiesEn;
   return stories.map((story) => ({
     params: { slug: story.frontmatter.slug },
     props: { story },
