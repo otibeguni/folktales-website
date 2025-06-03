@@ -6,8 +6,14 @@ import { type IStoryList } from '@/types';
 
 const MAX_STORIES = 12;
 
-const StoryList = ({ stories }: { stories: IStoryList[] }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+const StoryList = ({
+  stories,
+  lang,
+}: {
+  stories: IStoryList[];
+  lang: string;
+}) => {
+  const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
