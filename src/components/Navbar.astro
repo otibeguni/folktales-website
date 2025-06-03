@@ -1,10 +1,6 @@
 ---
 import { t } from 'i18next';
 import { localizePath } from 'astro-i18next';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
-
-const { currentLanguage } = Astro.props;
-const currentPath = Astro.url.pathname;
 ---
 
 <nav class="navbar bg-primary text-primary-content">
@@ -20,11 +16,6 @@ const currentPath = Astro.url.pathname;
         >
           {t('header.navStories')}
         </a>
-        <LanguageSwitcher
-          currentLanguage={currentLanguage}
-          currentPath={currentPath}
-          client:load
-        />
       </div>
     </div>
   </div>
