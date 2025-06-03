@@ -2,8 +2,11 @@
   "name": "otibeguni",
   "type": "module",
   "version": "0.0.3",
+  "author": "Yasin Junet (hello@yasinjunet.com)",
   "scripts": {
+    "predev": "npm run i18n",
     "dev": "astro dev",
+    "prebuild": "npm run i18n",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -12,7 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "release": "standard-version"
+    "release": "standard-version",
+    "i18n": "npx astro-i18next generate"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -21,6 +25,7 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "astro": "^5.8.1",
+    "astro-i18next": "^1.0.0-beta.21",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.8"
