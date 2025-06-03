@@ -1,6 +1,6 @@
 export const locales = [
-  { label: 'English', value: 'en' },
-  { label: 'Bengali', value: 'bn' },
+  { label: 'English (EN)', value: 'en' },
+  { label: 'Bengali (BN)', value: 'bn' },
 ];
 
 export const defaultLocale = 'en';

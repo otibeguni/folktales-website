@@ -1,6 +1,6 @@
 ---
+import { t, changeLanguage } from 'i18next';
 import { localizePath } from 'astro-i18next';
-import { changeLanguage } from 'i18next';
 import Layout from '@/layouts/Layout.astro';
 
 changeLanguage('en');
@@ -10,13 +10,12 @@ changeLanguage('en');
   <div class="hero bg-base-200 min-h-screen">
     <div class="hero-content text-center">
       <div class="max-w-md">
-        <h1 class="text-5xl font-bold">Welcome to Otibeguni!</h1>
+        <h1 class="text-5xl font-bold">{t('pages.home.heroTitle')}</h1>
         <p class="py-6">
-          Pioneering Bangladeshi Folklore R&D company dedicated to revitalizing
-          interest in Bengali and indigenous folklore.
+          {t('pages.home.heroDescription')}
         </p>
         <a href={localizePath('/stories')} class="btn btn-primary"
-          >View Stories</a
+          >{t('pages.home.heroCtaLabel')}</a
         >
       </div>
     </div>

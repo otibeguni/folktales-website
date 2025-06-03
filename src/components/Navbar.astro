@@ -1,4 +1,5 @@
 ---
+import { t } from 'i18next';
 import { localizePath } from 'astro-i18next';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
@@ -16,7 +17,7 @@ const { currentLanguage } = Astro.props;
           href={localizePath('/stories')}
           class="btn btn-primary rounded-field"
         >
-          Stories
+          {t('header.navStories')}
         </a>
         <LanguageSwitcher currentLanguage={currentLanguage} client:load />
       </div>
