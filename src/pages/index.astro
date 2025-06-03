@@ -1,28 +1,18 @@
 ---
-import Card from '@/components/Card.astro';
 import Layout from '@/layouts/Layout.astro';
-import type { IStory } from '@/types';
-
-const maxStories = 12;
-const storiesEn: Array<{ frontmatter: IStory }> = Object.values(
-  import.meta.glob('../stories/en/*.md', { eager: true }),
-);
 ---
 
 <Layout>
-  <div
-    class="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0"
-  >
-    {
-      storiesEn
-        .slice(0, maxStories)
-        .map(({ frontmatter }) => (
-          <Card
-            title={frontmatter.title}
-            category={frontmatter.category}
-            slug={frontmatter.slug}
-          />
-        ))
-    }
+  <div class="hero bg-base-200 min-h-screen">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Welcome to Otibeguni!</h1>
+        <p class="py-6">
+          Pioneering Bangladeshi Folklore R&D company dedicated to revitalizing
+          interest in Bengali and indigenous folklore.
+        </p>
+        <a href="/stories" class="btn btn-primary">View Stories</a>
+      </div>
+    </div>
   </div>
 </Layout>
