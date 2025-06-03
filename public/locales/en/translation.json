@@ -1,0 +1,26 @@
+{
+  "common": {
+    "siteTitle": "Otibeguni - Pioneering Bangladeshi Folklore R&D Company",
+    "siteDescription": "Pioneering Bangladeshi Folklore R&D company dedicated to revitalizing interest in Bengali and indigenous folklore."
+  },
+  "header": {
+    "navStories": "Stories"
+  },
+  "footer": {
+    "copyright": "Copyright",
+    "allRightsReserved": "All rights reserved."
+  },
+  "pages": {
+    "home": {
+      "heroTitle": "Welcome to Otibeguni!",
+      "heroDescription": "Pioneering Bangladeshi Folklore R&D company dedicated to revitalizing interest in Bengali and indigenous folklore.",
+      "heroCtaLabel": "View Stories"
+    },
+    "stories": {
+      "filterLabel": "Filter Stories",
+      "languageLabel": "Language",
+      "categoryLabel": "Category",
+      "allCategoryLabel": "All Categories"
+    }
+  }
+}

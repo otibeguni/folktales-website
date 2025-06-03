@@ -1,20 +1,26 @@
 ---
+import i18next, { t } from 'i18next';
+import { HeadHrefLangs } from 'astro-i18next/components';
 import '@/styles/global.css';
 import Footer from '@/components/Footer.astro';
 import Navbar from '@/components/Navbar.astro';
+
+const currentLanguage = i18next.language;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={currentLanguage}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>{t('common.siteTitle')}</title>
+    <meta name="description" content={t('common.siteDescription')} />
+    <HeadHrefLangs />
   </head>
   <body>
-    <Navbar />
+    <Navbar currentLanguage={currentLanguage} />
     <main class="container mx-auto py-12">
       <slot />
     </main>

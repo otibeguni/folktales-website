@@ -6,8 +6,16 @@ import { type IStoryList } from '@/types';
 
 const MAX_STORIES = 12;
 
-const StoryList = ({ stories }: { stories: IStoryList[] }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+const StoryList = ({
+  stories,
+  lang,
+  labels,
+}: {
+  stories: IStoryList[];
+  lang: string;
+  labels: { [key: string]: string };
+}) => {
+  const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -55,9 +63,9 @@ const StoryList = ({ stories }: { stories: IStoryList[] }) => {
   return (
     <div className="min-h-screen">
       <div className="mx-3 mb-5 flex flex-col gap-3 lg:flex-row lg:items-center">
-        <h2 className="text-2xl font-bold">Filter Stories</h2>
+        <h2 className="text-2xl font-bold">{labels.filterLabel}</h2>
         <Select
-          label="Language"
+          label={labels.languageLabel}
           value={selectedLanguage}
           handleChange={handleLanguageChange}
           options={[
@@ -72,12 +80,12 @@ const StoryList = ({ stories }: { stories: IStoryList[] }) => {
           ]}
         />
         <Select
-          label="Category"
+          label={labels.categoryLabel}
           value={selectedCategory}
           handleChange={handleCategoryChange}
           options={[
             {
-              label: 'All Categories',
+              label: labels.allCategoryLabel,
               value: '',
             },
             ...categories,
