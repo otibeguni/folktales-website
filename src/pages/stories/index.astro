@@ -4,10 +4,10 @@ import Layout from '@/layouts/Layout.astro';
 import type { IStory } from '@/types';
 
 const storiesEn: Array<{ frontmatter: IStory }> = Object.values(
-  import.meta.glob('../stories/en/*.md', { eager: true }),
+  import.meta.glob('../../stories/en/*.md', { eager: true }),
 );
 const storiesBn: Array<{ frontmatter: IStory }> = Object.values(
-  import.meta.glob('../stories/bn/*.md', { eager: true }),
+  import.meta.glob('../../stories/bn/*.md', { eager: true }),
 );
 const stories = [...storiesEn, ...storiesBn];
 ---
