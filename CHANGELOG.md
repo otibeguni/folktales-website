@@ -4,10 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.0.6](https://github.com/otibeguni/folktales-website/compare/v0.0.5...v0.0.6) (2025-06-03)
 
-
 ### Features
 
-* add json-ld schema ([5dba551](https://github.com/otibeguni/folktales-website/commit/5dba5517bfc15921c7ca17c6aa9696371d0c55b3))
+- add json-ld schema ([5dba551](https://github.com/otibeguni/folktales-website/commit/5dba5517bfc15921c7ca17c6aa9696371d0c55b3))
 
 ### [0.0.5](https://github.com/otibeguni/folktales-website/compare/v0.0.4...v0.0.5) (2025-06-03)
 
