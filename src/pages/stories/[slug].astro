@@ -1,32 +1,31 @@
 ---
-import i18next, { changeLanguage } from 'i18next';
-import Layout from '@/layouts/Layout.astro';
-import type { IStory } from '@/types';
+import i18next, { changeLanguage } from "i18next";
+import Layout from "@/layouts/Layout.astro";
+import type { IStory } from "@/types";
 
-changeLanguage('en');
+changeLanguage("en");
 
 export async function getStaticPaths() {
-  const currentLanguage = i18next.language;
-  const storiesEn: Array<{
-    frontmatter: IStory;
-    default: any;
-  }> = Object.values(import.meta.glob('@/stories/en/*.md', { eager: true }));
-  const storiesBn: Array<{
-    frontmatter: IStory;
-    default: any;
-  }> = Object.values(import.meta.glob('@/stories/bn/*.md', { eager: true }));
-  const stories = currentLanguage === 'bn' ? storiesBn : storiesEn;
-  return stories.map((story) => ({
-    params: { slug: story.frontmatter.slug },
-    props: { story },
-  }));
+    const currentLanguage = i18next.language;
+    const storiesEn: Array<{
+        frontmatter: IStory;
+        default: any;
+    }> = Object.values(import.meta.glob("@/stories/en/*.md", { eager: true }));
+    const storiesBn: Array<{
+        frontmatter: IStory;
+        default: any;
+    }> = Object.values(import.meta.glob("@/stories/bn/*.md", { eager: true }));
+    const stories = currentLanguage === "bn" ? storiesBn : storiesEn;
+    return stories.map((story) => ({
+        params: { slug: story.frontmatter.slug },
+        props: { story },
+    }));
 }
 const { story } = Astro.props;
 const { frontmatter, default: Content } = story;
 ---
 
 <Layout>
-  <code>{JSON.stringify(story)}</code>
   <article class="prose mx-auto max-w-3xl px-4 py-12">
     <h1 class="mb-4 text-5xl leading-16">{frontmatter.title}</h1>
     <span class="badge badge-soft badge-primary">
