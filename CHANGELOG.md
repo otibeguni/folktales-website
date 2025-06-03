@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/otibeguni/folktales-website/compare/v0.0.3...v0.0.4) (2025-06-03)
+
+
+### Features
+
+* adjust translations on components level ([3886914](https://github.com/otibeguni/folktales-website/commit/388691456b20f83870b0d0757dd268fab5fac95c))
+* multi-language feature ([c14b14c](https://github.com/otibeguni/folktales-website/commit/c14b14c8f7e602376f018427447ebc74c6719dc6))
+* story details page ([fac0d20](https://github.com/otibeguni/folktales-website/commit/fac0d20c72b0178f356d16cace8b5107382f2b88))
+
+
+### Bug Fixes
+
+* default language in filter ([c89654c](https://github.com/otibeguni/folktales-website/commit/c89654c60de54a2ae69ccfad5b92dee1cb850ace))
+* language switcher redirect to current path ([dc56eeb](https://github.com/otibeguni/folktales-website/commit/dc56eeb267559f3b5df176b0fb5da3b5c1ac08ad))
+* remove debug code from story details page ([f902aef](https://github.com/otibeguni/folktales-website/commit/f902aef68375a6c44d02533487e9fa2463535c27))
+
 ### [0.0.3](https://github.com/otibeguni/folktales-website/compare/v0.0.2...v0.0.3) (2025-06-03)
 
 ### Features
