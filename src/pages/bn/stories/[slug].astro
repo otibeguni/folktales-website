@@ -1,21 +1,30 @@
 ---
 import { changeLanguage } from 'i18next';
 import Layout from '@/layouts/Layout.astro';
-import type { IStory } from '@/types';
+import type { IStory, MetadataItem } from '@/types';
+import { fetchRowsByDatabaseId } from '@/utils/baserow';
 
 changeLanguage('en');
 
 export async function getStaticPaths() {
+  const baserowData = await fetchRowsByDatabaseId();
+  const baserowResult = await baserowData.results;
   const stories: Array<{
     frontmatter: IStory;
     default: any;
   }> = Object.values(import.meta.glob('@/stories/bn/*.md', { eager: true }));
   return stories.map((story) => ({
     params: { slug: story.frontmatter.slug },
-    props: { story },
+    props: {
+      story,
+      baserow:
+        baserowResult.find(
+          (item: MetadataItem) => item.slug === story.frontmatter.slug,
+        ) ?? null,
+    },
   }));
 }
-const { story } = Astro.props;
+const { story, baserow } = Astro.props;
 const { frontmatter, default: Content } = story;
 const currentUrl = Astro.url.href;
 ---
@@ -34,7 +43,40 @@ const currentUrl = Astro.url.href;
     <span class="badge badge-soft badge-primary">
       {frontmatter.category}
     </span>
+
     <div class="divider"></div>
+
+    <h1 class="text-3xl">Plot Summary</h1>
     <Content />
+
+    {
+      baserow?.sources && (
+        <div class="py-8">
+          <h1 class="text-3xl">Sources</h1>
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {baserow.sources.map((source) => (
+              <div class="card bg-base-100 card-md shadow-sm">
+                <div class="card-body">{source.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    {
+      baserow?.related_wikidata && (
+        <>
+          <h1 class="pt-8 text-3xl">Related Topics</h1>
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {baserow.related_wikidata.map((item) => (
+              <div class="card bg-base-100 card-md shadow-sm">
+                <div class="card-body">{item.value}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      )
+    }
   </article>
 </Layout>

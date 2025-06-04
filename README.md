@@ -27,13 +27,21 @@ Before starting, ensure you have the following installed:
    npm install
    ```
 
-3. Run the development server:
+3. Copy the example environment file:
+
+   ```
+   cp .env.example .env
+   ```
+
+4. Fill in the required values and tokens in the `.env` file.
+
+5. Run the development server:
 
    ```
    npm run dev
    ```
 
-4. Open [http://localhost:4321](http://localhost:4321) in your browser.
+6. Open [http://localhost:4321](http://localhost:4321) in your browser.
 
 ## Deploying on Production
 
@@ -71,3 +79,4 @@ fix: resolve layout shift issue on homepage
 - [Astro](https://astro.build/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [Baserow - Otibeguni Database](https://benign-bird.pikapod.net/api-docs/database/170)

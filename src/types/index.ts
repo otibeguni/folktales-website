@@ -21,3 +21,48 @@ export interface IStory {
 export interface IStoryList {
   frontmatter: IStory;
 }
+
+export interface WikidataItem {
+  id: number;
+  value: string;
+  order: string;
+}
+
+export interface SourceItem {
+  id: number;
+  value: string;
+  order: string;
+}
+
+export interface MetadataItem {
+  id: number;
+  order: string;
+  slug: string;
+  related_wikidata: WikidataItem[];
+  sources: SourceItem[];
+}
+
+export interface Frontmatter {
+  title: string;
+  title_bn?: string;
+  category: string;
+  source: string;
+  slug: string;
+  language: string;
+}
+
+export interface Story {
+  frontmatter: Frontmatter;
+  file: string;
+  related_wikidata?: WikidataItem[];
+  sources?: SourceItem[];
+}
+
+export interface StoryItem {
+  params: {
+    slug: string;
+  };
+  props: {
+    story: Story;
+  };
+}
