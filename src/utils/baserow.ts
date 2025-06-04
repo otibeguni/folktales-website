@@ -21,8 +21,9 @@ type RowData = {
  */
 export async function fetchRowsByDatabaseId(
   databaseId: string = BASEROW_DATABASE_ID,
+  additionalParams: string = '',
 ): Promise<RowData> {
-  const url = `${BASEROW_URL}/api/database/rows/table/${databaseId}/?user_field_names=true`;
+  const url = `${BASEROW_URL}/api/database/rows/table/${databaseId}/?user_field_names=true${additionalParams}`;
 
   const response = await fetch(url, {
     method: 'GET',
