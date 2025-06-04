@@ -2,12 +2,14 @@
 import { changeLanguage } from 'i18next';
 import Layout from '@/layouts/Layout.astro';
 import type { IStory, MetadataItem } from '@/types';
-import { fetchRowsByDatabaseId } from '@/utils/baserow';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
 
 changeLanguage('en');
 
 export async function getStaticPaths() {
-  const baserowData = await fetchRowsByDatabaseId();
+  const baserowData = await fetchRowsFromDatabase(
+    '&sources__join=author&related_wikidata__join=type',
+  );
   const baserowResult = await baserowData.results;
   const stories: Array<{
     frontmatter: IStory;
@@ -57,7 +59,18 @@ const currentUrl = Astro.url.href;
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {baserow.sources.map((source) => (
               <div class="card bg-base-100 card-md shadow-sm">
-                <div class="card-body">{source.value}</div>
+                <div class="card-body">
+                  <div class="flex flex-col gap-4">
+                    <div class="flex flex-col">
+                      <span class="text-xs font-bold">Source</span>
+                      {source.value}
+                    </div>
+                    <div class="flex flex-col">
+                      <span class="text-xs font-bold">Author</span>
+                      {source.author}
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -72,7 +85,18 @@ const currentUrl = Astro.url.href;
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {baserow.related_wikidata.map((item) => (
               <div class="card bg-base-100 card-md shadow-sm">
-                <div class="card-body">{item.value}</div>
+                <div class="card-body">
+                  <div class="flex flex-col gap-4">
+                    <div class="flex flex-col">
+                      <span class="text-xs font-bold">Topic</span>
+                      {item.value}
+                    </div>
+                    <div class="flex flex-col">
+                      <span class="text-xs font-bold">Type</span>
+                      {item.type}
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

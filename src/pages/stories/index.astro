@@ -3,7 +3,7 @@ import i18next, { changeLanguage, t } from 'i18next';
 import StoryList from '@/components/StoryList';
 import Layout from '@/layouts/Layout.astro';
 import type { IStory } from '@/types';
-import { fetchRowsByDatabaseId } from '@/utils/baserow';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
 
 changeLanguage('en');
 
@@ -17,7 +17,7 @@ const storiesBn: Array<{
 const stories = [...storiesEn, ...storiesBn];
 
 // Baserow
-const baserowData = await fetchRowsByDatabaseId();
+const baserowData = await fetchRowsFromDatabase();
 const baserowResult = await baserowData.results;
 ---
 

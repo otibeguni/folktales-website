@@ -26,12 +26,14 @@ export interface WikidataItem {
   id: number;
   value: string;
   order: string;
+  type?: string;
 }
 
 export interface SourceItem {
   id: number;
   value: string;
   order: string;
+  author?: string;
 }
 
 export interface MetadataItem {

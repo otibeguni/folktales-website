@@ -19,10 +19,10 @@ type RowData = {
  * @returns A promise that resolves to the row data from Baserow.
  * @throws An error if the HTTP response was not OK.
  */
-export async function fetchRowsByDatabaseId(
-  databaseId: string = BASEROW_DATABASE_ID,
+export async function fetchRowsFromDatabase(
   additionalParams: string = '',
 ): Promise<RowData> {
+  const databaseId = BASEROW_DATABASE_ID || '';
   const url = `${BASEROW_URL}/api/database/rows/table/${databaseId}/?user_field_names=true${additionalParams}`;
 
   const response = await fetch(url, {
