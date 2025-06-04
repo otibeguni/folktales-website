@@ -1,5 +1,6 @@
 ---
 import { changeLanguage } from 'i18next';
+import Article from '@/components/Article.astro';
 import Layout from '@/layouts/Layout.astro';
 import type { IStory, MetadataItem } from '@/types';
 import { fetchRowsFromDatabase } from '@/utils/baserow';
@@ -27,7 +28,7 @@ export async function getStaticPaths() {
   }));
 }
 const { story, baserow } = Astro.props;
-const { frontmatter, default: Content } = story;
+const { frontmatter } = story;
 const currentUrl = Astro.url.href;
 ---
 
@@ -41,67 +42,5 @@ const currentUrl = Astro.url.href;
     url: currentUrl,
   }}
 >
-  <article class="prose mx-auto max-w-3xl px-4 py-12">
-    <h1 class="mb-4 text-5xl leading-16">{frontmatter.title}</h1>
-    <span class="badge badge-soft badge-primary">
-      {frontmatter.category}
-    </span>
-
-    <div class="divider"></div>
-
-    <h1 class="text-3xl">Plot Summary</h1>
-    <Content />
-
-    {
-      baserow?.sources && (
-        <div class="py-8">
-          <h1 class="text-3xl">Sources</h1>
-          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {baserow.sources.map((source) => (
-              <div class="card bg-base-100 card-md shadow-sm">
-                <div class="card-body">
-                  <div class="flex flex-col gap-4">
-                    <div class="flex flex-col">
-                      <span class="text-xs font-bold">Source</span>
-                      {source.value}
-                    </div>
-                    <div class="flex flex-col">
-                      <span class="text-xs font-bold">Author</span>
-                      {source.author}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )
-    }
-
-    {
-      baserow?.related_wikidata && (
-        <>
-          <h1 class="pt-8 text-3xl">Related Topics</h1>
-          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {baserow.related_wikidata.map((item) => (
-              <div class="card bg-base-100 card-md shadow-sm">
-                <div class="card-body">
-                  <div class="flex flex-col gap-4">
-                    <div class="flex flex-col">
-                      <span class="text-xs font-bold">Topic</span>
-                      {item.value}
-                    </div>
-                    <div class="flex flex-col">
-                      <span class="text-xs font-bold">Type</span>
-                      {item.type}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </>
-      )
-    }
-  </article>
+  <Article story={story} baserow={baserow} />
 </Layout>

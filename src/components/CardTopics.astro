@@ -1,0 +1,29 @@
+---
+import type { WikidataItem } from '@/types';
+
+const { related_wikidata } = Astro.props;
+---
+
+<>
+  <h1 class="pt-8 text-3xl">Related Topics</h1>
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {
+      related_wikidata.map((item: WikidataItem) => (
+        <div class="card bg-base-100 card-md shadow-sm">
+          <div class="card-body">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col">
+                <span class="text-xs font-bold">Topic</span>
+                {item.value}
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-bold">Type</span>
+                {item.type}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</>

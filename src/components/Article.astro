@@ -1,0 +1,27 @@
+---
+import CardSource from './CardSource.astro';
+import CardTopics from './CardTopics.astro';
+
+const { story, baserow } = Astro.props;
+const { frontmatter, default: Content } = story;
+---
+
+<article class="prose mx-auto max-w-3xl px-4 py-12">
+  <h1 class="mb-4 text-5xl leading-16">{frontmatter.title}</h1>
+  <span class="badge badge-soft badge-primary">
+    {frontmatter.category}
+  </span>
+
+  <div class="divider"></div>
+
+  <h1 class="text-3xl">Plot Summary</h1>
+  <Content />
+
+  {baserow?.sources && <CardSource sources={baserow.sources} />}
+
+  {
+    baserow?.related_wikidata && (
+      <CardTopics related_wikidata={baserow.related_wikidata} />
+    )
+  }
+</article>

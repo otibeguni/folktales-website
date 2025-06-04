@@ -1,0 +1,29 @@
+---
+import type { SourceItem } from '@/types';
+
+const { sources } = Astro.props;
+---
+
+<div class="py-8">
+  <h1 class="text-3xl">Sources</h1>
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {
+      sources.map((source: SourceItem) => (
+        <div class="card bg-base-100 card-md shadow-sm">
+          <div class="card-body">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col">
+                <span class="text-xs font-bold">Source</span>
+                {source.value}
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-bold">Author</span>
+                {source.author}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
