@@ -2,16 +2,18 @@ import { useState } from 'react';
 
 import Card from '@/components/Card.tsx';
 import Select from '@/components/Select.tsx';
-import { type IStoryList } from '@/types';
+import type { IStoryList, MetadataItem } from '@/types';
 
 const MAX_STORIES = 12;
 
 const StoryList = ({
   stories,
+  baserow,
   lang,
   labels,
 }: {
   stories: IStoryList[];
+  baserow: MetadataItem[];
   lang: string;
   labels: { [key: string]: string };
 }) => {
@@ -98,6 +100,7 @@ const StoryList = ({
           <Card
             key={`${frontmatter.language}-${frontmatter.slug}`}
             {...frontmatter}
+            {...baserow.find((item) => item.slug === frontmatter.slug)}
           />
         ))}
       </div>
