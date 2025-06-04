@@ -8,7 +8,7 @@ import Navbar from '@/components/Navbar.astro';
 
 const currentLanguage = i18next.language;
 
-const { schema = null } = Astro.props;
+const { schema = null, title = null, description = null } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,8 +18,11 @@ const { schema = null } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{t('common.siteTitle')}</title>
-    <meta name="description" content={t('common.siteDescription')} />
+    <title>{title ?? t('common.siteTitle')}</title>
+    <meta
+      name="description"
+      content={description ?? t('common.siteDescription')}
+    />
     <HeadHrefLangs />
     {schema && <Schema item={schema} />}
   </head>

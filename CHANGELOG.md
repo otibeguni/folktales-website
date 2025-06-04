@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/otibeguni/folktales-website/compare/v0.0.6...v0.0.8) (2025-06-04)
+
+### Features
+
+- show baserow data into story details page ([c4bfb63](https://github.com/otibeguni/folktales-website/commit/c4bfb6364a2c24283451470a9f6cbd69effbbb9d))
+- show baserow data into story list page ([a61249a](https://github.com/otibeguni/folktales-website/commit/a61249a472e38bdbe313a067b840b5d3972f003c))
+
+### Bug Fixes
+
+- adjust SEO stuff ([b3d8dd7](https://github.com/otibeguni/folktales-website/commit/b3d8dd7d875d48cc33488ca229d63837d0263db9))
+- show author of source, and type of topic ([64744e2](https://github.com/otibeguni/folktales-website/commit/64744e24238e7e9cf0c916e048f2a0acec391d9e))
+
 ### [0.0.7](https://github.com/otibeguni/folktales-website/compare/v0.0.6...v0.0.7) (2025-06-04)
 
 ### Features

@@ -1,13 +1,16 @@
 ---
 import { changeLanguage } from 'i18next';
+import Article from '@/components/Article.astro';
 import Layout from '@/layouts/Layout.astro';
 import type { IStory, MetadataItem } from '@/types';
-import { fetchRowsByDatabaseId } from '@/utils/baserow';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
 
 changeLanguage('en');
 
 export async function getStaticPaths() {
-  const baserowData = await fetchRowsByDatabaseId();
+  const baserowData = await fetchRowsFromDatabase(
+    '&sources__join=author&related_wikidata__join=type',
+  );
   const baserowResult = await baserowData.results;
   const stories: Array<{
     frontmatter: IStory;
@@ -25,11 +28,12 @@ export async function getStaticPaths() {
   }));
 }
 const { story, baserow } = Astro.props;
-const { frontmatter, default: Content } = story;
+const { frontmatter } = story;
 const currentUrl = Astro.url.href;
 ---
 
 <Layout
+  title={`${frontmatter.title} - Stories | Otibeguni `}
   schema={{
     '@context': 'https://schema.org',
     '@type': 'Book',
@@ -38,45 +42,5 @@ const currentUrl = Astro.url.href;
     url: currentUrl,
   }}
 >
-  <article class="prose mx-auto max-w-3xl px-4 py-12">
-    <h1 class="mb-4 text-5xl leading-16">{frontmatter.title}</h1>
-    <span class="badge badge-soft badge-primary">
-      {frontmatter.category}
-    </span>
-
-    <div class="divider"></div>
-
-    <h1 class="text-3xl">Plot Summary</h1>
-    <Content />
-
-    {
-      baserow?.sources && (
-        <div class="py-8">
-          <h1 class="text-3xl">Sources</h1>
-          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {baserow.sources.map((source) => (
-              <div class="card bg-base-100 card-md shadow-sm">
-                <div class="card-body">{source.value}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )
-    }
-
-    {
-      baserow?.related_wikidata && (
-        <>
-          <h1 class="pt-8 text-3xl">Related Topics</h1>
-          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {baserow.related_wikidata.map((item) => (
-              <div class="card bg-base-100 card-md shadow-sm">
-                <div class="card-body">{item.value}</div>
-              </div>
-            ))}
-          </div>
-        </>
-      )
-    }
-  </article>
+  <Article story={story} baserow={baserow} />
 </Layout>
