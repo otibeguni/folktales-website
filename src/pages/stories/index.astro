@@ -21,7 +21,7 @@ const baserowData = await fetchRowsByDatabaseId();
 const baserowResult = await baserowData.results;
 ---
 
-<Layout>
+<Layout title={'Stories | ' + t('common.siteTitle')}>
   <StoryList
     stories={stories}
     baserow={baserowResult}
