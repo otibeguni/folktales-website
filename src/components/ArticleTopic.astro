@@ -1,0 +1,38 @@
+---
+import Card from '@/components/Card';
+import type { IStory } from '@/types';
+import CardResources from '@/components/CardResources.astro';
+
+const { topic, stories, resources } = Astro.props;
+const relatedResources = resources.flatMap(
+  (item: any) => item.related_resources || [],
+);
+---
+
+<article class="prose mx-auto max-w-3xl px-4 py-12">
+  <h1 class="mb-4 text-5xl leading-16">{topic.item}</h1>
+  <span class="badge badge-soft badge-primary">
+    {topic.type}
+  </span>
+
+  <div class="divider"></div>
+
+  {
+    stories.length > 0 && (
+      <>
+        <h1 class="text-3xl">Stories</h1>
+        <div class="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0">
+          {stories.map(({ frontmatter }: { frontmatter: IStory }) => (
+            <Card {...frontmatter} />
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  {
+    relatedResources.length > 0 && (
+      <CardResources related_resources={relatedResources} />
+    )
+  }
+</article>

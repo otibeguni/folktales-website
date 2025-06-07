@@ -4,15 +4,16 @@ const Card = (props: IStory & Partial<MetadataItem>) => {
   const basePath = props.language === 'en' ? '' : `/${props.language}`;
 
   return (
-    <div className="card bg-base-100 card-md shadow-sm">
+    <a
+      href={`${basePath}/stories/${props.slug}`}
+      className="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
+    >
       <div className="card-body">
-        <a href={`${basePath}/stories/${props.slug}`} className="card-title">
-          {props.title}
-        </a>
+        <div className="card-title">{props.title}</div>
         <p>{props.category}</p>
         {props.sources && <p>{props.sources.map((source) => source.value)}</p>}
       </div>
-    </div>
+    </a>
   );
 };
 

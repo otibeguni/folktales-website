@@ -5,10 +5,7 @@ const CardTopic = (props: WikidataItemAlt) => {
     <div className="card bg-base-100 card-md shadow-sm">
       <div className="card-body">
         <a href={`/topics/${props.slug}`} className="flex flex-col gap-4">
-          <div className="!prose-gray flex flex-col">
-            <span className="text-xs font-bold">Topic</span>
-            {props.item}
-          </div>
+          <div className="card-title">{props.item}</div>
           <div className="!prose-slate flex flex-col">
             <span className="text-xs font-bold">Type</span>
             {props.type}

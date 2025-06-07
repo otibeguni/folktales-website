@@ -1,26 +1,32 @@
 ---
-import { changeLanguage } from "i18next";
-import Article from "@/components/Article.astro";
-import Layout from "@/layouts/Layout.astro";
-import type { IStory, MetadataItem } from "@/types";
-import { fetchRowsFromDatabase } from "@/utils/baserow";
+import { changeLanguage } from 'i18next';
+import Article from '@/components/Article.astro';
+import Layout from '@/layouts/Layout.astro';
+import type { IStory, MetadataItem } from '@/types';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
 
-changeLanguage("en");
+changeLanguage('en');
 
 export async function getStaticPaths() {
-    const baserowData = await fetchRowsFromDatabase(741, "&sources__join=author,library_url,slug&related_wikidata__join=type,slug&related_resources__join=type,url");
-    const baserowResult = (await baserowData.results) as MetadataItem[];
-    const stories: Array<{
-        frontmatter: IStory;
-        default: any;
-    }> = Object.values(import.meta.glob("@/stories/bn/*.md", { eager: true }));
-    return stories.map((story) => ({
-        params: { slug: story.frontmatter.slug },
-        props: {
-            story,
-            baserow: baserowResult.find((item: MetadataItem) => item.slug === story.frontmatter.slug) ?? null,
-        },
-    }));
+  const baserowData = await fetchRowsFromDatabase(
+    741,
+    '&sources__join=author,library_url,slug&related_wikidata__join=type,slug&related_resources__join=type,url',
+  );
+  const baserowResult = (await baserowData.results) as MetadataItem[];
+  const stories: Array<{
+    frontmatter: IStory;
+    default: any;
+  }> = Object.values(import.meta.glob('@/stories/bn/*.md', { eager: true }));
+  return stories.map((story) => ({
+    params: { slug: story.frontmatter.slug },
+    props: {
+      story,
+      baserow:
+        baserowResult.find(
+          (item: MetadataItem) => item.slug === story.frontmatter.slug,
+        ) ?? null,
+    },
+  }));
 }
 const { story, baserow } = Astro.props;
 const { frontmatter } = story;
