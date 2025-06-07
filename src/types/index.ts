@@ -92,3 +92,8 @@ export interface ResourceItem {
   };
   url?: string;
 }
+
+export interface IBreadcrumbs {
+  label: string;
+  href: string;
+}

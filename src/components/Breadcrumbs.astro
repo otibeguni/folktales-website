@@ -1,0 +1,25 @@
+---
+import { localizePath } from 'astro-i18next';
+import type { IBreadcrumbs } from '@/types';
+
+const { menus } = Astro.props;
+---
+
+<div class="breadcrumbs mb-5 text-sm">
+  <ul class="pl-0">
+    <li><a href={localizePath('/')} class="no-underline">Home</a></li>
+    {
+      menus.map((menu: IBreadcrumbs) => (
+        <li>
+          {menu.href ? (
+            <a href={localizePath(menu.href)} class="no-underline">
+              {menu.label}
+            </a>
+          ) : (
+            menu.label
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>
