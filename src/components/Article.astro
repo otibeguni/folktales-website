@@ -1,4 +1,5 @@
 ---
+import CardResources from './CardResources.astro';
 import CardSource from './CardSource.astro';
 import CardTopics from './CardTopics.astro';
 
@@ -22,6 +23,12 @@ const { frontmatter, default: Content } = story;
   {
     baserow?.related_wikidata && (
       <CardTopics related_wikidata={baserow.related_wikidata} />
+    )
+  }
+
+  {
+    baserow?.related_resources && (
+      <CardResources related_resources={baserow.related_resources} />
     )
   }
 </article>

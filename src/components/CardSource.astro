@@ -10,28 +10,24 @@ const { sources } = Astro.props;
   <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
     {
       sources.map((source: SourceItem) => (
-        <div class="card bg-base-100 card-md shadow-sm">
+        <a
+          href={source.library_url || localizePath(`/books/${source.slug}`)}
+          class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
+        >
           <div class="card-body">
             <div class="flex flex-col gap-4">
               <div class="prose-gray flex flex-col">
                 <span class="text-xs font-bold">Source</span>
-                {source.value} | {source.library_url}
+                {source.value}
               </div>
               <div class="prose-gray flex flex-col">
                 <span class="text-xs font-bold">Author</span>
                 {source.author}
               </div>
-              <a
-                href={
-                  source.library_url || localizePath(`/books/${source.slug}`)
-                }
-                class="btn btn-neutral btn-xs"
-              >
-                Read Online
-              </a>
+              <button class="btn btn-neutral btn-xs">Read Online</button>
             </div>
           </div>
-        </div>
+        </a>
       ))
     }
   </div>

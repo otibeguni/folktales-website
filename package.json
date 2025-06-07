@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@splidejs/splide": "^4.1.4",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.8",

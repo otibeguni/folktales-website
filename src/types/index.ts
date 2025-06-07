@@ -71,3 +71,14 @@ export interface StoryItem {
     story: Story;
   };
 }
+
+export interface ResourceItem {
+  id: number;
+  value: string;
+  order: string;
+  type: {
+    id: number;
+    value: string;
+  };
+  url?: string;
+}

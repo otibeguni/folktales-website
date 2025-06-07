@@ -5,8 +5,8 @@ import type { WikidataItem } from '@/types';
 const { related_wikidata } = Astro.props;
 ---
 
-<>
-  <h1 class="pt-8 text-3xl">Related Topics</h1>
+<div class="py-8">
+  <h1 class="text-3xl">Related Topics</h1>
   <section class="splide text-black" aria-label="Related Topics Carousel">
     <div class="splide__track">
       <div class="splide__list">
@@ -64,4 +64,4 @@ const { related_wikidata } = Astro.props;
       },
     }).mount();
   </script>
-</>
+</div>
