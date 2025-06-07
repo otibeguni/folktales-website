@@ -2,7 +2,7 @@ import type { WikidataItemAlt } from '@/types';
 
 const CardTopic = (props: WikidataItemAlt) => {
   return (
-    <div className="card bg-base-100 card-md shadow-sm">
+    <div className="card bg-base-100 card-md shadow-sm transition hover:scale-105">
       <div className="card-body">
         <a href={`/topics/${props.slug}`} className="flex flex-col gap-4">
           <div className="card-title">{props.item}</div>
