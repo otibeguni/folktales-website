@@ -1,4 +1,5 @@
 ---
+import { localizePath } from 'astro-i18next';
 import type { WikidataItem } from '@/types';
 
 const { related_wikidata } = Astro.props;
@@ -11,21 +12,24 @@ const { related_wikidata } = Astro.props;
       <div class="splide__list">
         {
           related_wikidata.map((item: WikidataItem) => (
-            <li class="splide__slide p-1">
-              <div class="card bg-base-100 card-md shadow-sm">
+            <li class="splide__slide p-2">
+              <a
+                href={localizePath(`/topics/${item.slug}`)}
+                class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
+              >
                 <div class="card-body">
                   <div class="flex flex-col gap-4">
-                    <div class="flex flex-col">
+                    <div class="!prose-gray flex flex-col">
                       <span class="text-xs font-bold">Topic</span>
                       {item.value}
                     </div>
-                    <div class="flex flex-col">
+                    <div class="!prose-slate flex flex-col">
                       <span class="text-xs font-bold">Type</span>
                       {item.type}
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </li>
           ))
         }

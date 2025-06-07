@@ -27,6 +27,7 @@ export interface WikidataItem {
   value: string;
   order: string;
   type?: string;
+  slug?: string;
 }
 
 export interface SourceItem {
@@ -34,6 +35,8 @@ export interface SourceItem {
   value: string;
   order: string;
   author?: string;
+  library_url?: string;
+  slug?: string;
 }
 
 export interface MetadataItem {
