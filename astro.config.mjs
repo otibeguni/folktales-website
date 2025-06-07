@@ -18,10 +18,6 @@ export default defineConfig({
     schema: {
       BASEROW_URL: envField.string({ context: 'server', access: 'secret' }),
       BASEROW_TOKEN: envField.string({ context: 'server', access: 'secret' }),
-      BASEROW_DATABASE_ID: envField.string({
-        context: 'server',
-        access: 'secret',
-      }),
     },
   },
 });

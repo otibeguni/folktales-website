@@ -21,6 +21,11 @@
       "languageLabel": "Language",
       "categoryLabel": "Category",
       "allCategoryLabel": "All Categories"
+    },
+    "topics": {
+      "filterLabel": "Filter Types",
+      "typeLabel": "Type",
+      "allTypesLabel": "All Types"
     }
   }
 }
