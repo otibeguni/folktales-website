@@ -1,19 +1,19 @@
 ---
-import i18next, { changeLanguage, t } from 'i18next';
-import StoryList from '@/components/StoryList';
-import Layout from '@/layouts/Layout.astro';
-import type { IStory } from '@/types';
-import { fetchRowsFromDatabase } from '@/utils/baserow';
+import i18next, { changeLanguage, t } from "i18next";
+import StoryList from "@/components/StoryList";
+import Layout from "@/layouts/Layout.astro";
+import type { IStory } from "@/types";
+import { fetchRowsFromDatabase } from "@/utils/baserow";
 
-changeLanguage('en');
+changeLanguage("en");
 
 const currentLanguage = i18next.language;
 const storiesEn: Array<{
-  frontmatter: IStory;
-}> = Object.values(import.meta.glob('@/stories/en/*.md', { eager: true }));
+    frontmatter: IStory;
+}> = Object.values(import.meta.glob("@/stories/en/*.md", { eager: true }));
 const storiesBn: Array<{
-  frontmatter: IStory;
-}> = Object.values(import.meta.glob('@/stories/bn/*.md', { eager: true }));
+    frontmatter: IStory;
+}> = Object.values(import.meta.glob("@/stories/bn/*.md", { eager: true }));
 const stories = [...storiesEn, ...storiesBn];
 // Baserow
 const baserowData = await fetchRowsFromDatabase();
