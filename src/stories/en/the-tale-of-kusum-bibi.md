@@ -6,8 +6,6 @@ slug: the-tale-of-kusum-bibi
 language: en
 ---
 
-# English
-
 It was a long time ago. In the city of Rome, there lived a childless king named Sher Shah. He had not one, but seven queens in his palace. The youngest of these queens was named Kusum. When this youngest queen became pregnant, the king’s affection for her grew significantly. Because of this, the other six queens could not tolerate Kusum.
 
 During childbirth, the senior queen conspired with the midwife and secretly replaced Queen Kusum's baby with a wooden doll, making it seem as though Kusum had given birth to the doll. The real baby was taken to the senior queen's chambers. The queen immediately commanded the midwife, “Take this child away from my sight and kill it with a sharp weapon.” However, the midwife, filled with compassion, couldn’t bring herself to kill the child. Instead, she decided to leave the kingdom and take the baby to another land, sparing its life.
