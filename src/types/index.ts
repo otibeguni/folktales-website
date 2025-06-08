@@ -49,6 +49,18 @@ export interface SourceItem {
   slug?: string;
 }
 
+export interface SourceItemAlt {
+  id: number;
+  name: string;
+  order: string;
+  author?: string;
+  url?: string;
+  library_url?: string;
+  slug?: string;
+  language: string;
+  category: string;
+}
+
 export interface MetadataItem {
   id: number;
   order: string;

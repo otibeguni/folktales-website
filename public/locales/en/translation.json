@@ -5,7 +5,8 @@
   },
   "header": {
     "navStories": "Stories",
-    "navTopics": "Topics"
+    "navTopics": "Topics",
+    "navBooks": "Books"
   },
   "footer": {
     "copyright": "Copyright",
@@ -27,6 +28,12 @@
       "filterLabel": "Filter Types",
       "typeLabel": "Type",
       "allTypesLabel": "All Types"
+    },
+    "books": {
+      "filterLabel": "Filter Books",
+      "languageLabel": "Language",
+      "categoryLabel": "Category",
+      "allCategoryLabel": "All Categories"
     }
   }
 }
