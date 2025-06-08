@@ -22,7 +22,7 @@ const websiteIcon = icon({ prefix: 'fas', iconName: faGlobe.iconName });
           class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
         >
           <div class="card-body">
-            <div class="prose-gray flex items-center gap-2">
+            <div class="prose-gray flex items-center gap-3 leading-tight">
               {resource.type.value.toLowerCase() === 'image' && (
                 <Fragment set:html={imageIcon.html} />
               )}
@@ -32,7 +32,7 @@ const websiteIcon = icon({ prefix: 'fas', iconName: faGlobe.iconName });
               {resource.type.value.toLowerCase() === 'website' && (
                 <Fragment set:html={websiteIcon.html} />
               )}
-              {resource.type.value}
+              {resource.value}
             </div>
           </div>
         </a>
