@@ -7,8 +7,6 @@ slug: the-girl-with-rose-colored-skin
 language: en
 ---
 
-# English
-
 In a certain kingdom, there lived four friends. Each of them was the son of a powerful man — a prince, a minister’s son, a nobleman’s son, and the son of the chief constable.
 
 They spent their days laughing, playing, and roaming around in merriment. None of them had any interest in studies.
