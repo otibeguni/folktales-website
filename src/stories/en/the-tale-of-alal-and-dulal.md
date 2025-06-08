@@ -7,8 +7,6 @@ slug: the-tale-of-alal-and-dulal
 language: en
 ---
 
-# English
-
 The Dewan of Boinnachong, Sonafar, sits beside his dying wife, accompanied by his two sons, Alal and Dulal. On her deathbed, Sonafar's wife requests that he never remarry after her passing. She believes that a stepmother can never truly love her stepchildren. Therefore, with the sky, the air, and all the animals and birds as witnesses, she makes this vow to her husband before taking her last breath.
 
 Meanwhile, after their mother’s death, Alal and Dulal stop eating due to their grief. Sonafar is also struggling to accept that his wife is gone. Seeing his sons in such distress deeply worries him. Gradually, Sonafar loses focus on his duties as Dewan, and his absence begins to affect the administration negatively. Observing this, his ministers and officials come together to request that he remarry. Sonafar responds that if he takes another wife, she might not care for his children properly, as a stepmother can never truly be a loving parent.
