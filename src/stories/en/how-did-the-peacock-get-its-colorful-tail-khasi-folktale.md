@@ -8,10 +8,6 @@ slug: how-did-the-peacock-get-its-colorful-tail-khasi-folktale
 language: en
 ---
 
-# Plot Summary
-
-## English
-
 Long long ago, humans spoke the same language as animals and birds. At that time, U Kliew the peacock had the same gray coat as other birds. Even so, U Klew was very arrogant. He walked among the other birds with his head held high in a majestic manner. He was a vain bird, excessively proud of his long tail and feathers, which were longer and higher than any other bird. He flaunted his tail and feathers and demeaned other birds. The peacock was also a very troublesome neighbour. Due to his large body, he could not meet the birds living in the lowlands. He only interacted with big name birds. And these wealthy birds also catered to his ego a lot, causing the peacock’s pride to grow taller than his feathers.
 
 One day, the birds were discussing in their court about who should they send from the jungle to greet the beautiful Goddess of the blue realm, Ka Snagi? Who would represent the whole forest? The Goddess had brightened everyone’s lives with her light, so the forest dwellers wanted to express their gratitude. At one point of the meeting, the representative chosen was that arrogant peacock, U Klew.
