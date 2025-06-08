@@ -45,6 +45,7 @@ export interface SourceItem {
   value: string;
   order: string;
   author?: string;
+  url?: string;
   library_url?: string;
   slug?: string;
 }
