@@ -7,8 +7,6 @@ slug: merchant-amir-and-bhelua
 language: en
 ---
 
-## English
-
 In the city of Teloinna, King Manohar and the enchanting Moyna Sundari were blessed with a divine daughter—Velua Sundari.
 
 Her beauty? Like a celestial apsara from the heavens, her features bathed in the mystical glow of moonlight.
