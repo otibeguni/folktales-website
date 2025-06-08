@@ -7,8 +7,6 @@ slug: the-chronicles-of-dulal
 language: en
 ---
 
-# English
-
 In a certain country, there lived a merchant named Alal Saudagar. He lived happily with his beautiful wife and son, Dulal. As Dulal grew older, when he turned twelve, he insisted on going hunting in the deep forest. His parents couldn’t refuse their only son, even though they had a bad feeling about it. Despite their worries, they allowed Dulal to venture into the woods. Once in the forest, he lost his way and couldn't find the path back home. Wandering aimlessly, Dulal became a drifter, as if the magic of the forest made him forget about returning to his parents.
 
 On the other hand, Rupa Sundari's beauty seemed to fade day by day with worry for her son. Alal Saudagar's trading ship sank, yet Dulal did not return home. How could he? He had lost his way and ended up in a completely different land.
