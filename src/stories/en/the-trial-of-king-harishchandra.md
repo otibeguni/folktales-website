@@ -6,16 +6,6 @@ slug: the-trial-of-king-harishchandra
 language: en
 ---
 
-<aside>
-
-💡
-
-The [_Mangal Kavya_](https://en.wikipedia.org/wiki/Mangal-K%C4%81vya) (literally "auspicious poetry") is a significant genre of Bengali religious literature that flourished between the 13th and 18th centuries. These narrative poems were composed in honor of local deities, blending indigenous folk traditions with Sanskritic elements to promote the worship of these gods and goddesses. Typically written in simple rhyming couplets, they were intended for oral performance during festivals and rituals, making them accessible to rural audiences. _Dharma Mangal Kavya_ is a notable subgenre within the _Mangal Kavya_ tradition, focusing on the deity Dharma Thakur. Dharma Thakur, also known as Dharmaraj, is a folk deity revered in the Rarh region of Bengal.
-
-</aside>
-
-## English
-
 Long, long ago in ancient India, there lived a noble king named **Harishchandra**. He was so well-known for his honesty and righteousness that people in distant kingdoms would swear oaths in his name. Harishchandra’s wife was **Queen Madana**, and together they ruled a peaceful, prosperous kingdom. Their people adored them. But despite all their happiness, one sorrow always lingered in their hearts — they had no child.
 
 One evening, the king and queen were walking in their garden, lost in thought. The sadness of being childless surfaced once again.
