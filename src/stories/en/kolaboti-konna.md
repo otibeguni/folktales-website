@@ -9,8 +9,6 @@ slug: kolaboti-konna
 language: en
 ---
 
-# English
-
 Narayan was the ruler of the Teylafang region in the Tripura kingdom. He had five sons, of which the wives of four were very beautiful and attractive. The youngest prince was unmarried and was the beloved younger brother of the four sisters-in-law. One day, the sisters-in-law joked, “No girl will ever come to the house of the lazy prince.” The youngest prince replied, “Just watch; my wife will be more beautiful than all of you.” Saying this, he set out to find a bride, carrying a branch of the gumchak fruit (a sweet and fragrant wild fruit that resembles an apple), a stick, and a knife.
 
 While walking, the prince's eyes fell upon an exquisite girl in a bamboo hut, adorned with a rinai (traditional garment). She had wildflowers woven into her hair and was wearing various ornaments while spinning thread on a charka (spinning wheel). He approached the hut and addressed her:

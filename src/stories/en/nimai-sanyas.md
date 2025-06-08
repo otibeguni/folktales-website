@@ -6,14 +6,6 @@ slug: nimai-sanyas
 language: en
 ---
 
-<aside>
-
-💡 The early 15th century marked the beginning of Alauddin Hussain Shah's reign over Bengal. During his rule, the upper-caste Hindus lived in luxury and comfort, while the lower castes were neglected and marginalized. It was during this time that Shri Chaitanya Mahaprabhu, known in his early life as ‘Nimai,’ made his appearance. Born in 1486, Nimai’s life left a profound impact on the religious landscape, and he passed away in 1533. His death remains shrouded in mystery even today. Some believe that he disappeared on his own, while others suggest that he was murdered.
-
-</aside>
-
-# English
-
 Nimai was quite renowned in his neighborhood. He ran a small school, or 'tol,' where he not only taught but also entertained the local boys with various stories beyond the usual lessons. His charismatic presence and engaging storytelling made his 'tol' a lively hub for learning and laughter.
 
 At home, Nimai lived with his mother, Shachidevi, and his newly wedded wife, Vishnupriya. Before Vishnupriya, he was married to another sweet-natured girl named Lakshmipriya. Unfortunately, Lakshmipriya met a tragic end; she passed away after being bitten by a snake.

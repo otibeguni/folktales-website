@@ -8,8 +8,6 @@ slug: how-alcohol-came-to-be
 language: en
 ---
 
-## English
-
 A long time ago, when King Shukradeva ruled over Tripura, ghosts used to roam freely in his kingdom. One day, one of his spies came to him and exclaimed, “O Maharaja! The peasants from the southern part of your kingdom are fed up of ghosts and are fleeing their homes. When the women bathe, the ghosts pierce holes in their water buckets. During meals, the ghosts desecrate their plates with urine and feces. Even in their sleep, the ghosts tug at their hair. And when they engage in no activity at all, the mischievous spirits incessantly tickle them. Please do something.” “Why hasn’t the local governor done anything to address this issue?” asked the King furiously. “He tried his best, my lord. But every time he took any initiative, the ghosts would throw stones at his men.” answered the spy.
 
 Upon hearing this, King Shukradeva called a meeting gathering all his ministers, advisors and the commander of his army. For three days and three nights, the council deliberated, searching for a solution. Alas, it became apparent that conventional warfare would prove futile. After exhausting all possible ideas, they decided to call for help. An proclamation was issued throughout the kingdom. Whoever could get rid of the ghosts, would be given the highest rank among the king's advisors. He would be handsomely rewarded and the history books would immortalize this great deed. The announcement reached the ears of the ghosts as well. They decided to wait for 7 days to see who dares to challenge them. Once the wait was over, they would unleash chaos all over the kingdom.

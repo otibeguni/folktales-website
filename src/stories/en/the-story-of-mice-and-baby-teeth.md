@@ -8,8 +8,6 @@ slug: the-story-of-mice-and-baby-teeth
 language: en
 ---
 
-## English
-
 Once upon a time in a forested mountain area, there lived a couple without kids. Every day, the husband worked hard chopping wood in the forest, while his wife took care of their home, eagerly awaiting his return. They lived comfortably on the income from selling the wood, enjoying a peaceful life filled with joy. However, each evening they felt something was missing – a child to complete their family. Hoping for a miracle, the wife began praying daily to Mah Lakhi, a revered goddess of the [Chakma people](https://en.wikipedia.org/wiki/Chakma_people).
 
 Their prayers didn't go unheard. Mah Lakhi, moved by their devotion, blessed them with a son. The couple was overjoyed, and their happiness grew as their son did. But a strange thing happened. The boy's baby teeth fell out and were replaced by new ones, only for those to fall out again. This worried the couple deeply, as they wondered how their son could go through life like this.

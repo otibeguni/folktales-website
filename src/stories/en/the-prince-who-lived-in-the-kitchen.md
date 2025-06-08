@@ -7,8 +7,6 @@ slug: the-prince-who-lived-in-the-kitchen
 language: en
 ---
 
-# English
-
 Several hundred years ago, there was a king named Ammok. The king had seven sons, but the youngest son was different from the rest. He would remain quiet all day and engage in cooking like the girls. Because of this, he was named 'Pahailya.' After years of enduring humiliation from the king, one day, out of deep resentment, he left the kingdom.
 
 Walking along the path, Pahailya arrived in a forest where he saw a small hut and a goat tied up in front of it. He decided to spend the night there and, after having his dinner, he fell asleep. In the morning, Pahailya woke up to find his horse missing. Seeing no one else around, he became suspicious of the goat. The next night, he kept a close watch on the goat’s movements, and as he had suspected, once the night grew deep, the goat shed its disguise and transformed into a demoness. Witnessing this, Pahailya ran into the forest, but the demoness, now in the form of a young woman, chased after him.

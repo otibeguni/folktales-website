@@ -9,8 +9,6 @@ slug: how-chittagong-came-to-be
 language: en
 ---
 
-## English
-
 In ancient times, most of the present-day region of Chittagong was covered in dense forests. Apart from a few nomadic tribes there weren't any large human settlements in the area. This presented a golden opportunity for Sufi preachers who were looking for new areas to settle. One particular Sufi saint named Hazrat Badar Shah was fascinated with this prospect and wanted to explore the banks of the Karnaphuli river. His followers warned him of the rumors of deadly creatures of both natural and supernatural origins that lurked in the area. But Badr Shah was undeterred. He stepped on a large stone and using his mystical powers, commanded it to float in the water and take him on a voyage through the river.
 
 As the daylight began to fade and darkness engulfed the forest, Badr Shah started to suspect that he was being followed. But being a man of faith, he remained assured that the Almighty would never lead him to harm. He decided to stop for the night and climbed up a hill to set up his camp. In the middle of the night, a group of men wearing white robes stormed in to his tent, abducted him, and took him to their leader. Except, these were no ordinary men, they were from the local tribe of Jinns. And their leader was none other than the Jinn Badshah himself.

@@ -7,8 +7,6 @@ slug: the-tale-of-sakhina-bibi
 language: en
 ---
 
-# English
-
 Many years ago, in the village of Kella Tajpur in Mymensingh, lived a Mughal nobleman named Omar Khan. He had a daughter named Sakhina. Unlike other girls of her age, Sakhina didn’t play with dolls. Instead, she had the desire to become a warrior, and she received ample training to fulfill that dream.
 
 In the history of Bengal, the Baro-Bhuiyans were a group of landlords who rebelled against the Mughal Empire to defend the independence of their regions. Among them, the most famous was Isa Khan. He was entrusted with the responsibility of Jangalbari.

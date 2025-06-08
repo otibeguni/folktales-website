@@ -8,8 +8,6 @@ slug: the-love-story-of-ushaboti
 language: en
 ---
 
-## English
-
 Long ago, in a kingdom by the river, there lived a princess named Ushaboti. She was the only daughter of King Banraj, a powerful ruler from the early days of the Pal dynasty. Ushaboti was known across the land for her golden complexion, her grace, and the quiet strength in her eyes.
 
 One morning, as the sun cast its first golden rays over the Ganges, Ushaboti went down to the river to bathe with her handmaidens. The air was filled with the scent of sandalwood and neem flowers. As she stepped into the water in her pale saffron saree, she looked like a goddess descended to earth.

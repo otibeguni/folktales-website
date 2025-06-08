@@ -9,8 +9,6 @@ slug: the-dighi-of-king-tiyor
 language: en
 ---
 
-## English
-
 Many years ago, in a region adjacent to the Sundarbans called Tala-Kalaroa, there was a village named “Sujan Saha”. The villagers were suffering from a severe lack of water. A kind-hearted man from the village named Sharaf Khan decided to address the issue by digging a large pond. Work began on the pond, but as the project progressed, news reached the king.The king lives in a nearby village.In the capital of Manikhar. The king was furious when he heard about the pond being dug.
 
 "A pond is being dug in my kingdom, without informing me? I'll deal with this."

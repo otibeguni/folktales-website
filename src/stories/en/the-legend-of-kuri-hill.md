@@ -9,8 +9,6 @@ slug: the-legend-of-kuri-hill
 language: en
 ---
 
-## English
-
 Centuries ago, there was a renowned market called Imambazar, located in the present-day district of Habiganj. Among other things, the market was well-known for its fish shops. However, there was one unpleasant aspect of Imambazar - a nearby garbage dump where people would throw away discarded fish pieces. Every day, someone would come and collect the fish pieces, but no one bothered to find out who this person was. No one, except for an infamous robber named Shamsu Miah.
 
 One evening, after the market had closed for the day, Shamsu Miah secretly began observing. After a while, a Dervish (দরবেশ) dressed in white clothes approached the garbage dump. The curious robber watched with keen interest as the dervish picked up the fish pieces, put them inside his bag, and started walking away. Shamsu Miah began to follow him. The dervish walked to the top of a nearby hill and stopped in front of a giant black rectangular slab of rock. Then, as if by magic, the rock slid to the side and revealed an illuminated tunnel. The dervish casually walked into the tunnel and left the door open. Shamsu Miah hesitated to go in, but the open door was too much of a temptation. He gathered all his courage and followed the dervish inside.

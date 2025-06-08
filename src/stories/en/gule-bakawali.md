@@ -7,8 +7,6 @@ slug: gule-bakawali
 language: en
 ---
 
-# English
-
 The King of Shorkostan was Zaynul Muluk. He was fortunate in terms of having sons. Unlike other kings and emperors, he was not childless. Everything was going well, but when it came to his fifth son, Tajul Muluk, fate intervened. The astrologer predicted, 'As soon as the king lays eyes on his fifth son, he will lose his sight.' The time given was twelve years. Within twelve years, this grave misfortune would fall upon the king.
 
 > "‘What a strange thing, I’ve never heard of it before, that the father’s eyes will go blind upon seeing the face of his son.’"

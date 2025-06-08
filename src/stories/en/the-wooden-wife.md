@@ -8,8 +8,6 @@ slug: the-wooden-wife
 language: en
 ---
 
-## English
-
 Once upon a time, there lived a day-labourer who struggled to make ends meet. All day long, he did various odd-jobs around the village, and when he returned home he busied himself with domestic chores. He never had the time to socialize with people and as the years went by, a sense of lonliness enveloped him. Driven by the desire for companionship, he spent his evenings sculpting a lifelike wooden figure of a beautiful woman. Once finished, he envisioned it as his wife. He would affectionately utter, “Honey, can you hear me?" and even make requests like "Could you please roll me some tobacco?". He'd then proceed to make tobacco for himself. Whenever he finished cooking, he'd ask his wooden creation, "My dear wife, is the food ready?" and proceeded to serve food on his own plate. Somehow, the poor man found a semblance of happiness in this imaginary family.
 
 One day, he made plans to meet up with an old friend. He bid farewell to his wooden wife and asked her to have food ready by the time he returns. Spending the entire day catching up with his friend, he found himself evading questions about his marital status. He was too embarassed to say he was single. So he lied and said he was married. Hearing this, his friend feigned being upset at him for not inviting him to the wedding, and insisted to be introduced to his wife that very day. Seeing no way out of this situation, the poor man agreed to this and prepared for the biggest humiliation of his life.

@@ -7,8 +7,6 @@ slug: jaigun-the-warrior-princess
 language: en
 ---
 
-## English
-
 In a kingdom, there was an extraordinary princess named Jaigun. The sight of her beauty would dazzle everyone around her. Raised with much affection by her parents, Jaigun grew up surrounded by forty maidens. When she was ten years old, Jaigun developed an interest in learning wrestling. However, princesses are not taught wrestling, so she had to disguise herself as a man. Secretly, Jaigun trained in wrestling and horseback riding, showing remarkable strength. She could easily grab the trunk of a huge elephant and throw it if she wished.
 
 No one could predict when Jaigun would return to the palace or when she would leave for the forest and jungle for hunting. Such was Jaigun's intelligence. Thus, she spent another ten years involved in hunting, wrestling, and horseback riding. At that time, the king took notice of his daughter. He called the queen and raised the topic of Jaigun's marriage. However, Jaigun placed a peculiar condition:

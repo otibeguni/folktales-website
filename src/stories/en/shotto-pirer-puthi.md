@@ -7,8 +7,6 @@ slug: shotto-pirer-puthi
 language: en
 ---
 
-## English
-
 In the land of India, in Chandanagar of Hooghly, was born a merchant named Joydhor Sadagar. He had three sons—Madan, Kamdev, and Sundar.
 
 Before his death, Joydhor called his elder two sons, Madan and Kamdev, and entrusted them with the care of their youngest brother, Sundar. After Joydhor passed away, the three brothers performed his last rites together.

@@ -9,10 +9,6 @@ slug: the-tale-of-komola-shundori
 language: en
 ---
 
-# Plot Summary
-
-## English
-
 In the late 8th century, the vast [Gauda Empire](https://en.wikipedia.org/wiki/Kingdom_of_Gauda) was beginning to fracture, giving rise to numerous smaller kingdoms. During this time, the ruler of [Pundranagar](https://en.wikipedia.org/wiki/Pundranagar) was King Jayanta. A beloved and just ruler, adored by his subjects.
 
 Meanwhile, [King Vinayaditya Jayapira](https://www.jatland.com/home/Jayapida) of Kashmir, having conquered several territories, set his sights on Gauda. His next target was Pundranagar. However, before launching an attack, he wanted to thoroughly assess the battlefield. Disguised and under the cover of night, he wandered through the city, unnoticed by anyone. As he moved through the streets, he carefully observed and assessed the state of the kingdom, preparing for the battle ahead.

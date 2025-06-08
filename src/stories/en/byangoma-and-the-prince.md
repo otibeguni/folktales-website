@@ -7,8 +7,6 @@ slug: byangoma-and-the-prince
 language: en
 ---
 
-# English
-
 King Bhimsen's capital was situated in the western part of Villri. The king was just and fair. Many knowledgeable scholars and Brahmins would visit his court. In that kingdom, there were people of all professions—shepherds, gardeners, oil pressers, blacksmiths, farmers, and even wanderers. Except for the very poor, everyone had homes, and people were generally well-off.
 
 In such a prosperous kingdom lived a young bird hunter. Although he hunted birds, he never killed them. Every morning, he would go to the forest with his net to catch birds. He would capture the wild birds, place them in the net, and carry them to the market. Whatever he earned from selling them was enough for him to eat and live.

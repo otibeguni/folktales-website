@@ -8,8 +8,6 @@ slug: the-legend-of-noder-chand
 language: en
 ---
 
-## English
-
 In a time long gone, Gadadhar, a fisherman, lived in a modest hut by the Madhumati River with his wife. They sustained their small family through his skillful catches in the river's depths. Soon, their joy was doubled as his wife became pregnant, bringing with it not only excitement but also the worry of providing for their growing family.
 
 As the seasons turned and summer faded, the monsoons arrived. This period, with its abundant rain, brought the best fishing season of the year. In anticipation, Gadadhar, along with the other fishermen of the village, began preparing their nets and boats, eager to harvest the bounty of the river. However, amidst the preparations, his wife expressed her fears. She worried that if she were to die during childbirth, she wouldn't see Gadadhar again. But, Gadadhar reassured her, and when a promising day arrived, he joined the other fishermen, setting sail on the Madhumati River, leaving his wife behind with a mix of hope and anxiety for his safe return.

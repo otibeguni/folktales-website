@@ -10,8 +10,6 @@ slug: gazi-kalu-chompaboti
 language: en
 ---
 
-# English
-
 Long, long ago, the king of Biratnagar was Shah Sikandar, and his queen was the beautiful Ajoopa. The royal couple carried deep sorrow in their hearts after losing their first child during a hunting trip in the forest.
 
 One day, as the queen stood gazing out at the sea with a heavy heart, she noticed a wooden chest floating on the water. She stepped into the waves, reached out, and pulled the chest toward her. Upon opening it, she discovered a six-month-old baby inside. Despite many efforts, no one could locate the child's parents. So the queen decided to adopt him as her own. The beautiful child was named Kalu.

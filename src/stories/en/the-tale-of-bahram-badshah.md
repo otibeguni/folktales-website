@@ -7,8 +7,6 @@ slug: the-tale-of-bahram-badshah
 language: en
 ---
 
-## English
-
 There was once a king named Bahram. Like other kings, he had granaries full of grain, a treasury overflowing with wealth, and a kingdom of subjects. However, unlike many others, this king was not cruel. He had a heart full of kindness and compassion. Whoever stood at his door asking for something, he would grant it without a second thought. This king was a truly generous soul. But this habit of giving brought misfortune upon him. Despite his goodwill toward everyone, his luck began to turn. And the bringer of this ill fate was none other than a beggar who stood at the king’s door one day.
 
 One day, the beggar approached the king and said, "I've heard that you are a great benefactor, that anyone who asks for something receives it. Will my request be granted at the door of this merciful king?"

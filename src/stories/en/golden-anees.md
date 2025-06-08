@@ -7,8 +7,6 @@ slug: golden-anees
 language: en
 ---
 
-## English
-
 Once upon a time, there lived a kind and noble king. Despite having a powerful army and great wealth, there was a void in his life, for he had no children. Over the years, the king had married seven different queens, but to his sorrow, none of them could give him a child. He sought counsel from healers and saints across the kingdom, but no remedy could be found. In his desperation, the king decided to venture into the dense jungle in search of answers. His seven queens pleaded with him not to go, but he set off with nothing but the clothes on his back.
 
 After months of wandering in the wild, the king encountered a wise sage (মুনি) deep in meditation. Falling to his knees, the king begged the sage for a solution. The sage, initially unwilling to help, threatened to cast a curse. However, the king's repeated pleas eventually moved the sage's heart. He revealed the secret of an enchanted banana tree hidden in the heart of the forest. To bless his queens with children, the king must gather seven bananas from this magical tree. The sage, though, required a price for this knowledge: one of the king's sons in twelve years' time. The king considered the sage's offer, thinking that having six children was worth the cost of one. He returned to his palace with the enchanted bananas and followed the sage's instructions.

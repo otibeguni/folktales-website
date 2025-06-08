@@ -7,8 +7,6 @@ slug: the-girl-who-lived-in-a-seashell
 language: en
 ---
 
-# English
-
 It was a long time ago. In a corner of the village lived a young orphan named Sushil. Though his father had passed away when he was very young, his mother had only left him a few days ago. Since then, Sushil had neither cared to bathe nor eat. His home, too, had fallen into disarray, with nothing in order.
 
 Sushil would just lie in a corner of his house, reminiscing about the old days and his mother's love. When his mother was alive, he used to spend entire days collecting seashells by the shore. It's been so long since he last gathered shells—he had almost forgotten those days entirely.

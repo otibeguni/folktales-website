@@ -7,14 +7,6 @@ slug: the-tale-of-radha-and-krishna
 language: en
 ---
 
-<aside>
-
-💡 The following story is based on a 14th-century Bengali poem that reimagines the classic love story of Radha and Krishna from the Bhagavata Purana.
-
-</aside>
-
-## English
-
 [Radha](https://en.wikipedia.org/wiki/Radha) and [Krishna](https://en.wikipedia.org/wiki/Krishna), divinely destined to be born as humans on Earth after a prolonged existence together in heaven, began their earthly journey. Radha, at a young age, was married to Ayan Gopa, a eunuch. While Ayan tended to his duties herding cows, Radha was cared for by his aunt, Barai. Alongside other young women, Radha would travel to [Mathura](https://en.wikipedia.org/wiki/Mathura) to sell curd and milk.
 
 During one of these trips, Barai lost track of Radha. In her search, she approached Krishna, inquiring if he had seen a beautiful girl, and described Radha's appearance. Krishna, upon hearing about Radha's beauty, experienced a sense of unease. He persuaded Barai to convey a romantic proposal to Radha, adorned with gifts of betel leaves and flowers. However, Radha, committed to her marriage, declined the offer. Krishna, in a bold move, blocked Radha and her friends' path as they headed to Mathura to sell curds, playfully demanding a toll for crossing the river. His cheeky demand was that he be allowed to sleep with Radha. Radha firmly refused this proposition. In an attempt to avoid further advances, Radha contemplated cutting her hair to make herself less appealing and fled into the forest. Krishna, determined not to be deterred, followed her into the forest and made love to her.

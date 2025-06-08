@@ -8,8 +8,6 @@ slug: soul-catcher
 language: en
 ---
 
-# English
-
 It was long ago, in a kingdom ruled by a wicked king and his even more wicked queen. Together, they subjected the subjects to immense cruelty. Any slightest mistake would lead to the decapitation of soldiers. The maids and servants were always on edge, fearing that any small misstep could cost them their lives. If even a spoonful of sugar was missing or a maid glanced at the queen the wrong way, there was no escape from the wrath of the king and queen.
 
 The fields were filled with golden waves of rice, and the forests and jungles carried the pure flow of crystal-clear streams. Despite the king's lack of mercy, the people of the kingdom loved the land dearly.

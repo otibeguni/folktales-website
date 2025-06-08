@@ -7,8 +7,6 @@ slug: the-tale-of-molua
 language: en
 ---
 
-# English
-
 At that time, the country was going through an unseasonal period of rain. The autumn paddy was being destroyed by the downpour. During this time, a widow and her son, Chand Binod, were struggling to survive. In search of some extra income, Binod took up hunting kites or eagles. One day, he went to the pond bank in the village of Aralia to hunt kites. As he became exhausted while hunting, he sat under a tree to rest and soon fell asleep. Evening was approaching then. At that moment, Molua, the young daughter of the village chief in Aralia, came to the riverbank to fetch water.
 
 As Binod slept, evening approached.  

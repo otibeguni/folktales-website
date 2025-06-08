@@ -8,8 +8,6 @@ slug: the-tale-of-delaram
 language: en
 ---
 
-# English
-
 This is a story from a time long, long ago.
 
 In the prosperous land of Pholna in Hindustan, there was a famous sweetmaker's shop. The sweets from this shop were renowned far and wide. Customers came in droves, and the sweetmaker was never short on money. He had a grand house, a luxurious bed—but even on that soft bed, he couldn’t sleep peacefully at night.

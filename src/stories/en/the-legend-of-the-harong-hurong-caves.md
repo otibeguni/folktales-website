@@ -8,8 +8,6 @@ slug: the-legend-of-the-harong-hurong-caves
 language: en
 ---
 
-## English
-
 Seven hundred years ago, the land we now know as Sylhet was part of the Gaur kingdom, called Srihatta at the time. This kingdom was shrouded in mystery, whispered to be a haven for sorcerers since ancient times. Even the king, Gaur Govinda, himself wielded magical powers. He was also a staunch Hindu, intolerant of other religions. One of his most unbending laws was the complete ban on cow slaughter within his realm.
 
 One day, King Govinda was enjoying the peace of his palace balcony when a crow landed nearby, a piece of meat stuck to its beak. The morsel tumbled down, landing right at the king's feet. It didn't take King Govinda long to realize the horrifying truth; the meat was beef. Fury consumed him, and he demanded the immediate capture of the culprit. After days of relentless search, the offender was identified: Sheikh Burhanuddin, a humble resident of Tulkikar. Burhanuddin, blessed with a child late in life after years of fervent prayers, had dared to slaughter a cow for his son's "Akika" ceremony, a blatant disregard for the king's law. This act of defiance sealed his fate, leading to his downfall.

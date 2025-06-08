@@ -7,12 +7,6 @@ slug: yusuf-zulaikha
 language: en
 ---
 
-> The earliest known reference to today's story dates back 3500 years. The Book of Genesis recounts the tale of Joseph, who was sold into slavery by his jealous brothers. He was subsequently purchased by Potiphar, the captain of the Egyptian Pharaoh's guard. Potiphar's wife, whose name remains undisclosed, attempts to seduce Joseph, and his refusal leads to his imprisonment. Two thousand years later, the Holy Quran also tells a similar rendition of the story. Potiphar is now referred to as Al-Aziz, and the rest of the narrative bears resemblances with some minor variations. Eight hundred years thereafter, the Persian poet Jami assigns a name to the nameless woman, calling her Zulekha. Drawing inspiration from Sufi tradition, he composes a poem that envisions a romance between Yusuf and Zulekha. However, this is no ordinary love. Jami reinterprets Zulekha's infatuation as a yearning for a genuine spiritual connection with God himself. Lastly, in the 15th century, the Bengali poet Shah Muhammad Sagir translates Jami's version, relocating the events to Bengal and incorporating his own material, which encompasses Zulekha's childhood.
-
->
-
-# English
-
 > "Westward, the king was the most prominent,
 
 >

@@ -2,21 +2,10 @@
 title: The tale of Madar Pir
 title_bn: মাদার পীরের প্যাচালি
 category: Bengali Folktale
-related_links: Madar Gaan Performance (Madar%20Gaan%20Performance%2071f96b004c254bb9a64abe131775f8ed.md)
 source: Bangla Kingbodonti Volume 2 - Asaduzzaman Jewel and Rudra Kaysar
 slug: the-tale-of-madar-pir
 language: en
 ---
-
-<aside>
-
-🔎 Contents
-
-</aside>
-
-# Plot Summary
-
-## English
 
 A long time ago, two angels named [Harut and Marut](https://en.wikipedia.org/wiki/Harut_and_Marut) requested God to be allowed to live among humans so that they could observe their way of life. The Almighty refused their wish and warned them that nothing good would come out of succumbing to worldly desires. But the angels remained adamant, and God finally granted them permission. Since angels do not have any gender, they were allowed to choose one for themselves. They chose to become a man and a woman and be sent down to Earth as a married couple. At first, Harut and Marut stayed true to their objective and began observing mankind. But over time, attracted to each other's stunning physical beauty, the two fell in love and consummated their marriage. By doing so, they broke their oath of staying away from worldly desires. So, God brought them back to heaven, but not before giving birth to a baby boy, who would later be adopted by the caliph, Ali Ibn Talib, and come to be known as Madar Pir.
 

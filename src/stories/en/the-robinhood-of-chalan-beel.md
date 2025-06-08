@@ -9,8 +9,6 @@ slug: the-robinhood-of-chalan-beel
 language: en
 ---
 
-# English
-
 The English officers were searching for girls from ordinary homes to take as gifts. It wasn’t just the officers; there were many soldiers and guards who needed to be pleased as well, and the landlord’s lackeys were tasked with this grim job. A young girl, recently married, was supposed to go to her husband’s home, but fate dealt her a cruel hand. Instead, she was being taken in a boat, led astray by the landlord’s men. Their intentions were anything but good. Just as the boat was about to dock at the Kacharibari ghat, out of nowhere, a boat with twenty-two oars appeared. With a fierce strike of spears, the landlord's boat was shattered into pieces.
 
 "What happened? What happened?"

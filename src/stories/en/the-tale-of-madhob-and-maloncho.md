@@ -7,8 +7,6 @@ slug: the-tale-of-madhob-and-maloncho
 language: en
 ---
 
-# English
-
 Once upon a time, long ago, there lived a king in a certain land. Like most kings and nobles, his treasury was overflowing with wealth. In the elephant stable, the elephants trumpeted joyfully, and in the horse stable, the horses sharpened their hooves. He had plenty of people and soldiers. Yet, there was one sorrow in the king's heart—he had no children. What use is such wealth and prosperity if there is no heir to carry on the family legacy? The king spent his days in deep sorrow.
 
 One day, in his deep sorrow, the king decided to end his life in the dense forest. It was midnight. Seeing the distressed king, Shiva and Parvati appeared before him. After listening to all of the king's woes, Shiva granted him a boon, promising that a beautiful child would soon be born to him. Filled with joy, the king returned to his palace. Shiva's boon came to fruition quickly, and a beautiful daughter was born in the royal palace—her name was Maloncho.

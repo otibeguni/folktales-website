@@ -7,8 +7,6 @@ slug: layli-majnu
 language: en
 ---
 
-# **English**
-
 For many days, the Arab king felt troubled. He had done much for his subjects and had fulfilled his duties as a king properly. However, he had no children in his home. The king decided that he would go into the jungle. But his loyal minister stopped him.
 
 In the same kingdom, four years later, a daughter was born to the merchant Aziz, who was known for her enchanting beauty. Her name was Laila. Laila and Qais studied together at school, exchanging books and learning side by side, which fostered a story of friendship between them. As they grew older, that friendship gradually transformed into love—a secret known only to the two of them.

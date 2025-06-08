@@ -13,8 +13,6 @@ slug: jiyat-kunda-the-well-of-life
 language: en
 ---
 
-# English
-
 In the year 1636, Shah Ali Asghar, the ruler of the Balkh region in Afghanistan, wished to pass on all the responsibilities of the kingdom to his son. However, his son had no interest in the throne. Instead, he aspired to become a missionary.
 
 The kingdom-averse prince was named Shah Sultan Balkhi. He was a disciple of the pious Sheikh Toufic from Damascus. Following the Sheikh’s orders, he left the throne and dedicated himself to missionary work. One day, the Sheikh instructed him, “Now go to Bengal and focus on spreading the faith.”

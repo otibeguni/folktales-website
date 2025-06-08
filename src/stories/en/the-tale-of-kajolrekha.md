@@ -8,8 +8,6 @@ slug: the-tale-of-kajolrekha
 language: en
 ---
 
-## English
-
 Once upon a time in the enchanting Land of the Tides, there lived a merchant named Dhoneshhor. He had a son and a lovely daughter named Kajolrekha. Dhoneshhor, however, had a weakness for gambling, which eventually led to the loss of all his wealth. In the past, he possessed seven boatloads of paddy, but now, none remained. Forced to resort to begging, he wandered from one place to another in search of a better life.
 
 During his travels, Dhoneshhor encountered a wise monk who owned a mystical fortune-telling bird named Shukpakhi. The monk, sensing Dhoneshhor's plight, generously handed him the magical bird. He instructed Dhoneshhor to follow the bird's guidance faithfully, assuring him that by doing so, he would recover his lost wealth.
