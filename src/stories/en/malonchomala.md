@@ -7,8 +7,6 @@ slug: malonchomala
 language: en
 ---
 
-# English
-
 There was a king named Chandra. Like all the other sorrowful kings in fairy tales, he had the same old sorrow. He had plenty of kingdom, subjects, and wealth, but he lacked only one thing: a child to brighten his home. In his yearning for a child, the king organized a grand yajna. He fasted for three days and three nights and received the fruits of the yajna. It was decreed in the yajna that the king must break his fast by eating the two fruits that would be found together on the same mango tree in the royal garden.
 
 "Under the tender leaves, the golden fruits glisten,  
