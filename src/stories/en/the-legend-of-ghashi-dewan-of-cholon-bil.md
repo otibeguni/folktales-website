@@ -7,8 +7,6 @@ slug: the-legend-of-ghashi-dewan-of-cholon-bil
 language: en
 ---
 
-# English
-
 About 500 years ago, Shah Makhdum (RA) journeyed from the distant lands of Arabia, through Yemen, to finally settle in Rajshahi, Bangladesh. Accompanying him was Baba Ghasi Dewan (RA). Shah Makhdum (RA) was a revered Islamic saint who, along with numerous disciples, came to this region to spread the teachings of Islam. Among his followers, some dedicated themselves to spreading Islam, while others devoted their lives to serving humanity. Baba Ghasi Dewan (RA) was one of the most notable among them.
 
 He devoted himself to serving humanity in the sacred land of Chalan Beel, which is renowned as the land of the Baro Auliya (twelve saints). His arrival in this region was guided by divine inspiration and the instructions of Shah Makhdum Baba. Baba Ghasi Dewan (RA) traveled from Rajshahi, passing through Natore, and eventually arrived in Singra, a thana within the Natore subdivision. From there, he wandered until he reached a small piece of land between Satpukuria Hijli and Dahiya.
