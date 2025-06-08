@@ -22,6 +22,8 @@ const relatedResources = resources.flatMap(
 
     <div class="divider"></div>
 
+    {topic.description && <p class="mb-8">{topic.description}</p>}
+
     {
       stories.length > 0 && (
         <>
