@@ -5,7 +5,7 @@ const BookCardSource = (props: SourceItemAlt) => {
 
   return (
     <a
-      href={props.library_url || `/${basePath}books/${props.slug}`}
+      href={props.library_url || `${basePath}/books/${props.slug}`}
       className="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
     >
       <div className="card-body">
