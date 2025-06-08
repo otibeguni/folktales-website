@@ -2,12 +2,9 @@
 import Breadcrumbs from './Breadcrumbs.astro';
 import Card from '@/components/Card';
 import type { IStory } from '@/types';
-import CardResources from '@/components/CardResources.astro';
+import CardResourcesTopic from '@/components/CardResourcesTopic.astro';
 
 const { topic, stories, resources } = Astro.props;
-const relatedResources = resources.flatMap(
-  (item: any) => item.related_resources || [],
-);
 ---
 
 <div class="min-h-screen">
@@ -38,8 +35,8 @@ const relatedResources = resources.flatMap(
     }
 
     {
-      relatedResources.length > 0 && (
-        <CardResources related_resources={relatedResources} />
+      resources.length > 0 && (
+        <CardResourcesTopic related_resources={resources} />
       )
     }
   </article>

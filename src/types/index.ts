@@ -106,6 +106,17 @@ export interface ResourceItem {
   url?: string;
 }
 
+export interface ResourceItemAlt {
+  id: number;
+  title: string;
+  url?: string;
+  type: {
+    id: number;
+    value: string;
+  };
+  related_wikidata?: WikidataItem[];
+}
+
 export interface IBreadcrumbs {
   label: string;
   href: string;

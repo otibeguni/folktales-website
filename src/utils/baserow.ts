@@ -1,11 +1,20 @@
 import { BASEROW_URL, BASEROW_TOKEN } from 'astro:env/server';
-import type { MetadataItem, SourceItemAlt, WikidataItemAlt } from '@/types';
+import type {
+  MetadataItem,
+  SourceItemAlt,
+  WikidataItemAlt,
+  ResourceItemAlt,
+} from '@/types';
 
 type RowData = {
   count: number;
   next: string | null;
   previous: string | null;
-  results: MetadataItem[] | WikidataItemAlt[] | SourceItemAlt[];
+  results:
+    | MetadataItem[]
+    | WikidataItemAlt[]
+    | SourceItemAlt[]
+    | ResourceItemAlt[];
 };
 
 /**
