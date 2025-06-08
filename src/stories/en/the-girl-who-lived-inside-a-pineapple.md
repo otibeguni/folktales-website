@@ -7,8 +7,6 @@ slug: the-girl-who-lived-inside-a-pineapple
 language: en
 ---
 
-# English
-
 In the city of Bairat, there was a prince named Emran. One night, he dreamed of a girl of unmatched beauty. Since then, he lost all desire for food and sleep—the melody of her presence played endlessly in his mind. But finding this girl was no easy task, for she did not reside in any ordinary palace. She lived far away, within a pineapple. Inside the core of the pineapple was a vast palace, and the girl was surrounded by fourteen layers of curtains.
 
 Anwar Kali, the maiden with hair so long it trails upon the ground, captivates everyone who sees her—they fall to the earth in awe. Yet, no one can approach her, for each layer of curtain surrounding her is guarded differently. Breaking through these walls of protection to reach Anwar Kali is nearly impossible.
