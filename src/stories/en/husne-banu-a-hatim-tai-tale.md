@@ -7,8 +7,6 @@ slug: husne-banu-a-hatim-tai-tale
 language: en
 ---
 
-# English
-
 Once upon a time, in the kingdom of Khorasan, there ruled a king named Khurdan Shah. He had five hundred thousand horses in his stables. In front of and behind the palace, there were ten thousand chariots along with a multitude of swordsmen, guards, and archers. People said that in his realm, even tigers and sheep drank water together, such was the justice of this king. Throughout the kingdom, only his fame and tales of compassion circulated from mouth to mouth among the people.
 
 In this kingdom of Khorasan lived a merchant named Barzakh. The merchant lacked for nothing in wealth and riches. While he was not a king, he held himself with the same grandeur as one. He shared a close bond with Khurdan Shah. So, when the merchant passed away, he entrusted all the responsibilities of his beloved only daughter, Husne Banur, to the king. The king accepted her as if she were his own daughter.
