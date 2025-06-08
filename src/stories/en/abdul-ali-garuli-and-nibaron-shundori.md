@@ -6,8 +6,6 @@ slug: abdul-ali-garuli-and-nibaron-shundori
 language: en
 ---
 
-## English
-
 In the year 1315, amidst the bustling town of Jhalokati, there dwelled a young lad by the name of Abdul Ali. At just twenty years old, he possessed a striking handsomeness that caught the eye of many. Abdul had a penchant for adventure, and so he often found himself traversing the countryside on horseback, exploring every nook and cranny.
 
 One fateful day, his journey led him to the town of Barisal, where he stumbled upon a troupe of snake charmers. Among them stood a young maiden named Nibaran, whose beauty rivaled that of the morning sun. Instantly captivated by her charm, Ali found himself falling head over heels in love.
