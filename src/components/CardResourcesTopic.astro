@@ -1,7 +1,7 @@
 ---
 import { library, icon } from '@fortawesome/fontawesome-svg-core';
 import { faImage, faVideo, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import type { ResourceItem } from '@/types';
+import type { ResourceItemAlt } from '@/types';
 
 const { related_resources } = Astro.props;
 
@@ -16,7 +16,7 @@ const websiteIcon = icon({ prefix: 'fas', iconName: faGlobe.iconName });
   <h1 class="text-3xl">Related Resources</h1>
   <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
     {
-      related_resources.map((resource: ResourceItem) => (
+      related_resources.map((resource: ResourceItemAlt) => (
         <a
           href={resource.url}
           class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
@@ -32,7 +32,7 @@ const websiteIcon = icon({ prefix: 'fas', iconName: faGlobe.iconName });
               {resource.type.value.toLowerCase() === 'website' && (
                 <Fragment set:html={websiteIcon.html} />
               )}
-              {resource.value}
+              {resource.title}
             </div>
           </div>
         </a>

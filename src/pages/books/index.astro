@@ -1,5 +1,5 @@
 ---
-import i18next, { changeLanguage, t } from 'i18next';
+import { changeLanguage, t } from 'i18next';
 import BookList from '@/components/BookList';
 import Layout from '@/layouts/Layout.astro';
 import { fetchRowsFromDatabase } from '@/utils/baserow';
@@ -7,7 +7,6 @@ import type { SourceItemAlt } from '@/types';
 
 changeLanguage('en');
 
-const currentLanguage = i18next.language;
 // Baserow
 const baserowData = await fetchRowsFromDatabase(742);
 const baserowResult = (await baserowData.results) as SourceItemAlt[];
@@ -16,7 +15,6 @@ const baserowResult = (await baserowData.results) as SourceItemAlt[];
 <Layout title={'Books | ' + t('common.siteTitle')}>
   <BookList
     books={baserowResult}
-    lang={currentLanguage}
     labels={{
       filterLabel: t('pages.books.filterLabel'),
       languageLabel: t('pages.books.languageLabel'),

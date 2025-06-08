@@ -1,6 +1,6 @@
 ---
 import { localizePath } from 'astro-i18next';
-import type { WikidataItem } from '@/types';
+import type { WikidataItemAlt } from '@/types';
 
 const { related_wikidata } = Astro.props;
 ---
@@ -11,7 +11,7 @@ const { related_wikidata } = Astro.props;
     <div class="splide__track">
       <div class="splide__list">
         {
-          related_wikidata.map((item: WikidataItem) => (
+          related_wikidata.map((item: WikidataItemAlt) => (
             <li class="splide__slide p-2">
               <a
                 href={localizePath(`/topics/${item.slug}`)}
@@ -21,7 +21,7 @@ const { related_wikidata } = Astro.props;
                   <div class="flex flex-col gap-4">
                     <div class="!prose-gray flex flex-col">
                       <span class="text-xs font-bold">Topic</span>
-                      {item.value}
+                      {item.item}
                     </div>
                     <div class="!prose-slate flex flex-col">
                       <span class="text-xs font-bold">Type</span>

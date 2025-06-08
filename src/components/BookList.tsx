@@ -8,14 +8,12 @@ const MAX_BOOKS = 12;
 
 const BookList = ({
   books,
-  lang,
   labels,
 }: {
   books: SourceItemAlt[];
-  lang: string;
   labels: { [key: string]: string };
 }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState(lang);
+  const [selectedLanguage, setSelectedLanguage] = useState('bn');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 

@@ -45,6 +45,7 @@ export interface SourceItem {
   value: string;
   order: string;
   author?: string;
+  url?: string;
   library_url?: string;
   slug?: string;
 }
@@ -103,6 +104,17 @@ export interface ResourceItem {
     value: string;
   };
   url?: string;
+}
+
+export interface ResourceItemAlt {
+  id: number;
+  title: string;
+  url?: string;
+  type: {
+    id: number;
+    value: string;
+  };
+  related_wikidata?: WikidataItem[];
 }
 
 export interface IBreadcrumbs {
