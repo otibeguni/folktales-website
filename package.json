@@ -1,7 +1,7 @@
 {
   "name": "otibeguni",
   "type": "module",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Yasin Junet (hello@yasinjunet.com)",
   "scripts": {
     "predev": "npm run i18n",
