@@ -6,8 +6,6 @@ slug: the-stolen-wife
 language: en
 ---
 
-# English
-
 In a village, there lived a Brahmin and a Kayastha. Their houses were next to each other, and they shared a deep friendship. The Brahmin’s household was in a state of constant struggle, living hand to mouth. The Kayastha’s household did not suffer as much from a lack of basic necessities like rice and lentils, but his situation was not much better either. Neither of them was married.
 
 One day, the Brahmin friend said, “How long can we go on like this? I’m thinking of getting married. But who would marry their daughter to me if things don’t improve? Will this poverty ever end?” The Kayastha friend echoed his thoughts, saying, “Exactly what I keep thinking. No one in this village will give their daughter to us! We'll have to come up with another plan, you see. Let's go to another village and see if we can manage something there." At first, the Brahmin was reluctant, but eventually, he agreed to his friend's suggestion. The Kayastha said, "You don’t have to think too much. Just do as I say."
