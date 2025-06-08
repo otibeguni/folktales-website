@@ -7,8 +7,6 @@ slug: konchar-mulluk-the-land-of-the-tiny-women
 language: en
 ---
 
-## English
-
 Long ago, in the village of Bhonar Para in Tangail, there was a buzz about a young man who had returned from a strange place called Kochhar Mulluk. No one could pinpoint the exact year, but the villagers were eager to hear his story.
 
 When questioned, the young man described Kochhar Mulluk as a peculiar land, inhabited solely by women. Teenagers, young women, and elderly alike - there were no men to be found anywhere.
