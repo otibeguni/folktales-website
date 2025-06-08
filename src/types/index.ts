@@ -1,6 +1,6 @@
 export interface IFilterSelect {
   label: string;
-  value?: string;
+  value: string;
   options: ISelect[];
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -27,6 +27,17 @@ export interface WikidataItem {
   value: string;
   order: string;
   type?: string;
+  slug?: string;
+}
+
+export interface WikidataItemAlt {
+  id: number;
+  order: string;
+  slug: string;
+  item: string;
+  wikidata_id: string;
+  type: string;
+  description?: string;
 }
 
 export interface SourceItem {
@@ -34,6 +45,20 @@ export interface SourceItem {
   value: string;
   order: string;
   author?: string;
+  library_url?: string;
+  slug?: string;
+}
+
+export interface SourceItemAlt {
+  id: number;
+  name: string;
+  order: string;
+  author?: string;
+  url?: string;
+  library_url?: string;
+  slug?: string;
+  language: string;
+  category: string;
 }
 
 export interface MetadataItem {
@@ -67,4 +92,20 @@ export interface StoryItem {
   props: {
     story: Story;
   };
+}
+
+export interface ResourceItem {
+  id: number;
+  value: string;
+  order: string;
+  type: {
+    id: number;
+    value: string;
+  };
+  url?: string;
+}
+
+export interface IBreadcrumbs {
+  label: string;
+  href: string;
 }

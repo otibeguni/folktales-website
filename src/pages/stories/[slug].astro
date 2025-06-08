@@ -9,9 +9,10 @@ changeLanguage('en');
 
 export async function getStaticPaths() {
   const baserowData = await fetchRowsFromDatabase(
-    '&sources__join=author&related_wikidata__join=type',
+    741,
+    '&sources__join=author,library_url,slug&related_wikidata__join=type,slug&related_resources__join=type,url',
   );
-  const baserowResult = await baserowData.results;
+  const baserowResult = (await baserowData.results) as MetadataItem[];
   const stories: Array<{
     frontmatter: IStory;
     default: any;

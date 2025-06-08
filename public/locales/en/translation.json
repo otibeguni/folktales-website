@@ -4,7 +4,9 @@
     "siteDescription": "Pioneering Bangladeshi Folklore R&D company dedicated to revitalizing interest in Bengali and indigenous folklore."
   },
   "header": {
-    "navStories": "Stories"
+    "navStories": "Stories",
+    "navTopics": "Topics",
+    "navBooks": "Books"
   },
   "footer": {
     "copyright": "Copyright",
@@ -18,6 +20,17 @@
     },
     "stories": {
       "filterLabel": "Filter Stories",
+      "languageLabel": "Language",
+      "categoryLabel": "Category",
+      "allCategoryLabel": "All Categories"
+    },
+    "topics": {
+      "filterLabel": "Filter Types",
+      "typeLabel": "Type",
+      "allTypesLabel": "All Types"
+    },
+    "books": {
+      "filterLabel": "Filter Books",
       "languageLabel": "Language",
       "categoryLabel": "Category",
       "allCategoryLabel": "All Categories"

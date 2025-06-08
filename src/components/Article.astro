@@ -1,4 +1,6 @@
 ---
+import Breadcrumbs from './Breadcrumbs.astro';
+import CardResources from './CardResources.astro';
 import CardSource from './CardSource.astro';
 import CardTopics from './CardTopics.astro';
 
@@ -7,6 +9,12 @@ const { frontmatter, default: Content } = story;
 ---
 
 <article class="prose mx-auto max-w-3xl px-4 py-12">
+  <Breadcrumbs
+    menus={[
+      { label: 'Stories', href: '/stories' },
+      { label: frontmatter.title },
+    ]}
+  />
   <h1 class="mb-4 text-5xl leading-16">{frontmatter.title}</h1>
   <span class="badge badge-soft badge-primary">
     {frontmatter.category}
@@ -22,6 +30,12 @@ const { frontmatter, default: Content } = story;
   {
     baserow?.related_wikidata && (
       <CardTopics related_wikidata={baserow.related_wikidata} />
+    )
+  }
+
+  {
+    baserow?.related_resources && (
+      <CardResources related_resources={baserow.related_resources} />
     )
   }
 </article>

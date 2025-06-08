@@ -1,0 +1,58 @@
+---
+import { changeLanguage } from 'i18next';
+import ArticleTopic from '@/components/ArticleTopic.astro';
+import Layout from '@/layouts/Layout.astro';
+import type { IStory, MetadataItem, WikidataItemAlt } from '@/types';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
+
+changeLanguage('en');
+
+export async function getStaticPaths() {
+  const baserowTopicData = await fetchRowsFromDatabase(740);
+  const baserowTopicResult =
+    (await baserowTopicData.results) as WikidataItemAlt[];
+  const baserowStoryData = await fetchRowsFromDatabase(
+    741,
+    '&related_resources__join=type,url',
+  );
+  const baserowStoryResult = (await baserowStoryData.results) as MetadataItem[];
+  const allStories: Array<{
+    frontmatter: IStory;
+    default: any;
+  }> = Object.values(import.meta.glob('@/stories/en/*.md', { eager: true }));
+  return baserowTopicResult.map((topic) => ({
+    params: { slug: topic.slug },
+    props: {
+      topic,
+      storyByTopic: baserowStoryResult.filter((item: MetadataItem) =>
+        item.related_wikidata?.some((i: any) => i.value === topic.slug),
+      ),
+      allStories,
+    },
+  }));
+}
+const { topic, storyByTopic, allStories } = Astro.props;
+const currentUrl = Astro.url.href;
+// Filter story by topic
+const topicSlugs = new Set(storyByTopic.map((item) => item.slug));
+const filteredStories: Array<{
+  frontmatter: IStory;
+  default: any;
+}> = allStories.filter((item) => topicSlugs.has(item.frontmatter.slug));
+---
+
+<Layout
+  title={`${topic.item} - Topic | Otibeguni `}
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: topic.item,
+    url: currentUrl,
+  }}
+>
+  <ArticleTopic
+    topic={topic}
+    stories={filteredStories}
+    resources={storyByTopic}
+  />
+</Layout>

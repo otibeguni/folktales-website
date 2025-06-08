@@ -1,29 +1,67 @@
 ---
+import { localizePath } from 'astro-i18next';
 import type { WikidataItem } from '@/types';
 
 const { related_wikidata } = Astro.props;
 ---
 
-<>
-  <h1 class="pt-8 text-3xl">Related Topics</h1>
-  <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-    {
-      related_wikidata.map((item: WikidataItem) => (
-        <div class="card bg-base-100 card-md shadow-sm">
-          <div class="card-body">
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col">
-                <span class="text-xs font-bold">Topic</span>
-                {item.value}
-              </div>
-              <div class="flex flex-col">
-                <span class="text-xs font-bold">Type</span>
-                {item.type}
-              </div>
-            </div>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-</>
+<div class="py-8">
+  <h1 class="text-3xl">Related Topics</h1>
+  <section class="splide text-black" aria-label="Related Topics Carousel">
+    <div class="splide__track">
+      <div class="splide__list">
+        {
+          related_wikidata.map((item: WikidataItem) => (
+            <li class="splide__slide p-2">
+              <a
+                href={localizePath(`/topics/${item.slug}`)}
+                class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
+              >
+                <div class="card-body">
+                  <div class="flex flex-col gap-4">
+                    <div class="!prose-gray flex flex-col">
+                      <span class="text-xs font-bold">Topic</span>
+                      {item.value}
+                    </div>
+                    <div class="!prose-slate flex flex-col">
+                      <span class="text-xs font-bold">Type</span>
+                      {item.type}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <script>
+    import '@splidejs/splide/css';
+    import Splide from '@splidejs/splide';
+
+    new Splide('.splide', {
+      type: 'slide',
+      perPage: 3,
+      gap: '1rem',
+      pagination: false,
+      padding: { top: 10, bottom: 10 },
+      classes: {
+        prev: 'splide__arrow--prev !-left-10',
+        next: 'splide__arrow--next !-right-10',
+        pagination: 'splide__pagination !-bottom-6',
+        page: 'splide__pagination__page !bg-neutral-content',
+      },
+      breakpoints: {
+        1024: {
+          arrows: false,
+          pagination: true,
+          perPage: 2,
+        },
+        640: {
+          perPage: 1,
+        },
+      },
+    }).mount();
+  </script>
+</div>

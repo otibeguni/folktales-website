@@ -1,0 +1,53 @@
+---
+import { library, icon } from '@fortawesome/fontawesome-svg-core';
+import { faImage, faVideo, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import type { ResourceItem } from '@/types';
+
+const { related_resources } = Astro.props;
+
+library.add(faImage, faVideo, faGlobe);
+
+const imageIcon = icon({ prefix: 'fas', iconName: faImage.iconName });
+const videoIcon = icon({ prefix: 'fas', iconName: faVideo.iconName });
+const websiteIcon = icon({ prefix: 'fas', iconName: faGlobe.iconName });
+---
+
+<div class="py-8">
+  <h1 class="text-3xl">Related Resources</h1>
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {
+      related_resources.map((resource: ResourceItem) => (
+        <a
+          href={resource.url}
+          class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105"
+        >
+          <div class="card-body">
+            <div class="prose-gray flex items-center gap-2">
+              {resource.type.value.toLowerCase() === 'image' && (
+                <Fragment set:html={imageIcon.html} />
+              )}
+              {resource.type.value.toLowerCase() === 'video' && (
+                <Fragment set:html={videoIcon.html} />
+              )}
+              {resource.type.value.toLowerCase() === 'website' && (
+                <Fragment set:html={websiteIcon.html} />
+              )}
+              {resource.type.value}
+            </div>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  /* Declare a custom CSS class to make the icon look right */
+  .svg-inline--fa {
+    overflow: visible;
+    box-sizing: content-box;
+    display: inline-block;
+    height: 1em;
+    vertical-align: -0.125em;
+  }
+</style>

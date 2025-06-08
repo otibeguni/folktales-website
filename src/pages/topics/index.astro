@@ -1,0 +1,25 @@
+---
+import { changeLanguage, t } from 'i18next';
+import TopicList from '@/components/TopicList';
+import Layout from '@/layouts/Layout.astro';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
+import type { WikidataItemAlt } from '@/types';
+
+changeLanguage('en');
+
+// Baserow
+const baserowData = await fetchRowsFromDatabase(740);
+const baserowResult = (await baserowData.results) as WikidataItemAlt[];
+---
+
+<Layout title={'Topics | ' + t('common.siteTitle')}>
+  <TopicList
+    topics={baserowResult}
+    labels={{
+      filterLabel: t('pages.topics.filterLabel'),
+      typeLabel: t('pages.topics.typeLabel'),
+      allTypesLabel: t('pages.topics.allTypesLabel'),
+    }}
+    client:load
+  />
+</Layout>

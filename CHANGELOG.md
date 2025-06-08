@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/otibeguni/folktales-website/compare/v0.0.6...v0.0.9) (2025-06-08)
+
+### Features
+
+- add breacrumbs for better navigation ([1449535](https://github.com/otibeguni/folktales-website/commit/1449535c7325cb718a772ea24f28428322ce0413))
+- add related resources ([67a4d7c](https://github.com/otibeguni/folktales-website/commit/67a4d7c8956b035e37b7bfca47fd608d23db7e02))
+- book list page ([46c4343](https://github.com/otibeguni/folktales-website/commit/46c4343859040307850f59ef7a69d2847ff80173))
+- make related-topics card as a carousel ([267135a](https://github.com/otibeguni/folktales-website/commit/267135a7bfe2a23b39b65d1b8f2f6d04ed77ba6b))
+- show baserow data into story details page ([c4bfb63](https://github.com/otibeguni/folktales-website/commit/c4bfb6364a2c24283451470a9f6cbd69effbbb9d))
+- show baserow data into story list page ([a61249a](https://github.com/otibeguni/folktales-website/commit/a61249a472e38bdbe313a067b840b5d3972f003c))
+- topic details page ([2553109](https://github.com/otibeguni/folktales-website/commit/2553109c346ff37a82c2d66182092c691a03d379))
+- topic list page ([3768181](https://github.com/otibeguni/folktales-website/commit/3768181c73dc8ccbfe74805499429e90a3bdd99f))
+
+### Bug Fixes
+
+- add read online to book card ([f8531aa](https://github.com/otibeguni/folktales-website/commit/f8531aafefee1e0f0669b9edf3e523031b28316d))
+- adjust SEO stuff ([b3d8dd7](https://github.com/otibeguni/folktales-website/commit/b3d8dd7d875d48cc33488ca229d63837d0263db9))
+- broken link on books card source ([d288e5e](https://github.com/otibeguni/folktales-website/commit/d288e5ee9e03e86ebb7569be8bddcc5ea5fa0604))
+- show author of source, and type of topic ([64744e2](https://github.com/otibeguni/folktales-website/commit/64744e24238e7e9cf0c916e048f2a0acec391d9e))
+- topic filter issue caused by localizePath ([ba98312](https://github.com/otibeguni/folktales-website/commit/ba98312ec96f7da6151ea2875b47e6a5f1ed4aa0))
+
 ### [0.0.8](https://github.com/otibeguni/folktales-website/compare/v0.0.6...v0.0.8) (2025-06-04)
 
 ### Features

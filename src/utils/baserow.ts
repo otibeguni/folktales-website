@@ -1,29 +1,26 @@
-import {
-  BASEROW_URL,
-  BASEROW_TOKEN,
-  BASEROW_DATABASE_ID,
-} from 'astro:env/server';
-import type { MetadataItem } from '@/types';
+import { BASEROW_URL, BASEROW_TOKEN } from 'astro:env/server';
+import type { MetadataItem, SourceItemAlt, WikidataItemAlt } from '@/types';
 
 type RowData = {
   count: number;
   next: string | null;
   previous: string | null;
-  results: MetadataItem[];
+  results: MetadataItem[] | WikidataItemAlt[] | SourceItemAlt[];
 };
 
 /**
- * Fetches all rows from a Baserow database with the given ID.
- * @param databaseId The ID of the Baserow database to fetch rows from.
- * If not provided, the default value of `BASEROW_DATABASE_ID` is used.
+ * Fetches all rows from a Baserow table with the given ID.
+ * @param tableId The ID of the Baserow table to fetch rows from.
  * @returns A promise that resolves to the row data from Baserow.
  * @throws An error if the HTTP response was not OK.
  */
 export async function fetchRowsFromDatabase(
+  tableId: number,
   additionalParams: string = '',
 ): Promise<RowData> {
-  const databaseId = BASEROW_DATABASE_ID || '';
-  const url = `${BASEROW_URL}/api/database/rows/table/${databaseId}/?user_field_names=true${additionalParams}`;
+  // tableId 740: Wikidata
+  // tableId 741: Story Metadata
+  const url = `${BASEROW_URL}/api/database/rows/table/${tableId}/?user_field_names=true${additionalParams}`;
 
   const response = await fetch(url, {
     method: 'GET',
