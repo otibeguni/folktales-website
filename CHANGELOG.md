@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/otibeguni/folktales-website/compare/v0.0.6...v0.0.11) (2025-06-09)
+
+### Features
+
+- add breacrumbs for better navigation ([1449535](https://github.com/otibeguni/folktales-website/commit/1449535c7325cb718a772ea24f28428322ce0413))
+- add related resources ([67a4d7c](https://github.com/otibeguni/folktales-website/commit/67a4d7c8956b035e37b7bfca47fd608d23db7e02))
+- book list page ([46c4343](https://github.com/otibeguni/folktales-website/commit/46c4343859040307850f59ef7a69d2847ff80173))
+- make related-topics card as a carousel ([267135a](https://github.com/otibeguni/folktales-website/commit/267135a7bfe2a23b39b65d1b8f2f6d04ed77ba6b))
+- navbar with burger button and drawer ([99d1d5e](https://github.com/otibeguni/folktales-website/commit/99d1d5eab752e996590b5b63dc88d0e36f27637c))
+- show baserow data into story details page ([c4bfb63](https://github.com/otibeguni/folktales-website/commit/c4bfb6364a2c24283451470a9f6cbd69effbbb9d))
+- show baserow data into story list page ([a61249a](https://github.com/otibeguni/folktales-website/commit/a61249a472e38bdbe313a067b840b5d3972f003c))
+- static markdown pages ([ef2de8b](https://github.com/otibeguni/folktales-website/commit/ef2de8b6a7c69704aee2d2210778b4bc5570271b))
+- topic details page ([2553109](https://github.com/otibeguni/folktales-website/commit/2553109c346ff37a82c2d66182092c691a03d379))
+- topic list page ([3768181](https://github.com/otibeguni/folktales-website/commit/3768181c73dc8ccbfe74805499429e90a3bdd99f))
+
+### Bug Fixes
+
+- add read online to book card ([f8531aa](https://github.com/otibeguni/folktales-website/commit/f8531aafefee1e0f0669b9edf3e523031b28316d))
+- adjust SEO stuff ([b3d8dd7](https://github.com/otibeguni/folktales-website/commit/b3d8dd7d875d48cc33488ca229d63837d0263db9))
+- broken link on books card source ([d288e5e](https://github.com/otibeguni/folktales-website/commit/d288e5ee9e03e86ebb7569be8bddcc5ea5fa0604))
+- buttons condition on sources section ([db6f8f7](https://github.com/otibeguni/folktales-website/commit/db6f8f76158fd4744e3be726299ee1fd3adfa9eb))
+- display description on the topic details page ([fa4ce45](https://github.com/otibeguni/folktales-website/commit/fa4ce452f89f761c12b2671ff8f371174ce087a3))
+- make Bengali the default language filter for book list page ([811a2a1](https://github.com/otibeguni/folktales-website/commit/811a2a1b3dceb626291cc38b4e8ace359f59ab6c))
+- replace resource types with title ([80fe03e](https://github.com/otibeguni/folktales-website/commit/80fe03ec246efdde29343a8d6a4ceba00b28c566))
+- show author of source, and type of topic ([64744e2](https://github.com/otibeguni/folktales-website/commit/64744e24238e7e9cf0c916e048f2a0acec391d9e))
+- spacing of main content and related ([33074a6](https://github.com/otibeguni/folktales-website/commit/33074a6cea000fff8111a00219faf1b9e3cd390f))
+- topic cards showing slug instead of title ([2c0d1fb](https://github.com/otibeguni/folktales-website/commit/2c0d1fb4a9cb1f683e8242a560888e61459d2f39))
+- topic filter issue caused by localizePath ([ba98312](https://github.com/otibeguni/folktales-website/commit/ba98312ec96f7da6151ea2875b47e6a5f1ed4aa0))
+- topic page is displaying unrelated resources ([c66aec9](https://github.com/otibeguni/folktales-website/commit/c66aec975625a3d411186f4da4ed87485667ee4f))
+
 ### [0.0.10](https://github.com/otibeguni/folktales-website/compare/v0.0.6...v0.0.10) (2025-06-08)
 
 ### Features

@@ -10,7 +10,7 @@ const Select: React.FC<IFilterSelect> = ({
     <select
       value={value}
       onChange={handleChange}
-      className="select min-w-full lg:min-w-[200px]"
+      className="select min-w-full lg:max-w-[33%] lg:min-w-[120px]"
     >
       <option disabled>{label}</option>
       {options.map((option) => (
