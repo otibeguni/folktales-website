@@ -25,16 +25,16 @@ const { frontmatter, default: Content } = story;
   <h1 class="text-3xl">Plot Summary</h1>
   <Content />
 
-  {baserow?.sources && <CardSource sources={baserow.sources} />}
+  {baserow?.sources.length > 0 && <CardSource sources={baserow.sources} />}
 
   {
-    baserow?.related_wikidata && (
+    baserow?.related_wikidata.length > 0 && (
       <CardTopics related_wikidata={baserow.related_wikidata} />
     )
   }
 
   {
-    baserow?.related_resources && (
+    baserow?.related_resources.length > 0 && (
       <CardResources related_resources={baserow.related_resources} />
     )
   }
