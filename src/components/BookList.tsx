@@ -57,8 +57,8 @@ const BookList = ({
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-3 mb-5 flex flex-col gap-3 lg:flex-row lg:items-center">
+    <div className="container mx-auto min-h-screen max-w-3xl">
+      <div className="mx-3 my-5 flex flex-col gap-3 lg:mx-0 lg:flex-row lg:items-center">
         <h2 className="text-2xl font-bold">{labels.filterLabel}</h2>
         <Select
           label={labels.languageLabel}
