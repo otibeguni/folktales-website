@@ -1,0 +1,5 @@
+name = "folktales-website"
+compatibility_date = "2025-06-10"
+
+[assets]
+directory = "./dist"
