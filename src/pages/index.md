@@ -1,24 +1,24 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
-title: Index Page
+title: Otibeguni | Reviving Bengali and Indigenous Folklore
 ---
 
-# Welcome to Otibeguni!
+# Otibeguni
 
-> Occaecat cillum ex elit ipsum culpa dolor nisi minim magna minim incididunt eiusmod ut laborum.
+Otibeguni is a pioneering Bangladeshi Folklore R&D company dedicated to revitalizing interest in Bengali and indigenous folklore. Our mission is to preserve, adapt, and share the rich cultural heritage of our oral traditions, making it accessible and engaging for modern audiences.
 
-Est cupidatat enim deserunt irure aliqua nisi id. Sit tempor enim mollit in do laboris mollit dolore. Exercitation aliquip in ipsum ullamco dolor laboris esse mollit deserunt. Tempor cillum anim ipsum id nostrud excepteur deserunt velit Lorem.
+## Publications
 
-- Ea incididunt esse ipsum ut
-- Duis cupidatat esse qui aute
-- Et nulla magna adipisicing culpa culpa aliquip proident qui voluptate
-- Sunt labore consectetur ullamco officia ea est sit sunt esse occaecat nisi consequat
-- Duis non laboris occaecat ad anim reprehenderit sunt enim nulla cupidatat irure
+### 📘 Otiprakrito - Volume 1
+A beautifully illustrated book cataloging over one hundred mythical creatures from Bengali and indigenous folklore.
 
-## Consequat irure nisi enim
+## Projects
 
-Et nostrud nostrud pariatur excepteur proident reprehenderit magna sit proident proident commodo cupidatat sint. Sint et tempor in aliquip sint adipisicing. Ea ex fugiat cupidatat officia deserunt magna Lorem pariatur deserunt aliquip. Aliquip Lorem veniam sunt duis deserunt dolor esse duis nisi cupidatat nostrud tempor et sint.
+### [🎭 Folktales and legends of Bengal](/stories)
+Collection of short story adaptations of Bengali and indigenous folk tales
 
-## Nulla aliqua commodo cupidatat est sint
+### [📜 Folklore Preservation](https://library.otibeguni.com/)
+Digital library featuring over 70 folklore collections, including rare works compiled by Bangla Academy and independent authors.
 
-Aute in elit eiusmod duis Lorem commodo commodo. Laboris minim Lorem aliqua fugiat cillum proident. Minim sit id deserunt elit dolor aliqua proident cupidatat. Et culpa enim ad excepteur excepteur aliqua exercitation dolore. Fugiat aute amet ex minim cillum reprehenderit reprehenderit ut voluptate. Velit excepteur ad consectetur exercitation eu quis et magna aliquip anim Lorem. Cillum eiusmod consectetur est nisi duis reprehenderit eiusmod qui elit.
+### [🧑‍🎨 Vintage Bengali Children’s Illustrations](https://art.otibeguni.com/)
+This project documents and preserves the rich visual heritage of Bengali children's books by collecting titles from private resellers and digitizing their illustrations. We scan covers and interior artwork in high resolution, creating a growing online archive of vintage Bengali book art.
