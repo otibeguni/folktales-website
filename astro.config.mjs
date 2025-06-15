@@ -1,6 +1,7 @@
 import { defineConfig, envField } from 'astro/config';
 import astroI18next from 'astro-i18next';
 import tailwindcss from '@tailwindcss/vite';
+import mdx from '@astrojs/mdx';
 
 import react from '@astrojs/react';
 
@@ -12,7 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react(), astroI18next()],
+  integrations: [react(), astroI18next(), mdx()],
 
   env: {
     schema: {

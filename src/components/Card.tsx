@@ -11,7 +11,6 @@ const Card = (props: IStory & Partial<MetadataItem>) => {
       <div className="card-body">
         <div className="card-title">{props.title}</div>
         <p>{props.category}</p>
-        {props.sources && <p>{props.sources.map((source) => source.value)}</p>}
       </div>
     </a>
   );

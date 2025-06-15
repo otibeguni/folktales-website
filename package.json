@@ -19,6 +19,7 @@
     "i18n": "npx astro-i18next generate"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.3.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
