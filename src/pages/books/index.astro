@@ -1,11 +1,11 @@
 ---
-import { changeLanguage, t } from "i18next";
-import BookList from "@/components/BookList";
-import Layout from "@/layouts/Layout.astro";
-import { fetchRowsFromDatabase } from "@/utils/baserow";
-import type { SourceItemAlt } from "@/types";
+import { changeLanguage, t } from 'i18next';
+import BookList from '@/components/BookList';
+import Layout from '@/layouts/Layout.astro';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
+import type { SourceItemAlt } from '@/types';
 
-changeLanguage("en");
+changeLanguage('en');
 
 // Baserow
 const baserowData = await fetchRowsFromDatabase(742);

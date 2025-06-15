@@ -1,11 +1,11 @@
 ---
-import { changeLanguage, t } from "i18next";
-import TopicList from "@/components/TopicList";
-import Layout from "@/layouts/Layout.astro";
-import { fetchRowsFromDatabase } from "@/utils/baserow";
-import type { WikidataItemAlt } from "@/types";
+import { changeLanguage, t } from 'i18next';
+import TopicList from '@/components/TopicList';
+import Layout from '@/layouts/Layout.astro';
+import { fetchRowsFromDatabase } from '@/utils/baserow';
+import type { WikidataItemAlt } from '@/types';
 
-changeLanguage("en");
+changeLanguage('en');
 
 // Baserow
 const baserowData = await fetchRowsFromDatabase(740);
