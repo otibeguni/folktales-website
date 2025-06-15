@@ -1,16 +1,43 @@
 ---
 layout: ../../layouts/MarkdownLayout.astro
-title: Otiprakrito Page
+title: Otiprakrito Volume 1 by Otibeguni
 ---
 
-# Otiprakrito
+# Otiprakrito - Volume 1
 
-Ut minim aliquip irure nulla occaecat deserunt incididunt consequat esse adipisicing ea mollit velit veniam. Dolor adipisicing pariatur ullamco ipsum sit sint. Velit nostrud magna magna cillum quis est fugiat exercitation cillum magna nisi.
+A visual encylopedia of the mythical creatures of Bengal
 
-Elit dolore cillum veniam nostrud magna fugiat eiusmod est. Ut excepteur duis qui dolor commodo do sunt mollit esse aliqua qui quis cillum. Sit aliqua amet et aliquip dolore deserunt ea id. Culpa officia id reprehenderit id non duis. Minim voluptate anim sunt anim irure elit. Ea anim adipisicing proident eu elit nisi sint. Officia consequat est amet magna dolor aute.
+<img src="https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/wwwnotionso-image-prod-files-secures3us-west-2amazonawscom-78db12f1-c691-45de-b1e3-0703df5f72a6-5554bf7c-7b19-4141-9fb9-b8ff93508371-img_4060jpeg/format=auto,w=1416">
 
-Duis ut consectetur fugiat sunt consectetur non culpa ea proident duis aliquip tempor dolore. Adipisicing quis nostrud magna duis quis. Nulla labore labore magna exercitation quis consequat in qui culpa aute occaecat nisi esse non. Magna voluptate minim enim enim esse non commodo.
+Featuring over one hundred stunning illustrations from Bengali and indigenous artists, this book draws references from Bengali oral traditions, Puthi literature, Hindu Mythology and folktale collections from seven different indigenous cultures.
 
-Amet culpa cupidatat veniam anim voluptate non culpa labore velit eiusmod adipisicing officia consequat laboris. Consequat duis excepteur sint aute amet dolore voluptate. Sint incididunt reprehenderit amet veniam commodo officia mollit mollit consectetur anim pariatur amet cupidatat. Labore proident enim cillum nisi aliquip excepteur amet magna. Incididunt magna enim reprehenderit magna est consectetur duis excepteur in sunt aute id. Sunt irure aute nulla aliquip ullamco. Eu eiusmod velit velit velit cupidatat voluptate tempor aliquip ad.
+## Look Inside
 
-Nostrud proident eu dolor nisi nisi laboris dolor quis exercitation anim tempor adipisicing exercitation magna. Lorem consectetur velit proident incididunt culpa incididunt occaecat ea laboris. Dolore aliquip qui ullamco nisi consequat ex proident consequat occaecat quis do ut pariatur. Magna occaecat dolore mollit excepteur cillum deserunt aliqua eiusmod quis ex consequat. Voluptate cillum magna ex laboris commodo anim commodo minim qui qui ut officia dolor. Sint commodo ad laborum nostrud sint eu fugiat labore. Reprehenderit culpa sint deserunt pariatur nisi cillum amet officia non.
+<img src="https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/wwwnotionso-image-prod-files-secures3us-west-2amazonawscom-78db12f1-c691-45de-b1e3-0703df5f72a6-4164433d-e1aa-482f-9d95-de6077533e69-img_4061jpeg/format=auto,w=8320">
+
+<img src="https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/wwwnotionso-image-prod-files-secures3us-west-2amazonawscom-78db12f1-c691-45de-b1e3-0703df5f72a6-f359aa21-e203-408d-81cf-915605bc32cb-img_4062jpeg/format=auto,w=8320">
+
+<img src="https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/wwwnotionso-image-prod-files-secures3us-west-2amazonawscom-78db12f1-c691-45de-b1e3-0703df5f72a6-ebf0580b-2ae7-4f68-a658-c8c89c9c0239-img_4063jpeg/format=auto,w=8320">
+
+## Features
+
+- Navy-blue matte dust jacket with beautiful embossed gold ornamentation featuring elements from Islamic, Hindu and indigenous cultures.
+- Featuring Subha Letterpress - a beautiful vintage Bengali childrens’ book inspired typography on 80 gsm créme paper.
+- Dozens of creatures that have been illustrated for the first time ever.
+
+## How to order
+
+- Direct from the publisher
+  - Send a message to our socials: [Facebook](https://www.facebook.com/otibeguni), [Instagram](https://www.instagram.com/otibeguni), [Email](mailto:hello@otibeguni.com)
+- Physical Bookstores
+  - [Baatighar](https://baatighar.com/shop/9789843604804-100253)
+  - [PBS](https://pbs.com.bd/book/2410418/otiprakrito-1st-part)
+- Facebook-based Stores
+
+  - [The Book Harbour](https://www.facebook.com/bookharbourbd/posts/pfbid0GMffXEJZrUUUxCKJxr2TANikt91bnXFXLCfMUqfjonvNkP3ctqkG6gUB5DQW25YUl?__tn__=R*F)
+
+  - [Dhee Books](https://www.facebook.com/dheebooks/posts/pfbid0YLeGCi8hhEAAWj6ofyk5tn3utp4ciRUNCHJvu5CvqdXGKKTvWZqimD88XNUhxyFDl?__tn__=R*F)
+
+  - [Onnushor](https://www.facebook.com/onnushor/posts/pfbid0izzReDSe83ajLip8Xh8PFUiRE9iD3dSTWZCBE5rAFreptbGhCEWPXdwE2LdkN1zxl?__tn__=R*F)
+
+  - [Book Street](https://www.facebook.com/bookstreetbd/posts/pfbid0NcTqCVXsu4Heou5jQWfJpiCVRQt6m1fh5iPed9yPitDLnaGuFKW2QFfGdrZsAR2Sl?__tn__=R*F)
