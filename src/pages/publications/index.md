@@ -8,6 +8,7 @@ title: Publications Page
 ## Published
 
 ### [Otiprakrito - Volume 1](/publications/otiprakrito)
+
 A beautifully illustrated book cataloging over one hundred mythical creatures from Bengali and indigenous folklore.
 
 ## Upcoming
