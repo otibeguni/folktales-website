@@ -21,4 +21,6 @@ export default defineConfig({
       BASEROW_TOKEN: envField.string({ context: 'server', access: 'secret' }),
     },
   },
+
+  site: 'https://otibeguni.com',
 });
