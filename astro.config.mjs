@@ -5,6 +5,8 @@ import mdx from '@astrojs/mdx';
 
 import react from '@astrojs/react';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
@@ -13,7 +15,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react(), astroI18next(), mdx()],
+  integrations: [react(), astroI18next(), mdx(), sitemap()],
 
   env: {
     schema: {
