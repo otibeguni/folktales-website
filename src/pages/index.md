@@ -9,16 +9,20 @@ Otibeguni is a pioneering Bangladeshi Folklore R&D company dedicated to revitali
 
 ## Publications
 
-### 📘 Otiprakrito - Volume 1
+### 📘 [Otiprakrito - Volume 1](/publications/otiprakrito)
+
 A beautifully illustrated book cataloging over one hundred mythical creatures from Bengali and indigenous folklore.
 
 ## Projects
 
 ### [🎭 Folktales and legends of Bengal](/stories)
+
 Collection of short story adaptations of Bengali and indigenous folk tales
 
 ### [📜 Folklore Preservation](https://library.otibeguni.com/)
+
 Digital library featuring over 70 folklore collections, including rare works compiled by Bangla Academy and independent authors.
 
 ### [🧑‍🎨 Vintage Bengali Children’s Illustrations](https://art.otibeguni.com/)
+
 This project documents and preserves the rich visual heritage of Bengali children's books by collecting titles from private resellers and digitizing their illustrations. We scan covers and interior artwork in high resolution, creating a growing online archive of vintage Bengali book art.
