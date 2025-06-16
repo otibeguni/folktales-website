@@ -1,134 +1,176 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 
-import Card from '@/components/Card.tsx';
-import Select from '@/components/Select.tsx';
-import type { IStoryList, MetadataItem } from '@/types';
+import type { IStoryList } from '@/types';
 
-const MAX_STORIES = 12;
+// A more suitable number for a list view to keep it scannable
+const STORIES_PER_PAGE = 8;
 
 const StoryList = ({
-  stories,
-  baserow,
-  lang,
-  labels,
-}: {
-  stories: IStoryList[];
-  baserow: MetadataItem[];
-  lang: string;
-  labels: { [key: string]: string };
+                       stories,
+                       lang,
+                       labels,
+                   }: {
+    stories: IStoryList[];
+    lang: string;
+    labels: { [key: string]: string };
 }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState(lang);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+    const [selectedLanguage, setSelectedLanguage] = useState(lang);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
 
-  const allCategories = Array.from(
-    new Set(stories.map((story) => story.frontmatter.category)),
-  );
+    // Memoize the categories list
+    const allCategories = Array.from(
+        new Set(stories.map((story) => story.frontmatter.category)),
+    );
 
-  const categories = allCategories.map((category) => ({
-    label: category,
-    value: category,
-  }));
+    const categories = [
+        { label: labels.allCategoryLabel, value: '' },
+        ...allCategories.map((category) => ({
+            label: category,
+            value: category,
+        }))
+    ];
 
-  const filteredStories = [
-    ...stories
-      .filter((story) => story.frontmatter.language === selectedLanguage)
-      .filter((story) => {
-        if (selectedCategory) {
-          return story.frontmatter.category === selectedCategory;
+    // Find the label for the currently selected category
+    const currentCategoryLabel = categories.find(c => c.value === selectedCategory)?.label || labels.allCategoryLabel;
+
+    // Filter stories based on selected language and category
+    const filteredStories = stories
+        .filter((story) => story.frontmatter.language === selectedLanguage)
+        .filter((story) => {
+            if (selectedCategory) {
+                return story.frontmatter.category === selectedCategory;
+            }
+            return true;
+        });
+
+    const totalPages = Math.ceil(filteredStories.length / STORIES_PER_PAGE);
+
+    // Reset to page 1 if filters change and current page becomes invalid
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages > 0 ? totalPages : 1);
         }
-        return true;
-      }),
-  ];
-  const totalPages = Math.ceil(filteredStories.length / MAX_STORIES);
-  const paginatedStories = filteredStories.slice(
-    (currentPage - 1) * MAX_STORIES,
-    currentPage * MAX_STORIES,
-  );
+    }, [selectedCategory, selectedLanguage, totalPages]);
 
-  const handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    event.preventDefault();
-    setCurrentPage(1);
-    setSelectedLanguage(event.target.value);
-  };
 
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    event.preventDefault();
-    setCurrentPage(1);
-    setSelectedCategory(event.target.value);
-  };
+    const paginatedStories = filteredStories.slice(
+        (currentPage - 1) * STORIES_PER_PAGE,
+        currentPage * STORIES_PER_PAGE,
+    );
 
-  return (
-    <div className="container mx-auto min-h-screen max-w-3xl">
-      <div className="mx-3 my-5 flex flex-col gap-3 lg:mx-0 lg:flex-row lg:items-center">
-        <h2 className="text-2xl font-bold">{labels.filterLabel}</h2>
-        <Select
-          label={labels.languageLabel}
-          value={selectedLanguage}
-          handleChange={handleLanguageChange}
-          options={[
-            {
-              label: 'English',
-              value: 'en',
-            },
-            {
-              label: 'Bengali',
-              value: 'bn',
-            },
-          ]}
-        />
-        <Select
-          label={labels.categoryLabel}
-          value={selectedCategory}
-          handleChange={handleCategoryChange}
-          options={[
-            {
-              label: labels.allCategoryLabel,
-              value: '',
-            },
-            ...categories,
-          ]}
-        />
-      </div>
-      <div className="divider my-5"></div>
-      <div className="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0">
-        {paginatedStories.map(({ frontmatter }) => (
-          <Card
-            key={`${frontmatter.language}-${frontmatter.slug}`}
-            {...frontmatter}
-            {...baserow.find((item) => item.slug === frontmatter.slug)}
-          />
-        ))}
-      </div>
+    const handleLanguageChange = (language: string) => {
+        setCurrentPage(1);
+        setSelectedLanguage(language);
+    };
 
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="mt-12 flex justify-center gap-4">
-          <button
-            className="btn"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-          >
-            Prev
-          </button>
-          <span className="self-center">
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            className="btn"
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-          >
-            Next
-          </button>
-        </div>
-      )}
-    </div>
-  );
+    const handleCategoryClick = (categoryValue: string) => {
+        setCurrentPage(1);
+        setSelectedCategory(categoryValue);
+        // This is a neat trick to close the dropdown after selection
+        if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur();
+        }
+    };
+
+    return (
+        <>
+            {/* Filter Section */}
+            <div className="mt-8 mb-8 flex flex-col items-start gap-4 rounded-xl bg-base-100 p-6 shadow-sm md:flex-row md:items-center md:justify-between">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <div className="btn-group">
+                        <button
+                            className={`btn btn-sm sm:btn-md ${selectedLanguage === 'en' ? 'btn-primary' : ''}`}
+                            onClick={() => handleLanguageChange('en')}
+                        >
+                            English
+                        </button>
+                        <button
+                            className={`btn btn-sm sm:btn-md ${selectedLanguage === 'bn' ? 'btn-primary' : ''}`}
+                            onClick={() => handleLanguageChange('bn')}
+                        >
+                            বাংলা
+                        </button>
+                    </div>
+                </div>
+                {/* Modern Dropdown for Categories */}
+                <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost w-full sm:w-auto">
+                        {currentCategoryLabel}
+                        <svg width="12px" height="12px" className="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+                    </div>
+                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        {categories.map(cat => (
+                            <li key={cat.value}>
+                                <a
+                                    className={selectedCategory === cat.value ? 'bg-base-200' : ''}
+                                    onClick={() => handleCategoryClick(cat.value)}
+                                >
+                                    {cat.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+
+            {/* Story List */}
+            <div className="space-y-4">
+                {paginatedStories.length > 0 ? (
+                    paginatedStories.map(({ frontmatter }) => {
+                        const basePath = frontmatter.language === 'en' ? '' : `/${frontmatter.language}`;
+
+                        return (
+                            <a
+                                key={`${frontmatter.language}-${frontmatter.slug}`}
+                                href={`${basePath}/stories/${frontmatter.slug}`}
+                                className="flex flex-col sm:flex-row items-center gap-4 p-4 bg-base-100 rounded-lg shadow-sm hover:shadow-md hover:bg-base-200/50 transition-all duration-300 no-underline"
+                            >
+                                <img
+                                    src={`https://placehold.co/100x100/f0f0f0/333333?text=${frontmatter.slug.toUpperCase().charAt(0)}`}
+                                    alt={frontmatter.title}
+                                    className="w-24 h-24 sm:w-20 sm:h-20 flex-shrink-0 rounded-md object-cover bg-base-300"
+                                />
+                                <div className="flex-grow text-center sm:text-left">
+                                    <div className="font-bold text-lg text-base-content">{frontmatter.title}</div>
+                                </div>
+                                <div className="badge badge-secondary sm:ml-4 flex-shrink-0">{frontmatter.category}</div>
+                            </a>
+                        );
+                    })
+                ) : (
+                    <div className="text-center p-8 bg-base-100 rounded-lg">
+                        <p>No stories found for the selected filters.</p>
+                    </div>
+                )}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+                <div className="mt-12 flex justify-center">
+                    <div className="join">
+                        <button
+                            className="join-item btn"
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                        >
+                            «
+                        </button>
+                        <button className="join-item btn btn-active">
+                            Page {currentPage} of {totalPages}
+                        </button>
+                        <button
+                            className="join-item btn"
+                            disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                        >
+                            »
+                        </button>
+                    </div>
+                </div>
+            )}
+        </>
+    );
 };
 
 export default StoryList;
