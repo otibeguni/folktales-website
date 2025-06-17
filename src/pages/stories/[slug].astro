@@ -1,78 +1,94 @@
 ---
-import { changeLanguage } from 'i18next';
-import Layout from '@/layouts/Layout.astro';
-import type { IStory, MetadataItem } from '@/types';
-import { fetchRowsFromDatabase } from '@/utils/baserow';
-import StoryHeader from '../../components/StoryHeader.astro';
-import StoryMetadata from '../../components/StoryMetadata.astro';
-import ArticleBody from '../../components/ArticleBody.astro';
+import { changeLanguage } from "i18next";
+import Layout from "@/layouts/Layout.astro";
+import type { IStory, MetadataItem } from "@/types";
+import { fetchRowsFromDatabase } from "@/utils/baserow";
+import StoryHeader from "../../components/StoryHeader.astro";
+import StoryMetadata from "../../components/StoryMetadata.astro";
+import ArticleBody from "../../components/ArticleBody.astro";
+import RelatedItemsList from "../../components/RelatedItemsList.astro";
 
-changeLanguage('en');
+changeLanguage("en");
 
 export async function getStaticPaths() {
-  const stories: Array<{
-    frontmatter: IStory;
-    default: any;
-  }> = Object.values(import.meta.glob('@/stories/en/*.md', { eager: true }));
-  return await Promise.all(
-    stories.map(async (story) => {
-      // Construct the specific filter for the current story's slug
-      const filter = {
-        filter_type: 'AND',
-        filters: [
-          { field: 'slug', type: 'equal', value: story.frontmatter.slug },
-        ],
-      };
-      const encodedFilter = encodeURIComponent(JSON.stringify(filter));
-      // Fetch only the metadata for this single story
-      const baserowData = await fetchRowsFromDatabase(
-        741,
-        `&sources__join=author,url,library_url,slug&related_wikidata__join=type,slug,item&related_resources__join=type,url&filters=${encodedFilter}`,
-      );
-      const storyMetadata =
-        ((await baserowData.results) as MetadataItem[])[0] ?? null;
-      return {
-        params: { slug: story.frontmatter.slug },
-        props: {
-          story,
-          metadata: storyMetadata,
-        },
-      };
-    }),
-  );
+    const stories: Array<{
+        frontmatter: IStory;
+        default: any;
+    }> = Object.values(import.meta.glob("@/stories/en/*.md", { eager: true }));
+    return await Promise.all(stories.map(async (story) => {
+        // Construct the specific filter for the current story's slug
+        const filter = {
+            filter_type: "AND",
+            filters: [
+                { field: "slug", type: "equal", value: story.frontmatter.slug },
+            ],
+        };
+        const encodedFilter = encodeURIComponent(JSON.stringify(filter));
+        // Fetch only the metadata for this single story
+        const baserowData = await fetchRowsFromDatabase(741, `&sources__join=author,url,library_url,slug&related_wikidata__join=type,slug,item&related_resources__join=type,url&filters=${encodedFilter}`);
+        const storyMetadata = (baserowData.results as MetadataItem[])[0] ?? null;
+        return {
+            params: { slug: story.frontmatter.slug },
+            props: {
+                story,
+                metadata: storyMetadata,
+            },
+        };
+    }));
 }
 const { story, metadata } = Astro.props;
 const Content = story.default;
 const { frontmatter } = story;
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
 // Prepare the isBasedOn data if applicable
-const isBasedOn =
-  metadata != null && metadata.sources?.length > 0 && metadata.sources[0].value
+const isBasedOn = metadata != null && metadata.sources?.length > 0 && metadata.sources[0].value
     ? {
-        '@type': 'CreativeWork',
+        "@type": "CreativeWork",
         name: metadata.sources[0].value,
         ...(metadata.sources[0].author && {
-          author: {
-            '@type': 'Person',
-            name: metadata.sources[0].author,
-          },
+            author: {
+                "@type": "Person",
+                name: metadata.sources[0].author,
+            },
         }),
-      }
+    }
     : null;
 const schemaData = {
-  '@context': 'https://schema.org',
-  '@type': 'CreativeWork',
-  name: frontmatter.title,
-  url: currentUrl,
-  author: {
-    '@type': 'Organization',
-    name: 'Otibeguni',
-  },
-  ...(isBasedOn && { isBasedOn }),
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: frontmatter.title,
+    url: currentUrl,
+    author: {
+        "@type": "Organization",
+        name: "Otibeguni",
+    },
+    ...(isBasedOn && { isBasedOn }),
 };
+// Define the map of types to Font Awesome class strings
+const iconMap = {
+    "Location": "fa-solid fa-location-dot",
+    "Person": "fa-solid fa-user",
+    "Supernatural Entity": "fa-solid fa-ghost",
+    "River": "fa-solid fa-water",
+    "video": "fa-solid fa-video",
+    "website": "fa-solid fa-newspaper",
+};
+// Map Wikidata topics to a common format
+const relatedTopics = metadata?.related_wikidata?.map(topic => ({
+    name: topic.item,
+    type: topic.type || "",
+    url: `/topics/${topic.slug}`,
+    isExternal: false,
+})) || [];
+// Map Resource links to the same common format
+const relatedResources = metadata?.related_resources?.map(resource => ({
+    name: resource.value,
+    type: resource.type.value,
+    url: resource.url || "",
+    isExternal: true,
+})) || [];
 ---
 
-<!--<Layout--><!--  title={`${frontmatter.title} - Stories | Otibeguni `}--><!--  schema={schemaData}--><!--&gt;--><!--  <Article story={story} metadata={metadata} />--><!--</Layout>-->
 <Layout
   title={`${frontmatter.title} - Stories | Otibeguni `}
   schema={schemaData}
@@ -99,6 +115,30 @@ const schemaData = {
           <ArticleBody>
             <Content />
           </ArticleBody>
+
+          <!-- Conditionally render the Related Topics section -->
+          {relatedTopics.length > 0 && (
+              <>
+                <div class="divider mt-12"></div>
+                <RelatedItemsList
+                    title="Related Topics"
+                    items={relatedTopics}
+                    iconMap={iconMap}
+                />
+              </>
+          )}
+
+          <!-- Conditionally render the Related Resources section -->
+          {relatedResources.length > 0 && (
+              <>
+                <div class="divider mt-12"></div>
+                <RelatedItemsList
+                    title="Related Resources"
+                    items={relatedResources}
+                    iconMap={iconMap}
+                />
+              </>
+          )}
         </article>
       </div>
     </div>

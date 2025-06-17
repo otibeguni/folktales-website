@@ -3,7 +3,7 @@
 interface Props {
   category: string;
   sourceBook: string;
-  sourceAuthor: string;
+  sourceAuthor?: string;
   sourceUrl?: string;
 }
 
@@ -35,6 +35,6 @@ const { category, sourceBook, sourceAuthor, sourceUrl } = Astro.props;
         <p class="text-lg font-semibold">{sourceBook}</p>
       )
     }
-    <p class="text-sm opacity-80">by {sourceAuthor}</p>
+    <p class="text-sm opacity-80">by {sourceAuthor || 'Unknown'}</p>
   </div>
 </div>

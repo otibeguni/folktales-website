@@ -24,6 +24,7 @@ export interface IStoryList {
 
 export interface WikidataItem {
   id: number;
+  item: string;
   value: string;
   order: string;
   type?: string;
@@ -68,6 +69,7 @@ export interface MetadataItem {
   slug: string;
   related_wikidata: WikidataItem[];
   sources: SourceItem[];
+  related_resources: ResourceItem[];
 }
 
 export interface Frontmatter {
