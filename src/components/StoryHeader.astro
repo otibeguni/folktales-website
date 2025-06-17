@@ -3,23 +3,24 @@
 import type { IStory } from '@/types';
 
 interface Props {
-    story: IStory;
+  story: IStory;
 }
 
 const { story } = Astro.props;
 const { title, slug } = story;
 ---
+
 <!-- NEW: Integrated Header Section -->
-<div class="p-6 md:p-10 text-center border-b border-base-200">
-    <div class="flex justify-center">
-        <img
-                src={`https://placehold.co/150x150/f0f0f0/333333?text=${slug.toUpperCase().charAt(0)}`}
-                alt={`Cover illustration for ${title}`}
-                class="w-28 h-28 md:w-36 md:h-36 rounded-lg shadow-lg -mb-16 object-cover"
-        >
-    </div>
+<div class="border-base-200 border-b p-6 text-center md:p-10">
+  <div class="flex justify-center">
+    <img
+      src={`https://placehold.co/150x150/f0f0f0/333333?text=${slug.toUpperCase().charAt(0)}`}
+      alt={`Cover illustration for ${title}`}
+      class="-mb-16 h-28 w-28 rounded-lg object-cover shadow-lg md:h-36 md:w-36"
+    />
+  </div>
 </div>
 
-<div class="text-center pt-20">
-    <h1 class="text-3xl md:text-5xl font-bold leading-tight mt-2">{title}</h1>
+<div class="pt-20 text-center">
+  <h1 class="mt-2 text-3xl leading-tight font-bold md:text-5xl">{title}</h1>
 </div>

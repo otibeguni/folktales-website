@@ -2,12 +2,14 @@
 // src/components/story/ArticleBody.astro
 // This is a simple wrapper to ensure consistent styling for the article content.
 ---
-<div class="prose max-w-none flex-1 article-content mt-8">
-    <style>
-        /* You can add global prose styles here or in a global stylesheet */
-        .prose p {
-            line-height: 1.75;
-        }
-    </style>
-    <slot /> <!-- The MD/MDX content will be passed into here -->
+
+<div class="prose article-content mt-8 max-w-none flex-1">
+  <style>
+    /* You can add global prose styles here or in a global stylesheet */
+    .prose p {
+      line-height: 1.75;
+    }
+  </style>
+  <slot />
+  <!-- The MD/MDX content will be passed into here -->
 </div>
