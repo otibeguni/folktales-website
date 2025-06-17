@@ -1,0 +1,70 @@
+---
+// src/components/story/RelatedItemsList.astro
+import { localizePath } from 'astro-i18next';
+
+// A generic interface for any item we want to display in the list
+interface Item {
+  name: string;
+  type: string;
+  url?: string;
+  isExternal?: boolean;
+}
+
+interface Props {
+  title: string; // The title for the section
+  items?: Item[];
+  // NEW: The map now expects Font Awesome class strings (e.g., 'fa-solid fa-location-dot')
+  iconMap: Record<string, string>;
+}
+
+const { title, items, iconMap } = Astro.props;
+
+if (!items || items.length === 0) {
+  return null;
+}
+
+// A default Font Awesome icon class
+const defaultIconClass = 'fa-solid fa-link';
+---
+
+<!--
+  Reminder: Ensure Font Awesome is loaded in your project, for example,
+  by adding the CDN link to your main Layout.astro <head>.
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+-->
+<div class="mt-8">
+  <h3 class="mb-4 text-2xl font-bold">{title}</h3>
+  <div class="flex flex-col gap-3">
+    {
+      items.map((item) => {
+        const linkUrl = item.isExternal ? item.url : localizePath(item.url);
+
+        if (!linkUrl) return null;
+
+        // Look up the icon class from the map, or use the default
+        const iconClass = iconMap[item.type] || defaultIconClass;
+
+        return (
+          <a
+            href={linkUrl}
+            target={item.isExternal ? '_blank' : '_self'}
+            rel={item.isExternal ? 'noopener noreferrer' : null}
+            class="bg-base-200/50 hover:bg-base-200 flex items-center gap-4 rounded-lg p-4 no-underline transition-all duration-300 hover:shadow-sm"
+          >
+            <div class="bg-primary/10 text-primary flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full p-3">
+              {/* NEW: Render an <i> tag with the Font Awesome classes */}
+              <i class:list={[iconClass, 'fa-lg']} />
+            </div>
+            <div class="flex-grow">
+              <p class="text-xs opacity-60">{item.type}</p>
+              <h4 class="-mt-1 text-base font-bold">{item.name}</h4>
+            </div>
+            <div class="text-neutral-content/30">
+              <i class="fa-solid fa-chevron-right" />
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+</div>

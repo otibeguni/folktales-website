@@ -1,0 +1,40 @@
+---
+// src/components/story/StoryMetadata.astro
+interface Props {
+  category: string;
+  sourceBook: string;
+  sourceAuthor?: string;
+  sourceUrl?: string;
+}
+
+const { category, sourceBook, sourceAuthor, sourceUrl } = Astro.props;
+---
+
+<div
+  class="bg-base-200/50 mt-8 mb-6 grid grid-cols-1 items-start gap-6 rounded-lg p-4 sm:grid-cols-2"
+>
+  <div class="text-center sm:text-left">
+    <div class="text-xs font-bold opacity-60">CATEGORY</div>
+    <div class="text-secondary text-lg font-semibold">{category}</div>
+  </div>
+  <div
+    class="border-base-300 border-t-2 pt-4 text-center sm:border-t-0 sm:border-l-2 sm:pt-0 sm:pl-6 sm:text-left"
+  >
+    <p class="text-xs font-bold opacity-60">BASED ON THE BOOK</p>
+    {
+      sourceUrl ? (
+        <a
+          href={sourceUrl}
+          class="link link-hover text-lg font-semibold"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {sourceBook}
+        </a>
+      ) : (
+        <p class="text-lg font-semibold">{sourceBook}</p>
+      )
+    }
+    <p class="text-sm opacity-80">by {sourceAuthor || 'Unknown'}</p>
+  </div>
+</div>

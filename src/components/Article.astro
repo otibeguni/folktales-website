@@ -4,7 +4,7 @@ import CardResources from './CardResources.astro';
 import CardSource from './CardSource.astro';
 import CardTopics from './CardTopics.astro';
 
-const { story, baserow } = Astro.props;
+const { story, metadata } = Astro.props;
 const { frontmatter, default: Content } = story;
 ---
 
@@ -25,17 +25,17 @@ const { frontmatter, default: Content } = story;
   <h1 class="text-3xl">Plot Summary</h1>
   <Content />
 
-  {baserow?.sources.length > 0 && <CardSource sources={baserow.sources} />}
+  {metadata?.sources.length > 0 && <CardSource sources={metadata.sources} />}
 
   {
-    baserow?.related_wikidata.length > 0 && (
-      <CardTopics related_wikidata={baserow.related_wikidata} />
+    metadata?.related_wikidata.length > 0 && (
+      <CardTopics related_wikidata={metadata.related_wikidata} />
     )
   }
 
   {
-    baserow?.related_resources.length > 0 && (
-      <CardResources related_resources={baserow.related_resources} />
+    metadata?.related_resources.length > 0 && (
+      <CardResources related_resources={metadata.related_resources} />
     )
   }
 </article>
