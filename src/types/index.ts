@@ -70,6 +70,7 @@ export interface MetadataItem {
   related_wikidata: WikidataItem[];
   sources: SourceItem[];
   related_resources: ResourceItem[];
+  cover_image: string;
 }
 
 export interface Frontmatter {

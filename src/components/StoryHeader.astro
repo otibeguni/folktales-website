@@ -1,12 +1,13 @@
 ---
 // src/components/story/StoryHeader.astro
-import type { IStory } from '@/types';
+import type { IStory, MetadataItem } from '@/types';
 
 interface Props {
   story: IStory;
+  metadata: MetadataItem;
 }
 
-const { story } = Astro.props;
+const { story, metadata } = Astro.props;
 const { title, slug } = story;
 ---
 
@@ -14,9 +15,9 @@ const { title, slug } = story;
 <div class="border-base-200 border-b p-6 text-center md:p-10">
   <div class="flex justify-center">
     <img
-      src={`https://placehold.co/150x150/f0f0f0/333333?text=${slug.toUpperCase().charAt(0)}`}
+      src={metadata.cover_image ?? `https://placehold.co/150x150/f0f0f0/333333?text=${slug.toUpperCase().charAt(0)}`}
       alt={`Cover illustration for ${title}`}
-      class="-mb-16 h-28 w-28 rounded-lg object-cover shadow-lg md:h-36 md:w-36"
+      class="-mb-20 h-40 w-40 rounded-lg object-cover shadow-lg md:-mb-28 md:h-56 md:w-56"
     />
   </div>
 </div>
