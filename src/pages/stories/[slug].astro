@@ -69,6 +69,7 @@ const schemaData = {
     name: 'Otibeguni',
   },
   ...(isBasedOn && { isBasedOn }),
+  ...(metadata?.cover_image && { image: metadata.cover_image }),
 };
 // Define the map of types to Font Awesome class strings
 const iconMap = {
@@ -106,7 +107,7 @@ const relatedResources =
       <div class="bg-base-100 rounded-xl shadow-lg">
         <article class="p-6 md:p-10">
           <!-- Using the new header component -->
-          <StoryHeader story={frontmatter} />
+          <StoryHeader story={frontmatter} metadata={metadata} />
 
           <!-- Using the new metadata component -->
           <StoryMetadata
