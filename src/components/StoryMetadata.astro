@@ -17,7 +17,7 @@ const { category, sourceBook, sourceAuthor, sourceUrl } = Astro.props;
     <div class="text-xs font-bold opacity-60">CATEGORY</div>
     <div class="text-secondary text-lg font-semibold">{category}</div>
   </div>
-  <div
+  { sourceBook ? (<div
     class="border-base-300 border-t-2 pt-4 text-center sm:border-t-0 sm:border-l-2 sm:pt-0 sm:pl-6 sm:text-left"
   >
     <p class="text-xs font-bold opacity-60">BASED ON THE BOOK</p>
@@ -36,5 +36,6 @@ const { category, sourceBook, sourceAuthor, sourceUrl } = Astro.props;
       )
     }
     <p class="text-sm opacity-80">by {sourceAuthor || 'Unknown'}</p>
-  </div>
+  </div>) : ( <div/>)
+  } 
 </div>

@@ -9,10 +9,12 @@ const StoryList = ({
   stories,
   lang,
   labels,
+  path
 }: {
   stories: IStoryList[];
   lang: string;
   labels: { [key: string]: string };
+  path: string;
 }) => {
   const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -142,7 +144,7 @@ const StoryList = ({
             return (
               <a
                 key={`${frontmatter.language}-${frontmatter.slug}`}
-                href={`${basePath}/stories/${frontmatter.slug}`}
+                href={`${basePath}/${path}/${frontmatter.slug}`}
                 className="bg-base-100 hover:bg-base-200/50 flex flex-col items-center gap-4 rounded-lg p-4 no-underline shadow-sm transition-all duration-300 hover:shadow-md sm:flex-row"
               >
                 <img
@@ -163,7 +165,7 @@ const StoryList = ({
           })
         ) : (
           <div className="bg-base-100 rounded-lg p-8 text-center">
-            <p>No stories found for the selected filters.</p>
+            <p>No entries found for the selected filters.</p>
           </div>
         )}
       </div>
