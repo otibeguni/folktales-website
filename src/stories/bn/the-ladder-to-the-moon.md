@@ -2,7 +2,7 @@
 title: চাঁদে চড়ার সিঁড়ি
 category: Indigenous Folktale
 source: Folk tales of the Garos
-slug: the-ladder-to-the-moon
+slug: the-ladder-to-the-moon.md
 language: bn
 ---
 
