@@ -1,5 +1,5 @@
 ---
-title: How did the peacock get its colorful tail - Khasi Folktale
+title: How did the peacock get its colorful tail
 title_bn: ময়ূরপুচ্ছে রংধনু কীভাবে এলো?
 category: Indigenous Folktale
 source: Folktales of the Khasis
