@@ -15,7 +15,7 @@ const { title, slug } = story;
 <div class="border-base-200 border-b p-6 text-center md:p-10">
   <div class="flex justify-center">
     <img
-      src={metadata.cover_image ??
+      src={metadata?.cover_image ??
         `https://placehold.co/150x150/f0f0f0/333333?text=${slug.toUpperCase().charAt(0)}`}
       alt={`Cover illustration for ${title}`}
       class="-mb-20 h-40 w-40 rounded-lg object-cover shadow-lg md:-mb-28 md:h-56 md:w-56"
