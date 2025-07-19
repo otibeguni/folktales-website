@@ -9,7 +9,7 @@ const StoryList = ({
   stories,
   lang,
   labels,
-  path
+  path,
 }: {
   stories: IStoryList[];
   lang: string;
@@ -79,22 +79,20 @@ const StoryList = ({
   return (
     <>
       {/* Filter Section */}
-      <div className="bg-base-100 mt-8 mb-8 flex flex-col items-start gap-4 rounded-xl p-6 shadow-sm md:flex-row md:items-center md:justify-between">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <div className="btn-group">
-            <button
-              className={`btn btn-sm sm:btn-md ${selectedLanguage === 'en' ? 'btn-primary' : ''}`}
-              onClick={() => handleLanguageChange('en')}
-            >
-              English
-            </button>
-            <button
-              className={`btn btn-sm sm:btn-md ${selectedLanguage === 'bn' ? 'btn-primary' : ''}`}
-              onClick={() => handleLanguageChange('bn')}
-            >
-              বাংলা
-            </button>
-          </div>
+      <div className="bg-base-100 mt-8 mb-8 flex flex-row items-center justify-between gap-4 rounded-xl p-6 shadow-sm">
+        <div className="btn-group">
+          <button
+            className={`btn btn-sm sm:btn-md ${selectedLanguage === 'en' ? 'btn-primary' : ''}`}
+            onClick={() => handleLanguageChange('en')}
+          >
+            English
+          </button>
+          <button
+            className={`btn btn-sm sm:btn-md ${selectedLanguage === 'bn' ? 'btn-primary' : ''}`}
+            onClick={() => handleLanguageChange('bn')}
+          >
+            বাংলা
+          </button>
         </div>
         {/* Modern Dropdown for Categories */}
         <div className="dropdown dropdown-end">
