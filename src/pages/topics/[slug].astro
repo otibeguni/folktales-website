@@ -1,55 +1,42 @@
 ---
-import { changeLanguage } from 'i18next';
-import ArticleTopic from '@/components/ArticleTopic.astro';
-import Layout from '@/layouts/Layout.astro';
-import type {
-  IStory,
-  MetadataItem,
-  WikidataItemAlt,
-  ResourceItemAlt,
-} from '@/types';
-import { fetchRowsFromDatabase } from '@/utils/baserow';
+import { changeLanguage } from "i18next";
+import ArticleTopic from "@/components/ArticleTopic.astro";
+import Layout from "@/layouts/Layout.astro";
+import type { IStory, MetadataItem, WikidataItemAlt, ResourceItemAlt, } from "@/types";
+import { fetchRowsFromDatabase } from "@/utils/baserow";
 
-changeLanguage('en');
+changeLanguage("en");
 
 export async function getStaticPaths() {
-  const bsTopicData = await fetchRowsFromDatabase(740);
-  const bsTopicResult = (await bsTopicData.results) as WikidataItemAlt[];
-  const bsStoryData = await fetchRowsFromDatabase(
-    741,
-    '&related_resources__join=type,url',
-  );
-  const bsStoryResult = (await bsStoryData.results) as MetadataItem[];
-  const bsResourcesData = await fetchRowsFromDatabase(747);
-  const bsResourcesResult =
-    (await bsResourcesData.results) as ResourceItemAlt[];
-  const allStories: Array<{
-    frontmatter: IStory;
-    default: any;
-  }> = Object.values(import.meta.glob('@/stories/en/*.md', { eager: true }));
-  return bsTopicResult.map((topic) => ({
-    params: { slug: topic.slug },
-    props: {
-      topic,
-      storyByTopic: bsStoryResult.filter((item: MetadataItem) =>
-        item.related_wikidata?.some((i: any) => i.value === topic.slug),
-      ),
-      allStories,
-      resources: bsResourcesResult,
-    },
-  }));
+    const bsTopicData = await fetchRowsFromDatabase(740);
+    const bsTopicResult = (await bsTopicData.results) as WikidataItemAlt[];
+    const bsStoryData = await fetchRowsFromDatabase(741, "&related_resources__join=type,url");
+    const bsStoryResult = (await bsStoryData.results) as MetadataItem[];
+    const bsResourcesData = await fetchRowsFromDatabase(747);
+    const bsResourcesResult = (await bsResourcesData.results) as ResourceItemAlt[];
+    const allStories: Array<{
+        frontmatter: IStory;
+        default: any;
+    }> = Object.values(import.meta.glob("@/stories/en/*.md", { eager: true }));
+    return bsTopicResult.map((topic) => ({
+        params: { slug: topic.slug },
+        props: {
+            topic,
+            storyByTopic: bsStoryResult.filter((item: MetadataItem) => item.related_wikidata?.some((i: any) => i.value === topic.slug)),
+            allStories,
+            resources: bsResourcesResult,
+        },
+    }));
 }
 const { topic, storyByTopic, allStories, resources } = Astro.props;
 const currentUrl = Astro.url.href;
 // Filter story by topic
 const topicSlugs = new Set(storyByTopic.map((item) => item.slug));
 const filteredStories: Array<{
-  frontmatter: IStory;
-  default: any;
+    frontmatter: IStory;
+    default: any;
 }> = allStories.filter((item) => topicSlugs.has(item.frontmatter.slug));
-const relatedResources = resources.filter((item: ResourceItemAlt) =>
-  item.related_wikidata?.some((i: any) => i.value === topic.slug),
-);
+const relatedResources = resources.filter((item: ResourceItemAlt) => item.related_wikidata?.some((i: any) => i.value === topic.slug));
 ---
 
 <Layout
