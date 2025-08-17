@@ -10,7 +10,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "release": "standard-version",
     "i18n": "npx astro-i18next generate"
   },
   "dependencies": {
@@ -33,7 +32,6 @@
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
-    "daisyui": "^5.0.43",
-    "standard-version": "^9.5.0"
+    "daisyui": "^5.0.43"
   }
 }
