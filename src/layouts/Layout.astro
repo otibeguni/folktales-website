@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar.astro';
 const currentLanguage = 'en';
 
 const { schema = null, title = null, description = null } = Astro.props;
+console.log(Astro.props);
 ---
 
 <!doctype html>
@@ -15,6 +16,12 @@ const { schema = null, title = null, description = null } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+
+    { schema && <meta property="og:type" content="article"> }
+    { schema && <meta property="og:title" content={schema.name}> }
+    { schema && <meta property="og:image" content={schema.image}> }
+    { schema && <meta property="og:url" content={schema.url}> }
+
     <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
     <link
       rel="stylesheet"
@@ -25,7 +32,6 @@ const { schema = null, title = null, description = null } = Astro.props;
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <meta name="description" content={description} />
     <HeadHrefLangs />
     {schema && <Schema item={schema} />}
   </head>
