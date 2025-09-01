@@ -1,11 +1,12 @@
 ---
+import type { MarkdownInstance } from "astro";
 import i18next, { changeLanguage, t } from "i18next";
 import StoryList from "@/components/StoryList";
 import Layout from "@/layouts/Layout.astro";
-import type { IStory, IStoryCollection } from "@/types";
+import type { IStory, IStoryCollection, MetadataItem } from "@/types";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import StoryCollectionList from "@/components/StoryCollectionList.astro";
-import type { MarkdownInstance } from "astro";
+import { fetchRowsFromDatabase } from "@/utils/baserow";
 
 changeLanguage("en");
 
@@ -16,6 +17,7 @@ const collections = Object.values(
     { eager: true }
   )
 );
+const baserowData = (await fetchRowsFromDatabase(741)) ?? null;
 const storiesEn = Object.values(
   import.meta.glob<MarkdownInstance<IStory>>("@/stories/en/*.md", {
     eager: true,
@@ -36,12 +38,14 @@ const stories = [...storiesEn, ...storiesBn];
 
     <StoryCollectionList
       collections={collections}
+      metadatas={baserowData?.results}
       stories={stories}
       path="stories"
     />
 
     <StoryList
       stories={stories}
+      metadatas={baserowData?.results as MetadataItem[]}
       lang={currentLanguage}
       labels={{
         filterLabel: t("pages.stories.filterLabel"),

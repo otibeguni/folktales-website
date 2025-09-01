@@ -2,11 +2,16 @@ import type { IStory } from "@/types";
 
 const CardStory = ({
   frontmatter,
+  coverImage = null,
   path,
 }: {
   frontmatter: IStory;
+  coverImage?: any;
   path: string;
 }) => {
+  const cover =
+    coverImage ||
+    `https://placehold.co/256x256/f0f0f0/333333?text=${frontmatter.title}`;
   const basePath =
     frontmatter.language === "en" ? "" : `/${frontmatter.language}`;
 
@@ -18,9 +23,10 @@ const CardStory = ({
     >
       <div className="mx-auto">
         <img
-          src={`https://placehold.co/360x360/f0f0f0/333333?text=${frontmatter.title}`}
+          src={cover}
           alt={frontmatter.title}
-          className="bg-base-300 aspect-square w-[256px] rounded-lg"
+          className="bg-base-300 aspect-square w-3xs rounded-lg"
+          loading="lazy"
         />
       </div>
       <div className="space-y-1 pt-4">

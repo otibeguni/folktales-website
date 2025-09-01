@@ -2,7 +2,7 @@
 import CardStory from "./CardStory";
 import type { IStoryCollectionList, IStoryList } from "@/types";
 
-const { collections, stories, path } = Astro.props;
+const { collections, metadatas, stories, path } = Astro.props;
 ---
 
 <div class="space-y-8">
@@ -34,9 +34,18 @@ const { collections, stories, path } = Astro.props;
                       story.frontmatter.slug
                     )
                 )
-                .map((story: IStoryList) => (
-                  <CardStory frontmatter={story.frontmatter} path={path} />
-                ))}
+                .map((story: IStoryList) => {
+                  const currentStory = metadatas.find(
+                    (item: any) => item.slug === story.frontmatter.slug
+                  );
+                  return (
+                    <CardStory
+                      frontmatter={story.frontmatter}
+                      coverImage={currentStory?.cover_image}
+                      path={path}
+                    />
+                  );
+                })}
             </div>
           </div>
         )

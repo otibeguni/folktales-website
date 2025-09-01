@@ -1,33 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import type { IStoryList } from '@/types';
-import CardStory from './CardStory';
+import type { IStoryList, MetadataItem } from "@/types";
+import CardStory from "./CardStory";
 
 // A more suitable number for a list view to keep it scannable
 const STORIES_PER_PAGE = 8;
 
 const StoryList = ({
   stories,
+  metadatas,
   lang,
   labels,
   path,
 }: {
   stories: IStoryList[];
+  metadatas: MetadataItem[];
   lang: string;
   labels: { [key: string]: string };
   path: string;
 }) => {
   const [selectedLanguage, setSelectedLanguage] = useState(lang);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   // Memoize the categories list
   const allCategories = Array.from(
-    new Set(stories.map((story) => story.frontmatter.category)),
+    new Set(stories.map((story) => story.frontmatter.category))
   );
 
   const categories = [
-    { label: labels.allCategoryLabel, value: '' },
+    { label: labels.allCategoryLabel, value: "" },
     ...allCategories.map((category) => ({
       label: category,
       value: category,
@@ -60,7 +62,7 @@ const StoryList = ({
 
   const paginatedStories = filteredStories.slice(
     (currentPage - 1) * STORIES_PER_PAGE,
-    currentPage * STORIES_PER_PAGE,
+    currentPage * STORIES_PER_PAGE
   );
 
   const handleLanguageChange = (language: string) => {
@@ -83,14 +85,18 @@ const StoryList = ({
       <div className="bg-base-100 mt-8 mb-8 flex flex-row items-center justify-between gap-4 rounded-xl p-6 shadow-sm">
         <div className="btn-group">
           <button
-            className={`btn btn-sm sm:btn-md ${selectedLanguage === 'en' ? 'btn-primary' : ''}`}
-            onClick={() => handleLanguageChange('en')}
+            className={`btn btn-sm sm:btn-md ${
+              selectedLanguage === "en" ? "btn-primary" : ""
+            }`}
+            onClick={() => handleLanguageChange("en")}
           >
             English
           </button>
           <button
-            className={`btn btn-sm sm:btn-md ${selectedLanguage === 'bn' ? 'btn-primary' : ''}`}
-            onClick={() => handleLanguageChange('bn')}
+            className={`btn btn-sm sm:btn-md ${
+              selectedLanguage === "bn" ? "btn-primary" : ""
+            }`}
+            onClick={() => handleLanguageChange("bn")}
           >
             বাংলা
           </button>
@@ -121,7 +127,7 @@ const StoryList = ({
               <li key={cat.value}>
                 <a
                   className={
-                    selectedCategory === cat.value ? 'bg-base-200' : ''
+                    selectedCategory === cat.value ? "bg-base-200" : ""
                   }
                   onClick={() => handleCategoryClick(cat.value)}
                 >
@@ -136,14 +142,20 @@ const StoryList = ({
       {/* Story List */}
       <div className="space-y-4">
         {paginatedStories.length > 0 ? (
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-            {paginatedStories.map(({ frontmatter }) => (
-              <CardStory
-                key={`${frontmatter.language}-${frontmatter.slug}`}
-                frontmatter={frontmatter}
-                path={path}
-              />
-            ))}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {paginatedStories.map(({ frontmatter }) => {
+              const currentStory = metadatas.find(
+                (item: any) => item.slug === frontmatter.slug
+              );
+              return (
+                <CardStory
+                  key={`${frontmatter.language}-${frontmatter.slug}`}
+                  frontmatter={frontmatter}
+                  coverImage={currentStory?.cover_image}
+                  path={path}
+                />
+              );
+            })}
           </div>
         ) : (
           <div className="bg-base-100 rounded-lg p-8 text-center">
