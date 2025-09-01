@@ -21,14 +21,12 @@ const CardStory = ({
       href={`${basePath}/${path}/${frontmatter.slug}`}
       className="bg-base-100 hover:bg-base-200/50 flex flex-col rounded-lg no-underline shadow-sm transition-all duration-300 hover:shadow-md p-4"
     >
-      <div className="mx-auto">
-        <img
-          src={cover}
-          alt={frontmatter.title}
-          className="bg-base-300 aspect-square w-3xs rounded-lg"
-          loading="lazy"
-        />
-      </div>
+      <img
+        src={cover}
+        alt={frontmatter.title}
+        className="bg-base-300 aspect-square w-3xs rounded-lg"
+        loading="lazy"
+      />
       <div className="space-y-1 pt-4">
         <div className="text-left">
           <div className="text-base-content text-lg font-bold">
