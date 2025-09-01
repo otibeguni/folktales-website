@@ -25,7 +25,7 @@ const { collections, metadatas, stories, path } = Astro.props;
             <div class="text-gray-600 mb-4">
               <Fragment set:html={collection?.compiledContent()} />
             </div>
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="hidden md:grid grid-cols-1 gap-4 md:grid-cols-2 hi">
               {stories
                 .filter(
                   (story: IStoryList) =>
@@ -47,8 +47,52 @@ const { collections, metadatas, stories, path } = Astro.props;
                   );
                 })}
             </div>
+            <section class="grid grid-cols-1 md:hidden">
+              <div class="splide splide-collection">
+                <div class="splide__track">
+                  <ul class="splide__list">
+                    {stories
+                      .filter(
+                        (story: IStoryList) =>
+                          story.frontmatter.language === "en" &&
+                          collection.frontmatter.stories.includes(
+                            story.frontmatter.slug
+                          )
+                      )
+                      .map((story: IStoryList) => {
+                        const currentStory = metadatas.find(
+                          (item: any) => item.slug === story.frontmatter.slug
+                        );
+                        return (
+                          <li class="splide__slide p-2">
+                            <CardStory
+                              frontmatter={story.frontmatter}
+                              coverImage={currentStory?.cover_image}
+                              path={path}
+                            />
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </div>
+            </section>
           </div>
         )
       )
   }
 </div>
+<script>
+  import "@splidejs/splide/css";
+  import Splide from "@splidejs/splide";
+
+  const splides = document.querySelectorAll(".splide-collection");
+  for (let i = 0; i < splides.length; i++) {
+    const splideElement = splides[i] as HTMLElement;
+    new Splide(splideElement, {
+      type: "slide",
+      perPage: 1,
+      pagination: false,
+    }).mount();
+  }
+</script>
