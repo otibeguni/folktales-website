@@ -2,36 +2,54 @@
 import i18next, { changeLanguage, t } from "i18next";
 import StoryList from "@/components/StoryList";
 import Layout from "@/layouts/Layout.astro";
-import type { IStory } from "@/types";
-import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import type { IStory, IStoryCollection } from "@/types";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import StoryCollectionList from "@/components/StoryCollectionList.astro";
+import type { MarkdownInstance } from "astro";
 
 changeLanguage("en");
 
 const currentLanguage = i18next.language;
-const storiesEn: Array<{
-    frontmatter: IStory;
-}> = Object.values(import.meta.glob("@/stories/en/*.md", { eager: true }));
-const storiesBn: Array<{
-    frontmatter: IStory;
-}> = Object.values(import.meta.glob("@/stories/bn/*.md", { eager: true }));
+const collections = Object.values(
+  import.meta.glob<MarkdownInstance<IStoryCollection>>(
+    "@/stories/collections/*.md",
+    { eager: true }
+  )
+);
+const storiesEn = Object.values(
+  import.meta.glob<MarkdownInstance<IStory>>("@/stories/en/*.md", {
+    eager: true,
+  })
+);
+const storiesBn = Object.values(
+  import.meta.glob<MarkdownInstance<IStory>>("@/stories/bn/*.md", {
+    eager: true,
+  })
+);
 const stories = [...storiesEn, ...storiesBn];
 ---
 
-<Layout title={'Stories | ' + t('common.siteTitle')}>
+<Layout title={"Stories | " + t("common.siteTitle")}>
   {/* This is the main container for the page content */}
   <div class="container mx-auto max-w-4xl px-4 py-8">
-    <Breadcrumbs menus={[{ label: 'Stories', href: '/stories' }]} />
+    <Breadcrumbs menus={[{ label: "Stories", href: "/stories" }]} />
+
+    <StoryCollectionList
+      collections={collections}
+      stories={stories}
+      path="stories"
+    />
 
     <StoryList
       stories={stories}
       lang={currentLanguage}
       labels={{
-        filterLabel: t('pages.stories.filterLabel'),
-        languageLabel: t('pages.stories.languageLabel'),
-        categoryLabel: t('pages.stories.categoryLabel'),
-        allCategoryLabel: t('pages.stories.allCategoryLabel'),
+        filterLabel: t("pages.stories.filterLabel"),
+        languageLabel: t("pages.stories.languageLabel"),
+        categoryLabel: t("pages.stories.categoryLabel"),
+        allCategoryLabel: t("pages.stories.allCategoryLabel"),
       }}
-      path='stories'
+      path="stories"
       client:load
     />
   </div>
