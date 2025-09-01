@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type { IStoryList } from '@/types';
+import CardStory from './CardStory';
 
 // A more suitable number for a list view to keep it scannable
 const STORIES_PER_PAGE = 8;
@@ -135,32 +136,15 @@ const StoryList = ({
       {/* Story List */}
       <div className="space-y-4">
         {paginatedStories.length > 0 ? (
-          paginatedStories.map(({ frontmatter }) => {
-            const basePath =
-              frontmatter.language === 'en' ? '' : `/${frontmatter.language}`;
-
-            return (
-              <a
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+            {paginatedStories.map(({ frontmatter }) => (
+              <CardStory
                 key={`${frontmatter.language}-${frontmatter.slug}`}
-                href={`${basePath}/${path}/${frontmatter.slug}`}
-                className="bg-base-100 hover:bg-base-200/50 flex flex-col items-center gap-4 rounded-lg p-4 no-underline shadow-sm transition-all duration-300 hover:shadow-md sm:flex-row"
-              >
-                <img
-                  src={`https://placehold.co/100x100/f0f0f0/333333?text=${frontmatter.slug.toUpperCase().charAt(0)}`}
-                  alt={frontmatter.title}
-                  className="bg-base-300 h-24 w-24 flex-shrink-0 rounded-md object-cover sm:h-20 sm:w-20"
-                />
-                <div className="flex-grow text-center sm:text-left">
-                  <div className="text-base-content text-lg font-bold">
-                    {frontmatter.title}
-                  </div>
-                </div>
-                <div className="badge badge-secondary flex-shrink-0 sm:ml-4">
-                  {frontmatter.category}
-                </div>
-              </a>
-            );
-          })
+                frontmatter={frontmatter}
+                path={path}
+              />
+            ))}
+          </div>
         ) : (
           <div className="bg-base-100 rounded-lg p-8 text-center">
             <p>No entries found for the selected filters.</p>
