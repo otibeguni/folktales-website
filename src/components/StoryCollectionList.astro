@@ -8,6 +8,9 @@ const { collections, metadatas, stories, path } = Astro.props;
 <div class="space-y-8">
   {
     collections
+      .filter(
+        (collection: IStoryCollectionList) => collection.frontmatter.isShow
+      )
       .sort(
         (
           collectionPrev: IStoryCollectionList,

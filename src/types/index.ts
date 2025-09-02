@@ -128,6 +128,7 @@ export interface IBreadcrumbs {
 export interface IStoryCollection {
   title: string;
   order: number;
+  isShow: boolean;
   stories: string[];
 }
 

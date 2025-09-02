@@ -1,6 +1,7 @@
 ---
 title: Featured Story
 order: 1
+isShow: true
 stories:
   - bonobibi-jahuranama
 ---
