@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 
-import type { IStoryList, MetadataItem } from "@/types";
+import type { IStoryList } from "@/types";
 import CardStory from "./CardStory";
 
 // A more suitable number for a list view to keep it scannable
 const STORIES_PER_PAGE = 8;
 
-const StoryList = ({
+const StoryListCodex = ({
   stories,
-  metadatas,
   lang,
   labels,
   path,
 }: {
   stories: IStoryList[];
-  metadatas: MetadataItem[];
   lang: string;
   labels: { [key: string]: string };
   path: string;
@@ -22,6 +20,7 @@ const StoryList = ({
   const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const basePath = selectedLanguage === "en" ? "" : `/${selectedLanguage}`;
 
   // Memoize the categories list
   const allCategories = Array.from(
@@ -142,21 +141,29 @@ const StoryList = ({
       {/* Story List */}
       <div className="space-y-4">
         {paginatedStories.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {paginatedStories.map(({ frontmatter }) => {
-              const currentStory = metadatas.find(
-                (item: any) => item.slug === frontmatter.slug
-              );
-              return (
-                <CardStory
-                  key={`${frontmatter.language}-${frontmatter.slug}`}
-                  frontmatter={frontmatter}
-                  coverImage={currentStory?.cover_image}
-                  path={path}
-                />
-              );
-            })}
-          </div>
+          paginatedStories.map(({ frontmatter }) => (
+            <a
+              key={`${frontmatter.language}-${frontmatter.slug}`}
+              href={`${basePath}/${path}/${frontmatter.slug}`}
+              className="bg-base-100 hover:bg-base-200/50 flex flex-col items-center gap-4 rounded-lg p-4 no-underline shadow-sm transition-all duration-300 hover:shadow-md sm:flex-row"
+            >
+              <img
+                src={`https://placehold.co/100x100/f0f0f0/333333?text=${frontmatter.slug
+                  .toUpperCase()
+                  .charAt(0)}`}
+                alt={frontmatter.title}
+                className="bg-base-300 h-24 w-24 flex-shrink-0 rounded-md object-cover sm:h-20 sm:w-20"
+              />
+              <div className="flex-grow text-center sm:text-left">
+                <div className="text-base-content text-lg font-bold">
+                  {frontmatter.title}
+                </div>
+              </div>
+              <div className="badge badge-secondary flex-shrink-0 sm:ml-4">
+                {frontmatter.category}
+              </div>
+            </a>
+          ))
         ) : (
           <div className="bg-base-100 rounded-lg p-8 text-center">
             <p>No entries found for the selected filters.</p>
@@ -194,4 +201,4 @@ const StoryList = ({
   );
 };
 
-export default StoryList;
+export default StoryListCodex;

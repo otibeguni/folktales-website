@@ -1,0 +1,101 @@
+---
+import CardStory from "./CardStory";
+import type { IStoryCollectionList, IStoryList } from "@/types";
+
+const { collections, metadatas, stories, path } = Astro.props;
+---
+
+<div class="space-y-8">
+  {
+    collections
+      .filter(
+        (collection: IStoryCollectionList) => collection.frontmatter.isShow
+      )
+      .sort(
+        (
+          collectionPrev: IStoryCollectionList,
+          collectionNext: IStoryCollectionList
+        ) => collectionPrev.frontmatter.order - collectionNext.frontmatter.order
+      )
+      .map(
+        (
+          collection: IStoryCollectionList & { compiledContent: () => string }
+        ) => (
+          <div class="space-y-2 pb-12">
+            <h2 class="text-2xl md:text-3xl font-bold border-l-4 border-primary pl-4">
+              {collection?.frontmatter?.title}
+            </h2>
+            <div class="text-gray-600 mb-4">
+              <Fragment set:html={collection?.compiledContent()} />
+            </div>
+            <div class="hidden md:grid grid-cols-1 gap-4 md:grid-cols-2 hi">
+              {stories
+                .filter(
+                  (story: IStoryList) =>
+                    story.frontmatter.language === "en" &&
+                    collection.frontmatter.stories.includes(
+                      story.frontmatter.slug
+                    )
+                )
+                .map((story: IStoryList) => {
+                  const currentStory = metadatas.find(
+                    (item: any) => item.slug === story.frontmatter.slug
+                  );
+                  return (
+                    <CardStory
+                      frontmatter={story.frontmatter}
+                      coverImage={currentStory?.cover_image}
+                      path={path}
+                    />
+                  );
+                })}
+            </div>
+            <section class="grid grid-cols-1 md:hidden">
+              <div class="splide splide-collection">
+                <div class="splide__track">
+                  <ul class="splide__list">
+                    {stories
+                      .filter(
+                        (story: IStoryList) =>
+                          story.frontmatter.language === "en" &&
+                          collection.frontmatter.stories.includes(
+                            story.frontmatter.slug
+                          )
+                      )
+                      .map((story: IStoryList) => {
+                        const currentStory = metadatas.find(
+                          (item: any) => item.slug === story.frontmatter.slug
+                        );
+                        return (
+                          <li class="splide__slide p-2">
+                            <CardStory
+                              frontmatter={story.frontmatter}
+                              coverImage={currentStory?.cover_image}
+                              path={path}
+                            />
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+        )
+      )
+  }
+</div>
+<script>
+  import "@splidejs/splide/css";
+  import Splide from "@splidejs/splide";
+
+  const splides = document.querySelectorAll(".splide-collection");
+  for (let i = 0; i < splides.length; i++) {
+    const splideElement = splides[i] as HTMLElement;
+    new Splide(splideElement, {
+      type: "slide",
+      perPage: 1,
+      pagination: false,
+    }).mount();
+  }
+</script>

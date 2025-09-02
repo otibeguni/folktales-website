@@ -1,6 +1,6 @@
 ---
 import i18next, { changeLanguage, t } from "i18next";
-import StoryList from "@/components/StoryList";
+import StoryListCodex from "@/components/StoryListCodex";
 import Layout from "@/layouts/Layout.astro";
 import type { IStory } from "@/types";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
@@ -14,19 +14,19 @@ const codexstoriesEn: Array<{
 const codex = [...codexstoriesEn];
 ---
 
-<Layout title={'Codex | ' + t('common.siteTitle')}>
+<Layout title={"Codex | " + t("common.siteTitle")}>
   {/* This is the main container for the page content */}
   <div class="container mx-auto max-w-4xl px-4 py-8">
-    <Breadcrumbs menus={[{ label: 'Codex', href: '/codex' }]} />
+    <Breadcrumbs menus={[{ label: "Codex", href: "/codex" }]} />
 
-    <StoryList
+    <StoryListCodex
       stories={codex}
       lang={currentLanguage}
       labels={{
-        filterLabel: t('pages.stories.filterLabel'),
-        languageLabel: t('pages.stories.languageLabel'),
-        categoryLabel: t('pages.stories.categoryLabel'),
-        allCategoryLabel: t('pages.stories.allCategoryLabel'),
+        filterLabel: t("pages.stories.filterLabel"),
+        languageLabel: t("pages.stories.languageLabel"),
+        categoryLabel: t("pages.stories.categoryLabel"),
+        allCategoryLabel: t("pages.stories.allCategoryLabel"),
       }}
       path="codex"
       client:load

@@ -124,3 +124,14 @@ export interface IBreadcrumbs {
   label: string;
   href: string;
 }
+
+export interface IStoryCollection {
+  title: string;
+  order: number;
+  isShow: boolean;
+  stories: string[];
+}
+
+export interface IStoryCollectionList {
+  frontmatter: IStoryCollection;
+}
