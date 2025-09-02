@@ -1,5 +1,8 @@
+# when using the default proxy server port
+local_backend: true
+
 backend:
-  name: test-repo # change this to 'git-gateway' later
+  name: git-gateway
   branch: main
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'

@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "i18n": "npx astro-i18next generate"
+    "i18n": "npx astro-i18next generate",
+    "decap": "npx decap-server"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
@@ -32,6 +33,7 @@
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
-    "daisyui": "^5.0.43"
+    "daisyui": "^5.0.43",
+    "decap-server": "^3.3.1"
   }
 }
