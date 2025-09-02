@@ -18,12 +18,12 @@ media_folder: "src/assets/uploads"
 public_folder: "src/assets/uploads"
 
 # Cloudinary media library configuration
-# media_library:
-#   name: cloudinary
-#   config:
-#     cloud_name: ${CLOUDINARY_CLOUD_NAME}
-#     api_key: ${CLOUDINARY_API_KEY}
-#     multiple: false
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: ${CLOUDINARY_CLOUD_NAME}
+    api_key: ${CLOUDINARY_API_KEY}
+    multiple: false
 
 collections:
   - name: "blog"
@@ -54,11 +54,11 @@ collections:
           - label: "Image"
             name: "src"
             widget: "image"
-            # media_library:
-            #   config:
-            #     cloud_name: ${CLOUDINARY_CLOUD_NAME}
-            #     api_key: ${CLOUDINARY_API_KEY}
-            #     multiple: false
+            media_library:
+              config:
+                cloud_name: ${CLOUDINARY_CLOUD_NAME}
+                api_key: ${CLOUDINARY_API_KEY}
+                multiple: false
           - label: "Alt Text"
             name: "alt"
             widget: "string"
@@ -68,4 +68,9 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
+        media_library:
+          config:
+            cloud_name: ${CLOUDINARY_CLOUD_NAME}
+            api_key: ${CLOUDINARY_API_KEY}
+            multiple: false
         required: true

@@ -4893,3 +4893,7 @@
   inherits: false;
   initial-value: 1;
 }
+
+body {
+  padding: 1rem;
+}
