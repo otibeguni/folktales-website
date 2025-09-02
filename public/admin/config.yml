@@ -1,0 +1,68 @@
+backend:
+  name: test-repo # change this to 'git-gateway' later
+  branch: main
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: '[skip ci] Upload "{{path}}"'
+    deleteMedia: '[skip ci] Delete "{{path}}"'
+
+publish_mode: editorial_workflow
+
+# Local media storage (fallback)
+media_folder: "src/assets/uploads"
+public_folder: "src/assets/uploads"
+
+# Cloudinary media library configuration
+# media_library:
+#   name: cloudinary
+#   config:
+#     cloud_name: ${CLOUDINARY_CLOUD_NAME}
+#     api_key: ${CLOUDINARY_API_KEY}
+#     multiple: false
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "_posts/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "blog"
+
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        required: true
+
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        required: true
+
+      - label: "Cover Image"
+        name: "cover_image"
+        widget: "object"
+        fields:
+          - label: "Image"
+            name: "src"
+            widget: "image"
+            # media_library:
+            #   config:
+            #     cloud_name: ${CLOUDINARY_CLOUD_NAME}
+            #     api_key: ${CLOUDINARY_API_KEY}
+            #     multiple: false
+          - label: "Alt Text"
+            name: "alt"
+            widget: "string"
+            required: false
+        required: true
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: true
