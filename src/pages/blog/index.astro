@@ -1,0 +1,54 @@
+---
+import type { MarkdownInstance } from "astro";
+import i18next, { changeLanguage, t } from "i18next";
+import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
+import CardStory from "@/components/CardStory";
+
+changeLanguage("en");
+
+const currentLanguage = i18next.language;
+const blogs = Object.values(
+  import.meta.glob<MarkdownInstance<any>>("#/blog/*.md", {
+    eager: true,
+  })
+);
+---
+
+<MarkdownBreadcrumbLayout
+  title={"Blog | " + t("common.siteTitle")}
+  description={t("common.siteDescription")}
+  breadcrumbLabels={[{ label: "Blog", href: "/blog" }]}
+>
+  <div class="space-y-4">
+    {
+      blogs.length > 0 ? (
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {blogs.map(({ frontmatter }) => (
+            <a
+              href={`/blog/${frontmatter.slug}`}
+              class="bg-base-100 hover:bg-base-200/50 flex flex-col rounded-lg no-underline shadow-sm transition-all duration-300 hover:shadow-md p-4"
+            >
+              <img
+                src={frontmatter?.cover_image?.src}
+                alt={frontmatter.title}
+                class="bg-base-300 aspect-square w-3xs rounded-lg"
+                loading="lazy"
+              />
+              <div class="space-y-1 pt-4">
+                <div class="text-left">
+                  <div class="text-base-content text-lg font-bold">
+                    {frontmatter.title}
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="bg-base-100 rounded-lg p-8 text-center">
+          <p>No entries found for the selected filters.</p>
+        </div>
+      )
+    }
+  </div>
+</MarkdownBreadcrumbLayout>
