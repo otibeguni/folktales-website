@@ -33,7 +33,9 @@ const CardStory = ({
             {frontmatter.title}
           </div>
         </div>
-        <div className="badge badge-secondary">{frontmatter.category}</div>
+        {frontmatter.category && (
+          <div className="badge badge-secondary">{frontmatter.category}</div>
+        )}
       </div>
     </a>
   );
