@@ -43,6 +43,14 @@ Before starting, ensure you have the following installed:
 
 6. Open [http://localhost:4321](http://localhost:4321) in your browser.
 
+## Run Decap Server on localhost
+
+To run the Decap server on localhost, use the following command:
+
+```
+npm run decap
+```
+
 ## Deploying on Production
 
 To deploy the application for production use, follow these command:
