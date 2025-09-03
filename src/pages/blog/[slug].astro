@@ -9,7 +9,7 @@ changeLanguage("en");
 
 export async function getStaticPaths() {
   const blogs = Object.values(
-    import.meta.glob<MarkdownInstance<any>>("@decap/blog/*.md", {
+    import.meta.glob<MarkdownInstance<any>>("@/decap/blog/*.md", {
       eager: true,
     })
   );
