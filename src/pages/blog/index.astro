@@ -5,9 +5,11 @@ import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
 
 changeLanguage("en");
 
-const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("~_posts/blog/*.md", {
+const blogs = Object.values(
+  import.meta.glob<MarkdownInstance<any>>("@/decap/blog/*.md", {
     eager: true,
-}));
+  })
+);
 ---
 
 <MarkdownBreadcrumbLayout

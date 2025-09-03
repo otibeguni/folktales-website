@@ -8,13 +8,15 @@ import ArticleBody from "@/components/ArticleBody.astro";
 changeLanguage("en");
 
 export async function getStaticPaths() {
-    const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("~_posts/blog/*.md", {
-        eager: true,
-    }));
-    return blogs?.map((blog) => ({
-        params: { slug: blog.frontmatter.slug },
-        props: { blog },
-    }));
+  const blogs = Object.values(
+    import.meta.glob<MarkdownInstance<any>>("@decap/blog/*.md", {
+      eager: true,
+    })
+  );
+  return blogs?.map((blog) => ({
+    params: { slug: blog.frontmatter.slug },
+    props: { blog },
+  }));
 }
 const { blog } = Astro.props;
 const Content = blog?.default;

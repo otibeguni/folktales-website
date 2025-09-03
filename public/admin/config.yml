@@ -28,7 +28,7 @@ media_library:
 collections:
   - name: "blog"
     label: "Blog"
-    folder: "_posts/blog"
+    folder: "decap/blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
