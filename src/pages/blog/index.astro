@@ -1,12 +1,10 @@
 ---
 import type { MarkdownInstance } from "astro";
-import i18next, { changeLanguage, t } from "i18next";
+import { changeLanguage, t } from "i18next";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
-import CardStory from "@/components/CardStory";
 
 changeLanguage("en");
 
-const currentLanguage = i18next.language;
 const blogs = Object.values(
   import.meta.glob<MarkdownInstance<any>>("#/blog/*.md", {
     eager: true,
