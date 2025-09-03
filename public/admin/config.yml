@@ -21,8 +21,8 @@ public_folder: "src/assets/uploads"
 media_library:
   name: cloudinary
   config:
-    cloud_name: dx0tajutq
-    api_key: 381123623983732
+    cloud_name: ${CLOUDINARY_CLOUD_NAME}
+    api_key: ${CLOUDINARY_API_KEY}
     multiple: false
 
 collections:
@@ -38,7 +38,7 @@ collections:
         required: true
 
       - label: "Slug"
-        name: "slug"
+        name: "title"
         widget: "string"
         required: true
 
@@ -56,8 +56,8 @@ collections:
             widget: "image"
             media_library:
               config:
-                cloud_name: dx0tajutq
-                api_key: 381123623983732
+                cloud_name: ${CLOUDINARY_CLOUD_NAME}
+                api_key: ${CLOUDINARY_API_KEY}
                 multiple: false
           - label: "Alt Text"
             name: "alt"
@@ -70,7 +70,7 @@ collections:
         widget: "markdown"
         media_library:
           config:
-            cloud_name: dx0tajutq
-            api_key: 381123623983732
+            cloud_name: ${CLOUDINARY_CLOUD_NAME}
+            api_key: ${CLOUDINARY_API_KEY}
             multiple: false
         required: true
