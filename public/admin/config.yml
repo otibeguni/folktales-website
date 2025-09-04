@@ -26,6 +26,100 @@ media_library:
     multiple: false
 
 collections:
+  - name: "story_collection"
+    label: "Collection"
+    folder: "src/stories/collections"
+    create: true
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        required: true
+      - label: "Order"
+        name: "order"
+        widget: "number"
+        required: true
+      - label: "Visible"
+        name: "isShow"
+        widget: "boolean"
+        required: true
+      - label: "Stories"
+        name: "stories"
+        widget: "relation"
+        required: true
+        collection: "en_stories"
+        search_fields: ["title"]
+        value_field: "slug"
+        display_fields: ["title"]  
+        multiple: true
+        min: 1 
+
+  - name: "en_stories"
+    label: "English Stories"
+    folder: "src/stories/en"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        required: true
+      
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+        required: true
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Puthi Literature", "Bengali Folktale", "Bengali Translation", "Indigenous Folktale", "Bengal Legend", "Hindu Mythology"]        
+        required: true
+
+      - label: "Language"
+        name: "language"
+        widget: "select"
+        options: ["en", "bn"]
+        required: true
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: true
+  
+  - name: "bn_stories"
+    label: "Bengali Stories"
+    folder: "src/stories/bn"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        required: true
+      
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+        required: true
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Puthi Literature", "Bengali Folktale", "Bengali Translation", "Indigenous Folktale", "Bengal Legend", "Hindu Mythology"]        
+        required: true
+
+      - label: "Language"
+        name: "language"
+        widget: "select"
+        options: ["en", "bn"]
+        required: true
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: true
+
   - name: "blog"
     label: "Blog"
     folder: "decap/blog"
@@ -38,7 +132,7 @@ collections:
         required: true
 
       - label: "Slug"
-        name: "title"
+        name: "slug"
         widget: "string"
         required: true
 
