@@ -1,9 +1,10 @@
 ---
-import { t } from 'i18next';
+import { t } from "i18next";
 ---
 
 <footer
   class="footer footer-horizontal footer-center bg-primary text-primary-content p-10"
+  data-pagefind-ignore
 >
   <aside>
     <svg
@@ -24,8 +25,8 @@ import { t } from 'i18next';
       <br />
     </p>
     <p class="text-xs">
-      {t('footer.copyright')} © {new Date().getFullYear()} - {
-        t('footer.allRightsReserved')
+      {t("footer.copyright")} © {new Date().getFullYear()} - {
+        t("footer.allRightsReserved")
       }
     </p>
   </aside>

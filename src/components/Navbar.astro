@@ -1,60 +1,60 @@
 ---
-import { t } from 'i18next';
-import { localizePath } from 'astro-i18next';
+import { t } from "i18next";
+import { localizePath } from "astro-i18next";
 
 const menus = [
   {
-    label: t('header.navHome'),
-    href: localizePath('/'),
+    label: t("header.navHome"),
+    href: localizePath("/"),
   },
   {
-    label: t('header.navStories'),
-    href: localizePath('/stories'),
-  },
-    {
-    label: t('header.navCodex'),
-    href: localizePath('/codex'),
+    label: t("header.navStories"),
+    href: localizePath("/stories"),
   },
   {
-    label: t('header.navResources'),
+    label: t("header.navCodex"),
+    href: localizePath("/codex"),
+  },
+  {
+    label: t("header.navResources"),
     href: null,
     children: [
       {
-        label: t('header.navBooks'),
-        href: localizePath('/books'),
+        label: t("header.navBooks"),
+        href: localizePath("/books"),
       },
       {
-        label: t('header.navTopics'),
-        href: localizePath('/topics'),
+        label: t("header.navTopics"),
+        href: localizePath("/topics"),
       },
     ],
   },
   {
-    label: t('header.navProjects'),
+    label: t("header.navProjects"),
     href: null,
     children: [
       {
-        label: t('header.navPublish'),
-        href: localizePath('/publications'),
+        label: t("header.navPublish"),
+        href: localizePath("/publications"),
       },
       {
-        label: t('header.navLibrary'),
-        href: 'https://library.otibeguni.com/',
+        label: t("header.navLibrary"),
+        href: "https://library.otibeguni.com/",
       },
       {
-        label: t('header.navGallery'),
-        href: 'https://art.otibeguni.com/',
+        label: t("header.navGallery"),
+        href: "https://art.otibeguni.com/",
       },
     ],
   },
   {
-    label: t('header.navAbout'),
-    href: localizePath('/about'),
+    label: t("header.navAbout"),
+    href: localizePath("/about"),
   },
 ];
 ---
 
-<div class="drawer">
+<div class="drawer" data-pagefind-ignore>
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col">
     <!-- Navbar -->
@@ -81,7 +81,7 @@ const menus = [
           </label>
         </div>
         <div class="mx-auto flex-1 items-center justify-between">
-          <a href={localizePath('/')} class="btn btn-primary text-xl font-bold">
+          <a href={localizePath("/")} class="btn btn-primary text-xl font-bold">
             Otibeguni
           </a>
         </div>
