@@ -13,7 +13,9 @@ const CardStory = ({
     coverImage ||
     `https://placehold.co/256x256/f0f0f0/333333?text=${frontmatter.title}`;
   const basePath =
-    frontmatter.language === "en" ? "" : `/${frontmatter.language}`;
+    frontmatter.language === "en" || !frontmatter.language
+      ? ""
+      : `/${frontmatter.language}`;
 
   return (
     <a
