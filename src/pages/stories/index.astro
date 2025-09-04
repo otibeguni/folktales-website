@@ -11,29 +11,20 @@ import { fetchRowsFromDatabase } from "@/utils/baserow";
 changeLanguage("en");
 
 const currentLanguage = i18next.language;
-const collections = Object.values(
-  import.meta.glob<MarkdownInstance<IStoryCollection>>(
-    "@/stories/collections/*.md",
-    { eager: true }
-  )
-);
+const collections = Object.values(import.meta.glob<MarkdownInstance<IStoryCollection>>("@/stories/collections/*.md", { eager: true }));
 const baserowData = (await fetchRowsFromDatabase(741)) ?? null;
-const storiesEn = Object.values(
-  import.meta.glob<MarkdownInstance<IStory>>("@/stories/en/*.md", {
+const storiesEn = Object.values(import.meta.glob<MarkdownInstance<IStory>>("@/stories/en/*.md", {
     eager: true,
-  })
-);
-const storiesBn = Object.values(
-  import.meta.glob<MarkdownInstance<IStory>>("@/stories/bn/*.md", {
+}));
+const storiesBn = Object.values(import.meta.glob<MarkdownInstance<IStory>>("@/stories/bn/*.md", {
     eager: true,
-  })
-);
+}));
 const stories = [...storiesEn, ...storiesBn];
 ---
 
 <Layout title={"Stories | " + t("common.siteTitle")}>
   {/* This is the main container for the page content */}
-  <div class="container mx-auto max-w-4xl px-4 py-8">
+  <div class="container mx-auto max-w-4xl px-4 py-8" data-pagefind-body>
     <Breadcrumbs menus={[{ label: "Stories", href: "/stories" }]} />
 
     <StoryCollectionList

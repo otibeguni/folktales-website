@@ -6,17 +6,14 @@ import PaginatedList from "@/components/PaginatedList";
 
 changeLanguage("en");
 
-const blogs =
-  Object.values(
-    import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
-      eager: true,
-    })
-  )?.map((blog) => ({
+const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
+    eager: true,
+}))?.map((blog) => ({
     frontmatter: {
-      ...blog.frontmatter,
-      coverImage: blog?.frontmatter?.cover_image?.src,
+        ...blog.frontmatter,
+        coverImage: blog?.frontmatter?.cover_image?.src,
     },
-  })) ?? [];
+})) ?? [];
 ---
 
 <MarkdownBreadcrumbLayout
@@ -24,7 +21,7 @@ const blogs =
   description={t("common.siteDescription")}
   breadcrumbLabels={[{ label: "Blog", href: "/blog" }]}
 >
-  <div class="space-y-4">
+  <div class="space-y-4" data-pagefind-body>
     <PaginatedList data={blogs} path="blog" client:load />
   </div>
 </MarkdownBreadcrumbLayout>
