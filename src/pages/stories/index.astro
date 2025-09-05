@@ -24,7 +24,7 @@ const stories = [...storiesEn, ...storiesBn];
 
 <Layout title={"Stories | " + t("common.siteTitle")}>
   {/* This is the main container for the page content */}
-  <div class="container mx-auto max-w-4xl px-4 py-8" data-pagefind-body>
+  <div class="container mx-auto max-w-4xl px-4 py-8" data-pagefind-ignore>
     <Breadcrumbs menus={[{ label: "Stories", href: "/stories" }]} />
 
     <StoryCollectionList
