@@ -160,10 +160,12 @@ collections:
       - label: "Cover Image"
         name: "cover_image"
         widget: "object"
+        required: false
         fields:
           - label: "Image"
             name: "src"
             widget: "image"
+            required: false
             media_library:
               config:
                 cloud_name: ${CLOUDINARY_CLOUD_NAME}
