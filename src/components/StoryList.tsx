@@ -82,6 +82,9 @@ const StoryList = ({
   return (
     <>
       {/* Filter Section */}
+      <h2 className="text-2xl md:text-3xl font-bold border-l-4 border-primary pl-4">
+        All Stories
+      </h2>
       <div className="bg-base-100 mt-8 mb-8 flex flex-row items-center justify-between gap-4 rounded-xl p-6 shadow-sm">
         <div className="btn-group">
           <button
@@ -142,32 +145,32 @@ const StoryList = ({
       {/* Story List */}
       <div className="space-y-4">
         {paginatedStories.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {paginatedStories.map(({ frontmatter }) => {
-              const currentStory = metadatas.find(
-                (item: any) => item.slug === frontmatter.slug
-              );
-              return (
-                <CardStory
-                  key={`${frontmatter.language}-${frontmatter.slug}`}
-                  frontmatter={frontmatter}
-                  coverImage={currentStory?.cover_image}
-                  path={path}
-                />
-              );
-            })}
-          </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {paginatedStories.map(({frontmatter}) => {
+                const currentStory = metadatas.find(
+                    (item: any) => item.slug === frontmatter.slug
+                );
+                return (
+                    <CardStory
+                        key={`${frontmatter.language}-${frontmatter.slug}`}
+                        frontmatter={frontmatter}
+                        coverImage={currentStory?.cover_image}
+                        path={path}
+                    />
+                );
+              })}
+            </div>
         ) : (
-          <div className="bg-base-100 rounded-lg p-8 text-center">
-            <p>No entries found for the selected filters.</p>
-          </div>
+            <div className="bg-base-100 rounded-lg p-8 text-center">
+              <p>No entries found for the selected filters.</p>
+            </div>
         )}
       </div>
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="mt-12 flex justify-center">
-          <div className="join">
+          <div className="mt-12 flex justify-center">
+            <div className="join">
             <button
               className="join-item btn"
               disabled={currentPage === 1}
