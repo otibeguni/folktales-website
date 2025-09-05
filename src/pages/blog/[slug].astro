@@ -8,15 +8,13 @@ import ArticleBody from "@/components/ArticleBody.astro";
 changeLanguage("en");
 
 export async function getStaticPaths() {
-  const blogs = Object.values(
-    import.meta.glob<MarkdownInstance<any>>("@/decap/blog/*.md", {
-      eager: true,
-    })
-  );
-  return blogs?.map((blog) => ({
-    params: { slug: blog.frontmatter.slug },
-    props: { blog },
-  }));
+    const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
+        eager: true,
+    }));
+    return blogs?.map((blog) => ({
+        params: { slug: blog.frontmatter.slug },
+        props: { blog },
+    }));
 }
 const { blog } = Astro.props;
 const Content = blog?.default;
@@ -27,11 +25,13 @@ const { frontmatter } = blog;
   title={`${frontmatter?.title} - Stories | Otibeguni `}
   breadcrumbLabels={[{ label: "Blog", href: "/blog" }]}
 >
-  <ArticleBody>
-    <h1 class="mb-4 text-5xl leading-16">{frontmatter?.title}</h1>
-    <span class="badge badge-soft badge-primary"
-      >{dayjs(frontmatter?.date).format("MMM DD YYYY")}</span
-    >
-    <Content />
-  </ArticleBody>
+  <div data-pagefind-body>
+    <ArticleBody>
+      <h1 class="mb-4 text-5xl leading-16">{frontmatter?.title}</h1>
+      <span class="badge badge-soft badge-primary"
+        >{dayjs(frontmatter?.date).format("MMM DD YYYY")}</span
+      >
+      <Content />
+    </ArticleBody>
+  </div>
 </MarkdownBreadcrumbLayout>

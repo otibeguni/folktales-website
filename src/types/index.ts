@@ -127,6 +127,7 @@ export interface IBreadcrumbs {
 
 export interface IStoryCollection {
   title: string;
+  slug: string;
   order: number;
   isShow: boolean;
   stories: string[];
@@ -134,4 +135,11 @@ export interface IStoryCollection {
 
 export interface IStoryCollectionList {
   frontmatter: IStoryCollection;
+}
+
+export interface IBlog {
+  title: string;
+  slug: string;
+  date: string;
+  coverImage: string;
 }

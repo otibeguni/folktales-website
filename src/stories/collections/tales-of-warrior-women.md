@@ -1,5 +1,6 @@
 ---
 title: Tales of Warrior Women
+slug: tales-of-warrior-women
 order: 2
 isShow: true
 stories:

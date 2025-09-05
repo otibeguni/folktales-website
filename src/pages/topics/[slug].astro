@@ -42,15 +42,17 @@ const relatedResources = resources.filter((item: ResourceItemAlt) => item.relate
 <Layout
   title={`${topic.item} - Topic | Otibeguni `}
   schema={{
-    '@context': 'https://schema.org',
-    '@type': 'Book',
+    "@context": "https://schema.org",
+    "@type": "Book",
     name: topic.item,
     url: currentUrl,
   }}
 >
-  <ArticleTopic
-    topic={topic}
-    stories={filteredStories}
-    resources={relatedResources}
-  />
+  <div data-pagefind-body>
+    <ArticleTopic
+      topic={topic}
+      stories={filteredStories}
+      resources={relatedResources}
+    />
+  </div>
 </Layout>

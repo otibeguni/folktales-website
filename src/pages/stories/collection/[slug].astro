@@ -1,0 +1,57 @@
+---
+import type { MarkdownInstance } from "astro";
+import { changeLanguage } from "i18next";
+import Layout from "@/layouts/Layout.astro";
+import type { IStory, IStoryCollection } from "@/types";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import StoryCollectionList from "@/components/StoryCollectionList.astro";
+import { fetchRowsFromDatabase } from "@/utils/baserow";
+
+changeLanguage("en");
+
+export async function getStaticPaths() {
+  const collections = Object.values(
+    import.meta.glob<MarkdownInstance<IStoryCollection>>(
+      "@/stories/collections/*.md",
+      { eager: true }
+    )
+  );
+
+  return collections.map((collection) => ({
+    params: { slug: collection.frontmatter.slug },
+    props: {
+      collection,
+    },
+  }));
+}
+
+const { collection } = Astro.props;
+const { frontmatter } = collection;
+const baserowData = (await fetchRowsFromDatabase(741)) ?? null;
+const storiesEn = Object.values(
+  import.meta.glob<MarkdownInstance<IStory>>("@/stories/en/*.md", {
+    eager: true,
+  })
+);
+const storiesBn = Object.values(
+  import.meta.glob<MarkdownInstance<IStory>>("@/stories/bn/*.md", {
+    eager: true,
+  })
+);
+const stories = [...storiesEn, ...storiesBn];
+---
+
+<Layout title={`${frontmatter.title} - Story Collection | Otibeguni `}>
+  <div class="container mx-auto max-w-4xl px-4 py-8">
+    <Breadcrumbs
+      menus={[{ label: "Stories", href: "/stories" }, { label: "Collection" }]}
+    />
+
+    <StoryCollectionList
+      collections={[collection]}
+      metadatas={baserowData?.results}
+      stories={stories}
+      path="stories"
+    />
+  </div>
+</Layout>

@@ -50,9 +50,9 @@ collections:
         collection: "en_stories"
         search_fields: ["title"]
         value_field: "slug"
-        display_fields: ["title"]  
+        display_fields: ["title"]
         multiple: true
-        min: 1 
+        min: 1
 
   - name: "en_stories"
     label: "English Stories"
@@ -64,7 +64,7 @@ collections:
         name: "title"
         widget: "string"
         required: true
-      
+
       - label: "Slug"
         name: "slug"
         widget: "string"
@@ -73,7 +73,15 @@ collections:
       - label: "Category"
         name: "category"
         widget: "select"
-        options: ["Puthi Literature", "Bengali Folktale", "Bengali Translation", "Indigenous Folktale", "Bengal Legend", "Hindu Mythology"]        
+        options:
+          [
+            "Puthi Literature",
+            "Bengali Folktale",
+            "Bengali Translation",
+            "Indigenous Folktale",
+            "Bengal Legend",
+            "Hindu Mythology",
+          ]
         required: true
 
       - label: "Language"
@@ -86,7 +94,7 @@ collections:
         name: "body"
         widget: "markdown"
         required: true
-  
+
   - name: "bn_stories"
     label: "Bengali Stories"
     folder: "src/stories/bn"
@@ -97,7 +105,7 @@ collections:
         name: "title"
         widget: "string"
         required: true
-      
+
       - label: "Slug"
         name: "slug"
         widget: "string"
@@ -106,7 +114,15 @@ collections:
       - label: "Category"
         name: "category"
         widget: "select"
-        options: ["Puthi Literature", "Bengali Folktale", "Bengali Translation", "Indigenous Folktale", "Bengal Legend", "Hindu Mythology"]        
+        options:
+          [
+            "Puthi Literature",
+            "Bengali Folktale",
+            "Bengali Translation",
+            "Indigenous Folktale",
+            "Bengal Legend",
+            "Hindu Mythology",
+          ]
         required: true
 
       - label: "Language"
@@ -144,10 +160,12 @@ collections:
       - label: "Cover Image"
         name: "cover_image"
         widget: "object"
+        required: false
         fields:
           - label: "Image"
             name: "src"
             widget: "image"
+            required: false
             media_library:
               config:
                 cloud_name: ${CLOUDINARY_CLOUD_NAME}
@@ -157,7 +175,6 @@ collections:
             name: "alt"
             widget: "string"
             required: false
-        required: true
 
       - label: "Body"
         name: "body"

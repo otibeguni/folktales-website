@@ -12,14 +12,16 @@ const baserowData = await fetchRowsFromDatabase(740);
 const baserowResult = (await baserowData.results) as WikidataItemAlt[];
 ---
 
-<Layout title={'Topics | ' + t('common.siteTitle')}>
-  <TopicList
-    topics={baserowResult}
-    labels={{
-      filterLabel: t('pages.topics.filterLabel'),
-      typeLabel: t('pages.topics.typeLabel'),
-      allTypesLabel: t('pages.topics.allTypesLabel'),
-    }}
-    client:load
-  />
+<Layout title={"Topics | " + t("common.siteTitle")}>
+  <div data-pagefind-body>
+    <TopicList
+      topics={baserowResult}
+      labels={{
+        filterLabel: t("pages.topics.filterLabel"),
+        typeLabel: t("pages.topics.typeLabel"),
+        allTypesLabel: t("pages.topics.allTypesLabel"),
+      }}
+      client:load
+    />
+  </div>
 </Layout>
