@@ -29,10 +29,16 @@ collections:
   - name: "story_collection"
     label: "Collection"
     folder: "src/stories/collections"
+    slug: "{{slug}}"
     create: true
+    sortable_fields: ["order"]
     fields:
       - label: "Title"
         name: "title"
+        widget: "string"
+        required: true
+      - label: "Slug"
+        name: "slug"
         widget: "string"
         required: true
       - label: "Order"
@@ -53,6 +59,10 @@ collections:
         display_fields: ["title"]
         multiple: true
         min: 1
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: false
 
   - name: "en_stories"
     label: "English Stories"
