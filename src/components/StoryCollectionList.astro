@@ -5,7 +5,7 @@ import type { IStoryCollectionList, IStoryList } from "@/types";
 const { collections, metadatas, stories, path } = Astro.props;
 ---
 
-<div class="space-y-8">
+<div class="space-y-8" data-pagefind-ignore>
   {
     collections
       .filter(
