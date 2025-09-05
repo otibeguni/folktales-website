@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-import CardStory from "./CardStory";
+import CardBodyContent from "./CardBodyContent";
 
 // A more suitable number for a list view to keep it scannable
-const POST_PER_PAGE = 1;
+const POST_PER_PAGE = 8;
 
 const PaginatedList = ({
   data,
   path,
 }: {
-  data: Array<{ frontmatter: any }>;
+  data: Array<{ frontmatter: any; htmlContent: any }>;
   path: string;
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,12 +33,13 @@ const PaginatedList = ({
       {/* Story List */}
       <div className="space-y-4">
         {paginatedStories.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {paginatedStories.map(({ frontmatter }) => (
-              <CardStory
-                key={frontmatter.slug}
-                frontmatter={frontmatter}
-                coverImage={frontmatter.coverImage}
+          <div className="grid grid-cols-1 gap-8">
+            {paginatedStories.map((story) => (
+              <CardBodyContent
+                key={`${story.frontmatter.date}-${story.frontmatter.slug}`}
+                frontmatter={story.frontmatter}
+                coverImage={story.frontmatter.cover_image?.src}
+                content={story.htmlContent}
                 path={path}
               />
             ))}

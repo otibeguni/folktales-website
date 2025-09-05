@@ -6,14 +6,17 @@ import PaginatedList from "@/components/PaginatedList";
 
 changeLanguage("en");
 
-const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
-    eager: true,
-}))?.map((blog) => ({
-    frontmatter: {
-        ...blog.frontmatter,
-        coverImage: blog?.frontmatter?.cover_image?.src,
-    },
-})) ?? [];
+const blogs =
+  Object.values(
+    import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
+      eager: true,
+    })
+  )?.map(async (blog) => ({
+    ...blog,
+    htmlContent: await blog.compiledContent(),
+  })) ?? [];
+
+const blogContents = await Promise.all(blogs);
 ---
 
 <MarkdownBreadcrumbLayout
@@ -22,6 +25,6 @@ const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md
   breadcrumbLabels={[{ label: "Blog", href: "/blog" }]}
 >
   <div class="space-y-4" data-pagefind-body>
-    <PaginatedList data={blogs} path="blog" client:load />
+    <PaginatedList data={blogContents} path="blog" client:load />
   </div>
 </MarkdownBreadcrumbLayout>

@@ -135,3 +135,10 @@ export interface IStoryCollection {
 export interface IStoryCollectionList {
   frontmatter: IStoryCollection;
 }
+
+export interface IBlog {
+  title: string;
+  slug: string;
+  date: string;
+  coverImage: string;
+}
