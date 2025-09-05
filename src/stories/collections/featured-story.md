@@ -1,5 +1,6 @@
 ---
 title: Featured Story
+slug: featured-story
 order: 1
 isShow: true
 stories:
