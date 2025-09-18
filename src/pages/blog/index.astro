@@ -6,17 +6,15 @@ import PaginatedList from "@/components/PaginatedList";
 
 changeLanguage("en");
 
-const blogs =
-  Object.values(
-    import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
-      eager: true,
-    })
-  )?.map(async (blog) => ({
+const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
+    eager: true,
+}))?.map(async (blog) => ({
     ...blog,
     htmlContent: await blog.compiledContent(),
-  })) ?? [];
-
+})) ?? [];
 const blogContents = await Promise.all(blogs);
+// Sort the blogs in reverse chronological order (newest first)
+const sortedBlogs = blogContents.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
 ---
 
 <MarkdownBreadcrumbLayout
@@ -25,6 +23,6 @@ const blogContents = await Promise.all(blogs);
   breadcrumbLabels={[{ label: "Blog", href: "/blog" }]}
 >
   <div class="space-y-4" data-pagefind-body>
-    <PaginatedList data={blogContents} path="blog" client:load />
+    <PaginatedList data={sortedBlogs} path="blog" client:load />
   </div>
 </MarkdownBreadcrumbLayout>
