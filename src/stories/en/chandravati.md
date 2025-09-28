@@ -1,7 +1,7 @@
 ---
 title: Chandravati
 slug: chandravati
-category: Puthi Literature
+category: Bengal Legend
 language: en
 ---
 On the banks of the gentle Phuleswari river, nestled like a picture postcard, was the village of Patpari. In this village lived a young girl named Chandravati. Near her home was a pond surrounded by a flower garden, vibrant with the colors of hibiscus, jasmine, and champak flowers. Every day, a graceful young girl and a handsome young man would come to the pond's edge to pick flowers.
