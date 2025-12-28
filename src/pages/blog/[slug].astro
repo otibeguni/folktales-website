@@ -27,6 +27,16 @@ const { frontmatter } = blog;
 >
   <div data-pagefind-body>
     <ArticleBody>
+      {frontmatter?.cover_image?.src && (
+        <div class="mb-6 overflow-hidden rounded-xl max-w-3xl">
+          <img
+            src={frontmatter.cover_image.src}
+            alt={frontmatter.cover_image.alt || frontmatter.title}
+            class="aspect-square w-full object-cover block"
+            loading="lazy"
+          />
+        </div>
+      )}
       <h1 class="mb-4 text-5xl leading-16">{frontmatter?.title}</h1>
       <span class="badge badge-soft badge-primary"
         >{dayjs(frontmatter?.date).format("MMM DD YYYY")}</span
