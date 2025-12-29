@@ -1,0 +1,44 @@
+---
+import { HeadHrefLangs } from 'astro-i18next/components';
+import { Schema } from 'astro-seo-schema';
+import '@/styles/global.css';
+import Footer from '@/components/Footer.astro';
+import Navbar from '@/components/Navbar.astro';
+
+const {
+  schema = null,
+  title = 'Publications | Otibeguni',
+  description = 'Books, art books, and research projects that celebrate Bengali and indigenous folklore.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <HeadHrefLangs />
+    {schema && <Schema item={schema} />}
+  </head>
+  <body class="bg-white text-slate-900">
+    <Navbar />
+    <main class="container mx-auto min-h-screen px-4 pb-12">
+      <section class="relative isolate overflow-hidden">
+        <div
+          class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12)_0,_transparent_42%),radial-gradient(circle_at_20%_20%,_rgba(14,165,233,0.12)_0,_transparent_36%),radial-gradient(circle_at_80%_0,_rgba(56,189,248,0.14)_0,_transparent_32%)]"
+          aria-hidden="true"
+        />
+        <div class="mx-auto max-w-4xl py-12 sm:py-16 lg:py-20">
+          <slot name="hero" />
+        </div>
+      </section>
+      <section class="-mt-6 space-y-12 sm:-mt-10 mx-auto max-w-4xl">
+        <slot />
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

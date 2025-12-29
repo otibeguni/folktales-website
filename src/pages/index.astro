@@ -1,0 +1,152 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Search from 'astro-pagefind/components/Search';
+
+const publications = [
+  {
+    title: 'Otiprakrito - Volume 1',
+    description:
+      'A beautifully illustrated bestiary with over one hundred mythical creatures from Bengali and indigenous folklore.',
+    cover:
+      'https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/wwwnotionso-image-prod-files-secures3us-west-2amazonawscom-78db12f1-c691-45de-b1e3-0703df5f72a6-5554bf7c-7b19-4141-9fb9-b8ff93508371-img_4060jpeg/format=auto,w=1200',
+    href: '/publications/otiprakrito',
+    meta: 'Hardcover · 303 pages · Bengali',
+  },
+  {
+    title: 'Chonde Chonde Golpo Boli',
+    description:
+      'This book brings together fourteen traditional puthi narratives alongside twelve palas drawn from the song-based traditions of ancient Mymensingh and North Bengal.',
+    cover:
+      'https://res.cloudinary.com/dx0tajutq/image/upload/v1766991441/ChatGPT_Image_Dec_29_2025_05_56_31_PM_nbl7x1.png',
+    href: 'https://chonde-chonde.com/',
+    meta: 'Paperback · 241 pages · Bengali',
+  },
+];
+
+const projects = [
+  {
+    title: 'Folktales and legends of Bengal',
+    description: 'Short story adaptations of Bengali and indigenous folktales.',
+    href: '/stories',
+    tag: 'Stories',
+  },
+  {
+    title: 'Folklore Preservation',
+    description:
+      'Digital library featuring over 70 folklore collections, including rare works compiled by Bangla Academy and independent authors.',
+    href: 'https://library.otibeguni.com/',
+    tag: 'Library',
+  },
+  {
+    title: 'Vintage Bengali Children’s Illustrations',
+    description:
+      'A growing archive of high-resolution scans from classic Bengali children’s books, covers, and interior artwork.',
+    href: 'https://art.otibeguni.com/',
+    tag: 'Archive',
+  },
+];
+---
+
+<Layout
+  title="Otibeguni | Reviving Bengali and Indigenous Folklore"
+  description="Folklore R&D company preserving Bengali and indigenous stories through books, archives, and community projects."
+>
+  <div class="mx-auto max-w-4xl space-y-10 px-4 sm:px-6 lg:px-10">
+    <section class="space-y-6">
+      <div class="space-y-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-600">
+          Otibeguni
+        </p>
+        <h1 class="text-4xl font-bold leading-[1.1] text-slate-900 sm:text-5xl">
+          Reviving Bengali and Indigenous Folklore
+        </h1>
+        <p class="text-lg text-slate-700 sm:text-xl">
+          We preserve, adapt, and share the rich cultural heritage of our oral traditions—through books,
+          archives, and storytelling projects built for modern audiences.
+        </p>
+      </div>
+
+      <div>
+        <Search id="search" className="pagefind-ui mb-8" uiOptions={{ showImages: false }} />
+      </div>
+    </section>
+
+    <section class="rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-100 sm:p-8">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sky-600">Publications</p>
+          <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">
+            Books that keep folklore alive
+          </h2>
+        </div>
+        <a
+          class="text-sm font-semibold text-sky-700 hover:text-sky-900"
+          href="/publications"
+        >
+          View all &rarr;
+        </a>
+      </div>
+      <div class="mt-6 grid auto-rows-[1fr] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {publications.map((pub) => (
+          <a
+            href={pub.href}
+            class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 shadow-[0_16px_50px_-44px_rgba(15,23,42,0.6)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_20px_60px_-40px_rgba(15,23,42,0.65)]"
+          >
+            <div class="relative overflow-hidden rounded-xl">
+              <img
+                src={pub.cover}
+                alt={`${pub.title} cover`}
+                loading="lazy"
+                class="aspect-[2/3] w-full object-cover transition duration-200 group-hover:scale-[1.03]"
+              />
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent opacity-70" />
+            </div>
+            <div class="flex flex-1 flex-col gap-3 pt-4">
+              <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-sky-700">
+                <span class="h-1 w-6 rounded-full bg-sky-500/70" aria-hidden="true" />
+                Published
+              </div>
+              <h3 class="text-lg font-semibold leading-tight text-slate-900">{pub.title}</h3>
+              {pub.meta && <p class="text-xs text-slate-500">{pub.meta}</p>}
+              <p class="text-sm text-slate-700">{pub.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-100 sm:p-8">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">Projects</p>
+          <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">Community & research work</h2>
+        </div>
+      </div>
+      <div class="mt-6 grid auto-rows-[1fr] gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => {
+          const isExternal = /^https?:\/\//.test(project.href);
+          return (
+            <a
+              href={project.href}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noreferrer noopener' : undefined}
+              class="group flex h-full flex-col justify-between rounded-2xl border border-slate-100 bg-slate-50 p-5 text-left shadow-sm transition duration-150 hover:-translate-y-1 hover:border-slate-200 hover:shadow-md"
+            >
+              <div class="space-y-3">
+                <div class="inline-flex items-center gap-2 rounded-full bg-slate-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
+                  <span class="h-1 w-4 rounded-full bg-slate-500" aria-hidden="true" />
+                  {project.tag}
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900">{project.title}</h3>
+                <p class="text-sm text-slate-700">{project.description}</p>
+              </div>
+              <span class="mt-4 text-sm font-semibold text-sky-700 group-hover:text-sky-900">
+                Explore &rarr;
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  </div>
+</Layout>

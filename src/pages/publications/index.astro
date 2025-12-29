@@ -1,0 +1,89 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import PublicationCard from '@/components/publications/PublicationCard.astro';
+import PublicationsLayout from '@/layouts/PublicationsLayout.astro';
+
+const publications = [
+  {
+    title: 'Otiprakrito - Volume 1',
+    description:
+      'A beautifully illustrated bestiary with over one hundred mythical creatures from Bengali and indigenous folklore.',
+    cover:
+      'https://imagedelivery.net/IEMzXmjRvW0g933AN5ejrA/wwwnotionso-image-prod-files-secures3us-west-2amazonawscom-78db12f1-c691-45de-b1e3-0703df5f72a6-5554bf7c-7b19-4141-9fb9-b8ff93508371-img_4060jpeg/format=auto,w=1200',
+    href: '/publications/otiprakrito',
+    meta: 'Hardcover · 303 pages · Bengali',
+  },
+  {
+    title: 'Chonde Chonde Golpo Boli',
+    description:
+      'This book brings together fourteen traditional puthi narratives alongside twelve palas drawn from the song-based traditions of ancient Mymensingh and North Bengal.',
+    cover:
+      'https://res.cloudinary.com/dx0tajutq/image/upload/v1766991441/ChatGPT_Image_Dec_29_2025_05_56_31_PM_nbl7x1.png',
+    href: 'https://chonde-chonde.com/',
+    meta: 'Paperback · 241 pages · Bengali',
+  },
+];
+
+const upcomingProjects = [
+  {
+    title: 'The Great Bengal Folk Anthology',
+    description:
+      'A definitive anthology weaving together legendary folktales, regional variants, and newly translated pieces with commentary.',
+    cover:
+      'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=900&h=1300&q=80',
+    meta: 'Research & translation · Coming soon',
+  },
+];
+
+// Toggle to show/hide upcoming projects.
+const showUpcomingProjects = false;
+---
+
+<PublicationsLayout
+  title="Publications | Otibeguni"
+  description="Beautifully illustrated books and upcoming projects celebrating Bengali and indigenous folklore."
+>
+  <div slot="hero" class="max-w-4xl space-y-4">
+    <Breadcrumbs menus={[{ label: 'Publications' }]} />
+    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-600">
+      Books & Research
+    </p>
+    <h1 class="text-4xl font-bold leading-[1.1] text-slate-900 sm:text-5xl">
+      Publications that keep folklore alive
+    </h1>
+    <p class="text-lg text-slate-700 sm:text-xl">
+      Explore published works and get an early look at the projects we are crafting next—each one rooted
+      in storytelling, illustration, and cultural memory.
+    </p>
+  </div>
+
+  <section class="rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-100 sm:p-8">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sky-600">Available now</p>
+        <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">Published works</h2>
+      </div>
+    </div>
+    <div class="mt-6 grid auto-rows-[1fr] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {publications.map((publication) => (
+        <PublicationCard {...publication} />
+      ))}
+    </div>
+  </section>
+
+  {showUpcomingProjects && (
+    <section class="rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-100 sm:p-8">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sky-600">On the horizon</p>
+          <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">Upcoming projects</h2>
+        </div>
+      </div>
+      <div class="mt-6 grid auto-rows-[1fr] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {upcomingProjects.map((project) => (
+          <PublicationCard {...project} />
+        ))}
+      </div>
+    </section>
+  )}
+</PublicationsLayout>

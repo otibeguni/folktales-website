@@ -1,0 +1,55 @@
+---
+import { localizePath } from 'astro-i18next';
+
+interface UpcomingProjectCardProps {
+  title: string;
+  description: string;
+  cover: string;
+  href?: string;
+  status?: string;
+  highlight?: string;
+}
+
+const {
+  title,
+  description,
+  cover,
+  href = '',
+  status = 'In development',
+  highlight = 'Coming soon',
+} = Astro.props as UpcomingProjectCardProps;
+const hasLink = Boolean(href);
+const isExternal = /^https?:\/\//.test(href);
+const target = isExternal ? '_blank' : undefined;
+const rel = isExternal ? 'noreferrer noopener' : undefined;
+const normalizedHref = !href ? undefined : isExternal ? href : localizePath(href);
+const Wrapper = hasLink ? 'a' : 'div';
+---
+
+<Wrapper
+  href={hasLink ? normalizedHref : undefined}
+  target={hasLink ? target : undefined}
+  rel={hasLink ? rel : undefined}
+  class={`group relative flex h-full min-h-[520px] flex-col overflow-hidden rounded-2xl border border-amber-200/50 bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 p-5 text-slate-900 shadow-[0_16px_50px_-44px_rgba(15,23,42,0.6)] transition duration-200 hover:-translate-y-1 hover:border-amber-300/80 hover:shadow-[0_20px_60px_-40px_rgba(15,23,42,0.65)] ${
+    hasLink ? 'cursor-pointer' : ''
+  }`}
+>
+  <div class="relative overflow-hidden rounded-xl">
+    <img
+      src={cover}
+      alt={`${title} concept cover`}
+      loading="lazy"
+      class="aspect-[2/3] w-full object-cover transition duration-200 group-hover:scale-[1.03]"
+    />
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-amber-900/30 via-transparent to-transparent opacity-90" />
+    <div class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-900 shadow">
+      <span class="h-1 w-5 rounded-full bg-amber-500" aria-hidden="true" />
+      {highlight}
+    </div>
+  </div>
+  <div class="flex flex-1 flex-col gap-3 pt-4 text-slate-900">
+    <div class="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700">{status}</div>
+    <h3 class="text-xl font-semibold leading-tight text-slate-900">{title}</h3>
+    <p class="text-sm text-amber-900/80">{description}</p>
+  </div>
+</Wrapper>
