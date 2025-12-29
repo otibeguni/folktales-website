@@ -2,7 +2,7 @@
 import type { MarkdownInstance } from "astro";
 import { changeLanguage, t } from "i18next";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
-import PaginatedList from "@/components/PaginatedList";
+import BlogPaginatedList from "@/components/blog/BlogPaginatedList";
 
 changeLanguage("en");
 
@@ -15,6 +15,11 @@ const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md
 const blogContents = await Promise.all(blogs);
 // Sort the blogs in reverse chronological order (newest first)
 const sortedBlogs = blogContents.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+const totalBlogs = sortedBlogs.length;
+const latestDate = totalBlogs ? new Date(sortedBlogs[0].frontmatter.date) : null;
+const formattedLatestDate = latestDate
+  ? latestDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+  : null;
 ---
 
 <MarkdownBreadcrumbLayout
@@ -22,7 +27,34 @@ const sortedBlogs = blogContents.sort((a, b) => new Date(b.frontmatter.date).val
   description={t("common.siteDescription")}
   breadcrumbLabels={[{ label: "Blog", href: "/blog" }]}
 >
-  <div class="space-y-4" data-pagefind-body>
-    <PaginatedList data={sortedBlogs} path="blog" client:load />
+  <section class="relative overflow-hidden rounded-3xl border border-base-300/70 bg-gradient-to-br from-primary/10 via-base-200 to-base-100 px-6 py-12 shadow-xl">
+    <div class="absolute -left-16 -top-24 h-56 w-56 rounded-full bg-primary/10 blur-3xl"></div>
+    <div class="absolute right-2 top-6 h-40 w-40 rounded-full bg-base-300/50 blur-3xl"></div>
+    <div class="relative grid items-center gap-10 lg:grid-cols-[1.7fr,1fr]">
+      <div class="space-y-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-primary">Field Notes</p>
+        <h1 class="text-4xl font-extrabold text-base-content sm:text-5xl">
+          Stories, grants, and updates from the Otibeguni community
+        </h1>
+        <p class="max-w-3xl text-base text-base-content/70">
+          Follow our latest announcements, behind-the-scenes progress, and lessons learned as we invest
+          in storytellers documenting indigenous knowledge.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="rounded-full border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+            {totalBlogs} stories
+          </span>
+          {formattedLatestDate && (
+            <span class="rounded-full border border-base-300 bg-base-100 px-4 py-2 text-sm font-medium text-base-content/80">
+              Latest update {formattedLatestDate}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mt-10" data-pagefind-body>
+    <BlogPaginatedList data={sortedBlogs} path="blog" client:load />
   </div>
 </MarkdownBreadcrumbLayout>
