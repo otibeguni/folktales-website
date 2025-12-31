@@ -1,0 +1,40 @@
+---
+---
+<!--Zoho Campaigns Embed Button Starts-->
+<script type="text/javascript" src="https://zgnp-zngp.maillist-manage.com/js/jquery-1.11.0.min.js"></script>
+<script type='text/javascript' src='https://zgnp-zngp.maillist-manage.com/js/jquery-migrate-1.2.1.min.js'></script>
+<script type='text/javascript' src='https://zgnp-zngp.maillist-manage.com/js/jquery-ui-1.10.4.custom.min.js'></script>
+<div id="zc_popoverlay" style="display:none;background: radial-gradient(50% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);height: 100%;left: 0px;overflow-x: hidden;overflow-y: auto;position: fixed;top: 0px;width: 100%;z-index: 2;">
+  <div style="height: 100%;display:table;margin: 0px auto;position: static;">
+    <div style="display: table-cell;vertical-align: middle;">
+      <div style="position:relative;background-color: #fff;box-shadow: 1px 2px 5px #555;border-radius: 3px;padding: 10px;margin: 15px 0px;" id="signUpFormInline">
+      </div>
+    </div>
+  </div>
+</div>
+<div id='embedLink'>
+  <button type="button" purpose="nrmlBtn" class="btn btn-primary btn-sm" changetype="EMBED_BUTTON" id="EMBED_BUTTON" name="EMBED_BUTTON" value="Signup" bgcolor="#5a15bd" formopenin="Popup" btntype="nrmlBtn" onclick="zc_loadForm('campaigns.zoho.com','https://zgnp-zngp.maillist-manage.com/ua/Optin?od=11287ecd4d4888&amp;zx=110b5c6&amp;lD=115ec1294e49b5ced&amp;n=11699f7515133a7&amp;sD=115ec1294e49b7278')">
+    <span class="zceditcnt">Signup</span>
+  </button>
+</div>
+<input type='hidden' id='zc_Url' value='zgnp-zngp.maillist-manage.com'/>
+<input type='hidden' id='zc_formIx' name='zc_formIx' value='3zfa5a421ff81f620f73d471622f199f2f15c78339775718406a45fc82bf1e463e' >
+<input type='hidden' id='cmpZuid' name='zx' value='undefined' >
+<input type='hidden' id='viewFrom' name='viewFrom' value='BUTTON_ACTION' />
+<input type='hidden' id='button_tc_codeVal' name='button_tc_codeVal' value='ZCFORMVIEW' />
+<script type='text/javascript' src='https://zgnp-zngp.maillist-manage.com/js/optin_min.js'></script>
+<script>
+  var trackingText='ZCFORMVIEW';
+  var $ZC = jQuery.noConflict();
+  $ZC('[id=embedLink]').append("<input type='hidden' id='tc_code"+$ZC('[id=embedLink]').size()+"' value="+trackingText+">");
+  var elemSize = parseInt($ZC('[id=embedLink]').size())-1;
+  var embedLink = $ZC($ZC('[id=embedLink]')[elemSize]).attr('href');
+  if(embedLink!=undefined && embedLink!=null && embedLink!='null'){
+    var dynamicCodeVal = $ZC("#tc_code"+$ZC('[id=embedLink]').size()).val();
+    embedLink = embedLink+'&trackingcode='+dynamicCodeVal;
+    $ZC($ZC('[id=embedLink]')[elemSize]).attr('href',embedLink);
+    $ZC('[id=button_tc_codeVal]').val(dynamicCodeVal);
+    trackSignupEvent(dynamicCodeVal,'buttonView');
+  }
+</script>
+<!-- Zoho Campaigns Embed Button End -->

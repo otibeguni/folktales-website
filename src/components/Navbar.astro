@@ -1,6 +1,7 @@
 ---
 import { t } from "i18next";
 import { localizePath } from "astro-i18next";
+import ZohoSignup from "./ZohoSignup.astro";
 
 const menus = [
   {
@@ -84,10 +85,11 @@ const menus = [
             </svg>
           </label>
         </div>
-        <div class="mx-auto flex-1 items-center justify-between">
+        <div class="mx-auto flex-1 flex items-center justify-between">
           <a href={localizePath("/")} class="btn btn-primary text-xl font-bold">
             Otibeguni
           </a>
+          <ZohoSignup />
         </div>
       </div>
     </nav>
