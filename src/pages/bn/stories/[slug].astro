@@ -39,6 +39,12 @@ export async function getStaticPaths() {
 const { story, metadata } = Astro.props;
 const Content = story.default;
 const { frontmatter } = story;
+
+// Check for English version
+const enStories = import.meta.glob("@/stories/en/*.md", { eager: true });
+const enStory = Object.values(enStories).find((s: any) => s.frontmatter.slug === frontmatter.slug);
+const enSlug = enStory ? (enStory as any).frontmatter.slug : null;
+
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
 // Prepare the isBasedOn data if applicable
 const isBasedOn = metadata != null && metadata.sources?.length > 0 && metadata.sources[0].value
@@ -108,6 +114,8 @@ const relatedResources = metadata?.related_resources?.map((resource) => ({
             sourceAuthor={metadata?.sources?.[0]?.author}
             sourceUrl={metadata?.sources?.[0]?.library_url ||
               metadata?.sources?.[0]?.url}
+            translationLink={enSlug ? `/stories/${enSlug}` : undefined}
+            translationLabel="Read in English"
           />
 
           <div class="divider"></div>

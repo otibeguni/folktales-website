@@ -5,19 +5,21 @@ interface Props {
   sourceBook: string;
   sourceAuthor?: string;
   sourceUrl?: string;
+  translationLink?: string;
+  translationLabel?: string;
 }
 
-const { category, sourceBook, sourceAuthor, sourceUrl } = Astro.props;
+const { category, sourceBook, sourceAuthor, sourceUrl, translationLink, translationLabel } = Astro.props;
 ---
 
 <div
-  class="bg-base-200/50 mt-8 mb-6 grid grid-cols-1 items-start gap-6 rounded-lg p-4 sm:grid-cols-2"
+  class="bg-base-200/50 mt-8 mb-6 grid grid-cols-1 items-start gap-6 rounded-lg p-4 sm:grid-cols-2 md:grid-cols-3"
 >
   <div class="text-center sm:text-left">
     <div class="text-xs font-bold opacity-60">CATEGORY</div>
     <div class="text-secondary text-lg font-semibold">{category}</div>
   </div>
-  { sourceBook ? (<div
+  { sourceBook && (<div
     class="border-base-300 border-t-2 pt-4 text-center sm:border-t-0 sm:border-l-2 sm:pt-0 sm:pl-6 sm:text-left"
   >
     <p class="text-xs font-bold opacity-60">BASED ON THE BOOK</p>
@@ -36,6 +38,14 @@ const { category, sourceBook, sourceAuthor, sourceUrl } = Astro.props;
       )
     }
     <p class="text-sm opacity-80">by {sourceAuthor || 'Unknown'}</p>
-  </div>) : ( <div/>)
-  } 
+  </div>)
+  }
+  { translationLink && (
+      <div class="border-base-300 border-t-2 pt-4 text-center sm:border-t-0 sm:border-l-2 sm:pt-0 sm:pl-6 sm:text-left md:border-t-0 md:border-l-2">
+        <div class="text-xs font-bold opacity-60">LANGUAGE</div>
+        <a href={translationLink} class="link link-hover text-lg font-semibold text-primary">
+          {translationLabel}
+        </a>
+      </div>
+  )}
 </div>
