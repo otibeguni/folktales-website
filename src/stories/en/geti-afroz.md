@@ -1,6 +1,6 @@
 ---
 title: Geti Afroz
-slug: geti-afroz
+slug: the-story-of-geti-afroz
 category: Puthi Literature
 language: en
 ---
