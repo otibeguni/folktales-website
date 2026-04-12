@@ -1,13 +1,9 @@
 ---
-import i18next, { changeLanguage, t } from "i18next";
+import { currentLanguage, t } from "@/utils/site-text";
 import StoryListCodex from "@/components/StoryListCodex";
 import Layout from "@/layouts/Layout.astro";
 import type { IStory } from "@/types";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
-
-changeLanguage("en");
-
-const currentLanguage = i18next.language;
 const codexstoriesEn: Array<{
     frontmatter: IStory;
 }> = Object.values(import.meta.glob("@/codex/*.md", { eager: true }));

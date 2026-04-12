@@ -1,5 +1,4 @@
 ---
-import { HeadHrefLangs } from 'astro-i18next/components';
 import { Schema } from 'astro-seo-schema';
 import '@/styles/global.css';
 import Footer from '@/components/Footer.astro';
@@ -20,7 +19,6 @@ const {
     <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <HeadHrefLangs />
     {schema && <Schema item={schema} />}
   </head>
   <body class="bg-white text-slate-900">

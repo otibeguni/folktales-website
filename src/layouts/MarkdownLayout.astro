@@ -1,12 +1,9 @@
 ---
-import i18next, { t } from 'i18next';
-import { HeadHrefLangs } from 'astro-i18next/components';
+import { currentLanguage, t } from '@/utils/site-text';
 import { Schema } from 'astro-seo-schema';
 import '@/styles/global.css';
 import Footer from '@/components/Footer.astro';
 import Navbar from '@/components/Navbar.astro';
-
-const currentLanguage = i18next.language;
 
 const { schema = null, title = null, description = null } = Astro.props;
 ---
@@ -23,7 +20,6 @@ const { schema = null, title = null, description = null } = Astro.props;
       name="description"
       content={description ?? t('common.siteDescription')}
     />
-    <HeadHrefLangs />
     {schema && <Schema item={schema} />}
   </head>
   <body>

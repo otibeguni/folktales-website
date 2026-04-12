@@ -1,5 +1,4 @@
 ---
-import { HeadHrefLangs } from 'astro-i18next/components';
 import { Schema } from 'astro-seo-schema';
 import '@/styles/global.css';
 import Footer from '@/components/Footer.astro';
@@ -31,7 +30,6 @@ const { schema = null, title = null, description = null } = Astro.props;
     />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <HeadHrefLangs />
     {schema && <Schema item={schema} />}
   </head>
   <body>

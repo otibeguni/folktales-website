@@ -1,10 +1,8 @@
 ---
 import type { MarkdownInstance } from "astro";
-import { changeLanguage, t } from "i18next";
+import { t } from "@/utils/site-text";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
 import BlogPaginatedList from "@/components/blog/BlogPaginatedList";
-
-changeLanguage("en");
 
 const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
     eager: true,

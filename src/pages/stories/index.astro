@@ -1,16 +1,12 @@
 ---
 import type { MarkdownInstance } from "astro";
-import i18next, { changeLanguage, t } from "i18next";
+import { currentLanguage, t } from "@/utils/site-text";
 import StoryList from "@/components/StoryList";
 import Layout from "@/layouts/Layout.astro";
 import type { IStory, IStoryCollection, MetadataItem } from "@/types";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import StoryCollectionList from "@/components/StoryCollectionList.astro";
 import { fetchRowsFromDatabase } from "@/utils/baserow";
-
-changeLanguage("en");
-
-const currentLanguage = i18next.language;
 const collections = Object.values(import.meta.glob<MarkdownInstance<IStoryCollection>>("@/stories/collections/*.md", { eager: true }));
 const baserowData = (await fetchRowsFromDatabase(741)) ?? null;
 const storiesEn = Object.values(import.meta.glob<MarkdownInstance<IStory>>("@/stories/en/*.md", {

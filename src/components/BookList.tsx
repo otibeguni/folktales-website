@@ -6,6 +6,19 @@ import type { SourceItemAlt } from '@/types';
 
 const MAX_BOOKS = 12;
 
+const getOptionValue = (value: unknown) => {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (value && typeof value === 'object' && 'value' in value) {
+    const nestedValue = (value as { value?: unknown }).value;
+    return typeof nestedValue === 'string' ? nestedValue : '';
+  }
+
+  return '';
+};
+
 const BookList = ({
   books,
   labels,
@@ -17,7 +30,13 @@ const BookList = ({
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const allCategories = Array.from(new Set(books.map((book) => book.category)));
+  const allCategories = Array.from(
+    new Set(
+      books
+        .map((book) => getOptionValue(book.category))
+        .filter((category) => Boolean(category)),
+    ),
+  );
 
   const categories = allCategories.map((category) => ({
     label: category,
@@ -26,10 +45,10 @@ const BookList = ({
 
   const filteredBooks = [
     ...books
-      .filter((book) => book.language === selectedLanguage)
+      .filter((book) => getOptionValue(book.language) === selectedLanguage)
       .filter((book) => {
         if (selectedCategory) {
-          return book.category === selectedCategory;
+          return getOptionValue(book.category) === selectedCategory;
         }
         return true;
       }),
