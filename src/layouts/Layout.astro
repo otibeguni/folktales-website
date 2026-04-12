@@ -1,24 +1,23 @@
 ---
-import { Schema } from 'astro-seo-schema';
-import '@/styles/global.css';
-import Footer from '@/components/Footer.astro';
-import Navbar from '@/components/Navbar.astro';
-
-const currentLanguage = 'en';
+import { Schema } from "astro-seo-schema";
+import "@/styles/global.css";
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
+import { t } from "@/utils/site-text";
 
 const { schema = null, title = null, description = null } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={currentLanguage}>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
 
-    { schema && <meta property="og:type" content="article"> }
-    { schema && <meta property="og:title" content={schema.name}> }
-    { schema && <meta property="og:image" content={schema.image}> }
-    { schema && <meta property="og:url" content={schema.url}> }
+    {schema && <meta property="og:type" content="article" />}
+    {schema && <meta property="og:title" content={schema.name} />}
+    {schema && <meta property="og:image" content={schema.image} />}
+    {schema && <meta property="og:url" content={schema.url} />}
 
     <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
     <link
@@ -29,7 +28,8 @@ const { schema = null, title = null, description = null } = Astro.props;
       referrerpolicy="no-referrer"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{title ?? t("common.siteTitle")}</title>
+    <meta name="description" content={description ?? t("common.siteDescription")} />
     {schema && <Schema item={schema} />}
   </head>
   <body>

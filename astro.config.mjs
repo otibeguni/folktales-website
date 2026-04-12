@@ -1,4 +1,4 @@
-import { defineConfig, envField } from "astro/config";
+import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
@@ -14,13 +14,5 @@ export default defineConfig({
   },
 
   integrations: [react(), mdx(), sitemap(), pagefind()],
-
-  env: {
-    schema: {
-      BASEROW_URL: envField.string({ context: "server", access: "secret" }),
-      BASEROW_TOKEN: envField.string({ context: "server", access: "secret" }),
-    },
-  },
-
   site: "https://otibeguni.com",
 });

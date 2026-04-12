@@ -2,21 +2,20 @@
 import { currentLanguage, t } from "@/utils/site-text";
 import StoryListCodex from "@/components/StoryListCodex";
 import Layout from "@/layouts/Layout.astro";
-import type { IStory } from "@/types";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
-const codexstoriesEn: Array<{
-    frontmatter: IStory;
-}> = Object.values(import.meta.glob("@/codex/*.md", { eager: true }));
-const codex = [...codexstoriesEn];
+import { getAllCodexEntries } from "@/utils/content";
+
+const codexstories = (await getAllCodexEntries()).map((entry) => ({
+  frontmatter: { ...entry.data, slug: entry.slug },
+}));
 ---
 
 <Layout title={"Codex | " + t("common.siteTitle")}>
-  {/* This is the main container for the page content */}
   <div class="container mx-auto max-w-4xl px-4 py-8">
     <Breadcrumbs menus={[{ label: "Codex", href: "/codex" }]} />
 
     <StoryListCodex
-      stories={codex}
+      stories={codexstories}
       lang={currentLanguage}
       labels={{
         filterLabel: t("pages.stories.filterLabel"),

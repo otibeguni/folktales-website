@@ -15,7 +15,7 @@ const BookCardSource = (props: SourceItemAlt) => {
           </div>
           {props.library_url && (
             <a
-              href={props.library_url || `/books/${props.slug}`}
+              href={props.library_url || props.url || `/books/${props.slug}`}
               className="btn btn-neutral btn-xs"
             >
               Read Online

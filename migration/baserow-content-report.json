@@ -1,0 +1,599 @@
+{
+  "generatedAt": "2026-04-12T13:13:58.521Z",
+  "stats": {
+    "topics": 123,
+    "storyMetadata": 100,
+    "books": 157,
+    "resources": 61,
+    "missingStoryMetadataRows": [
+      {
+        "slug": "gift-from-the-banyan-god",
+        "language": "en"
+      },
+      {
+        "slug": "mohon-mala",
+        "language": "bn"
+      },
+      {
+        "slug": "kolakumari",
+        "language": "bn"
+      },
+      {
+        "slug": "maniktara",
+        "language": "bn"
+      },
+      {
+        "slug": "fisherman-prince",
+        "language": "bn"
+      },
+      {
+        "slug": "well-of-mathin",
+        "language": "bn"
+      },
+      {
+        "slug": "mayaroshi",
+        "language": "bn"
+      },
+      {
+        "slug": "snake-prince",
+        "language": "bn"
+      }
+    ]
+  },
+  "generatedBookSlugs": [
+    {
+      "id": 4,
+      "name": "আদিবাসী লোককথা",
+      "slug": "book-4"
+    },
+    {
+      "id": 6,
+      "name": "বাংলা একাডেমী ফোকলোর সংগ্রহমালা - ৩২",
+      "slug": "book-6"
+    },
+    {
+      "id": 7,
+      "name": "বাংলা একাডেমী ফোকলোর সংগ্রহমালা - ৩৩",
+      "slug": "book-7"
+    },
+    {
+      "id": 8,
+      "name": "বাংলা একাডেমী ফোকলোর সংগ্রহমালা - ৯০",
+      "slug": "book-8"
+    },
+    {
+      "id": 9,
+      "name": "বাংলা একাডেমী ফোকলোর সংগ্রহমালা - ১২৭",
+      "slug": "book-9"
+    },
+    {
+      "id": 12,
+      "name": "Bangla Folktales Part 1",
+      "slug": "book-12-bangla-folktales-part-1"
+    },
+    {
+      "id": 15,
+      "name": "বাংলা প্রবাদে দেব দেবী",
+      "slug": "book-15"
+    },
+    {
+      "id": 16,
+      "name": "বাংলা প্রবাদে স্থান- কাল- পাত্র",
+      "slug": "book-16"
+    },
+    {
+      "id": 18,
+      "name": "বাংলাদেশের আদিবাসী ১ম খণ্ড",
+      "slug": "book-18"
+    },
+    {
+      "id": 21,
+      "name": "বাংলার কিংবদন্তি",
+      "slug": "book-21"
+    },
+    {
+      "id": 22,
+      "name": "বাংলার লোকদেবতা ও সমাজসংস্কৃতি",
+      "slug": "book-22"
+    },
+    {
+      "id": 24,
+      "name": "বাংলায় পূজিত নারীদেবতা",
+      "slug": "book-24"
+    },
+    {
+      "id": 28,
+      "name": "ভারতে লোককথা",
+      "slug": "book-28"
+    },
+    {
+      "id": 29,
+      "name": "ভারতের লোককথা",
+      "slug": "book-29"
+    },
+    {
+      "id": 33,
+      "name": "ছহি বড় জঙ্গে শাহ মাদার পুথি",
+      "slug": "book-33"
+    },
+    {
+      "id": 34,
+      "name": "ছহি বড় জঙ্গনামা",
+      "slug": "book-34"
+    },
+    {
+      "id": 37,
+      "name": "Fabulous Females and Peerless Pirs",
+      "slug": "book-37-fabulous-females-and-peerless-pirs"
+    },
+    {
+      "id": 38,
+      "name": "Folk-Tales of Bengal",
+      "slug": "book-38-folk-tales-of-bengal"
+    },
+    {
+      "id": 41,
+      "name": "Folk-Tales of the Khasis",
+      "slug": "book-41-folk-tales-of-the-khasis"
+    },
+    {
+      "id": 43,
+      "name": "গাজি কালু ও চম্পাবতীর পুথি",
+      "slug": "book-43"
+    },
+    {
+      "id": 46,
+      "name": "গ্রাম বাংলার কেচ্ছা রূপকথা লোককথা ১",
+      "slug": "book-46"
+    },
+    {
+      "id": 48,
+      "name": "জৈগুনের পুথি",
+      "slug": "book-48"
+    },
+    {
+      "id": 49,
+      "name": "কিংবদন্তি কথা কয়",
+      "slug": "book-49"
+    },
+    {
+      "id": 50,
+      "name": "কিংবদন্তির বাংলা",
+      "slug": "book-50"
+    },
+    {
+      "id": 51,
+      "name": "কোচ সম্প্রদায়ের সমাজ ও সংস্কৃতি",
+      "slug": "book-51"
+    },
+    {
+      "id": 53,
+      "name": "মধুমালতী",
+      "slug": "book-53"
+    },
+    {
+      "id": 54,
+      "name": "মারমা রূপকথা",
+      "slug": "book-54"
+    },
+    {
+      "id": 55,
+      "name": "মিজো গান, আধুনিক কবিতা ও লোককথা",
+      "slug": "book-55"
+    },
+    {
+      "id": 59,
+      "name": "Needle at the Bottom of the Sea",
+      "slug": "book-59-needle-at-the-bottom-of-the-sea"
+    },
+    {
+      "id": 60,
+      "name": "New Folktales of Manipur",
+      "slug": "book-60-new-folktales-of-manipur"
+    },
+    {
+      "id": 61,
+      "name": "ওয়েথু",
+      "slug": "book-61"
+    },
+    {
+      "id": 66,
+      "name": "প্রবাদের উৎসসন্ধান",
+      "slug": "book-66"
+    },
+    {
+      "id": 68,
+      "name": "রাজবংশী লোককথা",
+      "slug": "book-68"
+    },
+    {
+      "id": 69,
+      "name": "রাঙামাটির লোককথা",
+      "slug": "book-69"
+    },
+    {
+      "id": 71,
+      "name": "রূপকথার এই বাংলাদেশ",
+      "slug": "book-71"
+    },
+    {
+      "id": 72,
+      "name": "সয়ফুল মুলুক বদিউজ্জামাল",
+      "slug": "book-72"
+    },
+    {
+      "id": 76,
+      "name": "শবর নৃ-গোষ্ঠী: প্রেক্ষিত বাংলাদেশ",
+      "slug": "book-76"
+    },
+    {
+      "id": 77,
+      "name": "সমতলের বারো জাতি",
+      "slug": "book-77"
+    },
+    {
+      "id": 79,
+      "name": "সত্যপিরের পুথি",
+      "slug": "book-79"
+    },
+    {
+      "id": 80,
+      "name": "শ্রীকৃষ্ণকীর্তন",
+      "slug": "book-80"
+    },
+    {
+      "id": 81,
+      "name": "Tales from Marma Folklore",
+      "slug": "book-81-tales-from-marma-folklore"
+    },
+    {
+      "id": 85,
+      "name": "The adventures of Hatim Tai",
+      "slug": "book-85-the-adventures-of-hatim-tai"
+    },
+    {
+      "id": 90,
+      "name": "উত্তরবঙ্গের আদিবাসী লোক জীবন ও লোকসাহিত্য ওরাওঁ",
+      "slug": "book-90"
+    },
+    {
+      "id": 91,
+      "name": "উত্তরবঙ্গের আদিবাসী লোককথা",
+      "slug": "book-91"
+    },
+    {
+      "id": 92,
+      "name": "উত্তরবঙ্গের আদিবাসী পরিচয়",
+      "slug": "book-92"
+    },
+    {
+      "id": 94,
+      "name": "উত্তরবঙ্গের লোককথা",
+      "slug": "book-94"
+    },
+    {
+      "id": 95,
+      "name": "Witness to Marvels",
+      "slug": "book-95-witness-to-marvels"
+    },
+    {
+      "id": 96,
+      "name": "ইউসুফ জোলেখা",
+      "slug": "book-96"
+    }
+  ],
+  "generatedResourceSlugs": [
+    {
+      "id": 1,
+      "title": "The legend of Parir Pahar",
+      "slug": "resource-1-the-legend-of-parir-pahar"
+    },
+    {
+      "id": 2,
+      "title": "Harong Hurong Caves",
+      "slug": "resource-2-harong-hurong-caves"
+    },
+    {
+      "id": 3,
+      "title": "Hazrat Shahjalal Mazar",
+      "slug": "resource-3-hazrat-shahjalal-mazar"
+    },
+    {
+      "id": 4,
+      "title": "A collection of essays on Monipuri Folklore",
+      "slug": "resource-4-a-collection-of-essays-on-monipuri-folklore"
+    },
+    {
+      "id": 5,
+      "title": "Gokul Medh Temple - A Remarkable architecture of ancient Bengal",
+      "slug": "resource-5-gokul-medh-temple-a-remarkable-architecture-of-ancient-bengal"
+    },
+    {
+      "id": 7,
+      "title": "The mysterious black stone of Kuri Hill",
+      "slug": "resource-7-the-mysterious-black-stone-of-kuri-hill"
+    },
+    {
+      "id": 8,
+      "title": "Gazir Pat Scroll Painting - Banglapedia",
+      "slug": "resource-8-gazir-pat-scroll-painting-banglapedia"
+    },
+    {
+      "id": 9,
+      "title": "Undisciplined, playful and yet Bhadra",
+      "slug": "resource-9-undisciplined-playful-and-yet-bhadra"
+    },
+    {
+      "id": 27,
+      "title": "Shila Devir Ghat - Video",
+      "slug": "resource-27-shila-devir-ghat-video"
+    },
+    {
+      "id": 28,
+      "title": "Jiyat Kunda (Well of life) Documentary",
+      "slug": "resource-28-jiyat-kunda-well-of-life-documentary"
+    },
+    {
+      "id": 29,
+      "title": "Gokul Medh - Travel Vlog",
+      "slug": "resource-29-gokul-medh-travel-vlog"
+    },
+    {
+      "id": 30,
+      "title": "Behular Bashorghor in Champaknagar - Travel Vlog",
+      "slug": "resource-30-behular-bashorghor-in-champaknagar-travel-vlog"
+    },
+    {
+      "id": 31,
+      "title": "Pankho People - Video",
+      "slug": "resource-31-pankho-people-video"
+    },
+    {
+      "id": 32,
+      "title": "Bede community of Bangladesh - Video",
+      "slug": "resource-32-bede-community-of-bangladesh-video"
+    },
+    {
+      "id": 33,
+      "title": "Somapura Mahavihara - Documentary",
+      "slug": "resource-33-somapura-mahavihara-documentary"
+    },
+    {
+      "id": 34,
+      "title": "Kamakhya Temple - Travel Vlog",
+      "slug": "resource-34-kamakhya-temple-travel-vlog"
+    },
+    {
+      "id": 35,
+      "title": "The tomb of Azimunnesa Begum",
+      "slug": "resource-35-the-tomb-of-azimunnesa-begum"
+    },
+    {
+      "id": 36,
+      "title": "Noder Chand Ghaat - Travel Vlog",
+      "slug": "resource-36-noder-chand-ghaat-travel-vlog"
+    },
+    {
+      "id": 38,
+      "title": "The tomb of Ghashi Dewan - Travel Vlog",
+      "slug": "resource-38-the-tomb-of-ghashi-dewan-travel-vlog"
+    },
+    {
+      "id": 39,
+      "title": "Madar Gaan Performance",
+      "slug": "resource-39-madar-gaan-performance"
+    },
+    {
+      "id": 40,
+      "title": "Dosshu Kenaram Pala - Audio Summary",
+      "slug": "resource-40-dosshu-kenaram-pala-audio-summary"
+    },
+    {
+      "id": 41,
+      "title": "Chondraboti Pala - Audio Summary",
+      "slug": "resource-41-chondraboti-pala-audio-summary"
+    },
+    {
+      "id": 43,
+      "title": "Dewana-Modina Pala - Audio Summary",
+      "slug": "resource-43-dewana-modina-pala-audio-summary"
+    },
+    {
+      "id": 44,
+      "title": "Exploring Garo Hills and Dombe Wari",
+      "slug": "resource-44-exploring-garo-hills-and-dombe-wari"
+    },
+    {
+      "id": 45,
+      "title": "Mohua Pala - Audio Summary",
+      "slug": "resource-45-mohua-pala-audio-summary"
+    },
+    {
+      "id": 46,
+      "title": "Kajolrekha - Audio Summary",
+      "slug": "resource-46-kajolrekha-audio-summary"
+    },
+    {
+      "id": 47,
+      "title": "The tomb of Gazi Kalu and Chompaboti",
+      "slug": "resource-47-the-tomb-of-gazi-kalu-and-chompaboti"
+    },
+    {
+      "id": 48,
+      "title": "The Dighi of Kamala Rani",
+      "slug": "resource-48-the-dighi-of-kamala-rani"
+    },
+    {
+      "id": 49,
+      "title": "Alikodom - Bandarban Travel Vlog",
+      "slug": "resource-49-alikodom-bandarban-travel-vlog"
+    },
+    {
+      "id": 50,
+      "title": "Teilafang Waterfall - Travel Vlog",
+      "slug": "resource-50-teilafang-waterfall-travel-vlog"
+    },
+    {
+      "id": 51,
+      "title": "Chandimangal - English Translation",
+      "slug": "resource-51-chandimangal-english-translation"
+    },
+    {
+      "id": 52,
+      "title": "Friends of Endangered Ethnic Languages",
+      "slug": "resource-52-friends-of-endangered-ethnic-languages"
+    },
+    {
+      "id": 53,
+      "title": "Kaisar Rahmani",
+      "slug": "resource-53-kaisar-rahmani"
+    },
+    {
+      "id": 54,
+      "title": "Rezwan Siddique",
+      "slug": "resource-54-rezwan-siddique"
+    },
+    {
+      "id": 55,
+      "title": "Voyage Guide Bangladesh",
+      "slug": "resource-55-voyage-guide-bangladesh"
+    },
+    {
+      "id": 56,
+      "title": "BD Garo Production - Vlogs",
+      "slug": "resource-56-bd-garo-production-vlogs"
+    },
+    {
+      "id": 57,
+      "title": "Bengal Discovery - Historical Vlogs",
+      "slug": "resource-57-bengal-discovery-historical-vlogs"
+    },
+    {
+      "id": 58,
+      "title": "Salahuddin Sumon - Historical Vlogs",
+      "slug": "resource-58-salahuddin-sumon-historical-vlogs"
+    },
+    {
+      "id": 59,
+      "title": "Shobar jonno Bangla - School",
+      "slug": "resource-59-shobar-jonno-bangla-school"
+    },
+    {
+      "id": 60,
+      "title": "Shobar jonno Bangla",
+      "slug": "resource-60-shobar-jonno-bangla"
+    },
+    {
+      "id": 61,
+      "title": "Dhaka: 400-year history in photographs",
+      "slug": "resource-61-dhaka-400-year-history-in-photographs"
+    },
+    {
+      "id": 62,
+      "title": "Save the Heritages of Bangladesh",
+      "slug": "resource-62-save-the-heritages-of-bangladesh"
+    },
+    {
+      "id": 63,
+      "title": "Bangladesh Rare Photo Archive",
+      "slug": "resource-63-bangladesh-rare-photo-archive"
+    },
+    {
+      "id": 65,
+      "title": "Mapping Bengal",
+      "slug": "resource-65-mapping-bengal"
+    },
+    {
+      "id": 66,
+      "title": "Sylhet Nagri Script | British Library Endangered Archives Programme",
+      "slug": "resource-66-sylhet-nagri-script-british-library-endangered-archives-programme"
+    },
+    {
+      "id": 67,
+      "title": "Video tour of Sultan Balkhi’s Mazar",
+      "slug": "resource-67-video-tour-of-sultan-balkhi-s-mazar"
+    },
+    {
+      "id": 68,
+      "title": "Santal Resource Database",
+      "slug": "resource-68-santal-resource-database"
+    },
+    {
+      "id": 69,
+      "title": "Kalketu - Audio Summary",
+      "slug": "resource-69-kalketu-audio-summary"
+    },
+    {
+      "id": 70,
+      "title": "Skonder Dhap - Video",
+      "slug": "resource-70-skonder-dhap-video"
+    },
+    {
+      "id": 71,
+      "title": "Mound of King Tiyor",
+      "slug": "resource-71-mound-of-king-tiyor"
+    },
+    {
+      "id": 73,
+      "title": "৭০০ বছরের পুরনো কমলা রানীর দীঘি মৌলভীবাজার",
+      "slug": "resource-73"
+    },
+    {
+      "id": 74,
+      "title": "ঐতিহাসিক ঘাসী বাবার মাজার শরিফ",
+      "slug": "resource-74"
+    },
+    {
+      "id": 75,
+      "title": "Siraj Boyati - Abdul Ali Garoli | আব্দুল আলী গাড়লী",
+      "slug": "resource-75-siraj-boyati-abdul-ali-garoli"
+    },
+    {
+      "id": 76,
+      "title": "সাপের রাজা আব্দুল আলী গাড়লীর ইতিহাস",
+      "slug": "resource-76"
+    },
+    {
+      "id": 77,
+      "title": "১৪টি বাঁশঝাড় ও কয়েকটি তেঁতুল গাছসহ আব্দুল আলী গাড়ুলিকে উড়িয়ে নিয়ে যায় সাপে",
+      "slug": "resource-77"
+    },
+    {
+      "id": 78,
+      "title": "বনবিবির গল্প | চম্পাবতী-গাজী-কালু | সুন্দরবন | সিজন ০৪ | পর্ব ২৫",
+      "slug": "resource-78"
+    },
+    {
+      "id": 79,
+      "title": "সুন্দরবনের মা (মা বনোবিবি) কি তার জন্ম পরিচয়",
+      "slug": "resource-79"
+    },
+    {
+      "id": 80,
+      "title": "ঐতিহ্যবাহী গাজীকালুর কিচ্ছা",
+      "slug": "resource-80"
+    },
+    {
+      "id": 81,
+      "title": "মহুয়া : মৈমনসিংহ গীতিকা",
+      "slug": "resource-81"
+    },
+    {
+      "id": 82,
+      "title": "মলুয়া । মৈমনসিংহ গীতিকা",
+      "slug": "resource-82"
+    },
+    {
+      "id": 83,
+      "title": "TEDEd - The tale of the brothers who outwitted the demon queen",
+      "slug": "resource-83-teded-the-tale-of-the-brothers-who-outwitted-the-demon-queen"
+    }
+  ],
+  "normalizedTopicTypes": [
+    {
+      "slug": "babylon",
+      "from": "Ancient kingdom",
+      "to": "Ancient Kingdom"
+    }
+  ]
+}

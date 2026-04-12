@@ -2,22 +2,23 @@
 import { t } from "@/utils/site-text";
 import BookList from "@/components/BookList";
 import Layout from "@/layouts/Layout.astro";
-import { fetchRowsFromDatabase } from "@/utils/baserow";
-import type { SourceItemAlt } from "@/types";
+import { getAllBooks, getBookCategoryLabel } from "@/utils/content";
 
-// Baserow
-const baserowData = await fetchRowsFromDatabase(742);
-const baserowResult = (await baserowData.results) as SourceItemAlt[];
+const books = (await getAllBooks()).map((book) => ({
+  slug: book.slug,
+  ...book.data,
+  category: getBookCategoryLabel(book.data.category),
+}));
 ---
 
-<Layout title={'Books | ' + t('common.siteTitle')}>
+<Layout title={"Books | " + t("common.siteTitle")}>
   <BookList
-    books={baserowResult}
+    books={books}
     labels={{
-      filterLabel: t('pages.books.filterLabel'),
-      languageLabel: t('pages.books.languageLabel'),
-      categoryLabel: t('pages.books.categoryLabel'),
-      allCategoryLabel: t('pages.books.allCategoryLabel'),
+      filterLabel: t("pages.books.filterLabel"),
+      languageLabel: t("pages.books.languageLabel"),
+      categoryLabel: t("pages.books.categoryLabel"),
+      allCategoryLabel: t("pages.books.allCategoryLabel"),
     }}
     client:load
   />

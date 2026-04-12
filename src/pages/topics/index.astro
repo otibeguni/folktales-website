@@ -2,18 +2,18 @@
 import { t } from "@/utils/site-text";
 import TopicList from "@/components/TopicList";
 import Layout from "@/layouts/Layout.astro";
-import { fetchRowsFromDatabase } from "@/utils/baserow";
-import type { WikidataItemAlt } from "@/types";
+import { getAllTopics } from "@/utils/content";
 
-// Baserow
-const baserowData = await fetchRowsFromDatabase(740);
-const baserowResult = (await baserowData.results) as WikidataItemAlt[];
+const topics = (await getAllTopics()).map((topic) => ({
+  ...topic.data,
+  slug: topic.slug,
+}));
 ---
 
 <Layout title={"Topics | " + t("common.siteTitle")}>
   <div data-pagefind-body>
     <TopicList
-      topics={baserowResult}
+      topics={topics}
       labels={{
         filterLabel: t("pages.topics.filterLabel"),
         typeLabel: t("pages.topics.typeLabel"),

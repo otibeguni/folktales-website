@@ -1,128 +1,128 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import type { IStory, MetadataItem } from "@/types";
-import { fetchRowsFromDatabase } from "@/utils/baserow";
 import StoryHeader from "../../components/StoryHeader.astro";
 import StoryMetadata from "../../components/StoryMetadata.astro";
 import ArticleBody from "../../components/ArticleBody.astro";
 import RelatedItemsList from "../../components/RelatedItemsList.astro";
+import {
+  findStoryTranslation,
+  getAllBooks,
+  getAllResources,
+  getAllStories,
+  getAllTopics,
+  getStoriesByLanguage,
+  indexEntriesBySlug,
+  renderEntry,
+} from "@/utils/content";
 
 export async function getStaticPaths() {
-    const stories: Array<{
-        frontmatter: IStory;
-        default: any;
-    }> = Object.values(import.meta.glob("@/stories/en/*.md", { eager: true }));
-    return await Promise.all(stories.map(async (story) => {
-        // Construct the specific filter for the current story's slug
-        const filter = {
-            filter_type: "AND",
-            filters: [
-                { field: "slug", type: "equal", value: story.frontmatter.slug },
-            ],
-        };
-        const encodedFilter = encodeURIComponent(JSON.stringify(filter));
-        // Fetch only the metadata for this single story
-        const baserowData = await fetchRowsFromDatabase(741, `&sources__join=author,url,library_url,slug&related_wikidata__join=type,slug,item&related_resources__join=type,url&filters=${encodedFilter}`);
-        const storyMetadata = (baserowData.results as MetadataItem[])[0] ?? null;
-        return {
-            params: { slug: story.frontmatter.slug },
-            props: {
-                story,
-                metadata: storyMetadata,
-            },
-        };
-    }));
+  const stories = await getStoriesByLanguage("en");
+  return stories.map((story) => ({
+    params: { slug: story.slug },
+    props: { story },
+  }));
 }
-const { story, metadata } = Astro.props;
-const Content = story.default;
-const { frontmatter } = story;
 
-// Check for Bengali version
-const bnStories = import.meta.glob("@/stories/bn/*.md", { eager: true });
-const bnStory = Object.values(bnStories).find((s: any) => s.frontmatter.slug === frontmatter.slug);
-const bnSlug = bnStory ? (bnStory as any).frontmatter.slug : null;
+const { story } = Astro.props;
+const { Content } = await renderEntry(story);
+
+const [allStories, allTopics, allBooks, allResources] = await Promise.all([
+  getAllStories(),
+  getAllTopics(),
+  getAllBooks(),
+  getAllResources(),
+]);
+
+const topicBySlug = indexEntriesBySlug(allTopics);
+const bookBySlug = indexEntriesBySlug(allBooks);
+const resourceBySlug = indexEntriesBySlug(allResources);
+const bnStory = findStoryTranslation(allStories, story.slug, "bn");
+const sourceBook = story.data.source_slug
+  ? bookBySlug.get(story.data.source_slug)
+  : undefined;
 
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
-// Prepare the isBasedOn data if applicable
-const isBasedOn = metadata != null && metadata.sources?.length > 0 && metadata.sources[0].value
-    ? {
-        "@type": "CreativeWork",
-        name: metadata.sources[0].value,
-        ...(metadata.sources[0].author && {
-            author: {
-                "@type": "Person",
-                name: metadata.sources[0].author,
-            },
-        }),
+const isBasedOn = sourceBook
+  ? {
+      "@type": "CreativeWork",
+      name: sourceBook.data.name,
+      ...(sourceBook.data.author && {
+        author: {
+          "@type": "Person",
+          name: sourceBook.data.author,
+        },
+      }),
     }
-    : null;
+  : null;
+
 const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: frontmatter.title,
-    url: currentUrl,
-    author: {
-        "@type": "Organization",
-        name: "Otibeguni",
-    },
-    ...(isBasedOn && { isBasedOn }),
-    ...(metadata?.cover_image && { image: metadata.cover_image }),
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: story.data.title,
+  url: currentUrl,
+  author: {
+    "@type": "Organization",
+    name: "Otibeguni",
+  },
+  ...(isBasedOn && { isBasedOn }),
+  ...(story.data.cover_image && { image: story.data.cover_image }),
 };
-// Define the map of types to Font Awesome class strings
+
 const iconMap = {
-    Location: "fa-solid fa-location-dot",
-    Person: "fa-solid fa-user",
-    "Supernatural Entity": "fa-solid fa-ghost",
-    River: "fa-solid fa-water",
-    video: "fa-solid fa-video",
-    website: "fa-solid fa-newspaper",
+  Location: "fa-solid fa-location-dot",
+  Person: "fa-solid fa-user",
+  "Supernatural Entity": "fa-solid fa-ghost",
+  River: "fa-solid fa-water",
+  video: "fa-solid fa-video",
+  website: "fa-solid fa-newspaper",
 };
-// Map Wikidata topics to a common format
-const relatedTopics = metadata?.related_wikidata?.map((topic) => ({
-    name: topic.item,
-    type: topic.type || "",
+
+const relatedTopics = (story.data.topic_slugs ?? [])
+  .map((slug) => topicBySlug.get(slug))
+  .filter(Boolean)
+  .map((topic) => ({
+    name: topic.data.item,
+    type: topic.data.type || "",
     url: `/topics/${topic.slug}`,
     isExternal: false,
-})) || [];
-// Map Resource links to the same common format
-const relatedResources = metadata?.related_resources?.map((resource) => ({
-    name: resource.value,
-    type: resource.type.value,
-    url: resource.url || "",
+  }));
+
+const relatedResources = (story.data.resource_slugs ?? [])
+  .map((slug) => resourceBySlug.get(slug))
+  .filter(Boolean)
+  .map((resource) => ({
+    name: resource.data.title,
+    type: resource.data.type,
+    url: resource.data.url || "",
     isExternal: true,
-})) || [];
+  }));
 ---
 
 <Layout
-  title={`${frontmatter.title} - Stories | Otibeguni `}
+  title={`${story.data.title} - Stories | Otibeguni `}
   schema={schemaData}
 >
   <main class="py-8 md:py-12" data-pagefind-body>
     <div class="container mx-auto max-w-4xl px-4">
       <div class="bg-base-100 rounded-xl shadow-lg">
         <article class="p-6 md:p-10">
-          <!-- Using the new header component -->
-          <StoryHeader story={frontmatter} metadata={metadata} />
+          <StoryHeader story={{ ...story.data, slug: story.slug }} />
 
-          <!-- Using the new metadata component -->
           <StoryMetadata
-            category={frontmatter.category}
-            sourceBook={metadata?.sources?.[0]?.value}
-            sourceAuthor={metadata?.sources?.[0]?.author}
-            sourceUrl={metadata?.sources?.[0]?.library_url ||
-              metadata?.sources?.[0]?.url}
-            translationLink={bnSlug ? `/bn/stories/${bnSlug}` : undefined}
+            category={story.data.category}
+            sourceBook={sourceBook?.data.name || story.data.source_label}
+            sourceAuthor={sourceBook?.data.author}
+            sourceUrl={sourceBook?.data.library_url || sourceBook?.data.url}
+            translationLink={bnStory ? `/bn/stories/${bnStory.slug}` : undefined}
             translationLabel="Read in Bengali"
           />
 
           <div class="divider"></div>
 
-          <!-- The main story content is passed into the ArticleBody slot -->
           <ArticleBody>
             <Content />
           </ArticleBody>
 
-          <!-- Conditionally render the Related Topics section -->
           {
             relatedTopics.length > 0 && (
               <>
@@ -136,7 +136,6 @@ const relatedResources = metadata?.related_resources?.map((resource) => ({
             )
           }
 
-          <!-- Conditionally render the Related Resources section -->
           {
             relatedResources.length > 0 && (
               <>

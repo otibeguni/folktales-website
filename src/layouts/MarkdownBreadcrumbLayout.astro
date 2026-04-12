@@ -1,10 +1,10 @@
 ---
-import { currentLanguage, t } from "@/utils/site-text";
 import { Schema } from "astro-seo-schema";
 import "@/styles/global.css";
 import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import { t } from "@/utils/site-text";
 
 const {
   schema = null,
@@ -15,17 +15,14 @@ const {
 ---
 
 <!doctype html>
-<html lang={currentLanguage}>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title ?? t("common.siteTitle")}</title>
-    <meta
-      name="description"
-      content={description ?? t("common.siteDescription")}
-    />
+    <meta name="description" content={description ?? t("common.siteDescription")} />
     {schema && <Schema item={schema} />}
   </head>
   <body>

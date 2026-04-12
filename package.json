@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "decap": "npx decap-server"
+    "decap": "npx decap-server",
+    "migrate:content": "node scripts/migrate-baserow-to-content.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",

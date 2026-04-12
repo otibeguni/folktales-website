@@ -13,11 +13,9 @@ backend:
 
 publish_mode: editorial_workflow
 
-# Local media storage (fallback)
 media_folder: "src/assets/uploads"
 public_folder: "src/assets/uploads"
 
-# Cloudinary media library configuration
 media_library:
   name: cloudinary
   config:
@@ -27,8 +25,8 @@ media_library:
 
 collections:
   - name: "story_collection"
-    label: "Collection"
-    folder: "src/stories/collections"
+    label: "Story Collections"
+    folder: "src/content/storyCollections"
     slug: "{{slug}}"
     create: true
     sortable_fields: ["order"]
@@ -52,13 +50,12 @@ collections:
       - label: "Stories"
         name: "stories"
         widget: "relation"
-        required: true
         collection: "en_stories"
-        search_fields: ["title"]
+        search_fields: ["title", "slug"]
         value_field: "slug"
         display_fields: ["title"]
         multiple: true
-        min: 1
+        required: true
       - label: "Body"
         name: "body"
         widget: "markdown"
@@ -66,20 +63,13 @@ collections:
 
   - name: "en_stories"
     label: "English Stories"
-    folder: "src/stories/en"
+    folder: "src/content/stories/en"
     create: true
     slug: "{{slug}}"
     fields:
-      - label: "Title"
-        name: "title"
-        widget: "string"
-        required: true
-
-      - label: "Slug"
-        name: "slug"
-        widget: "string"
-        required: true
-
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Bengali Title", name: "title_bn", widget: "string", required: false }
+      - { label: "Slug", name: "slug", widget: "string", required: true }
       - label: "Category"
         name: "category"
         widget: "select"
@@ -93,34 +83,52 @@ collections:
             "Hindu Mythology",
           ]
         required: true
-
-      - label: "Language"
-        name: "language"
-        widget: "select"
-        options: ["en", "bn"]
-        required: true
-
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
-        required: true
+      - { label: "Language", name: "language", widget: "hidden", default: "en" }
+      - label: "Cover Image"
+        name: "cover_image"
+        widget: "image"
+        required: false
+      - label: "Source Book"
+        name: "source_slug"
+        widget: "relation"
+        collection: "books"
+        search_fields: ["name", "slug", "author"]
+        value_field: "slug"
+        display_fields: ["name"]
+        required: false
+      - label: "Source Label Override"
+        name: "source_label"
+        widget: "string"
+        required: false
+      - label: "Topic Links"
+        name: "topic_slugs"
+        widget: "relation"
+        collection: "topics"
+        search_fields: ["item", "slug", "item_bn"]
+        value_field: "slug"
+        display_fields: ["item"]
+        multiple: true
+        required: false
+      - label: "Resource Links"
+        name: "resource_slugs"
+        widget: "relation"
+        collection: "resources"
+        search_fields: ["title", "slug"]
+        value_field: "slug"
+        display_fields: ["title"]
+        multiple: true
+        required: false
+      - { label: "Body", name: "body", widget: "markdown", required: true }
 
   - name: "bn_stories"
     label: "Bengali Stories"
-    folder: "src/stories/bn"
+    folder: "src/content/stories/bn"
     create: true
     slug: "{{slug}}"
     fields:
-      - label: "Title"
-        name: "title"
-        widget: "string"
-        required: true
-
-      - label: "Slug"
-        name: "slug"
-        widget: "string"
-        required: true
-
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Bengali Title", name: "title_bn", widget: "string", required: false }
+      - { label: "Slug", name: "slug", widget: "string", required: true }
       - label: "Category"
         name: "category"
         widget: "select"
@@ -134,17 +142,124 @@ collections:
             "Hindu Mythology",
           ]
         required: true
+      - { label: "Language", name: "language", widget: "hidden", default: "bn" }
+      - label: "Cover Image"
+        name: "cover_image"
+        widget: "image"
+        required: false
+      - label: "Source Book"
+        name: "source_slug"
+        widget: "relation"
+        collection: "books"
+        search_fields: ["name", "slug", "author"]
+        value_field: "slug"
+        display_fields: ["name"]
+        required: false
+      - label: "Source Label Override"
+        name: "source_label"
+        widget: "string"
+        required: false
+      - label: "Topic Links"
+        name: "topic_slugs"
+        widget: "relation"
+        collection: "topics"
+        search_fields: ["item", "slug", "item_bn"]
+        value_field: "slug"
+        display_fields: ["item"]
+        multiple: true
+        required: false
+      - label: "Resource Links"
+        name: "resource_slugs"
+        widget: "relation"
+        collection: "resources"
+        search_fields: ["title", "slug"]
+        value_field: "slug"
+        display_fields: ["title"]
+        multiple: true
+        required: false
+      - { label: "Body", name: "body", widget: "markdown", required: true }
 
+  - name: "topics"
+    label: "Topics"
+    folder: "src/content/topics"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Slug", name: "slug", widget: "string", required: true }
+      - { label: "Title", name: "item", widget: "string", required: true }
+      - { label: "Bengali Title", name: "item_bn", widget: "string", required: false }
+      - { label: "Wikidata ID", name: "wikidata_id", widget: "string", required: false }
+      - { label: "Type", name: "type", widget: "string", required: true }
+      - { label: "Description", name: "description", widget: "text", required: false }
+
+  - name: "books"
+    label: "Books"
+    folder: "src/content/books"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string", required: true }
+      - { label: "Slug", name: "slug", widget: "string", required: true }
+      - { label: "Author", name: "author", widget: "string", required: false }
+      - { label: "Purchase URL", name: "url", widget: "string", required: false }
+      - { label: "Library URL", name: "library_url", widget: "string", required: false }
       - label: "Language"
         name: "language"
         widget: "select"
         options: ["en", "bn"]
         required: true
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        required: false
+        options:
+          [
+            "puthi",
+            "bengali-folklore",
+            "sylheti-nagri-script",
+            "indigenous-folklore",
+            "bengali-legend",
+            "bengali-non-fiction",
+            "bengali-religious-text",
+            "academic-publication",
+          ]
 
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
+  - name: "resources"
+    label: "Resources"
+    folder: "src/content/resources"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Slug", name: "slug", widget: "string", required: true }
+      - { label: "URL", name: "url", widget: "string", required: true }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["video", "website", "image"]
         required: true
+      - label: "Topic Links"
+        name: "topic_slugs"
+        widget: "relation"
+        collection: "topics"
+        search_fields: ["item", "slug", "item_bn"]
+        value_field: "slug"
+        display_fields: ["item"]
+        multiple: true
+        required: false
+
+  - name: "codex"
+    label: "Codex"
+    folder: "src/content/codex"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Slug", name: "slug", widget: "string", required: true }
+      - { label: "Category", name: "category", widget: "string", required: true }
+      - { label: "Language", name: "language", widget: "string", required: true, default: "en" }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
 
   - name: "blog"
     label: "Blog"
@@ -156,17 +271,14 @@ collections:
         name: "title"
         widget: "string"
         required: true
-
       - label: "Slug"
         name: "slug"
         widget: "string"
         required: true
-
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
         required: true
-
       - label: "Cover Image"
         name: "cover_image"
         widget: "object"
@@ -185,7 +297,6 @@ collections:
             name: "alt"
             widget: "string"
             required: false
-
       - label: "Body"
         name: "body"
         widget: "markdown"

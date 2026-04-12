@@ -1,15 +1,15 @@
 ---
-import { library, icon } from '@fortawesome/fontawesome-svg-core';
-import { faImage, faVideo, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import type { ResourceItem } from '@/types';
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faImage, faVideo, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import type { ResourceItem } from "@/types";
 
 const { related_resources } = Astro.props;
 
 library.add(faImage, faVideo, faGlobe);
 
-const imageIcon = icon({ prefix: 'fas', iconName: faImage.iconName });
-const videoIcon = icon({ prefix: 'fas', iconName: faVideo.iconName });
-const websiteIcon = icon({ prefix: 'fas', iconName: faGlobe.iconName });
+const imageIcon = icon({ prefix: "fas", iconName: faImage.iconName });
+const videoIcon = icon({ prefix: "fas", iconName: faVideo.iconName });
+const websiteIcon = icon({ prefix: "fas", iconName: faGlobe.iconName });
 ---
 
 <div class="py-8">
@@ -23,16 +23,16 @@ const websiteIcon = icon({ prefix: 'fas', iconName: faGlobe.iconName });
         >
           <div class="card-body">
             <div class="prose-gray flex items-center gap-3 leading-tight">
-              {resource.type.value.toLowerCase() === 'image' && (
+              {resource.type.toLowerCase() === "image" && (
                 <Fragment set:html={imageIcon.html} />
               )}
-              {resource.type.value.toLowerCase() === 'video' && (
+              {resource.type.toLowerCase() === "video" && (
                 <Fragment set:html={videoIcon.html} />
               )}
-              {resource.type.value.toLowerCase() === 'website' && (
+              {resource.type.toLowerCase() === "website" && (
                 <Fragment set:html={websiteIcon.html} />
               )}
-              {resource.value}
+              {resource.title}
             </div>
           </div>
         </a>

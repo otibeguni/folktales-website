@@ -1,38 +1,47 @@
 ---
-import type { MarkdownInstance } from "astro";
 import { currentLanguage, t } from "@/utils/site-text";
 import StoryList from "@/components/StoryList";
 import Layout from "@/layouts/Layout.astro";
-import type { IStory, IStoryCollection, MetadataItem } from "@/types";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import StoryCollectionList from "@/components/StoryCollectionList.astro";
-import { fetchRowsFromDatabase } from "@/utils/baserow";
-const collections = Object.values(import.meta.glob<MarkdownInstance<IStoryCollection>>("@/stories/collections/*.md", { eager: true }));
-const baserowData = (await fetchRowsFromDatabase(741)) ?? null;
-const storiesEn = Object.values(import.meta.glob<MarkdownInstance<IStory>>("@/stories/en/*.md", {
-    eager: true,
+import {
+  getAllStories,
+  getAllStoryCollections,
+  renderEntry,
+} from "@/utils/content";
+
+const [storyEntries, collectionEntries] = await Promise.all([
+  getAllStories(),
+  getAllStoryCollections(),
+]);
+
+const stories = storyEntries.map((story) => ({
+  frontmatter: { ...story.data, slug: story.slug },
 }));
-const storiesBn = Object.values(import.meta.glob<MarkdownInstance<IStory>>("@/stories/bn/*.md", {
-    eager: true,
-}));
-const stories = [...storiesEn, ...storiesBn];
+
+const collections = await Promise.all(
+  collectionEntries.map(async (collection) => {
+    const { Content } = await renderEntry(collection);
+    return {
+      frontmatter: { ...collection.data, slug: collection.slug },
+      Content,
+    };
+  }),
+);
 ---
 
 <Layout title={"Stories | " + t("common.siteTitle")}>
-  {/* This is the main container for the page content */}
   <div class="container mx-auto max-w-4xl px-4 py-8" data-pagefind-ignore>
     <Breadcrumbs menus={[{ label: "Stories", href: "/stories" }]} />
 
     <StoryCollectionList
       collections={collections}
-      metadatas={baserowData?.results}
       stories={stories}
       path="stories"
     />
 
     <StoryList
       stories={stories}
-      metadatas={baserowData?.results as MetadataItem[]}
       lang={currentLanguage}
       labels={{
         filterLabel: t("pages.stories.filterLabel"),

@@ -2,7 +2,7 @@
 import CardStory from "./CardStory";
 import type { IStoryCollectionList, IStoryList } from "@/types";
 
-const { collections, metadatas, stories, path } = Astro.props;
+const { collections, stories, path } = Astro.props;
 ---
 
 <div class="space-y-8">
@@ -18,15 +18,13 @@ const { collections, metadatas, stories, path } = Astro.props;
         ) => collectionPrev.frontmatter.order - collectionNext.frontmatter.order
       )
       .map(
-        (
-          collection: IStoryCollectionList & { compiledContent: () => string }
-        ) => (
+        (collection: IStoryCollectionList & { Content?: any }) => (
           <div class="space-y-2 pb-12" data-pagefind-body>
             <h2 class="text-2xl md:text-3xl font-bold border-l-4 border-primary pl-4">
               {collection?.frontmatter?.title}
             </h2>
             <div class="text-gray-600 mb-4">
-              <Fragment set:html={collection?.compiledContent()} />
+              {collection.Content && <collection.Content />}
             </div>
             <div class="hidden md:grid grid-cols-1 gap-4 md:grid-cols-2 hi">
               {stories
@@ -37,18 +35,13 @@ const { collections, metadatas, stories, path } = Astro.props;
                       story.frontmatter.slug
                     )
                 )
-                .map((story: IStoryList) => {
-                  const currentStory = metadatas.find(
-                    (item: any) => item.slug === story.frontmatter.slug
-                  );
-                  return (
-                    <CardStory
-                      frontmatter={story.frontmatter}
-                      coverImage={currentStory?.cover_image}
-                      path={path}
-                    />
-                  );
-                })}
+                .map((story: IStoryList) => (
+                  <CardStory
+                    frontmatter={story.frontmatter}
+                    coverImage={story.frontmatter.cover_image}
+                    path={path}
+                  />
+                ))}
             </div>
             <section class="grid grid-cols-1 md:hidden">
               <div class="splide splide-collection">
@@ -62,20 +55,15 @@ const { collections, metadatas, stories, path } = Astro.props;
                             story.frontmatter.slug
                           )
                       )
-                      .map((story: IStoryList) => {
-                        const currentStory = metadatas.find(
-                          (item: any) => item.slug === story.frontmatter.slug
-                        );
-                        return (
-                          <li class="splide__slide p-2">
-                            <CardStory
-                              frontmatter={story.frontmatter}
-                              coverImage={currentStory?.cover_image}
-                              path={path}
-                            />
-                          </li>
-                        );
-                      })}
+                      .map((story: IStoryList) => (
+                        <li class="splide__slide p-2">
+                          <CardStory
+                            frontmatter={story.frontmatter}
+                            coverImage={story.frontmatter.cover_image}
+                            path={path}
+                          />
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </div>

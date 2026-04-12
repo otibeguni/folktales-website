@@ -33,7 +33,7 @@ Before starting, ensure you have the following installed:
    cp .env.example .env
    ```
 
-4. Fill in the required values and tokens in the `.env` file.
+4. Fill in the required values in the `.env` file.
 
 5. Run the development server:
 
@@ -87,4 +87,3 @@ fix: resolve layout shift issue on homepage
 - [Astro](https://astro.build/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- [Baserow - Otibeguni Database](https://benign-bird.pikapod.net/api-docs/database/170)

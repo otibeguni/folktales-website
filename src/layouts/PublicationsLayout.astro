@@ -1,13 +1,14 @@
 ---
-import { Schema } from 'astro-seo-schema';
-import '@/styles/global.css';
-import Footer from '@/components/Footer.astro';
-import Navbar from '@/components/Navbar.astro';
+import { Schema } from "astro-seo-schema";
+import "@/styles/global.css";
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
 
 const {
   schema = null,
-  title = 'Publications | Otibeguni',
-  description = 'Books, art books, and research projects that celebrate Bengali and indigenous folklore.',
+  title = "Publications | Otibeguni",
+  description =
+    "Books, art books, and research projects that celebrate Bengali and indigenous folklore.",
 } = Astro.props;
 ---
 
@@ -33,7 +34,7 @@ const {
           <slot name="hero" />
         </div>
       </section>
-      <section class="-mt-6 space-y-12 sm:-mt-10 mx-auto max-w-4xl">
+      <section class="-mt-6 mx-auto max-w-4xl space-y-12 sm:-mt-10">
         <slot />
       </section>
     </main>

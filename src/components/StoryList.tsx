@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import type { IStoryList, MetadataItem } from "@/types";
+import type { IStoryList } from "@/types";
 import CardStory from "./CardStory";
 
 // A more suitable number for a list view to keep it scannable
@@ -8,13 +8,11 @@ const STORIES_PER_PAGE = 8;
 
 const StoryList = ({
   stories,
-  metadatas,
   lang,
   labels,
   path,
 }: {
   stories: IStoryList[];
-  metadatas: MetadataItem[];
   lang: string;
   labels: { [key: string]: string };
   path: string;
@@ -146,19 +144,14 @@ const StoryList = ({
       <div className="space-y-4">
         {paginatedStories.length > 0 ? (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {paginatedStories.map(({frontmatter}) => {
-                const currentStory = metadatas.find(
-                    (item: any) => item.slug === frontmatter.slug
-                );
-                return (
-                    <CardStory
-                        key={`${frontmatter.language}-${frontmatter.slug}`}
-                        frontmatter={frontmatter}
-                        coverImage={currentStory?.cover_image}
-                        path={path}
-                    />
-                );
-              })}
+              {paginatedStories.map(({ frontmatter }) => (
+                <CardStory
+                  key={`${frontmatter.language}-${frontmatter.slug}`}
+                  frontmatter={frontmatter}
+                  coverImage={frontmatter.cover_image}
+                  path={path}
+                />
+              ))}
             </div>
         ) : (
             <div className="bg-base-100 rounded-lg p-8 text-center">

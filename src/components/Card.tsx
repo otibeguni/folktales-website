@@ -1,6 +1,6 @@
-import type { IStory, MetadataItem } from '@/types';
+import type { IStory } from '@/types';
 
-const Card = (props: IStory & Partial<MetadataItem>) => {
+const Card = (props: IStory) => {
   const basePath = props.language === 'en' ? '' : `/${props.language}`;
 
   return (

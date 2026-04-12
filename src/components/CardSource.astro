@@ -1,6 +1,6 @@
 ---
-import { localizePath } from '@/utils/site-text';
-import type { SourceItem } from '@/types';
+import { localizePath } from "@/utils/site-text";
+import type { SourceItem } from "@/types";
 
 const { sources } = Astro.props;
 ---
@@ -13,13 +13,13 @@ const { sources } = Astro.props;
         <div class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105">
           <div class="card-body">
             <div class="flex flex-col gap-4">
-              <div class="prose-gray flex flex-col">
-                <span class="text-xs font-bold">Source</span>
-                {source.value || '-'}
+                <div class="prose-gray flex flex-col">
+                  <span class="text-xs font-bold">Source</span>
+                {source.name || "-"}
               </div>
               <div class="prose-gray flex flex-col">
                 <span class="text-xs font-bold">Author</span>
-                {source.author || '-'}
+                {source.author || "-"}
               </div>
               {source.library_url && (
                 <a
