@@ -4,13 +4,10 @@
   "version": "0.0.11",
   "author": "Yasin Junet (hello@yasinjunet.com)",
   "scripts": {
-    "predev": "npm run i18n",
     "dev": "astro dev",
-    "prebuild": "npm run i18n",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "i18n": "npx astro-i18next generate",
     "decap": "npx decap-server"
   },
   "dependencies": {
@@ -25,7 +22,6 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "astro": "^5.8.1",
-    "astro-i18next": "^1.0.0-beta.21",
     "astro-pagefind": "^1.8.4",
     "astro-seo-schema": "^5.0.0",
     "dayjs": "^1.11.18",

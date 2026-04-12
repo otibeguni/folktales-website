@@ -1,11 +1,8 @@
 ---
 import dayjs from "dayjs";
 import type { MarkdownInstance } from "astro";
-import { changeLanguage } from "i18next";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
 import ArticleBody from "@/components/ArticleBody.astro";
-
-changeLanguage("en");
 
 export async function getStaticPaths() {
     const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {

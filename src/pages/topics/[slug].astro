@@ -1,11 +1,8 @@
 ---
-import { changeLanguage } from "i18next";
 import ArticleTopic from "@/components/ArticleTopic.astro";
 import Layout from "@/layouts/Layout.astro";
 import type { IStory, MetadataItem, WikidataItemAlt, ResourceItemAlt, } from "@/types";
 import { fetchRowsFromDatabase } from "@/utils/baserow";
-
-changeLanguage("en");
 
 export async function getStaticPaths() {
     const bsTopicData = await fetchRowsFromDatabase(740);
