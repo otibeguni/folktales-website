@@ -2,7 +2,7 @@
 title: How alcohol came to be
 title_bn: অ্যালকোহলের উতপত্তি হলো কিভাবে
 category: Indigenous Folktale
-slug: how-alcohol-came-to-be
+url_slug: how-alcohol-came-to-be
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_Painting_of_an_indian_maharaja_having_alcohol_wit_2e750c5f-a0ad-43dd-a190-757a8ac7b1e4_c3jtbu.webp
 source_slug: tripura-lokokahini

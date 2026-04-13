@@ -1,7 +1,7 @@
 ---
 title: কালকেতু ও ফুল্লরার আখ্যান
 category: Bengali Folktale
-slug: the-tale-of-kalketu-and-fullora
+url_slug: the-tale-of-kalketu-and-fullora
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584695/shahriarhaque_oil_painting_of_a_hindu_village_archer_in_a_fores_e7b5022d-8a00-49ca-b939-185b93f01eeb_msopak.webp
 topic_slugs:

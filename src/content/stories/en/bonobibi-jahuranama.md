@@ -2,7 +2,7 @@
 title: Bonobibi Jahuranama
 title_bn: বনবিবি জহুরানামা
 category: Puthi Literature
-slug: bonobibi-jahuranama
+url_slug: bonobibi-jahuranama
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shahriarhaque_persian_miniature_painting_of_a_deer_and_an_india_db2bae43-5d93-4a23-a085-b1679f4d31d5_dkmlef.webp
 source_slug: bonbibi-johura-nama-konyar-puthi

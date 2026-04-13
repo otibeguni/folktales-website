@@ -1,7 +1,7 @@
 ---
 title: ভাল্লুক কন্যা
 category: Bengali Folktale
-slug: the-girl-who-was-raised-by-bears
+url_slug: the-girl-who-was-raised-by-bears
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/IMG_4688_kmjzp6.webp
 source_label: Bangla Academy Folklore Shongrohomala - 130

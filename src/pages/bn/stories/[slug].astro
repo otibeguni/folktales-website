@@ -10,15 +10,17 @@ import {
   getAllResources,
   getAllStories,
   getAllTopics,
+  getStoryRouteSlug,
   getStoriesByLanguage,
   indexEntriesBySlug,
   renderEntry,
 } from "@/utils/content";
+import { buildCanonicalUrl } from "@/utils/seo";
 
 export async function getStaticPaths() {
   const stories = await getStoriesByLanguage("bn");
   return stories.map((story) => ({
-    params: { slug: story.slug },
+    params: { slug: getStoryRouteSlug(story) },
     props: { story },
   }));
 }
@@ -36,12 +38,27 @@ const [allStories, allTopics, allBooks, allResources] = await Promise.all([
 const topicBySlug = indexEntriesBySlug(allTopics);
 const bookBySlug = indexEntriesBySlug(allBooks);
 const resourceBySlug = indexEntriesBySlug(allResources);
-const enStory = findStoryTranslation(allStories, story.slug, "en");
+const storyRouteSlug = getStoryRouteSlug(story);
+const enStory = findStoryTranslation(allStories, storyRouteSlug, "en");
 const sourceBook = story.data.source_slug
   ? bookBySlug.get(story.data.source_slug)
   : undefined;
 
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
+const alternateLinks = enStory
+  ? [
+      { hreflang: "bn", href: canonicalUrl },
+      {
+        hreflang: "en",
+        href: buildCanonicalUrl(`/stories/${getStoryRouteSlug(enStory)}`, Astro.site),
+      },
+      {
+        hreflang: "x-default",
+        href: buildCanonicalUrl(`/stories/${getStoryRouteSlug(enStory)}`, Astro.site),
+      },
+    ]
+  : [];
 const isBasedOn = sourceBook
   ? {
       "@type": "CreativeWork",
@@ -107,19 +124,22 @@ const relatedResources = (story.data.resource_slugs ?? [])
 <Layout
   title={`${story.data.title} - Stories | Otibeguni `}
   schema={schemaData}
+  lang="bn"
+  canonicalUrl={canonicalUrl}
+  alternateLinks={alternateLinks}
 >
   <main class="py-8 md:py-12" data-pagefind-body>
     <div class="container mx-auto max-w-4xl px-4">
       <div class="bg-base-100 rounded-xl shadow-lg">
         <article class="p-6 md:p-10">
-          <StoryHeader story={{ ...story.data, slug: story.slug }} />
+          <StoryHeader story={{ ...story.data, slug: storyRouteSlug }} />
 
           <StoryMetadata
             category={story.data.category}
             sourceBook={sourceBook?.data.name || story.data.source_label}
             sourceAuthor={sourceBook?.data.author}
             sourceUrl={sourceBook?.data.library_url || sourceBook?.data.url}
-            translationLink={enStory ? `/stories/${enStory.slug}` : undefined}
+            translationLink={enStory ? `/stories/${getStoryRouteSlug(enStory)}` : undefined}
             translationLabel="Read in English"
           />
 

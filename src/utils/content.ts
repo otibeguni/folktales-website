@@ -18,6 +18,10 @@ export type ResourceEntry = CollectionEntry<"resources">;
 export type StoryCollectionEntry = CollectionEntry<"storyCollections">;
 export type CodexEntry = CollectionEntry<"codex">;
 
+export function getStoryRouteSlug(story: StoryEntry) {
+  return story.data.url_slug ?? story.slug.split("/").pop() ?? story.slug;
+}
+
 export async function getAllStories() {
   return getCollection("stories");
 }
@@ -57,7 +61,9 @@ export function findStoryBySlugAndLanguage(
   slug: string,
   language: string,
 ) {
-  return stories.find((story) => story.slug === slug && story.data.language === language);
+  return stories.find(
+    (story) => getStoryRouteSlug(story) === slug && story.data.language === language,
+  );
 }
 
 export function findStoryTranslation(
@@ -66,7 +72,8 @@ export function findStoryTranslation(
   targetLanguage: string,
 ) {
   return stories.find(
-    (story) => story.slug === slug && story.data.language === targetLanguage,
+    (story) =>
+      getStoryRouteSlug(story) === slug && story.data.language === targetLanguage,
   );
 }
 

@@ -3,6 +3,7 @@ export interface IStory {
   title_bn?: string;
   category: string;
   slug: string;
+  url_slug?: string;
   language: string;
   cover_image?: string;
   source_slug?: string;

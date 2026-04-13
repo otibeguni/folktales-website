@@ -2,7 +2,7 @@
 title: Shonabhaner Puthi
 title_bn: সোনাভানের পুঁথি
 category: Bengali Folktale
-slug: shonabhaner-puthi
+url_slug: shonabhaner-puthi
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750587161/shahriarhaque_anime_style_painting_of_an_young_indian_queen_r_98de7795-1d34-4476-b36c-5fba4edfe4ee_1_wocheo.png
 topic_slugs: []

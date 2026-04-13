@@ -1,7 +1,7 @@
 ---
 title: কুড়ি টিলার কিংবদন্তি
 category: Bengal Legend
-slug: the-legend-of-kuri-hill
+url_slug: the-legend-of-kuri-hill
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_a_seven_dervishes_inside_a_cave_havin_759fc4a7-43cb-4abd-af34-125aff29f3c6_dmzbm4.webp
 source_slug: bangla-kingbodonti-asaduzzaman-juel

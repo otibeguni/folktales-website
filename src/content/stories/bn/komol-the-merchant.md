@@ -1,7 +1,7 @@
 ---
 title: কমল সওদাগর
 category: Bengali Folktale
-slug: komol-the-merchant
+url_slug: komol-the-merchant
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_4505_pp45zr.webp
 topic_slugs: []

@@ -2,7 +2,7 @@
 title: The legend of Komola Rani Lake
 title_bn: কমলা রানীর দীঘির কিংবদন্তি
 category: Bengal Legend
-slug: the-legend-of-komola-rani-lake
+url_slug: the-legend-of-komola-rani-lake
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_dramatic_painting_of_a_ghost_of_a_queen_standing__693a5a86-f192-4091-85ce-30985aa2970c_xzvdm4.webp
 source_slug: bangla-kingbodonti-asaduzzaman-juel

@@ -24,6 +24,7 @@ const stories = defineCollection({
     title: z.string(),
     title_bn: z.string().optional(),
     category: z.string(),
+    url_slug: z.string().optional(),
     language: z.enum(["en", "bn"]),
     cover_image: z.string().url().optional(),
     source_slug: z.string().optional(),

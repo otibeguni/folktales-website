@@ -1,7 +1,7 @@
 ---
 title: The gift from the Banyan God
 category: Indigenous Folktale
-slug: gift-from-the-banyan-god
+url_slug: gift-from-the-banyan-god
 language: en
 topic_slugs: []
 resource_slugs: []

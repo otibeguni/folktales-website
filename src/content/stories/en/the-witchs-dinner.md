@@ -2,7 +2,7 @@
 title: The Witch’s Dinner
 title_bn: জাদুর পিঠার গাছ ও ডাইনি বুড়ি
 category: Bengali Folktale
-slug: the-witchs-dinner
+url_slug: the-witchs-dinner
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589719/shahriarhaque_watercolor_painting_of_a_hindu_sadhu_talking_to_14d2bf6e-58fe-482e-bae3-d970306dd3b1_0_rkdzo4.png
 source_slug: bengali-household-tales

@@ -3,21 +3,40 @@ import { Schema } from "astro-seo-schema";
 import "@/styles/global.css";
 import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar.astro";
+import { buildCanonicalUrl, type AlternateLink } from "@/utils/seo";
+
+interface Props {
+  schema?: object | null;
+  title?: string;
+  description?: string;
+  lang?: string;
+  canonicalUrl?: string;
+  alternateLinks?: AlternateLink[];
+}
 
 const {
   schema = null,
   title = "Publications | Otibeguni",
   description =
     "Books, art books, and research projects that celebrate Bengali and indigenous folklore.",
-} = Astro.props;
+  lang = "en",
+  canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site),
+  alternateLinks = [],
+} = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      alternateLinks.map(({ hreflang, href }) => (
+        <link rel="alternate" hreflang={hreflang} href={href} />
+      ))
+    }
     <meta name="description" content={description} />
     <title>{title}</title>
     {schema && <Schema item={schema} />}

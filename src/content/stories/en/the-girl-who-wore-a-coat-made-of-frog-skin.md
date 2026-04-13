@@ -2,7 +2,7 @@
 title: The girl who wore a coat made of frog-skin
 title_bn: কা-নাম এবং ব্যাঙের চামড়ার খোলস
 category: Indigenous Folktale
-slug: the-girl-who-wore-a-coat-made-of-frog-skin
+url_slug: the-girl-who-wore-a-coat-made-of-frog-skin
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_folk_painting_of_a_frog_head_with_the_body_of_an__5eb713b6-c79a-42b7-8d56-9430c100dcb1_ry3bi5.webp
 source_slug: book-41-folk-tales-of-the-khasis

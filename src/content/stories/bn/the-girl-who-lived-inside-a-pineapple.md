@@ -1,7 +1,7 @@
 ---
 title: আনারসের কলি কইন্যা
 category: Bengali Folktale
-slug: the-girl-who-lived-inside-a-pineapple
+url_slug: the-girl-who-lived-inside-a-pineapple
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/shahriarhaque_watercolor_painting_of_a_mughal_prince_lying_unco_a3755847-aba7-49a6-a2ae-28f8e7826261_uym533.webp
 source_label: Rangpur Geetika

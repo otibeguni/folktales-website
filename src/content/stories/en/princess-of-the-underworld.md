@@ -1,7 +1,7 @@
 ---
 title: Princess of the Underworld
 category: Bengali Folktale
-slug: princess-of-the-underworld
+url_slug: princess-of-the-underworld
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754638938/shahriarhaque_watercolor_painting_of_a_close_up_of_a_giant_se_5d3fe6e4-588b-4df6-931b-66475fbf4806_3_fsbnma.png
 source_slug: thakurmar-jhuli-dakshinaranjan

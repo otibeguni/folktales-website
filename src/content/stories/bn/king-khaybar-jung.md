@@ -1,7 +1,7 @@
 ---
 title: রাজা খয়বর জং
 category: Bengali Folktale
-slug: king-khaybar-jung
+url_slug: king-khaybar-jung
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584701/shahriarhaque_watercolor_painting_of_a_indian_baby_girl_curled__73c2bdbf-bef5-4e63-8c0e-b84a365ba715_rnkr3e.webp
 topic_slugs: []

@@ -1,7 +1,7 @@
 ---
 title: Dalim Kumar
 category: Bengali Folktale
-slug: dalim-kumar
+url_slug: dalim-kumar
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754637616/shutashonkho_f2uius.jpg
 source_slug: thakurmar-jhuli-dakshinaranjan

@@ -1,7 +1,7 @@
 ---
 title: পাহাইল্যা রাজপুত্র
 category: Bengali Folktale
-slug: the-prince-who-lived-in-the-kitchen
+url_slug: the-prince-who-lived-in-the-kitchen
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/IMG_4506_clvwff.webp
 source_label: Bangla Academy Folklore Sangrahamala Volume 90

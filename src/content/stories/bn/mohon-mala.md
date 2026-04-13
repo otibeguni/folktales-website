@@ -1,7 +1,7 @@
 ---
 title: মোহন-মালা
 category: Bengali Folktale
-slug: mohon-mala
+url_slug: mohon-mala
 language: bn
 topic_slugs: []
 resource_slugs: []

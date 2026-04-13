@@ -2,7 +2,7 @@
 title: The love story of Ushaboti
 title_bn: উষাবতীর প্রেম
 category: Bengal Legend
-slug: the-love-story-of-ushaboti
+url_slug: the-love-story-of-ushaboti
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584689/62955496-FA75-4F47-9284-0BC1CB55C422_qaon4t.webp
 source_label: Uttorbonger Kingbodonti - Humayun Rahman

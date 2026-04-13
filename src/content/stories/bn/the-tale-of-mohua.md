@@ -1,7 +1,7 @@
 ---
 title: মহুয়ার পালা
 category: Bengali Folktale
-slug: the-tale-of-mohua
+url_slug: the-tale-of-mohua
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589206/shahriarhaque_surreal_painting_of_a_mughal_prince_sitting_on_a__2c7ccafc-4b71-498d-a5a3-296231a75172_s2rhos.webp
 topic_slugs:

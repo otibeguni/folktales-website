@@ -1,7 +1,7 @@
 ---
 title: ময়ূরপুচ্ছে রংধনু কীভাবে এলো?
 category: Indigenous Folktale
-slug: how-did-the-peacock-get-its-colorful-tail-khasi-folktale
+url_slug: how-did-the-peacock-get-its-colorful-tail-khasi-folktale
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_folk_painting_of_a_peacock_731d243c-e330-4bac-9a1a-6fe412a5372e_vathgn.webp
 source_slug: book-41-folk-tales-of-the-khasis

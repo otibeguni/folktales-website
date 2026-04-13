@@ -1,7 +1,7 @@
 ---
 title: আমির সদাগর ও ভেলুয়া সুন্দরী
 category: Puthi Literature
-slug: merchant-amir-and-bhelua
+url_slug: merchant-amir-and-bhelua
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/IMG_4687_eponaf.webp
 source_slug: amir-shodagor-o-bhelua-shundori

@@ -2,7 +2,7 @@
 title: The farmer and the beggar from a foreign land
 title_bn: চাষী ও ভিনদেশী ফকির
 category: Indigenous Folktale
-slug: the-farmer-and-the-beggar-from-a-foreign-land
+url_slug: the-farmer-and-the-beggar-from-a-foreign-land
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/khasi-beggar_emmy8x.webp
 source_slug: book-41-folk-tales-of-the-khasis

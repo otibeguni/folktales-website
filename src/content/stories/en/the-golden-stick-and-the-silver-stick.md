@@ -1,7 +1,7 @@
 ---
 title: The Golden Stick and the Silver Stick
 category: Bengali Folktale
-slug: the-golden-stick-and-the-silver-stick
+url_slug: the-golden-stick-and-the-silver-stick
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754639471/shahriarhaque_watercolor_painting_of_an_ornate_golden_wand_an_39431e19-8bd6-4480-8d1d-058925d3a364_0_uufjoe.png
 source_slug: thakurmar-jhuli-dakshinaranjan

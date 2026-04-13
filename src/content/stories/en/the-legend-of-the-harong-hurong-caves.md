@@ -2,7 +2,7 @@
 title: The legend of the Harong-Hurong caves
 title_bn: হাড়ং-হুড়ং গুহার কিংবদন্তি
 category: Bengal Legend
-slug: the-legend-of-the-harong-hurong-caves
+url_slug: the-legend-of-the-harong-hurong-caves
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584695/shahriarhaque_oil_painting_of_a_sufi_dervish_on_a_flying_carpet_d06d10bd-4ff5-4154-a343-a8ac965faaa4_th0fnj.webp
 source_slug: bangla-kingbodonti-two-asaduzzaman-juel

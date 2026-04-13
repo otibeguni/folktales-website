@@ -5,6 +5,7 @@ import {
   getAllResources,
   getAllStories,
   getAllTopics,
+  getStoryRouteSlug,
   renderEntry,
 } from "@/utils/content";
 
@@ -23,7 +24,7 @@ const stories = (await getAllStories())
       story.data.language === "en" &&
       (story.data.topic_slugs ?? []).includes(topic.slug),
   )
-  .map((story) => ({ frontmatter: { ...story.data, slug: story.slug } }));
+  .map((story) => ({ frontmatter: { ...story.data, slug: getStoryRouteSlug(story) } }));
 
 const resources = (await getAllResources())
   .filter((resource) => (resource.data.topic_slugs ?? []).includes(topic.slug))

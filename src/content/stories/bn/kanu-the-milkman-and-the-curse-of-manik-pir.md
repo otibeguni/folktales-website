@@ -1,7 +1,7 @@
 ---
 title: কানু গোয়ালা ও মানিক পীরের অভিশাপ
 category: Bengal Legend
-slug: kanu-the-milkman-and-the-curse-of-manik-pir
+url_slug: kanu-the-milkman-and-the-curse-of-manik-pir
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1753528241/shahriarhaque_watercolor_painting_of_two_ox_locking_horns_und_db105b8f-87a4-45f0-bfaa-8bc0c51cb148_3_lnq2ja.png
 source_slug: jessore-jelar-kingbodonti

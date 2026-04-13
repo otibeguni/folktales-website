@@ -5,21 +5,41 @@ import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { t } from "@/utils/site-text";
+import { buildCanonicalUrl, type AlternateLink } from "@/utils/seo";
+
+interface Props {
+  schema?: object | null;
+  title?: string | null;
+  description?: string | null;
+  breadcrumbLabels?: { label: string; href?: string }[];
+  lang?: string;
+  canonicalUrl?: string;
+  alternateLinks?: AlternateLink[];
+}
 
 const {
   schema = null,
   title = null,
   description = null,
   breadcrumbLabels = [{ label: "" }],
-} = Astro.props;
+  lang = "en",
+  canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site),
+  alternateLinks = [],
+} = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      alternateLinks.map(({ hreflang, href }) => (
+        <link rel="alternate" hreflang={hreflang} href={href} />
+      ))
+    }
     <meta name="generator" content={Astro.generator} />
     <title>{title ?? t("common.siteTitle")}</title>
     <meta name="description" content={description ?? t("common.siteDescription")} />

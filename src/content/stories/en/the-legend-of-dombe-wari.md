@@ -2,7 +2,7 @@
 title: The legend of Dombe Wari
 title_bn: ডম্বে ওয়ারির কিংবদন্তি
 category: Indigenous Folktale
-slug: the-legend-of-dombe-wari
+url_slug: the-legend-of-dombe-wari
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_an_evil_indian_merman_2766da2a-50de-4e80-85fa-8d695a986133_pasxjp.webp
 source_slug: bangla-kingbodonti-asaduzzaman-juel

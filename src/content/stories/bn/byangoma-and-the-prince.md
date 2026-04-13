@@ -1,7 +1,7 @@
 ---
 title: বেঙ্গমা ও রাজপুত্র
 category: Bengali Folktale
-slug: byangoma-and-the-prince
+url_slug: byangoma-and-the-prince
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/byangoma_btbd27.webp
 source_slug: book-37-fabulous-females-and-peerless-pirs

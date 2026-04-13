@@ -1,7 +1,7 @@
 ---
 title: মানিক পাল রাজা
 category: Bengali Folktale
-slug: king-manik-pal
+url_slug: king-manik-pal
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_4504_l663az.webp
 topic_slugs: []

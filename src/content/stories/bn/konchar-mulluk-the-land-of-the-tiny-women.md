@@ -1,7 +1,7 @@
 ---
 title: কোঁচার মুল্লুক
 category: Bengali Folktale
-slug: konchar-mulluk-the-land-of-the-tiny-women
+url_slug: konchar-mulluk-the-land-of-the-tiny-women
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_oilpainting_of_beautiful_indian_snakecharmer_wome_1b488bb5-a0f3-416e-a04a-d42a8ac95bf3_j8yb9p.webp
 source_slug: book-50

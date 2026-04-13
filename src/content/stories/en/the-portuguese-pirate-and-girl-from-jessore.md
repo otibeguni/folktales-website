@@ -1,7 +1,7 @@
 ---
 title: The Portuguese Pirate and girl from Jessore
 category: Bengal Legend
-slug: the-portuguese-pirate-and-girl-from-jessore
+url_slug: the-portuguese-pirate-and-girl-from-jessore
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/IMG_4506_clvwff.webp
 topic_slugs:

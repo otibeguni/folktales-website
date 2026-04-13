@@ -2,7 +2,7 @@
 title: The tale of Molua
 title_bn: মলুয়ার পালা
 category: Bengali Folktale
-slug: the-tale-of-molua
+url_slug: the-tale-of-molua
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584701/shahriarhaque_watercolor_painting_of_a_beautiful_indian_princes_6400f012-acf5-41be-9087-254381c5324b_s0zvga.webp
 topic_slugs:

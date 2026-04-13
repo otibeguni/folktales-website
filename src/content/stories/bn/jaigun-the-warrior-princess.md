@@ -1,7 +1,7 @@
 ---
 title: জৈগুনের পুঁথি
 category: Puthi Literature
-slug: jaigun-the-warrior-princess
+url_slug: jaigun-the-warrior-princess
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/jaigun_qljuxo.webp
 source_slug: book-48

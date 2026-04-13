@@ -2,7 +2,7 @@
 title: The legend of Noder Chand
 title_bn: নদের চাদের আখ্যান
 category: Bengal Legend
-slug: the-legend-of-noder-chand
+url_slug: the-legend-of-noder-chand
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_2861_zki27f.webp
 source_slug: bangla-kingbodonti-two-asaduzzaman-juel

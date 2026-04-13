@@ -1,7 +1,7 @@
 ---
 title: The quest for the three-legged, three-headed creature
 category: Bengali Folktale
-slug: the-quest-for-the-three-legged-three-headed-creature
+url_slug: the-quest-for-the-three-legged-three-headed-creature
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1759064631/Gemini_Generated_Image_vpbtunvpbtunvpbt_gqxup1.png
 source_slug: dadamoshayer-thole

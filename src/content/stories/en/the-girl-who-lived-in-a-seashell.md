@@ -2,7 +2,7 @@
 title: The girl who lived in a seashell
 title_bn: শামুক কন্যা
 category: Indigenous Folktale
-slug: the-girl-who-lived-in-a-seashell
+url_slug: the-girl-who-lived-in-a-seashell
 language: en
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_3672_zynih4.webp
 source_slug: bangladesher-adibashi-lokokotha

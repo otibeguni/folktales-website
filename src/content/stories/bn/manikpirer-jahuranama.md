@@ -1,7 +1,7 @@
 ---
 title: মানিক পীরের জহুরানামা
 category: Puthi Literature
-slug: manikpirer-jahuranama
+url_slug: manikpirer-jahuranama
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584703/manikpirer-jahuranama.webp
 source_slug: book-95-witness-to-marvels

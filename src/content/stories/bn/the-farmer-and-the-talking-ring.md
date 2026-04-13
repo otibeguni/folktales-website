@@ -1,7 +1,7 @@
 ---
 title: জাদুকরী আংটি ও জুম চাষী
 category: Indigenous Folktale
-slug: the-farmer-and-the-talking-ring
+url_slug: the-farmer-and-the-talking-ring
 language: bn
 cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584689/494763892_993614396305704_2008351711067734708_n_nshnuz.webp
 source_slug: tribal-folk-tales-of-tripura
