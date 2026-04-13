@@ -1,5 +1,24 @@
 import { defineCollection, z } from "astro:content";
 
+const topicTypes = [
+  "Deity",
+  "Person",
+  "People",
+  "Place",
+  "Site",
+  "Kingdom",
+  "Being",
+  "Work",
+  "Religion",
+  "Event",
+  "Sacred",
+  "Historical",
+  "Legendary",
+  "Mythic",
+  "Natural",
+  "Literary",
+] as const;
+
 const stories = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -28,7 +47,7 @@ const topics = defineCollection({
     item: z.string(),
     item_bn: z.string().optional(),
     wikidata_id: z.string().optional(),
-    type: z.string(),
+    types: z.array(z.enum(topicTypes)).min(1),
     description: z.string().nullable().optional(),
   }),
 });

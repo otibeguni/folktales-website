@@ -69,10 +69,16 @@ const schemaData = {
 };
 
 const iconMap = {
-  Location: "fa-solid fa-location-dot",
+  Deity: "fa-solid fa-burst",
   Person: "fa-solid fa-user",
-  "Supernatural Entity": "fa-solid fa-ghost",
-  River: "fa-solid fa-water",
+  People: "fa-solid fa-users",
+  Place: "fa-solid fa-location-dot",
+  Site: "fa-solid fa-landmark",
+  Kingdom: "fa-solid fa-chess-rook",
+  Being: "fa-solid fa-ghost",
+  Work: "fa-solid fa-book-open",
+  Religion: "fa-solid fa-hands-praying",
+  Event: "fa-solid fa-calendar-days",
   video: "fa-solid fa-video",
   website: "fa-solid fa-newspaper",
 };
@@ -82,7 +88,7 @@ const relatedTopics = (story.data.topic_slugs ?? [])
   .filter(Boolean)
   .map((topic) => ({
     name: topic.data.item,
-    type: topic.data.type || "",
+    types: topic.data.types || [],
     url: `/topics/${topic.slug}`,
     isExternal: false,
   }));

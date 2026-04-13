@@ -1,7 +1,7 @@
 ---
 slug: god-u-lyoh
 item: U Lyoh
-type: Deity
+types: ["Deity"]
 description: Khasi God of Mist
 ---
 

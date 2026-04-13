@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import CardTopic from '@/components/CardTopic.tsx';
-import Select from '@/components/Select.tsx';
 import type { WikidataItemAlt } from '@/types';
+import { sortTopicTags } from '@/utils/topic-tags';
 
 const MAX_TOPICS = 12;
 
@@ -11,15 +11,21 @@ const TopicList = ({
   labels,
 }: {
   topics: WikidataItemAlt[];
-  labels: { [key: string]: string };
+  labels: {
+    filterLabel: string;
+    typesLabel: string;
+    clearFiltersLabel: string;
+  };
 }) => {
-  const [selectedType, setSelectedType] = useState('');
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredTypes = [
     ...topics.filter((topic) => {
-      if (selectedType) {
-        return topic.type === selectedType;
+      if (selectedTypes.length > 0) {
+        return selectedTypes.every((selectedType) =>
+          topic.types.includes(selectedType),
+        );
       }
       return true;
     }),
@@ -29,34 +35,59 @@ const TopicList = ({
     (currentPage - 1) * MAX_TOPICS,
     currentPage * MAX_TOPICS,
   );
-  const allTopics = Array.from(new Set(topics.map((topic) => topic.type)));
-  const selectTopics = allTopics.map((topic) => ({
-    label: topic,
-    value: topic,
-  }));
+  const allTypes = sortTopicTags(
+    Array.from(new Set(topics.flatMap((topic) => topic.types))),
+  );
 
-  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    event.preventDefault();
+  const toggleType = (tag: string) => {
     setCurrentPage(1);
-    setSelectedType(event.target.value);
+    setSelectedTypes((current) =>
+      current.includes(tag)
+        ? current.filter((item) => item !== tag)
+        : [...current, tag],
+    );
+  };
+
+  const clearFilters = () => {
+    setCurrentPage(1);
+    setSelectedTypes([]);
   };
 
   return (
     <div className="container mx-auto min-h-screen max-w-3xl">
-      <div className="mx-3 my-5 flex flex-col gap-3 lg:mx-0 lg:flex-row lg:items-center">
+      <div className="mx-3 my-5 flex flex-col gap-4 lg:mx-0">
         <h2 className="text-2xl font-bold">{labels.filterLabel}</h2>
-        <Select
-          label={labels.typeLabel}
-          value={selectedType}
-          handleChange={handleTypeChange}
-          options={[
-            {
-              label: labels.allTypesLabel,
-              value: '',
-            },
-            ...selectTopics,
-          ]}
-        />
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-sm font-medium text-slate-600">{labels.typesLabel}</p>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            disabled={selectedTypes.length === 0}
+            onClick={clearFilters}
+          >
+            {labels.clearFiltersLabel}
+          </button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {allTypes.map((tag) => {
+            const isSelected = selectedTypes.includes(tag);
+
+            return (
+              <button
+                key={tag}
+                type="button"
+                className={`badge cursor-pointer border px-3 py-3 transition ${
+                  isSelected
+                    ? 'badge-primary text-primary-content'
+                    : 'badge-soft badge-primary'
+                }`}
+                onClick={() => toggleType(tag)}
+              >
+                {tag}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div className="divider my-5"></div>
       <div className="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0">

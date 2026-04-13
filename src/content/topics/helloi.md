@@ -1,7 +1,7 @@
 ---
 slug: helloi
 item: Helloi
-type: Supernatural Entity
+types: ["Being", "Mythic"]
 description: Nature Spirits in Meitei Tradition
 ---
 

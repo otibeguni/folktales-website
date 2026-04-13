@@ -1,7 +1,7 @@
 ---
 slug: u-hynroh
 item: U Hynroh
-type: Supernatural Entity
+types: ["Being", "Mythic"]
 description: Giant Toad Wizard from Khasi Mythology
 ---
 

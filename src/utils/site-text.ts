@@ -31,8 +31,8 @@ const translations = {
     },
     topics: {
       filterLabel: "Filter Types",
-      typeLabel: "Type",
-      allTypesLabel: "All Types",
+      typesLabel: "Types",
+      clearFiltersLabel: "Clear filters",
     },
     books: {
       filterLabel: "Filter Books",

@@ -2,6 +2,6 @@
 slug: shuk-bird
 item: Shuk (Mythical Bird)
 item_bn: শুকপাখি
-type: Mythical Creature
+types: ["Being", "Mythic"]
 ---
 

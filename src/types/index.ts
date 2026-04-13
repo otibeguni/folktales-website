@@ -1,15 +1,3 @@
-export interface IFilterSelect {
-  label: string;
-  value: string;
-  options: ISelect[];
-  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-export interface ISelect {
-  value: string;
-  label: string;
-}
-
 export interface IStory {
   title: string;
   title_bn?: string;
@@ -30,7 +18,7 @@ export interface IStoryList {
 export interface WikidataItem {
   slug: string;
   item: string;
-  type: string;
+  types: string[];
   description?: string;
   wikidata_id?: string;
   item_bn?: string;

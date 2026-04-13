@@ -1,6 +1,16 @@
-import { type IFilterSelect } from '@/types';
+interface SelectOption {
+  value: string;
+  label: string;
+}
 
-const Select: React.FC<IFilterSelect> = ({
+interface SelectProps {
+  label: string;
+  value: string;
+  options: SelectOption[];
+  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+const Select: React.FC<SelectProps> = ({
   value = '',
   label,
   options,

@@ -1,6 +1,7 @@
 ---
 import { localizePath } from "@/utils/site-text";
 import type { WikidataItemAlt } from '@/types';
+import { sortTopicTags } from '@/utils/topic-tags';
 
 const { related_wikidata } = Astro.props;
 ---
@@ -24,8 +25,12 @@ const { related_wikidata } = Astro.props;
                       {item.item}
                     </div>
                     <div class="!prose-slate flex flex-col">
-                      <span class="text-xs font-bold">Type</span>
-                      {item.type}
+                      <span class="text-xs font-bold">Types</span>
+                      <div class="mt-1 flex flex-wrap gap-2">
+                        {sortTopicTags(item.types).map((tag) => (
+                          <span class="badge badge-soft badge-primary">{tag}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>

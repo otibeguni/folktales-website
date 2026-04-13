@@ -1,7 +1,7 @@
 ---
 slug: god-u-klew
 item: U Klew
-type: Deity
+types: ["Deity"]
 description: Khasi Peacock God
 ---
 

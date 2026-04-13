@@ -3,8 +3,10 @@ import Breadcrumbs from './Breadcrumbs.astro';
 import Card from '@/components/Card';
 import type { IStory } from '@/types';
 import CardResourcesTopic from '@/components/CardResourcesTopic.astro';
+import { sortTopicTags } from '@/utils/topic-tags';
 
 const { topic, stories, resources } = Astro.props;
+const sortedTags = sortTopicTags(topic.types ?? []);
 ---
 
 <div class="min-h-screen">
@@ -13,9 +15,11 @@ const { topic, stories, resources } = Astro.props;
       menus={[{ label: 'Topics', href: '/topics' }, { label: topic.item }]}
     />
     <h1 class="mb-4 text-5xl leading-16">{topic.item}</h1>
-    <span class="badge badge-soft badge-primary">
-      {topic.type}
-    </span>
+    <div class="flex flex-wrap gap-2">
+      {sortedTags.map((tag) => (
+        <span class="badge badge-soft badge-primary">{tag}</span>
+      ))}
+    </div>
 
     <div class="divider"></div>
 

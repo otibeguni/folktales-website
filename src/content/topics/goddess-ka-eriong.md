@@ -1,7 +1,7 @@
 ---
 slug: goddess-ka-eriong
 item: Ka Eriong
-type: Deity
+types: ["Deity"]
 description: Khasi Storm Goddess
 ---
 
