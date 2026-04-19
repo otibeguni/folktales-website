@@ -17,6 +17,22 @@ export type BookEntry = CollectionEntry<"books">;
 export type ResourceEntry = CollectionEntry<"resources">;
 export type StoryCollectionEntry = CollectionEntry<"storyCollections">;
 export type CodexEntry = CollectionEntry<"codex">;
+type BookLinkFields = {
+  slug: string;
+  library_url?: string;
+  url?: string;
+};
+
+export function getBookAvailability(
+  book: Pick<BookEntry, "slug" | "data"> | BookLinkFields,
+) {
+  const libraryUrl = "data" in book ? book.data.library_url : book.library_url;
+  const sourceUrl = "data" in book ? book.data.url : book.url;
+
+  if (libraryUrl) return "read-online";
+  if (sourceUrl) return "purchase";
+  return undefined;
+}
 
 export function getStoryRouteSlug(story: StoryEntry) {
   return story.data.url_slug ?? story.slug.split("/").pop() ?? story.slug;
@@ -80,6 +96,16 @@ export function findStoryTranslation(
 export function getBookCategoryLabel(category?: string) {
   if (!category) return "";
   return BOOK_CATEGORY_LABELS[category] ?? category;
+}
+
+export function bookHasDetailPage(
+  book: Pick<BookEntry, "slug" | "data"> | BookLinkFields,
+) {
+  return Boolean(getBookAvailability(book));
+}
+
+export function getBookDetailPath(slug: string) {
+  return `/books/${slug}`;
 }
 
 export async function renderEntry(entry: StoryEntry | StoryCollectionEntry | CodexEntry) {

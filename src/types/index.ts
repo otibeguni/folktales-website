@@ -44,6 +44,8 @@ export interface SourceItemAlt extends SourceItem {
   language: string;
   category: string;
   topic_slugs?: string[];
+  detailHref?: string;
+  availability?: "read-online" | "purchase";
 }
 
 export interface MetadataItem {

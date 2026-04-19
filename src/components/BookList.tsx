@@ -29,6 +29,7 @@ const BookList = ({
   labels: { [key: string]: string };
 }) => {
   const [selectedLanguage, setSelectedLanguage] = useState('bn');
+  const [selectedAvailability, setSelectedAvailability] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [topicQuery, setTopicQuery] = useState('');
@@ -81,6 +82,12 @@ const BookList = ({
     ...books
       .filter((book) => getOptionValue(book.language) === selectedLanguage)
       .filter((book) => {
+        if (selectedAvailability) {
+          return getOptionValue(book.availability) === selectedAvailability;
+        }
+        return true;
+      })
+      .filter((book) => {
         if (selectedCategory) {
           return getOptionValue(book.category) === selectedCategory;
         }
@@ -118,6 +125,14 @@ const BookList = ({
     setSelectedCategory(event.target.value);
   };
 
+  const handleAvailabilityChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    event.preventDefault();
+    setCurrentPage(1);
+    setSelectedAvailability(event.target.value);
+  };
+
   const toggleTopic = (topicSlug: string) => {
     setCurrentPage(1);
     setSelectedTopics((current) =>
@@ -130,6 +145,7 @@ const BookList = ({
 
   const clearFilters = () => {
     setCurrentPage(1);
+    setSelectedAvailability('');
     setSelectedCategory('');
     setSelectedTopics([]);
     setTopicQuery('');
@@ -159,14 +175,18 @@ const BookList = ({
               <button
                 type="button"
                 className="btn btn-ghost btn-sm self-start md:self-auto"
-                disabled={!selectedCategory && selectedTopics.length === 0}
+                disabled={
+                  !selectedAvailability &&
+                  !selectedCategory &&
+                  selectedTopics.length === 0
+                }
                 onClick={clearFilters}
               >
                 {labels.clearFiltersLabel}
               </button>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-3">
               <label className="form-control w-full">
                 <span className="mb-2 text-sm font-medium text-slate-700">
                   {labels.languageLabel}
@@ -178,6 +198,21 @@ const BookList = ({
                 >
                   <option value="en">English</option>
                   <option value="bn">Bengali</option>
+                </select>
+              </label>
+
+              <label className="form-control w-full">
+                <span className="mb-2 text-sm font-medium text-slate-700">
+                  {labels.availabilityLabel}
+                </span>
+                <select
+                  value={selectedAvailability}
+                  onChange={handleAvailabilityChange}
+                  className="select select-bordered w-full"
+                >
+                  <option value="">{labels.allAvailabilityLabel}</option>
+                  <option value="read-online">{labels.readOnlineLabel}</option>
+                  <option value="purchase">{labels.availableForPurchaseLabel}</option>
                 </select>
               </label>
 

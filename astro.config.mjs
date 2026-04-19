@@ -11,6 +11,15 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      proxy: {
+        "/__pdfproxy": {
+          target: "https://data.otibeguni.com",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/__pdfproxy/, ""),
+        },
+      },
+    },
   },
 
   integrations: [react(), mdx(), sitemap(), pagefind()],

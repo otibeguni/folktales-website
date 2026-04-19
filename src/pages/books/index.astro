@@ -2,12 +2,21 @@
 import { t } from "@/utils/site-text";
 import BookList from "@/components/BookList";
 import Layout from "@/layouts/Layout.astro";
-import { getAllBooks, getAllTopics, getBookCategoryLabel } from "@/utils/content";
+import {
+  getAllBooks,
+  getAllTopics,
+  getBookAvailability,
+  getBookCategoryLabel,
+  getBookDetailPath,
+  bookHasDetailPage,
+} from "@/utils/content";
 
 const books = (await getAllBooks()).map((book) => ({
   slug: book.slug,
   ...book.data,
   category: getBookCategoryLabel(book.data.category),
+  detailHref: bookHasDetailPage(book) ? getBookDetailPath(book.slug) : undefined,
+  availability: getBookAvailability(book),
 }));
 const topics = (await getAllTopics()).map((topic) => ({
   ...topic.data,
@@ -25,10 +34,14 @@ const topics = (await getAllTopics()).map((topic) => ({
       browseLabel: t("pages.books.browseLabel"),
       resultsLabel: t("pages.books.resultsLabel"),
       languageLabel: t("pages.books.languageLabel"),
+      availabilityLabel: t("pages.books.availabilityLabel"),
       categoryLabel: t("pages.books.categoryLabel"),
       topicsLabel: t("pages.books.topicsLabel"),
       topicHelperText: t("pages.books.topicHelperText"),
       clearFiltersLabel: t("pages.books.clearFiltersLabel"),
+      allAvailabilityLabel: t("pages.books.allAvailabilityLabel"),
+      readOnlineLabel: t("pages.books.readOnlineLabel"),
+      availableForPurchaseLabel: t("pages.books.availableForPurchaseLabel"),
       allCategoryLabel: t("pages.books.allCategoryLabel"),
       topicSearchPlaceholder: t("pages.books.topicSearchPlaceholder"),
       noMatchingTopicsLabel: t("pages.books.noMatchingTopicsLabel"),

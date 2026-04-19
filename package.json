@@ -15,6 +15,7 @@
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
+    "@embedpdf/react-pdf-viewer": "^2.14.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@splidejs/splide": "^4.1.4",

@@ -2,10 +2,12 @@
 import ArticleTopic from "@/components/ArticleTopic.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
+  bookHasDetailPage,
   getAllBooks,
   getAllResources,
   getAllStories,
   getAllTopics,
+  getBookDetailPath,
   getBookCategoryLabel,
   getStoryRouteSlug,
 } from "@/utils/content";
@@ -33,6 +35,7 @@ const books = (await getAllBooks())
     slug: book.slug,
     ...book.data,
     category: getBookCategoryLabel(book.data.category),
+    detailHref: bookHasDetailPage(book) ? getBookDetailPath(book.slug) : undefined,
   }));
 
 const resources = (await getAllResources())

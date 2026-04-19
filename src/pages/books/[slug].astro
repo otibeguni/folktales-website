@@ -1,0 +1,182 @@
+---
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import BookPdfViewer from "@/components/BookPdfViewer";
+import RelatedItemsList from "@/components/RelatedItemsList.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  bookHasDetailPage,
+  getAllBooks,
+  getAllStories,
+  getAllTopics,
+  getBookAvailability,
+  getBookCategoryLabel,
+  getStoryRouteSlug,
+  indexEntriesBySlug,
+  storyBasePath,
+} from "@/utils/content";
+import { buildCanonicalUrl } from "@/utils/seo";
+
+export async function getStaticPaths() {
+  const books = await getAllBooks();
+
+  return books
+    .filter((book) => bookHasDetailPage(book))
+    .map((book) => ({
+      params: { slug: book.slug },
+      props: { book },
+    }));
+}
+
+const { book } = Astro.props;
+const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
+const stories = await getAllStories();
+const topics = await getAllTopics();
+const topicBySlug = indexEntriesBySlug(topics);
+const categoryLabel = getBookCategoryLabel(book.data.category);
+const languageLabel = book.data.language === "bn" ? "Bengali" : "English";
+const availability = getBookAvailability(book);
+const isReadOnline = availability === "read-online";
+const previewUrl = isReadOnline
+  ? import.meta.env.DEV
+    ? book.data.library_url?.replace("https://data.otibeguni.com", "/__pdfproxy")
+    : book.data.library_url
+  : book.data.url;
+const relatedStoryMap = new Map();
+
+for (const story of stories.filter((entry) => entry.data.source_slug === book.slug)) {
+  const routeSlug = getStoryRouteSlug(story);
+  const existingStory = relatedStoryMap.get(routeSlug);
+
+  if (!existingStory || story.data.language === book.data.language) {
+    relatedStoryMap.set(routeSlug, story);
+  }
+}
+
+const relatedStories = Array.from(relatedStoryMap.values()).map((story) => ({
+  name: story.data.title,
+  badges: [
+    story.data.category,
+    story.data.language === "bn" ? "Bengali" : "English",
+  ].filter(Boolean),
+  url: `${storyBasePath(story.data.language)}/${getStoryRouteSlug(story)}`,
+  isExternal: false,
+}));
+const relatedTopics = (book.data.topic_slugs ?? [])
+  .map((slug) => topicBySlug.get(slug))
+  .filter(Boolean)
+  .map((topic) => ({
+    name: topic.data.item,
+    types: topic.data.types ?? [],
+    url: `/topics/${topic.slug}`,
+    isExternal: false,
+  }));
+
+const descriptionSegments = [
+  isReadOnline ? `Read ${book.data.name} online` : `Explore ${book.data.name}`,
+  book.data.author ? `by ${book.data.author}` : null,
+  categoryLabel ? `${categoryLabel} book` : null,
+  `in ${languageLabel}`,
+  isReadOnline
+    ? "from Otibeguni's folklore library"
+    : "with related stories and topics from Otibeguni",
+].filter(Boolean);
+
+const pageDescription = `${descriptionSegments.join(" ")}.`;
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: book.data.name,
+  url: canonicalUrl,
+  inLanguage: book.data.language,
+  isAccessibleForFree: isReadOnline,
+  bookFormat: isReadOnline ? "EBook" : undefined,
+  encodingFormat: isReadOnline ? "application/pdf" : "text/html",
+  ...(book.data.author && {
+    author: {
+      "@type": "Person",
+      name: book.data.author,
+    },
+  }),
+  ...(categoryLabel && { genre: categoryLabel }),
+  ...(book.data.url && { sameAs: [book.data.url] }),
+  potentialAction: {
+    "@type": "ReadAction",
+    target: canonicalUrl,
+  },
+};
+
+---
+
+<Layout
+  title={`${book.data.name} | Books | Otibeguni`}
+  description={pageDescription}
+  schema={schemaData}
+  canonicalUrl={canonicalUrl}
+  openGraphType="book"
+>
+  <article class="mx-auto max-w-5xl px-4 py-8 md:py-12" data-pagefind-body>
+    <Breadcrumbs
+      menus={[{ label: "Books", href: "/books" }, { label: book.data.name }]}
+    />
+
+    <div class="flex flex-col gap-8">
+      <section class="bg-base-100 rounded-3xl border border-base-300 p-5 shadow-sm md:p-6">
+        <div class="space-y-5">
+          <div class="space-y-3">
+            <h1 class="text-3xl font-bold tracking-tight md:text-4xl">
+              {book.data.name}
+            </h1>
+            <p class="text-base text-slate-600 md:text-lg">
+              {book.data.author ? `By ${book.data.author}` : "Author unknown"}
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            {categoryLabel && (
+              <span class="badge badge-soft badge-primary">{categoryLabel}</span>
+            )}
+            <span class="badge badge-soft">{languageLabel}</span>
+            {
+              !isReadOnline && book.data.url && (
+                <a
+                  href={book.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-sm btn-outline h-8 min-h-0"
+                >
+                  Visit Page
+                </a>
+              )
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-8">
+        {
+          isReadOnline && previewUrl ? (
+            <BookPdfViewer client:only="react" src={previewUrl} title={book.data.name} />
+          ) : null
+        }
+
+        {
+          relatedStories.length > 0 && (
+            <RelatedItemsList
+              title="Related Stories"
+              items={relatedStories}
+            />
+          )
+        }
+
+        {
+          relatedTopics.length > 0 && (
+            <RelatedItemsList
+              title="Related Topics"
+              items={relatedTopics}
+            />
+          )
+        }
+      </section>
+    </div>
+  </article>
+</Layout>

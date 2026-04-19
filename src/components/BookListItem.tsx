@@ -1,10 +1,19 @@
 import type { SourceItemAlt } from '@/types';
 
-const getBookHref = (book: SourceItemAlt) => book.library_url || book.url || '';
+const getBookHref = (book: SourceItemAlt) =>
+  book.detailHref || book.library_url || book.url || '';
 
 const getBookActionLabel = (book: SourceItemAlt) => {
-  if (book.library_url) {
+  if (book.detailHref && book.availability === 'read-online') {
     return 'Read Online';
+  }
+
+  if (book.detailHref && book.availability === 'purchase') {
+    return 'View Details';
+  }
+
+  if (book.library_url) {
+    return 'Open PDF';
   }
 
   if (book.url) {
@@ -18,6 +27,7 @@ const BookListItem = ({ book }: { book: SourceItemAlt }) => {
   const href = getBookHref(book);
   const actionLabel = getBookActionLabel(book);
   const isLinked = Boolean(href);
+  const isExternal = !book.detailHref && Boolean(href);
   const Wrapper = isLinked ? 'a' : 'div';
 
   return (
@@ -25,8 +35,12 @@ const BookListItem = ({ book }: { book: SourceItemAlt }) => {
       {...(isLinked
         ? {
             href,
-            target: '_blank',
-            rel: 'noopener noreferrer',
+            ...(isExternal
+              ? {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                }
+              : {}),
           }
         : {})}
       className="bg-base-100 hover:bg-base-200/60 flex flex-col gap-4 rounded-2xl border border-base-300 px-4 py-4 no-underline transition md:px-5 md:py-5"

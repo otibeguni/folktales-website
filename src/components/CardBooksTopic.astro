@@ -21,7 +21,7 @@ const { related_books } = Astro.props;
               </div>
               {book.library_url && (
                 <a
-                  href={book.library_url || book.url || `/books/${book.slug}`}
+                  href={book.detailHref || book.library_url || book.url || `/books/${book.slug}`}
                   class="btn btn-neutral btn-xs"
                 >
                   Read Online

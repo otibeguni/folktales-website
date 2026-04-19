@@ -13,6 +13,7 @@ interface Props {
   lang?: string;
   canonicalUrl?: string;
   alternateLinks?: AlternateLink[];
+  openGraphType?: string;
 }
 
 const {
@@ -22,7 +23,18 @@ const {
   lang = "en",
   canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site),
   alternateLinks = [],
+  openGraphType = schema ? "article" : "website",
 } = Astro.props as Props;
+const schemaRecord =
+  schema && typeof schema === "object" ? (schema as Record<string, unknown>) : null;
+const metaTitle = title ?? t("common.siteTitle");
+const metaDescription = description ?? t("common.siteDescription");
+const metaImage =
+  schemaRecord && typeof schemaRecord.image === "string" ? schemaRecord.image : null;
+const metaUrl =
+  schemaRecord && typeof schemaRecord.url === "string"
+    ? schemaRecord.url
+    : canonicalUrl;
 ---
 
 <!doctype html>
@@ -31,10 +43,16 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
 
-    {schema && <meta property="og:type" content="article" />}
-    {schema && <meta property="og:title" content={schema.name} />}
-    {schema && <meta property="og:image" content={schema.image} />}
-    {schema && <meta property="og:url" content={schema.url} />}
+    <meta property="og:type" content={openGraphType} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={metaUrl} />
+    <meta property="og:site_name" content={t("common.siteTitle")} />
+    {metaImage && <meta property="og:image" content={metaImage} />}
+    <meta name="twitter:card" content={metaImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    {metaImage && <meta name="twitter:image" content={metaImage} />}
 
     <link rel="icon" type="image/png" href="/otibeguni-logo.png" />
     <link rel="canonical" href={canonicalUrl} />
@@ -51,8 +69,8 @@ const {
       referrerpolicy="no-referrer"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ?? t("common.siteTitle")}</title>
-    <meta name="description" content={description ?? t("common.siteDescription")} />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
     {schema && <Schema item={schema} />}
   </head>
   <body>
