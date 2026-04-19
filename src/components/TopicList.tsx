@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useDeferredValue, useState } from 'react';
 
-import CardTopic from '@/components/CardTopic.tsx';
+import TopicListItem from '@/components/TopicListItem';
 import type { WikidataItemAlt } from '@/types';
 import { sortTopicTags } from '@/utils/topic-tags';
 
@@ -12,15 +12,25 @@ const TopicList = ({
 }: {
   topics: WikidataItemAlt[];
   labels: {
-    filterLabel: string;
+    pageTitle: string;
+    pageDescription: string;
+    browseLabel: string;
+    resultsLabel: string;
+    searchLabel: string;
+    searchPlaceholder: string;
     typesLabel: string;
+    searchHelperText: string;
     clearFiltersLabel: string;
+    noTopicsFoundLabel: string;
   };
 }) => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const deferredSearchQuery = useDeferredValue(searchQuery);
+  const normalizedSearchQuery = deferredSearchQuery.trim().toLowerCase();
 
-  const filteredTypes = [
+  const filteredTopics = [
     ...topics.filter((topic) => {
       if (selectedTypes.length > 0) {
         return selectedTypes.every((selectedType) =>
@@ -28,10 +38,25 @@ const TopicList = ({
         );
       }
       return true;
+    }).filter((topic) => {
+      if (!normalizedSearchQuery) {
+        return true;
+      }
+
+      const searchableText = [
+        topic.item,
+        topic.slug,
+        topic.description ?? '',
+        ...topic.types,
+      ]
+        .join(' ')
+        .toLowerCase();
+
+      return searchableText.includes(normalizedSearchQuery);
     }),
   ];
-  const totalPages = Math.ceil(filteredTypes.length / MAX_TOPICS);
-  const paginatedTypes = filteredTypes.slice(
+  const totalPages = Math.ceil(filteredTopics.length / MAX_TOPICS);
+  const paginatedTopics = filteredTopics.slice(
     (currentPage - 1) * MAX_TOPICS,
     currentPage * MAX_TOPICS,
   );
@@ -51,52 +76,101 @@ const TopicList = ({
   const clearFilters = () => {
     setCurrentPage(1);
     setSelectedTypes([]);
+    setSearchQuery('');
   };
 
   return (
-    <div className="container mx-auto min-h-screen max-w-3xl">
-      <div className="mx-3 my-5 flex flex-col gap-4 lg:mx-0">
-        <h2 className="text-2xl font-bold">{labels.filterLabel}</h2>
-        <div className="flex items-center justify-between gap-4">
-          <p className="text-sm font-medium text-slate-600">{labels.typesLabel}</p>
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            disabled={selectedTypes.length === 0}
-            onClick={clearFilters}
-          >
-            {labels.clearFiltersLabel}
-          </button>
+    <div className="container mx-auto min-h-screen max-w-4xl">
+      <div className="mx-3 my-8 flex flex-col gap-6 lg:mx-0">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+            {labels.pageTitle}
+          </h1>
+          <p className="max-w-3xl text-base text-slate-600 md:text-lg">
+            {labels.pageDescription}
+          </p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {allTypes.map((tag) => {
-            const isSelected = selectedTypes.includes(tag);
 
-            return (
+        <section className="bg-base-200/50 rounded-3xl border border-base-300 p-4 md:p-6">
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="text-xl font-semibold">{labels.browseLabel}</h2>
+                <p className="text-sm text-slate-600 md:text-base">
+                  {filteredTopics.length} {labels.resultsLabel}
+                </p>
+              </div>
               <button
-                key={tag}
                 type="button"
-                className={`badge cursor-pointer border px-3 py-3 transition ${
-                  isSelected
-                    ? 'badge-primary text-primary-content'
-                    : 'badge-soft badge-primary'
-                }`}
-                onClick={() => toggleType(tag)}
+                className="btn btn-ghost btn-sm self-start md:self-auto"
+                disabled={!searchQuery && selectedTypes.length === 0}
+                onClick={clearFilters}
               >
-                {tag}
+                {labels.clearFiltersLabel}
               </button>
-            );
-          })}
-        </div>
-      </div>
-      <div className="divider my-5"></div>
-      <div className="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0">
-        {paginatedTypes.map((props) => (
-          <CardTopic key={`topic-${props.slug}`} {...props} />
-        ))}
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <label className="form-control w-full">
+                <span className="mb-2 text-sm font-medium text-slate-700">
+                  {labels.searchLabel}
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(event) => {
+                    setCurrentPage(1);
+                    setSearchQuery(event.target.value);
+                  }}
+                  className="input input-bordered w-full"
+                  placeholder={labels.searchPlaceholder}
+                />
+              </label>
+
+              <div className="flex flex-col gap-2">
+                <span className="text-sm font-medium text-slate-700">
+                  {labels.typesLabel}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {allTypes.map((tag) => {
+                    const isSelected = selectedTypes.includes(tag);
+
+                    return (
+                      <button
+                        key={tag}
+                        type="button"
+                        className={`badge cursor-pointer border px-3 py-3 transition ${
+                          isSelected
+                            ? 'badge-primary text-primary-content'
+                            : 'badge-soft badge-primary'
+                        }`}
+                        onClick={() => toggleType(tag)}
+                      >
+                        {tag}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <p className="text-sm text-slate-500">{labels.searchHelperText}</p>
+          </div>
+        </section>
       </div>
 
-      {/* Pagination Controls */}
+      {paginatedTopics.length > 0 ? (
+        <div className="mx-3 flex flex-col gap-4 xl:mx-0">
+          {paginatedTopics.map((topic) => (
+            <TopicListItem key={`topic-${topic.slug}`} topic={topic} />
+          ))}
+        </div>
+      ) : (
+        <div className="mx-3 rounded-2xl border border-dashed border-base-300 px-6 py-12 text-center italic xl:mx-0">
+          {labels.noTopicsFoundLabel}
+        </div>
+      )}
+
       {totalPages > 1 && (
         <div className="mt-12 flex justify-center gap-4">
           <button

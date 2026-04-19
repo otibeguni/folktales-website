@@ -15,9 +15,16 @@ const topics = (await getAllTopics()).map((topic) => ({
     <TopicList
       topics={topics}
       labels={{
-        filterLabel: t("pages.topics.filterLabel"),
+        pageTitle: t("pages.topics.pageTitle"),
+        pageDescription: t("pages.topics.pageDescription"),
+        browseLabel: t("pages.topics.browseLabel"),
+        resultsLabel: t("pages.topics.resultsLabel"),
+        searchLabel: t("pages.topics.searchLabel"),
+        searchPlaceholder: t("pages.topics.searchPlaceholder"),
         typesLabel: t("pages.topics.typesLabel"),
+        searchHelperText: t("pages.topics.searchHelperText"),
         clearFiltersLabel: t("pages.topics.clearFiltersLabel"),
+        noTopicsFoundLabel: t("pages.topics.noTopicsFoundLabel"),
       }}
       client:load
     />

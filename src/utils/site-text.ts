@@ -30,9 +30,17 @@ const translations = {
       allCategoryLabel: "All Categories",
     },
     topics: {
-      filterLabel: "Filter Types",
+      pageTitle: "Topics",
+      pageDescription:
+        "Browse the people, places, beings, works, and ideas that shape Bengali and indigenous folklore.",
+      browseLabel: "Browse Collection",
+      resultsLabel: "topics found",
+      searchLabel: "Search",
+      searchPlaceholder: "Search topics by title, description, or type",
       typesLabel: "Types",
+      searchHelperText: "Use search and type filters together to narrow the list.",
       clearFiltersLabel: "Clear filters",
+      noTopicsFoundLabel: "No topics found.",
     },
     books: {
       pageTitle: "Books",
