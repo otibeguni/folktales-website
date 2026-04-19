@@ -1,6 +1,7 @@
 ---
 import Breadcrumbs from './Breadcrumbs.astro';
 import type { IStory } from '@/types';
+import BookListItem from '@/components/BookListItem';
 import RelatedItemsList from '@/components/RelatedItemsList.astro';
 import { sortTopicTags } from '@/utils/topic-tags';
 
@@ -9,28 +10,10 @@ const sortedTags = sortTopicTags(topic.types ?? []);
 
 const relatedStories = stories.map(({ frontmatter }: { frontmatter: IStory }) => ({
   name: frontmatter.title,
-  type: frontmatter.category,
+  badges: [frontmatter.category],
   url: `/stories/${frontmatter.slug}`,
   isExternal: false,
 }));
-
-const relatedBooks = books
-  .map((book) => {
-    const bookUrl = book.library_url || book.url;
-
-    if (!bookUrl) {
-      return null;
-    }
-
-    return {
-      name: book.name,
-      type: 'Book',
-      meta: book.author || '',
-      url: bookUrl,
-      isExternal: true,
-    };
-  })
-  .filter(Boolean);
 
 const relatedResources = resources
   .map((resource) => {
@@ -40,7 +23,7 @@ const relatedResources = resources
 
     return {
       name: resource.title,
-      type: resource.type,
+      badges: [resource.type],
       url: resource.url,
       isExternal: true,
     };
@@ -77,13 +60,14 @@ const relatedResources = resources
     }
 
     {
-      relatedBooks.length > 0 && (
+      books.length > 0 && (
         <>
           <h1 class="mt-8 text-3xl">Related Books</h1>
-          <RelatedItemsList
-            title=""
-            items={relatedBooks}
-          />
+          <div class="not-prose mt-4 flex flex-col gap-4">
+            {books.map((book) => (
+              <BookListItem book={book} />
+            ))}
+          </div>
         </>
       )
     }

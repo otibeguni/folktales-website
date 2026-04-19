@@ -1,10 +1,11 @@
 ---
 import { localizePath } from "@/utils/site-text";
-import { formatTopicTags } from "@/utils/topic-tags";
+import { sortTopicTags } from "@/utils/topic-tags";
 
-// A generic interface for any item we want to display in the list
 interface Item {
   name: string;
+  subtitle?: string;
+  badges?: string[];
   type?: string;
   types?: string[];
   meta?: string;
@@ -13,7 +14,7 @@ interface Item {
 }
 
 interface Props {
-  title?: string; // The title for the section
+  title?: string;
   items?: Item[];
 }
 
@@ -23,36 +24,44 @@ if (!items || items.length === 0) {
   return null;
 }
 ---
-<div class:list={['flex flex-col gap-3', title ? 'mt-8' : 'mt-4']}>
+
+<div class:list={["flex flex-col gap-3", title ? "mt-8" : "mt-4"]}>
   {title && <h3 class="mb-4 text-2xl font-bold">{title}</h3>}
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-4">
     {
       items.map((item) => {
         const linkUrl = item.isExternal ? item.url : localizePath(item.url);
 
         if (!linkUrl) return null;
 
-        const metadataParts = [
-          item.types ? formatTopicTags(item.types) : item.type,
-          item.meta,
-        ].filter(Boolean);
-        const metadata = metadataParts.join(' · ');
+        const subtitle = item.subtitle ?? item.meta;
+        const badges = item.badges ?? [
+          ...(item.types ? sortTopicTags(item.types) : []),
+          ...(item.type ? [item.type] : []),
+        ];
 
         return (
           <a
             href={linkUrl}
-            target={item.isExternal ? '_blank' : '_self'}
-            rel={item.isExternal ? 'noopener noreferrer' : null}
-            class="bg-base-200/50 hover:bg-base-200 flex rounded-xl px-4 py-4 no-underline transition-all duration-300 hover:shadow-sm md:px-5 md:py-5"
+            target={item.isExternal ? "_blank" : "_self"}
+            rel={item.isExternal ? "noopener noreferrer" : null}
+            class="bg-base-100 hover:bg-base-200/60 flex flex-col gap-3 rounded-2xl border border-base-300 px-4 py-4 no-underline transition md:px-5 md:py-5"
           >
-            <div class="flex min-w-0 flex-grow flex-col gap-2">
-              <h4 class="text-base font-bold leading-snug md:text-lg">
+            <div class="min-w-0">
+              <h4 class="mt-0 text-lg font-semibold leading-snug md:text-xl">
                 {item.name}
               </h4>
-              {metadata && (
-                <p class="mt-auto text-sm leading-snug text-slate-600 md:text-base">
-                  {metadata}
+              {subtitle && (
+                <p class="mt-1 text-sm leading-6 text-slate-600 md:text-base">
+                  {subtitle}
                 </p>
+              )}
+              {badges.length > 0 && (
+                <div class="mt-3 flex flex-wrap items-center gap-2">
+                  {badges.map((badge) => (
+                    <span class="badge badge-soft badge-primary">{badge}</span>
+                  ))}
+                </div>
               )}
             </div>
           </a>
