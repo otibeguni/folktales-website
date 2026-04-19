@@ -8,5 +8,7 @@ language: en
 category: indigenous-folklore
 categories:
   - indigenous-folklore
+topic_slugs:
+  - tripura-people
 ---
 

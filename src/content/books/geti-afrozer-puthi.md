@@ -8,5 +8,20 @@ language: bn
 category: puthi
 categories:
   - puthi
+topic_slugs:
+  - azdaha
+  - babylon
+  - damascus
+  - hamadan
+  - jinn
+  - kandahar
+  - khidr
+  - khotan
+  - mount-qaf
+  - pari
+  - prophet-yusuf
+  - rome
+  - sea-of-kulzum
+  - serendib
 ---
 

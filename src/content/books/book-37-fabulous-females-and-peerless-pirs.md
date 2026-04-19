@@ -5,5 +5,14 @@ author: Tony K. Stewart
 url: https://global.oup.com/academic/product/fabulous-females-and-peerless-pirs-9780195165302
 language: en
 categories: []
+topic_slugs:
+  - byangoma
+  - ganges-river
+  - god-brahma
+  - god-krishna
+  - rama
+  - satya-pir
+  - sundarbans
+  - vedas
 ---
 

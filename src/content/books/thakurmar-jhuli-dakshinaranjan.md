@@ -8,5 +8,23 @@ language: bn
 category: bengali-folklore
 categories:
   - bengali-folklore
+topic_slugs:
+  - brahmin
+  - byangoma
+  - ganges-river
+  - god-shiva
+  - god-yama
+  - goddess-kamadhenu
+  - goddess-lakshmi
+  - goddess-shashthi
+  - khakshasa
+  - kshira-sagara
+  - pakshiraja
+  - patala
+  - rakshasa
+  - shuk-bird
+  - shutashankha
+  - thakurmar-jhuli
+  - yamuna-river
 ---
 

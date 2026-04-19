@@ -36,12 +36,14 @@ export interface SourceItem {
   language?: string;
   category?: string;
   categories?: string[];
+  topic_slugs?: string[];
 }
 
 export interface SourceItemAlt extends SourceItem {
   slug: string;
   language: string;
   category: string;
+  topic_slugs?: string[];
 }
 
 export interface MetadataItem {

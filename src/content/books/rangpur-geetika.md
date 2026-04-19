@@ -8,5 +8,8 @@ language: bn
 category: bengali-folklore
 categories:
   - bengali-folklore
+topic_slugs:
+  - angel-gabriel
+  - emperor-akbar
 ---
 

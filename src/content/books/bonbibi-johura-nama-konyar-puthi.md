@@ -8,5 +8,9 @@ language: bn
 category: puthi
 categories:
   - puthi
+topic_slugs:
+  - bonbibi-deity
+  - ganges-river
+  - sundarbans
 ---
 

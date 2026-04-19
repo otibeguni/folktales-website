@@ -62,6 +62,7 @@ const books = defineCollection({
     language: z.string(),
     category: z.string().optional(),
     categories: z.array(z.string()).default([]),
+    topic_slugs: z.array(z.string()).default([]),
   }),
 });
 

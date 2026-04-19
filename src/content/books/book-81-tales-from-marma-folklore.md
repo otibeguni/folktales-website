@@ -5,5 +5,7 @@ author: Bapru Marma
 url: https://www.amazon.com.au/Tales-Marma-Folklore-Bapru/dp/B0BFFD7KQV
 language: en
 categories: []
+topic_slugs:
+  - marma-people
 ---
 

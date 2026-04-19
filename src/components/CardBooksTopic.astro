@@ -1,0 +1,41 @@
+---
+import type { SourceItemAlt } from "@/types";
+
+const { related_books } = Astro.props;
+---
+
+<div class="py-8">
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {
+      related_books.map((book: SourceItemAlt) => (
+        <div class="card bg-base-100 card-md no-underline shadow-sm transition hover:scale-105">
+          <div class="card-body">
+            <div class="flex flex-col gap-4">
+              <div class="prose-gray flex flex-col">
+                <span class="text-xs font-bold">Source</span>
+                {book.name || "-"}
+              </div>
+              <div class="prose-gray flex flex-col">
+                <span class="text-xs font-bold">Author</span>
+                {book.author || "-"}
+              </div>
+              {book.library_url && (
+                <a
+                  href={book.library_url || book.url || `/books/${book.slug}`}
+                  class="btn btn-neutral btn-xs"
+                >
+                  Read Online
+                </a>
+              )}
+              {!book.library_url && book.url && (
+                <a href={book.url} class="btn btn-neutral btn-xs">
+                  Purchase
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

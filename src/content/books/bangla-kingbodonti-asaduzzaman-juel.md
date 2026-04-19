@@ -8,5 +8,23 @@ language: bn
 category: bengali-legend
 categories:
   - bengali-legend
+topic_slugs:
+  - bogura-district
+  - chalan-beel
+  - chittagong-city
+  - ganga-devi
+  - garo-people
+  - god-vishnu
+  - goddess-manasa
+  - gokul-medh
+  - habiganj-district
+  - jinn
+  - jiyat-kunda
+  - karnaphuli-river
+  - mahasthangarh
+  - manasamangal-kavya
+  - moulvibazar-district
+  - pari
+  - pundravardhana-kingdom
 ---
 

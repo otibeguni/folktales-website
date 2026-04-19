@@ -7,5 +7,8 @@ language: bn
 category: bengali-religious-text
 categories:
   - bengali-religious-text
+topic_slugs:
+  - dharma-mangal-kavya
+  - dharmathakur
 ---
 

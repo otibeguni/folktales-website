@@ -8,5 +8,7 @@ language: bn
 category: puthi
 categories:
   - puthi
+topic_slugs:
+  - pari
 ---
 

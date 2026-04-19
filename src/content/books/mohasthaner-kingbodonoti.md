@@ -8,5 +8,8 @@ language: bn
 category: bengali-legend
 categories:
   - bengali-legend
+topic_slugs:
+  - kapalika
+  - pundravardhana-kingdom
 ---
 

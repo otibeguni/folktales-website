@@ -38,6 +38,8 @@ const translations = {
       filterLabel: "Filter Books",
       languageLabel: "Language",
       categoryLabel: "Category",
+      topicsLabel: "Topics",
+      clearFiltersLabel: "Clear filters",
       allCategoryLabel: "All Categories",
     },
   },

@@ -8,5 +8,14 @@ language: bn
 category: bengali-legend
 categories:
   - bengali-legend
+topic_slugs:
+  - conquest-of-sylhet
+  - faridpur-district
+  - gauda-kingdom
+  - harong-hurong
+  - kamakhya-temple
+  - shah-jalal
+  - shamsuddin-firoz-shah
+  - sylhet-division
 ---
 

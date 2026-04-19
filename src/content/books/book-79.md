@@ -5,5 +5,7 @@ author: তপন বাগচী
 url: https://www.rokomari.com/book/61688/sottopirer-puthi
 language: bn
 categories: []
+topic_slugs:
+  - satya-pir
 ---
 

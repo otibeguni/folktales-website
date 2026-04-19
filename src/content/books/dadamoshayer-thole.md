@@ -8,5 +8,7 @@ language: bn
 category: bengali-folklore
 categories:
   - bengali-folklore
+topic_slugs:
+  - shuk-bird
 ---
 

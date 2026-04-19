@@ -1,16 +1,55 @@
 ---
 import Breadcrumbs from './Breadcrumbs.astro';
-import Card from '@/components/Card';
 import type { IStory } from '@/types';
-import CardResourcesTopic from '@/components/CardResourcesTopic.astro';
+import RelatedItemsList from '@/components/RelatedItemsList.astro';
 import { sortTopicTags } from '@/utils/topic-tags';
 
-const { topic, stories, resources } = Astro.props;
+const { topic, stories, books, resources } = Astro.props;
 const sortedTags = sortTopicTags(topic.types ?? []);
+
+const relatedStories = stories.map(({ frontmatter }: { frontmatter: IStory }) => ({
+  name: frontmatter.title,
+  type: frontmatter.category,
+  url: `/stories/${frontmatter.slug}`,
+  isExternal: false,
+}));
+
+const relatedBooks = books
+  .map((book) => {
+    const bookUrl = book.library_url || book.url;
+
+    if (!bookUrl) {
+      return null;
+    }
+
+    return {
+      name: book.name,
+      type: 'Book',
+      meta: book.author || '',
+      url: bookUrl,
+      isExternal: true,
+    };
+  })
+  .filter(Boolean);
+
+const relatedResources = resources
+  .map((resource) => {
+    if (!resource.url) {
+      return null;
+    }
+
+    return {
+      name: resource.title,
+      type: resource.type,
+      url: resource.url,
+      isExternal: true,
+    };
+  })
+  .filter(Boolean);
 ---
 
 <div class="min-h-screen">
-  <article class="prose mx-auto max-w-3xl px-4 pb-12">
+  <article class="prose mx-auto max-w-4xl px-4 pb-12">
     <Breadcrumbs
       menus={[{ label: 'Topics', href: '/topics' }, { label: topic.item }]}
     />
@@ -26,21 +65,35 @@ const sortedTags = sortTopicTags(topic.types ?? []);
     {topic.description && <p class="mb-8">{topic.description}</p>}
 
     {
-      stories.length > 0 && (
+      relatedStories.length > 0 && (
         <>
           <h1 class="text-3xl">Stories</h1>
-          <div class="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:mx-0">
-            {stories.map(({ frontmatter }: { frontmatter: IStory }) => (
-              <Card {...frontmatter} />
-            ))}
-          </div>
+          <RelatedItemsList
+            title=""
+            items={relatedStories}
+          />
         </>
       )
     }
 
     {
-      resources.length > 0 && (
-        <CardResourcesTopic related_resources={resources} />
+      relatedBooks.length > 0 && (
+        <>
+          <h1 class="mt-8 text-3xl">Related Books</h1>
+          <RelatedItemsList
+            title=""
+            items={relatedBooks}
+          />
+        </>
+      )
+    }
+
+    {
+      relatedResources.length > 0 && (
+        <RelatedItemsList
+          title="Related Resources"
+          items={relatedResources}
+        />
       )
     }
   </article>

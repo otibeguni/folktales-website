@@ -2,11 +2,12 @@
 import ArticleTopic from "@/components/ArticleTopic.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
+  getAllBooks,
   getAllResources,
   getAllStories,
   getAllTopics,
+  getBookCategoryLabel,
   getStoryRouteSlug,
-  renderEntry,
 } from "@/utils/content";
 
 export async function getStaticPaths() {
@@ -25,6 +26,14 @@ const stories = (await getAllStories())
       (story.data.topic_slugs ?? []).includes(topic.slug),
   )
   .map((story) => ({ frontmatter: { ...story.data, slug: getStoryRouteSlug(story) } }));
+
+const books = (await getAllBooks())
+  .filter((book) => (book.data.topic_slugs ?? []).includes(topic.slug))
+  .map((book) => ({
+    slug: book.slug,
+    ...book.data,
+    category: getBookCategoryLabel(book.data.category),
+  }));
 
 const resources = (await getAllResources())
   .filter((resource) => (resource.data.topic_slugs ?? []).includes(topic.slug))
@@ -46,6 +55,7 @@ const currentUrl = Astro.url.href;
     <ArticleTopic
       topic={topic.data}
       stories={stories}
+      books={books}
       resources={resources}
     />
   </div>
