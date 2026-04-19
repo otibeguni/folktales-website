@@ -35,12 +35,20 @@ const translations = {
       clearFiltersLabel: "Clear filters",
     },
     books: {
-      filterLabel: "Filter Books",
+      pageTitle: "Books",
+      pageDescription:
+        "Browse the Otibeguni folklore book collection by language, category, and topic.",
+      browseLabel: "Browse Collection",
+      resultsLabel: "books found",
       languageLabel: "Language",
       categoryLabel: "Category",
       topicsLabel: "Topics",
+      topicHelperText: "Search and add one or more topics to narrow the list.",
       clearFiltersLabel: "Clear filters",
       allCategoryLabel: "All Categories",
+      topicSearchPlaceholder: "Search topics to add",
+      noMatchingTopicsLabel: "No matching topics found.",
+      noBooksFoundLabel: "No books found.",
     },
   },
 } as const;

@@ -20,12 +20,19 @@ const topics = (await getAllTopics()).map((topic) => ({
     books={books}
     topics={topics}
     labels={{
-      filterLabel: t("pages.books.filterLabel"),
+      pageTitle: t("pages.books.pageTitle"),
+      pageDescription: t("pages.books.pageDescription"),
+      browseLabel: t("pages.books.browseLabel"),
+      resultsLabel: t("pages.books.resultsLabel"),
       languageLabel: t("pages.books.languageLabel"),
       categoryLabel: t("pages.books.categoryLabel"),
       topicsLabel: t("pages.books.topicsLabel"),
+      topicHelperText: t("pages.books.topicHelperText"),
       clearFiltersLabel: t("pages.books.clearFiltersLabel"),
       allCategoryLabel: t("pages.books.allCategoryLabel"),
+      topicSearchPlaceholder: t("pages.books.topicSearchPlaceholder"),
+      noMatchingTopicsLabel: t("pages.books.noMatchingTopicsLabel"),
+      noBooksFoundLabel: t("pages.books.noBooksFoundLabel"),
     }}
     client:load
   />
