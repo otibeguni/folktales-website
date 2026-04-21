@@ -120,14 +120,14 @@ const schemaData = {
     />
 
     <div class="flex flex-col gap-8">
-      <section class="bg-base-100 rounded-3xl border border-base-300 p-5 shadow-sm md:p-6">
+      <section>
         <div class="space-y-5">
           <div class="space-y-3">
             <h1 class="text-3xl font-bold tracking-tight md:text-4xl">
               {book.data.name}
             </h1>
             <p class="text-base text-slate-600 md:text-lg">
-              {book.data.author ? `By ${book.data.author}` : "Author unknown"}
+              {book.data.author ?? "Author unknown"}
             </p>
           </div>
 
