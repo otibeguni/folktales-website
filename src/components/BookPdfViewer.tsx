@@ -134,7 +134,7 @@ const SingleDocumentViewer = ({ src, title }: BookPdfViewerProps) => {
   const plugins = useMemo(
     () => [
       createPluginRegistration(DocumentManagerPluginPackage, {
-        initialDocuments: [{ url: src, name: title }],
+        initialDocuments: [{ url: src, name: buildDownloadName(title) }],
         maxDocuments: 1,
       }),
       createPluginRegistration(ViewportPluginPackage, {
