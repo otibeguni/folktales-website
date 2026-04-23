@@ -3,7 +3,8 @@ import { Schema } from "astro-seo-schema";
 import "@/styles/global.css";
 import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar.astro";
-import { buildCanonicalUrl, type AlternateLink } from "@/utils/seo";
+import type { IBreadcrumbs } from "@/types";
+import { buildCanonicalUrl, normalizeBreadcrumbs, type AlternateLink } from "@/utils/seo";
 
 interface Props {
   schema?: object | null;
@@ -12,6 +13,7 @@ interface Props {
   lang?: string;
   canonicalUrl?: string;
   alternateLinks?: AlternateLink[];
+  breadcrumbs?: IBreadcrumbs[];
 }
 
 const {
@@ -22,7 +24,12 @@ const {
   lang = "en",
   canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site),
   alternateLinks = [],
+  breadcrumbs = [],
 } = Astro.props as Props;
+const { structuredData: breadcrumbStructuredData } = normalizeBreadcrumbs(
+  breadcrumbs,
+  Astro.site,
+);
 ---
 
 <!doctype html>
@@ -40,10 +47,16 @@ const {
     <meta name="description" content={description} />
     <title>{title}</title>
     {schema && <Schema item={schema} />}
+    {breadcrumbStructuredData && <Schema item={breadcrumbStructuredData} />}
   </head>
   <body class="bg-white text-slate-900">
-    <Navbar />
-    <main class="container mx-auto min-h-screen px-4 pb-12">
+    <Navbar breadcrumbs={breadcrumbs} site={Astro.site} />
+    <main
+      class:list={[
+        "container mx-auto min-h-screen px-4 pb-12",
+        breadcrumbs.length > 0 ? "pt-14" : "",
+      ]}
+    >
       <section class="relative isolate overflow-hidden">
         <div
           class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12)_0,_transparent_42%),radial-gradient(circle_at_20%_20%,_rgba(14,165,233,0.12)_0,_transparent_36%),radial-gradient(circle_at_80%_0,_rgba(56,189,248,0.14)_0,_transparent_32%)]"

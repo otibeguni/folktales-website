@@ -1,0 +1,59 @@
+---
+import type { IBreadcrumbs } from "@/types";
+import { normalizeBreadcrumbs } from "@/utils/seo";
+
+interface Props {
+  breadcrumbs?: IBreadcrumbs[];
+  site?: URL;
+}
+
+const { breadcrumbs = [], site } = Astro.props as Props;
+const { items } = normalizeBreadcrumbs(breadcrumbs, site);
+---
+
+<section class="text-primary-content" data-pagefind-ignore>
+  <div class="mx-auto flex max-w-3xl items-start px-4">
+    <div class="w-8 shrink-0" aria-hidden="true"></div>
+    <div class="flex min-w-0 flex-1">
+      <div class="relative max-w-full overflow-hidden rounded-b-2xl border border-primary-content/15 border-t-0 bg-primary shadow-lg shadow-primary/25">
+        <div class="overflow-x-auto px-4 py-2.5">
+        <nav aria-label="Breadcrumb">
+          <ol class="inline-flex w-max max-w-full items-center gap-2 whitespace-nowrap text-sm leading-relaxed">
+            {
+              items.map((item, index) => (
+                <li class="flex min-w-0 items-center gap-2">
+                  {index > 0 && (
+                    <span aria-hidden="true" class="text-primary-content/45 text-xs">
+                      /
+                    </span>
+                  )}
+                  {item.href && !item.isCurrent ? (
+                    <a
+                      href={item.href}
+                      class="truncate font-medium text-primary-content/72 no-underline transition hover:text-primary-content"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <span
+                      aria-current={item.isCurrent ? "page" : undefined}
+                      class:list={[
+                        "truncate",
+                        item.isCurrent
+                          ? "font-semibold text-primary-content"
+                          : "font-medium text-primary-content/72",
+                      ]}
+                    >
+                      {item.label}
+                    </span>
+                  )}
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -24,7 +24,10 @@ const topics = (await getAllTopics()).map((topic) => ({
 }));
 ---
 
-<Layout title={"Books | " + t("common.siteTitle")}>
+<Layout
+  title={"Books | " + t("common.siteTitle")}
+  breadcrumbs={[{ label: "Books", href: "/books" }]}
+>
   <BookList
     books={books}
     topics={topics}

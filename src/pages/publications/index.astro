@@ -1,5 +1,4 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import PublicationCard from '@/components/publications/PublicationCard.astro';
 import PublicationsLayout from '@/layouts/PublicationsLayout.astro';
 
@@ -42,9 +41,9 @@ const showUpcomingProjects = false;
 <PublicationsLayout
   title="Publications | Otibeguni"
   description="Beautifully illustrated books and upcoming projects celebrating Bengali and indigenous folklore."
+  breadcrumbs={[{ label: "Publications", href: "/publications" }]}
 >
   <div slot="hero" class="max-w-4xl space-y-4">
-    <Breadcrumbs menus={[{ label: 'Publications' }]} />
     <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-600">
       Books & Research
     </p>

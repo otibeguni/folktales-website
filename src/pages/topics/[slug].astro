@@ -43,6 +43,10 @@ const resources = (await getAllResources())
   .map((resource) => ({ ...resource.data, slug: resource.slug }));
 
 const currentUrl = Astro.url.href;
+const breadcrumbs = [
+  { label: "Topics", href: "/topics" },
+  { label: topic.data.item },
+];
 ---
 
 <Layout
@@ -53,6 +57,7 @@ const currentUrl = Astro.url.href;
     name: topic.data.item,
     url: currentUrl,
   }}
+  breadcrumbs={breadcrumbs}
 >
   <div data-pagefind-body>
     <ArticleTopic

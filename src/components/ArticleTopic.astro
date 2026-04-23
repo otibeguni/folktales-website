@@ -1,5 +1,4 @@
 ---
-import Breadcrumbs from './Breadcrumbs.astro';
 import type { IStory } from '@/types';
 import BookListItem from '@/components/BookListItem';
 import RelatedItemsList from '@/components/RelatedItemsList.astro';
@@ -33,9 +32,6 @@ const relatedResources = resources
 
 <div class="min-h-screen">
   <article class="prose mx-auto max-w-4xl px-4 pb-12">
-    <Breadcrumbs
-      menus={[{ label: 'Topics', href: '/topics' }, { label: topic.item }]}
-    />
     <h1 class="mb-4 text-5xl leading-16">{topic.item}</h1>
     <div class="flex flex-wrap gap-2">
       {sortedTags.map((tag) => (

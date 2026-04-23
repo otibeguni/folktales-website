@@ -1,25 +1,50 @@
 ---
-import { localizePath } from "@/utils/site-text";
 import type { IBreadcrumbs } from "@/types";
+import type { NormalizedBreadcrumb } from "@/utils/seo";
+import { normalizeBreadcrumbs } from "@/utils/seo";
 
-const { menus } = Astro.props;
+interface Props {
+  items?: NormalizedBreadcrumb[];
+  menus?: IBreadcrumbs[];
+  site?: URL;
+}
+
+const { items: providedItems, menus = [], site } = Astro.props as Props;
+const items = providedItems ?? normalizeBreadcrumbs(menus, site).items;
 ---
 
-<div class="breadcrumbs mb-5 text-sm" data-pagefind-ignore>
-  <ul class="pl-0">
-    <li><a href={localizePath("/")} class="no-underline">Home</a></li>
+<nav aria-label="Breadcrumb" data-pagefind-ignore>
+  <ol class="flex items-center gap-1.5 whitespace-nowrap text-sm">
     {
-      menus.map((menu: IBreadcrumbs) => (
-        <li>
-          {menu.href ? (
-            <a href={localizePath(menu.href)} class="no-underline">
-              {menu.label}
+      items.map((item, index) => (
+        <li class="flex min-w-0 items-center gap-1.5">
+          {index > 0 && (
+            <span aria-hidden="true" class="text-primary-content/45 text-xs">
+              /
+            </span>
+          )}
+          {item.href && !item.isCurrent ? (
+            <a
+              href={item.href}
+              class="truncate rounded-md px-2 py-1 font-medium text-primary-content/80 no-underline transition hover:bg-primary-content/10 hover:text-primary-content focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-content/40"
+            >
+              {item.label}
             </a>
           ) : (
-            menu.label
+            <span
+              aria-current={item.isCurrent ? "page" : undefined}
+              class:list={[
+                "truncate rounded-md px-2 py-1",
+                item.isCurrent
+                  ? "bg-primary-content/12 font-semibold text-primary-content"
+                  : "font-medium text-primary-content/80",
+              ]}
+            >
+              {item.label}
+            </span>
           )}
         </li>
       ))
     }
-  </ul>
-</div>
+  </ol>
+</nav>

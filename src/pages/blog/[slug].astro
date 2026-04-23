@@ -20,7 +20,10 @@ const { frontmatter } = blog;
 
 <MarkdownBreadcrumbLayout
   title={`${frontmatter?.title} - Stories | Otibeguni `}
-  breadcrumbLabels={[{ label: "Blog", href: "/blog" }]}
+  breadcrumbs={[
+    { label: "Blog", href: "/blog" },
+    { label: frontmatter?.title },
+  ]}
 >
   <div data-pagefind-body>
     <ArticleBody>

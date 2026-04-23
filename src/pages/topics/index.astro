@@ -10,7 +10,10 @@ const topics = (await getAllTopics()).map((topic) => ({
 }));
 ---
 
-<Layout title={"Topics | " + t("common.siteTitle")}>
+<Layout
+  title={"Topics | " + t("common.siteTitle")}
+  breadcrumbs={[{ label: "Topics", href: "/topics" }]}
+>
   <div data-pagefind-body>
     <TopicList
       topics={topics}

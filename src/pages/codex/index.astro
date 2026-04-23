@@ -2,7 +2,6 @@
 import { currentLanguage, t } from "@/utils/site-text";
 import StoryListCodex from "@/components/StoryListCodex";
 import Layout from "@/layouts/Layout.astro";
-import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { getAllCodexEntries } from "@/utils/content";
 
 const codexstories = (await getAllCodexEntries()).map((entry) => ({
@@ -10,10 +9,11 @@ const codexstories = (await getAllCodexEntries()).map((entry) => ({
 }));
 ---
 
-<Layout title={"Codex | " + t("common.siteTitle")}>
+<Layout
+  title={"Codex | " + t("common.siteTitle")}
+  breadcrumbs={[{ label: "Codex", href: "/codex" }]}
+>
   <div class="container mx-auto max-w-4xl px-4 py-8">
-    <Breadcrumbs menus={[{ label: "Codex", href: "/codex" }]} />
-
     <StoryListCodex
       stories={codexstories}
       lang={currentLanguage}

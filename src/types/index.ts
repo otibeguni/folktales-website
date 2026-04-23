@@ -86,7 +86,7 @@ export interface ResourceItemAlt extends ResourceItem {}
 
 export interface IBreadcrumbs {
   label: string;
-  href: string;
+  href?: string;
 }
 
 export interface IStoryCollection {

@@ -3,15 +3,15 @@ import { Schema } from "astro-seo-schema";
 import "@/styles/global.css";
 import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar.astro";
-import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import type { IBreadcrumbs } from "@/types";
 import { t } from "@/utils/site-text";
-import { buildCanonicalUrl, type AlternateLink } from "@/utils/seo";
+import { buildCanonicalUrl, normalizeBreadcrumbs, type AlternateLink } from "@/utils/seo";
 
 interface Props {
   schema?: object | null;
   title?: string | null;
   description?: string | null;
-  breadcrumbLabels?: { label: string; href?: string }[];
+  breadcrumbs?: IBreadcrumbs[];
   lang?: string;
   canonicalUrl?: string;
   alternateLinks?: AlternateLink[];
@@ -21,11 +21,15 @@ const {
   schema = null,
   title = null,
   description = null,
-  breadcrumbLabels = [{ label: "" }],
+  breadcrumbs = [],
   lang = "en",
   canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site),
   alternateLinks = [],
 } = Astro.props as Props;
+const { structuredData: breadcrumbStructuredData } = normalizeBreadcrumbs(
+  breadcrumbs,
+  Astro.site,
+);
 ---
 
 <!doctype html>
@@ -44,12 +48,17 @@ const {
     <title>{title ?? t("common.siteTitle")}</title>
     <meta name="description" content={description ?? t("common.siteDescription")} />
     {schema && <Schema item={schema} />}
+    {breadcrumbStructuredData && <Schema item={breadcrumbStructuredData} />}
   </head>
   <body>
-    <Navbar />
-    <main class="container mx-auto py-12">
+    <Navbar breadcrumbs={breadcrumbs} site={Astro.site} />
+    <main
+      class:list={[
+        "container mx-auto pb-12",
+        breadcrumbs.length > 0 ? "pt-20" : "pt-12",
+      ]}
+    >
       <article class="prose mx-auto max-w-3xl px-4 pb-12">
-        <Breadcrumbs menus={breadcrumbLabels} />
         <slot />
       </article>
     </main>

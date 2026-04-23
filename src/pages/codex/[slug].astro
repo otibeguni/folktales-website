@@ -26,11 +26,16 @@ const schemaData = {
     name: "Otibeguni",
   },
 };
+const breadcrumbs = [
+  { label: "Codex", href: "/codex" },
+  { label: story.data.title },
+];
 ---
 
 <Layout
   title={`${story.data.title} - Codex | Otibeguni `}
   schema={schemaData}
+  breadcrumbs={breadcrumbs}
 >
   <main class="py-8 md:py-12">
     <div class="container mx-auto max-w-4xl px-4">

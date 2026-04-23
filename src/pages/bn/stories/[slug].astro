@@ -119,6 +119,10 @@ const relatedResources = (story.data.resource_slugs ?? [])
     url: resource.data.url || "",
     isExternal: true,
   }));
+const breadcrumbs = [
+  { label: "Stories", href: "/bn/stories" },
+  { label: story.data.title },
+];
 ---
 
 <Layout
@@ -127,6 +131,7 @@ const relatedResources = (story.data.resource_slugs ?? [])
   lang="bn"
   canonicalUrl={canonicalUrl}
   alternateLinks={alternateLinks}
+  breadcrumbs={breadcrumbs}
 >
   <main class="py-8 md:py-12" data-pagefind-body>
     <div class="container mx-auto max-w-4xl px-4">
