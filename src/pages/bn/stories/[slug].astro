@@ -74,12 +74,19 @@ const isBasedOn = sourceBook
 
 const schemaData = {
   "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  name: story.data.title,
-  url: currentUrl,
+  "@type": "Article",
+  headline: story.data.title,
+  url: canonicalUrl,
+  inLanguage: story.data.language,
   author: {
     "@type": "Organization",
     name: "Otibeguni",
+    url: buildCanonicalUrl("/", Astro.site),
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Otibeguni",
+    url: buildCanonicalUrl("/", Astro.site),
   },
   ...(isBasedOn && { isBasedOn }),
   ...(story.data.cover_image && { image: story.data.cover_image }),
