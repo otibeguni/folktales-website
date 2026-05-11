@@ -1,47 +1,46 @@
 ---
 import dayjs from "dayjs";
-import type { MarkdownInstance } from "astro";
+import { renderRichText } from "@storyblok/astro";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
 import ArticleBody from "@/components/ArticleBody.astro";
+import { getBlogPosts } from "@/utils/storyblok-blog";
 
 export async function getStaticPaths() {
-    const blogs = Object.values(import.meta.glob<MarkdownInstance<any>>("@/blog/*.md", {
-        eager: true,
-    }));
-    return blogs?.map((blog) => ({
-        params: { slug: blog.frontmatter.slug },
+    const blogs = await getBlogPosts();
+    return blogs.map((blog) => ({
+        params: { slug: blog.slug },
         props: { blog },
     }));
 }
 const { blog } = Astro.props;
-const Content = blog?.default;
-const { frontmatter } = blog;
+const bodyHtml = renderRichText(blog.content?.body);
 ---
 
 <MarkdownBreadcrumbLayout
-  title={`${frontmatter?.title} - Stories | Otibeguni `}
+  title={`${blog.title} - Blog | Otibeguni `}
+  description={blog.seoDescription || blog.summary}
   breadcrumbs={[
     { label: "Blog", href: "/blog" },
-    { label: frontmatter?.title },
+    { label: blog.title },
   ]}
 >
   <div data-pagefind-body>
     <ArticleBody>
-      {frontmatter?.cover_image?.src && (
-        <div class="mb-6 overflow-hidden rounded-xl max-w-3xl">
+      {blog.coverImage?.src && (
+        <div class="mx-auto mb-6 max-w-xs overflow-hidden rounded-xl sm:max-w-sm">
           <img
-            src={frontmatter.cover_image.src}
-            alt={frontmatter.cover_image.alt || frontmatter.title}
+            src={blog.coverImage.src}
+            alt={blog.coverImage.alt || blog.title}
             class="aspect-square w-full object-cover block"
             loading="lazy"
           />
         </div>
       )}
-      <h1 class="mb-4 text-5xl leading-16">{frontmatter?.title}</h1>
+      <h1 class="mb-4 text-5xl leading-16">{blog.title}</h1>
       <span class="badge badge-soft badge-primary"
-        >{dayjs(frontmatter?.date).format("MMM DD YYYY")}</span
+        >{dayjs(blog.publishedAt).format("MMM DD YYYY")}</span
       >
-      <Content />
+      <Fragment set:html={bodyHtml} />
     </ArticleBody>
   </div>
 </MarkdownBreadcrumbLayout>

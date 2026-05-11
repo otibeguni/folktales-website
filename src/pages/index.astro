@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Search from 'astro-pagefind/components/Search';
-import type { MarkdownInstance } from 'astro';
 import {
   bookHasDetailPage,
   getAllBooks,
@@ -9,6 +8,7 @@ import {
   getBookDetailPath,
   getStoryRouteSlug,
 } from '@/utils/content';
+import { getBlogPosts } from '@/utils/storyblok-blog';
 
 const publicationSlides = [
   {
@@ -47,19 +47,11 @@ const bookSlides = allBooks
     href: getBookDetailPath(book.slug),
   }));
 
-const blogs = Object.values(
-  import.meta.glob<MarkdownInstance<any>>('@/blog/*.md', { eager: true }),
-)
-  .map((blog) => ({
-    title: blog.frontmatter.title as string,
-    slug: blog.frontmatter.slug as string,
-    date: blog.frontmatter.date as string,
-  }))
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+const blogs = await getBlogPosts();
 
 const blogSlides = blogs.slice(0, 3).map((blog) => ({
   title: blog.title,
-  copy: new Date(blog.date).toLocaleDateString('en-US', {
+  copy: new Date(blog.publishedAt).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
