@@ -4,16 +4,127 @@ import { renderRichText } from "@storyblok/astro";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
 import ArticleBody from "@/components/ArticleBody.astro";
 import { getBlogPosts } from "@/utils/storyblok-blog";
+import { getYouTubeEmbedUrl, getYouTubeHref } from "@/utils/youtube";
+
+type StoryblokRichTextNode = {
+  type: string;
+  content?: StoryblokRichTextNode[];
+  text?: string;
+  attrs?: {
+    id?: string;
+    body?: StoryblokBlok[];
+  };
+};
+
+type StoryblokMultilink = {
+  url?: string;
+  cached_url?: string;
+};
+
+type StoryblokBlok = {
+  _uid?: string;
+  component?: string;
+  youtube_url?: StoryblokMultilink;
+  caption?: string;
+  tone?: string;
+  body?: StoryblokRichTextNode;
+  url?: StoryblokMultilink;
+  title?: string;
+  commentary?: StoryblokRichTextNode;
+};
+
+type BodySegment =
+    | { kind: "html"; html: string; key: string }
+    | { kind: "youtube"; key: string; embedUrl: string; caption: string }
+    | { kind: "callout"; key: string; tone: string; html: string }
+    | { kind: "linkCommentary"; key: string; href: string; title: string; html: string };
+
+const getRichTextNodes = (body: unknown): StoryblokRichTextNode[] => {
+    if (!body || typeof body !== "object") {
+        return [];
+    }
+
+    const content = (body as { content?: unknown }).content;
+    return Array.isArray(content) ? (content as StoryblokRichTextNode[]) : [];
+};
+
+const getMultilinkHref = (link?: StoryblokMultilink) =>
+  getYouTubeHref(link);
+
+const renderBlock = (blok: StoryblokBlok, index: number): BodySegment | null => {
+    const key = blok._uid || `${blok.component || "blok"}-${index}`;
+
+    if (blok.component === "youtube_embed") {
+        const embedUrl = getYouTubeEmbedUrl(getMultilinkHref(blok.youtube_url));
+        if (!embedUrl) {
+            return null;
+        }
+
+        return {
+            kind: "youtube",
+            key,
+            embedUrl,
+            caption: blok.caption || "",
+        };
+    }
+
+    if (blok.component === "callout") {
+        return {
+            kind: "callout",
+            key,
+            tone: blok.tone || "note",
+            html: renderRichText(blok.body),
+        };
+    }
+
+    if (blok.component === "link_commentary") {
+        const href = getMultilinkHref(blok.url);
+        if (!href) {
+            return null;
+        }
+
+        return {
+            kind: "linkCommentary",
+            key,
+            href,
+            title: blok.title || href,
+            html: renderRichText(blok.commentary),
+        };
+    }
+
+    return null;
+};
+
+const getBodySegments = (body: unknown): BodySegment[] =>
+    getRichTextNodes(body).flatMap((node, index) => {
+        if (node.type === "blok") {
+            const bloks = Array.isArray(node.attrs?.body) ? node.attrs.body : [];
+            return bloks
+                .map((blok, blokIndex) => renderBlock(blok, blokIndex))
+                .filter((segment): segment is BodySegment => Boolean(segment));
+        }
+
+        return [
+            {
+                kind: "html",
+                key: `node-${index}`,
+                html: renderRichText({
+                    type: "doc",
+                    content: [node],
+                }),
+            },
+        ];
+    });
 
 export async function getStaticPaths() {
-    const blogs = await getBlogPosts();
-    return blogs.map((blog) => ({
-        params: { slug: blog.slug },
-        props: { blog },
-    }));
+  const blogs = await getBlogPosts();
+  return blogs.map((blog) => ({
+    params: { slug: blog.slug },
+    props: { blog },
+  }));
 }
 const { blog } = Astro.props;
-const bodyHtml = renderRichText(blog.content?.body);
+const bodySegments = getBodySegments(blog.content?.body);
 ---
 
 <MarkdownBreadcrumbLayout
@@ -26,11 +137,26 @@ const bodyHtml = renderRichText(blog.content?.body);
 >
   <div data-pagefind-body>
     <ArticleBody>
-      {blog.coverImage?.src && (
+      {blog.coverMedia?.type === "youtube" && (
+        <figure class="mx-auto mb-6 overflow-hidden rounded-2xl border border-base-300 bg-base-200 shadow-sm">
+          <div class="relative w-full" style="padding-top: 56.25%;">
+            <iframe
+              src={blog.coverMedia.embedUrl}
+              title={`${blog.title} cover video`}
+              class="absolute inset-0 h-full w-full"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            />
+          </div>
+        </figure>
+      )}
+      {blog.coverMedia?.type === "image" && (
         <div class="mx-auto mb-6 max-w-xs overflow-hidden rounded-xl sm:max-w-sm">
           <img
-            src={blog.coverImage.src}
-            alt={blog.coverImage.alt || blog.title}
+            src={blog.coverMedia.src}
+            alt={blog.coverMedia.alt || blog.title}
             class="aspect-square w-full object-cover block"
             loading="lazy"
           />
@@ -40,7 +166,69 @@ const bodyHtml = renderRichText(blog.content?.body);
       <span class="badge badge-soft badge-primary"
         >{dayjs(blog.publishedAt).format("MMM DD YYYY")}</span
       >
-      <Fragment set:html={bodyHtml} />
+      {
+        bodySegments.map((segment) => {
+          if (segment.kind === "html") {
+            return <Fragment set:html={segment.html} />;
+          }
+
+          if (segment.kind === "youtube") {
+            return (
+              <figure class="my-8">
+                <div class="overflow-hidden rounded-2xl border border-base-300 bg-base-200 shadow-sm">
+                  <div class="relative w-full" style="padding-top: 56.25%;">
+                    <iframe
+                      src={segment.embedUrl}
+                      title={`${blog.title} video`}
+                      class="absolute inset-0 h-full w-full"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allowfullscreen
+                    />
+                  </div>
+                </div>
+                {segment.caption && (
+                  <figcaption class="mt-3 text-sm text-base-content/70">
+                    {segment.caption}
+                  </figcaption>
+                )}
+              </figure>
+            );
+          }
+
+          if (segment.kind === "callout") {
+            const toneClasses = {
+              note: "border-info/40 bg-info/10",
+              warning: "border-warning/40 bg-warning/10",
+              success: "border-success/40 bg-success/10",
+            } as const;
+            const classes =
+              toneClasses[segment.tone as keyof typeof toneClasses] ||
+              toneClasses.note;
+
+            return (
+              <aside class={`my-8 rounded-2xl border px-5 py-4 ${classes}`}>
+                <div set:html={segment.html} />
+              </aside>
+            );
+          }
+
+          return (
+            <section class="my-8 rounded-2xl border border-base-300 bg-base-100 p-5 shadow-sm">
+              <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-base-content/60">
+                Link
+              </p>
+              <p class="mb-3 text-lg font-semibold">
+                <a href={segment.href} target="_blank" rel="noreferrer">
+                  {segment.title}
+                </a>
+              </p>
+              <div set:html={segment.html} />
+            </section>
+          );
+        })
+      }
     </ArticleBody>
   </div>
 </MarkdownBreadcrumbLayout>

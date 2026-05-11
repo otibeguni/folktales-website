@@ -1,7 +1,14 @@
+import { getYouTubeEmbedUrl, getYouTubeHref, getYouTubeThumbnailUrl } from "@/utils/youtube";
+
 type StoryblokAsset = {
   filename?: string;
   alt?: string;
   title?: string;
+};
+
+type StoryblokMultilink = {
+  url?: string;
+  cached_url?: string;
 };
 
 type StoryblokBlogContent = {
@@ -9,6 +16,7 @@ type StoryblokBlogContent = {
   published_at?: string;
   summary?: string;
   cover_image?: StoryblokAsset;
+  cover_video_url?: StoryblokMultilink;
   cover_alt?: string;
   body?: unknown;
   seo_title?: string;
@@ -30,6 +38,19 @@ export type BlogPost = {
   title: string;
   publishedAt: string;
   summary: string;
+  coverMedia?:
+    | {
+        type: "image";
+        src: string;
+        alt: string;
+      }
+    | {
+        type: "youtube";
+        url: string;
+        embedUrl: string;
+        thumbnailSrc: string;
+        alt: string;
+      };
   coverImage?: {
     src: string;
     alt: string;
@@ -53,7 +74,26 @@ const normalizeSlug = (slug: string) =>
 const mapStoryblokPost = (story: StoryblokStory): BlogPost => {
   const { content } = story;
   const coverSrc = content.cover_image?.filename;
+  const coverVideoUrl = getYouTubeHref(content.cover_video_url);
+  const coverVideoEmbedUrl = getYouTubeEmbedUrl(coverVideoUrl);
+  const coverVideoThumbnailUrl = getYouTubeThumbnailUrl(coverVideoUrl);
   const title = content.title || story.name;
+  const coverAlt = content.cover_alt || content.cover_image?.alt || title;
+  const coverMedia = coverVideoEmbedUrl
+    ? {
+        type: "youtube" as const,
+        url: coverVideoUrl,
+        embedUrl: coverVideoEmbedUrl,
+        thumbnailSrc: coverSrc || coverVideoThumbnailUrl,
+        alt: coverAlt,
+      }
+    : coverSrc
+      ? {
+          type: "image" as const,
+          src: coverSrc,
+          alt: coverAlt,
+        }
+      : undefined;
 
   return {
     id: story.uuid || String(story.id),
@@ -61,10 +101,18 @@ const mapStoryblokPost = (story: StoryblokStory): BlogPost => {
     title,
     publishedAt: content.published_at || "",
     summary: content.summary || "",
-    coverImage: coverSrc
+    coverMedia,
+    coverImage: coverMedia?.type === "youtube"
+      ? coverMedia.thumbnailSrc
+        ? {
+            src: coverMedia.thumbnailSrc,
+            alt: coverAlt,
+          }
+        : undefined
+      : coverSrc
       ? {
           src: coverSrc,
-          alt: content.cover_alt || content.cover_image?.alt || title,
+          alt: coverAlt,
         }
       : undefined,
     content,
@@ -112,6 +160,10 @@ const getStoryblokBlogPosts = async (): Promise<BlogPost[]> => {
 };
 
 export const getBlogPosts = () => {
+  if (import.meta.env.DEV) {
+    return getStoryblokBlogPosts();
+  }
+
   blogPostsPromise ??= getStoryblokBlogPosts();
   return blogPostsPromise;
 };
