@@ -4,6 +4,7 @@
   "version": "0.0.11",
   "author": "Yasin Junet (hello@yasinjunet.com)",
   "scripts": {
+    "predev": "node scripts/ensure-dev-cert.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
