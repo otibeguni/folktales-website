@@ -5,12 +5,14 @@ import BlogPaginatedList from "@/components/blog/BlogPaginatedList";
 import { getBlogPosts } from "@/utils/storyblok-blog";
 
 const sortedBlogs = await getBlogPosts();
-const blogListItems = sortedBlogs.map(({ id, slug, title, publishedAt, summary, coverImage, coverMedia }) => ({
+const blogListItems = sortedBlogs.map(({ id, slug, title, postType, publishedAt, summary, bookmark, coverImage, coverMedia }) => ({
   id,
   slug,
   title,
+  postType,
   publishedAt,
   summary,
+  bookmark,
   coverImage,
   coverMedia,
 }));

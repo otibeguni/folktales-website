@@ -125,6 +125,7 @@ export async function getStaticPaths() {
 }
 const { blog } = Astro.props;
 const bodySegments = getBodySegments(blog.content?.body);
+const isBookmark = blog.postType === "bookmark" && blog.bookmark;
 ---
 
 <MarkdownBreadcrumbLayout
@@ -163,9 +164,37 @@ const bodySegments = getBodySegments(blog.content?.body);
         </div>
       )}
       <h1 class="mb-4 text-5xl leading-16">{blog.title}</h1>
-      <span class="badge badge-soft badge-primary"
-        >{dayjs(blog.publishedAt).format("MMM DD YYYY")}</span
-      >
+      <div class="mb-6 flex flex-wrap items-center gap-3">
+        <span class="badge badge-soft badge-primary"
+          >{dayjs(blog.publishedAt).format("MMM DD YYYY")}</span
+        >
+        {isBookmark && (
+          <span class="badge badge-outline">Bookmark</span>
+        )}
+      </div>
+      {isBookmark && (
+        <section class="my-8 overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm">
+          <div class="border-b border-base-300 px-5 py-4">
+            <p class="text-xl font-semibold">
+              <a href={blog.bookmark.url} target="_blank" rel="noreferrer">
+                {blog.bookmark.linkText}
+              </a>
+            </p>
+          </div>
+          <div class="space-y-4 px-5 py-5">
+            {blog.bookmark.commentary && (
+              <p class="m-0 text-lg leading-8 text-base-content/80">
+                {blog.bookmark.commentary}
+              </p>
+            )}
+            <div>
+              <a class="btn btn-primary" href={blog.bookmark.url} target="_blank" rel="noreferrer">
+                Read the full article
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
       {
         bodySegments.map((segment) => {
           if (segment.kind === "html") {

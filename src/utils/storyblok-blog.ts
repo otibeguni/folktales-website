@@ -9,12 +9,17 @@ type StoryblokAsset = {
 type StoryblokMultilink = {
   url?: string;
   cached_url?: string;
+  linktype?: string;
 };
 
 type StoryblokBlogContent = {
   title?: string;
+  post_type?: string;
   published_at?: string;
   summary?: string;
+  bookmark_url?: StoryblokMultilink;
+  bookmark_link_text?: string;
+  bookmark_commentary?: string;
   cover_image?: StoryblokAsset;
   cover_video_url?: StoryblokMultilink;
   cover_alt?: string;
@@ -36,6 +41,7 @@ export type BlogPost = {
   id: string;
   slug: string;
   title: string;
+  postType: "article" | "bookmark";
   publishedAt: string;
   summary: string;
   coverMedia?:
@@ -55,6 +61,12 @@ export type BlogPost = {
     src: string;
     alt: string;
   };
+  bookmark?: {
+    url: string;
+    domain: string;
+    linkText: string;
+    commentary: string;
+  };
   content?: StoryblokBlogContent;
   seoTitle?: string;
   seoDescription?: string;
@@ -71,15 +83,105 @@ const getDeliveryToken = () =>
 const normalizeSlug = (slug: string) =>
   slug.replace(/^\/+|\/+$/g, "").replace(new RegExp(`^${BLOG_PREFIX}`), "");
 
-const mapStoryblokPost = (story: StoryblokStory): BlogPost => {
+const getExternalHref = (link?: StoryblokMultilink) => {
+  const href = link?.cached_url || link?.url || "";
+  return href.trim();
+};
+
+const getBookmarkScreenshotUrl = (href: string) =>
+  `https://image.thum.io/get/width/1200/noanimate/${href}`;
+
+const getDomainFromHref = (href: string) => {
+  try {
+    return new URL(href).hostname.replace(/^www\./, "");
+  } catch {
+    return href;
+  }
+};
+
+const clampSummary = (value: string, maxLength = 180) => {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+
+  return `${normalized.slice(0, maxLength - 1).trimEnd()}…`;
+};
+
+const decodeHtmlEntities = (value: string) =>
+  value
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+
+const extractHeadline = (html: string) => {
+  const ogTitleMatch = html.match(
+    /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i,
+  );
+  if (ogTitleMatch?.[1]) {
+    return decodeHtmlEntities(ogTitleMatch[1].trim());
+  }
+
+  const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
+  if (titleMatch?.[1]) {
+    return decodeHtmlEntities(titleMatch[1].trim());
+  }
+
+  const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+  if (h1Match?.[1]) {
+    const plainText = h1Match[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    return decodeHtmlEntities(plainText);
+  }
+
+  return "";
+};
+
+const getBookmarkLinkText = async (href: string, explicitText: string) => {
+  if (explicitText.trim()) {
+    return explicitText.trim();
+  }
+
+  try {
+    const response = await fetch(href, {
+      headers: {
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "accept-language": "en-US,en;q=0.9",
+      },
+    });
+    if (!response.ok) {
+      return "";
+    }
+
+    const html = await response.text();
+    return extractHeadline(html);
+  } catch {
+    return "";
+  }
+};
+
+const mapStoryblokPost = async (story: StoryblokStory): Promise<BlogPost> => {
   const { content } = story;
-  const coverSrc = content.cover_image?.filename;
+  const bookmarkUrl = getExternalHref(content.bookmark_url);
+  const isBookmark = content.post_type === "bookmark" && Boolean(bookmarkUrl);
+  const coverSrc = content.cover_image?.filename || (isBookmark ? getBookmarkScreenshotUrl(bookmarkUrl) : undefined);
   const coverVideoUrl = getYouTubeHref(content.cover_video_url);
   const coverVideoEmbedUrl = getYouTubeEmbedUrl(coverVideoUrl);
   const coverVideoThumbnailUrl = getYouTubeThumbnailUrl(coverVideoUrl);
   const title = content.title || story.name;
-  const coverAlt = content.cover_alt || content.cover_image?.alt || title;
-  const coverMedia = coverVideoEmbedUrl
+  const bookmarkDomain = isBookmark ? getDomainFromHref(bookmarkUrl) : "";
+  const bookmarkLinkText = isBookmark
+    ? (await getBookmarkLinkText(bookmarkUrl, content.bookmark_link_text || "")) || title || bookmarkDomain
+    : "";
+  const bookmarkCommentary = content.bookmark_commentary?.trim() || "";
+  const coverAlt = content.cover_alt ||
+    content.cover_image?.alt ||
+    (isBookmark ? `Screenshot of ${bookmarkDomain}` : title);
+  const coverMedia = !isBookmark && coverVideoEmbedUrl
     ? {
         type: "youtube" as const,
         url: coverVideoUrl,
@@ -99,8 +201,9 @@ const mapStoryblokPost = (story: StoryblokStory): BlogPost => {
     id: story.uuid || String(story.id),
     slug: normalizeSlug(story.full_slug || story.slug),
     title,
+    postType: isBookmark ? "bookmark" : "article",
     publishedAt: content.published_at || "",
-    summary: content.summary || "",
+    summary: content.summary || clampSummary(bookmarkCommentary),
     coverMedia,
     coverImage: coverMedia?.type === "youtube"
       ? coverMedia.thumbnailSrc
@@ -115,9 +218,17 @@ const mapStoryblokPost = (story: StoryblokStory): BlogPost => {
           alt: coverAlt,
         }
       : undefined,
+    bookmark: isBookmark
+      ? {
+          url: bookmarkUrl,
+          domain: bookmarkDomain,
+          linkText: bookmarkLinkText,
+          commentary: bookmarkCommentary,
+        }
+      : undefined,
     content,
     seoTitle: content.seo_title,
-    seoDescription: content.seo_description,
+    seoDescription: content.seo_description || clampSummary(bookmarkCommentary, 155),
   };
 };
 
@@ -150,10 +261,13 @@ const getStoryblokBlogPosts = async (): Promise<BlogPost[]> => {
 
   const data = (await response.json()) as { stories?: StoryblokStory[] };
 
-  return (data.stories ?? [])
-    .filter((story) => story.content)
-    .map(mapStoryblokPost)
-    .sort(
+  const posts = await Promise.all(
+    (data.stories ?? [])
+      .filter((story) => story.content)
+      .map(mapStoryblokPost),
+  );
+
+  return posts.sort(
       (a, b) =>
         new Date(b.publishedAt).valueOf() - new Date(a.publishedAt).valueOf(),
     );

@@ -5,7 +5,7 @@ import type { BlogPost } from "@/utils/storyblok-blog";
 const POSTS_PER_PAGE = 6;
 type BlogListItem = Pick<
   BlogPost,
-  "id" | "slug" | "title" | "publishedAt" | "summary" | "coverImage" | "coverMedia"
+  "id" | "slug" | "title" | "postType" | "publishedAt" | "summary" | "bookmark" | "coverImage" | "coverMedia"
 >;
 
 const BlogPaginatedList = ({
