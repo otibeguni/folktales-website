@@ -12,10 +12,8 @@ const { items } = normalizeBreadcrumbs(breadcrumbs, site);
 ---
 
 <section class="text-primary-content" data-pagefind-ignore>
-  <div class="mx-auto flex max-w-3xl items-start px-4">
-    <div class="w-8 shrink-0" aria-hidden="true"></div>
-    <div class="flex min-w-0 flex-1">
-      <div class="relative max-w-full overflow-hidden rounded-b-2xl border border-primary-content/15 border-t-0 bg-primary shadow-lg shadow-primary/25">
+  <div class="flex min-w-0">
+      <div class="relative max-w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div class="overflow-x-auto px-4 py-2.5">
         <nav aria-label="Breadcrumb">
           <ol class="inline-flex w-max max-w-full items-center gap-2 whitespace-nowrap text-sm leading-relaxed">
@@ -23,14 +21,14 @@ const { items } = normalizeBreadcrumbs(breadcrumbs, site);
               items.map((item, index) => (
                 <li class="flex min-w-0 items-center gap-2">
                   {index > 0 && (
-                    <span aria-hidden="true" class="text-primary-content/45 text-xs">
+                    <span aria-hidden="true" class="text-slate-400 text-xs">
                       /
                     </span>
                   )}
                   {item.href && !item.isCurrent ? (
                     <a
                       href={item.href}
-                      class="truncate font-medium text-primary-content/72 no-underline transition hover:text-primary-content"
+                      class="truncate font-medium text-slate-500 no-underline transition hover:text-slate-900"
                     >
                       {item.label}
                     </a>
@@ -40,8 +38,8 @@ const { items } = normalizeBreadcrumbs(breadcrumbs, site);
                       class:list={[
                         "truncate",
                         item.isCurrent
-                          ? "font-semibold text-primary-content"
-                          : "font-medium text-primary-content/72",
+                          ? "font-semibold text-slate-900"
+                          : "font-medium text-slate-500",
                       ]}
                     >
                       {item.label}
@@ -54,6 +52,5 @@ const { items } = normalizeBreadcrumbs(breadcrumbs, site);
         </nav>
         </div>
       </div>
-    </div>
   </div>
 </section>

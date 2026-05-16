@@ -1,0 +1,200 @@
+---
+import Footer from "@/components/Footer.astro";
+import HeaderBreadcrumbBar from "@/components/HeaderBreadcrumbBar.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteSidebar from "@/components/SiteSidebar.astro";
+import ZohoSignup from "@/components/ZohoSignup.astro";
+import type { IBreadcrumbs } from "@/types";
+
+interface Props {
+  breadcrumbs?: IBreadcrumbs[];
+  site?: URL;
+  currentPath?: string;
+}
+
+const {
+  breadcrumbs = [],
+  site,
+  currentPath = "/",
+} = Astro.props as Props;
+---
+
+<div class="min-h-screen bg-slate-100 text-slate-900 lg:grid lg:grid-cols-[18rem_minmax(0,1fr)]" data-site-shell>
+  <ZohoSignup />
+
+  <div
+    class="site-sidebar-overlay fixed inset-0 z-40 bg-slate-950/45 opacity-0 transition-opacity duration-300 lg:hidden"
+    data-sidebar-overlay
+    data-sidebar-close
+    aria-hidden="true"
+  ></div>
+
+  <SiteSidebar currentPath={currentPath} />
+
+  <div class="relative flex min-h-screen min-w-0 flex-col">
+    <SiteHeader />
+
+    <main class="flex-1 px-4 pb-12 pt-4 sm:px-6 sm:pt-6 lg:px-10 lg:py-8">
+      <div class="mx-auto w-full max-w-6xl">
+        {
+          breadcrumbs.length > 0 && (
+            <div class="mb-6 lg:mb-8">
+              <HeaderBreadcrumbBar breadcrumbs={breadcrumbs} site={site} />
+            </div>
+          )
+        }
+        <slot />
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</div>
+
+<script>
+  const shell = document.querySelector("[data-site-shell]");
+
+  if (shell instanceof HTMLElement) {
+    const panel = shell.querySelector("[data-sidebar-panel]");
+    const overlay = shell.querySelector("[data-sidebar-overlay]");
+    const openButtons = shell.querySelectorAll("[data-sidebar-open]");
+    const closeButtons = shell.querySelectorAll("[data-sidebar-close]");
+    const linkButtons = shell.querySelectorAll("[data-sidebar-link]");
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    const headerOpenButtons = shell.querySelectorAll(".site-header-open");
+    const headerBrands = shell.querySelectorAll(".site-header-brand");
+    const sidebarBrands = shell.querySelectorAll(".site-sidebar-brand");
+    let lastFocusedElement = null;
+    let desktopSidebarOpen = true;
+    let mobileSidebarOpen = false;
+
+    const syncSidebarState = () => {
+      const isDesktop = desktopQuery.matches;
+      const shouldShowSidebar = isDesktop ? desktopSidebarOpen : mobileSidebarOpen;
+      const shouldShowMobilePanel = !isDesktop && mobileSidebarOpen;
+
+      shell.classList.toggle("is-sidebar-open", shouldShowSidebar);
+      shell.classList.toggle("is-desktop-sidebar-collapsed", isDesktop && !desktopSidebarOpen);
+      document.body.style.overflow = shouldShowMobilePanel ? "hidden" : "";
+
+      if (panel instanceof HTMLElement) {
+        panel.setAttribute("aria-hidden", String(!shouldShowSidebar));
+        panel.classList.toggle("sidebar-open", shouldShowSidebar);
+        panel.classList.toggle("sidebar-closed", !shouldShowSidebar);
+        panel.style.transform = shouldShowSidebar ? "translateX(0)" : "translateX(-100%)";
+      }
+
+      if (overlay instanceof HTMLElement) {
+        overlay.classList.toggle("sidebar-overlay-visible", shouldShowMobilePanel);
+        overlay.style.opacity = shouldShowMobilePanel ? "1" : "0";
+        overlay.style.pointerEvents = shouldShowMobilePanel ? "auto" : "none";
+      }
+
+      openButtons.forEach((button) => {
+        if (button instanceof HTMLElement) {
+          button.setAttribute("aria-expanded", String(shouldShowSidebar));
+        }
+      });
+
+      headerOpenButtons.forEach((button) => {
+        if (button instanceof HTMLElement) {
+          const hideButton = isDesktop && desktopSidebarOpen;
+          button.style.visibility = hideButton ? "hidden" : "visible";
+          button.style.pointerEvents = hideButton ? "none" : "auto";
+        }
+      });
+
+      headerBrands.forEach((brand) => {
+        if (brand instanceof HTMLElement) {
+          const hideBrand = shouldShowSidebar;
+          brand.style.visibility = hideBrand ? "hidden" : "visible";
+          brand.style.pointerEvents = hideBrand ? "none" : "auto";
+        }
+      });
+
+      sidebarBrands.forEach((brand) => {
+        if (brand instanceof HTMLElement) {
+          const showBrand = shouldShowSidebar;
+          brand.style.visibility = showBrand ? "visible" : "hidden";
+          brand.style.pointerEvents = showBrand ? "auto" : "none";
+        }
+      });
+
+      if (!shouldShowSidebar && lastFocusedElement instanceof HTMLElement) {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
+      }
+    };
+
+    const openSidebar = (trigger) => {
+      lastFocusedElement = trigger instanceof HTMLElement ? trigger : document.activeElement;
+      if (desktopQuery.matches) {
+        desktopSidebarOpen = true;
+      } else {
+        mobileSidebarOpen = true;
+      }
+      syncSidebarState();
+    };
+
+    const closeSidebar = () => {
+      if (desktopQuery.matches) {
+        desktopSidebarOpen = false;
+      } else {
+        mobileSidebarOpen = false;
+      }
+      syncSidebarState();
+    };
+
+    openButtons.forEach((button) => {
+      button.addEventListener("click", () => openSidebar(button));
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", closeSidebar);
+    });
+
+    linkButtons.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (!desktopQuery.matches) {
+          closeSidebar();
+        }
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mobileSidebarOpen) {
+        closeSidebar();
+      }
+    });
+
+    desktopQuery.addEventListener("change", () => {
+      mobileSidebarOpen = false;
+      syncSidebarState();
+    });
+
+    syncSidebarState();
+  }
+</script>
+
+<style>
+  :global(.site-sidebar) {
+    transition: transform 300ms ease;
+  }
+
+  :global(.site-sidebar-overlay) {
+    pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    [data-site-shell].is-desktop-sidebar-collapsed {
+      grid-template-columns: 0 minmax(0, 1fr);
+    }
+
+    [data-site-shell].is-desktop-sidebar-collapsed :global(.site-sidebar) {
+      width: 0;
+      border-right-color: transparent;
+      box-shadow: none;
+      overflow: hidden;
+    }
+  }
+</style>

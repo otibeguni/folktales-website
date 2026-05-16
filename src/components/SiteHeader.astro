@@ -1,0 +1,45 @@
+---
+import { localizePath } from "@/utils/site-text";
+import ZohoSignupButton from "@/components/ZohoSignupButton.astro";
+---
+
+<header
+  class="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur"
+  data-pagefind-ignore
+>
+  <div class="site-header-inner flex min-h-[4.5rem] items-center justify-start gap-3 px-4 sm:px-6">
+    <button
+      type="button"
+      class="site-header-open inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900 lg:invisible lg:pointer-events-none"
+      aria-controls="site-sidebar"
+      aria-expanded="false"
+      aria-label="Open navigation menu"
+      data-sidebar-open
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="h-5 w-5 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M4 7h16M4 12h16M4 17h16"
+        ></path>
+      </svg>
+    </button>
+
+    <a
+      href={localizePath("/")}
+      class="site-header-brand min-w-0 text-left text-lg font-semibold tracking-tight text-slate-900 no-underline"
+    >
+      Otibeguni
+    </a>
+
+    <div class="ml-auto shrink-0">
+      <ZohoSignupButton />
+    </div>
+  </div>
+</header>

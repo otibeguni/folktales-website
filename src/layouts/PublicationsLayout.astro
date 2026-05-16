@@ -1,8 +1,7 @@
 ---
 import { Schema } from "astro-seo-schema";
 import "@/styles/global.css";
-import Footer from "@/components/Footer.astro";
-import Navbar from "@/components/Navbar.astro";
+import AppShell from "@/components/AppShell.astro";
 import type { IBreadcrumbs } from "@/types";
 import { buildCanonicalUrl, normalizeBreadcrumbs, type AlternateLink } from "@/utils/seo";
 
@@ -50,13 +49,7 @@ const { structuredData: breadcrumbStructuredData } = normalizeBreadcrumbs(
     {breadcrumbStructuredData && <Schema item={breadcrumbStructuredData} />}
   </head>
   <body class="bg-white text-slate-900">
-    <Navbar breadcrumbs={breadcrumbs} site={Astro.site} />
-    <main
-      class:list={[
-        "container mx-auto min-h-screen px-4 pb-12",
-        breadcrumbs.length > 0 ? "pt-14" : "",
-      ]}
-    >
+    <AppShell breadcrumbs={breadcrumbs} site={Astro.site} currentPath={Astro.url.pathname}>
       <section class="relative isolate overflow-hidden">
         <div
           class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12)_0,_transparent_42%),radial-gradient(circle_at_20%_20%,_rgba(14,165,233,0.12)_0,_transparent_36%),radial-gradient(circle_at_80%_0,_rgba(56,189,248,0.14)_0,_transparent_32%)]"
@@ -69,7 +62,6 @@ const { structuredData: breadcrumbStructuredData } = normalizeBreadcrumbs(
       <section class="-mt-6 mx-auto max-w-4xl space-y-12 sm:-mt-10">
         <slot />
       </section>
-    </main>
-    <Footer />
+    </AppShell>
   </body>
 </html>
