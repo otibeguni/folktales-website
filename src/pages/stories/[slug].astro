@@ -5,11 +5,13 @@ import StoryMetadata from "../../components/StoryMetadata.astro";
 import ArticleBody from "../../components/ArticleBody.astro";
 import RelatedItemsList from "../../components/RelatedItemsList.astro";
 import {
+  bookHasDetailPage,
   findStoryTranslation,
   getAllBooks,
   getAllResources,
   getAllStories,
   getAllTopics,
+  getBookDetailPath,
   getStoryRouteSlug,
   getStoriesByLanguage,
   indexEntriesBySlug,
@@ -42,6 +44,11 @@ const storyRouteSlug = getStoryRouteSlug(story);
 const bnStory = findStoryTranslation(allStories, storyRouteSlug, "bn");
 const sourceBook = story.data.source_slug
   ? bookBySlug.get(story.data.source_slug)
+  : undefined;
+const sourceBookUrl = sourceBook
+  ? bookHasDetailPage(sourceBook)
+    ? getBookDetailPath(sourceBook.slug)
+    : sourceBook.data.library_url || sourceBook.data.url
   : undefined;
 
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
@@ -147,7 +154,7 @@ const breadcrumbs = [
             category={story.data.category}
             sourceBook={sourceBook?.data.name || story.data.source_label}
             sourceAuthor={sourceBook?.data.author}
-            sourceUrl={sourceBook?.data.library_url || sourceBook?.data.url}
+            sourceUrl={sourceBookUrl}
             translationLink={bnStory ? `/bn/stories/${getStoryRouteSlug(bnStory)}` : undefined}
             translationLabel="Read in Bengali"
           />
