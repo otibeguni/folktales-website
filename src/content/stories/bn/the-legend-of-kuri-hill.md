@@ -1,15 +1,9 @@
 ---
 title: কুড়ি টিলার কিংবদন্তি
-category: Bengal Legend
 url_slug: the-legend-of-kuri-hill
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_a_seven_dervishes_inside_a_cave_havin_759fc4a7-43cb-4abd-af34-125aff29f3c6_dmzbm4.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - habiganj-district
-resource_slugs:
-  - resource-7-the-mysterious-black-stone-of-kuri-hill
 ---
+
 
 সে বহু শতাব্দী আগের কথা। বর্তমান হবিগঞ্জ জেলায় তখন ইমামবাজার নামে এক প্রসিদ্ধ বাজার ছিল। অন্যান্য বহু জিনিস সহ বাজারের মাছের অনেক নামডাক ছিল। দূরদূরান্ত থেকে মানুষ বাজারে মাছ কিনতে আসতো। কিন্তু এত খ্যাতি সত্ত্বেও ইমামবাজারের ঠিক পাশেই একটি আবর্জনার স্তুপ ছিলো। মানুষ সেখানে মাছের পঁচা অংশগুলো ফেলে দিতো। আবর্জনা ফেলার পর সেখানে গন্ধে টেকা যেতো না, কিন্তু অবাক ব্যাপার হলো, প্রতিদিনই একটি নির্দিষ্ট সময় কেউ একজন এসে সেই পঁচা মাছের টুকরোগুলো আবর্জনা থেকে নিয়ে যেত। কে এই কাজ করে, কেউ জানতো না। অবশ্য জানার জন্য কারো আগ্রহও ছিলনা। বাজার যেমন চলার, তেমনি চলে যেতো।
 

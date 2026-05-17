@@ -1,15 +1,10 @@
 ---
 title: The legend of Ghashi Dewan of Cholon Bil
 title_bn: চলন বিলের ঘাসি দেওয়ানের কিংবদন্তি
-category: Bengal Legend
 url_slug: the-legend-of-ghashi-dewan-of-cholon-bil
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750588050/shahriarhaque_Anime_style_render._A_solitary_indian_brown_ski_2e076fd8-d50e-4787-acd4-a688fa39c056_2_dkpia6.png
-topic_slugs:
-  - chalan-beel
-resource_slugs:
-  - resource-74
 ---
+
 
 About 500 years ago, Shah Makhdum (RA) journeyed from the distant lands of Arabia, through Yemen, to finally settle in Rajshahi, Bangladesh. Accompanying him was Baba Ghasi Dewan (RA). Shah Makhdum (RA) was a revered Islamic saint who, along with numerous disciples, came to this region to spread the teachings of Islam. Among his followers, some dedicated themselves to spreading Islam, while others devoted their lives to serving humanity. Baba Ghasi Dewan (RA) was one of the most notable among them.
 

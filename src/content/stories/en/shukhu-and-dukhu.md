@@ -1,14 +1,9 @@
 ---
 title: Shukhu and Dukhu
-category: Bengali Folktale
 url_slug: shukhu-and-dukhu
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754660929/shahriarhaque_watercolor_painting_cartoon_style_depiction_of__783e7360-d6d2-4dc0-b72c-a0c21990e2a0_2_osvym9.png
-source_slug: thakurmar-jhuli-dakshinaranjan
-topic_slugs:
-  - thakurmar-jhuli
-resource_slugs: []
 ---
+
 
 There was a weaver who had two wives. Each wife had a daughter; one was named Shukhu, and the other was Dukhu. The weaver favored his first wife and her daughter, Shukhu. They never lifted a finger to do any housework; they just sat and ate all day. Meanwhile, Dukhu and her mother spun thread and cleaned the house, and in return, they received only a few handfuls of rice and endless scolding.
 

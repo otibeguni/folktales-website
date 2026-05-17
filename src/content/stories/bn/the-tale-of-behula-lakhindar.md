@@ -1,17 +1,9 @@
 ---
 title: বেহুলা-লখিন্দর
-category: Bengali Folktale
 url_slug: the-tale-of-behula-lakhindar
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750588694/shahriarhaque_anime_style_wide-angle_render_of_A_sorrowful_yo_9aca4224-394e-4923-ae2e-ee8c8104ab72_3_ey8owd.png
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - gokul-medh
-  - goddess-manasa
-  - manasamangal-kavya
-resource_slugs:
-  - resource-30-behular-bashorghor-in-champaknagar-travel-vlog
 ---
+
 
 সে বহুকাল আগের কথা। সমুদ্রপথে বণিকেরা তখন ব্যবসায় খুব লাভ করছে। চম্পাই নগরে থাকতো এমনই এক বদমেজাজী আর দুঃসাহসী বণিক। নাম তার চাঁদ সওদাগর। লোকে তাকে চাঁদ বেনে বলেও ডাকে। এই চাঁদ সওদাগর ছিল মহাদেব, মানে দেবাধিদেব শিবের বিশাল ভক্ত। অন্য কাউকে যেন তোয়াক্কাই করতো না সে।
 

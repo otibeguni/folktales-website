@@ -1,17 +1,10 @@
 ---
 title: The legend of Komola Rani Lake
 title_bn: কমলা রানীর দীঘির কিংবদন্তি
-category: Bengal Legend
 url_slug: the-legend-of-komola-rani-lake
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_dramatic_painting_of_a_ghost_of_a_queen_standing__693a5a86-f192-4091-85ce-30985aa2970c_xzvdm4.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - ganga-devi
-  - moulvibazar-district
-resource_slugs:
-  - resource-73
 ---
+
 
 It was the year 1580. King Suvidh Narayan ruled over the region of present-day Moulvibazar. One night, [Gangadevi](<https://en.wikipedia.org/wiki/Ganga_(goddess)>) visited him in his dreams and asked him to dig a lake over a 12-bigha plot of land. She also left instructions to reward the first worker to dig with a gold necklace. Fearing the wrath of the Goddess, the king obliged and promptly had his men dig the lake. But alas, no matter how deep they dug, water did not come out of the ground.
 

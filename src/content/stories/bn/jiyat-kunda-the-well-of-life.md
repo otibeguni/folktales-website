@@ -1,18 +1,9 @@
 ---
 title: জিয়ৎ কুন্ড
-category: Bengal Legend
 url_slug: jiyat-kunda-the-well-of-life
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584695/shahriarhaque_oil_painting_of_a_eagle_with_piece_of_meat_in_its_7f5dfa11-22d8-4246-8b02-9b0b5d67db8d_tw6wfn.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - bogura-district
-  - jiyat-kunda
-  - pundravardhana-kingdom
-  - god-vishnu
-  - mahasthangarh
-resource_slugs: []
 ---
+
 
 সময়টা তখন ১৬৩৬ সাল। আফগানিস্তানের বলখ অঞ্চলের শাসক শাহ আলি আসগর নিজের ছেলেকে রাজ্যের সকল দায়িত্ব তুলে দিতে চাইলেন। কিন্তু ছেলের তো সিংহাসনে মন নেই। তিনি চান ধর্ম প্রচারক হতে।
 

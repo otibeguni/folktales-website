@@ -1,18 +1,10 @@
 ---
 title: Purenba and the cursed Helloi
 title_bn: পুরেনব এবং হ্যালই
-category: Indigenous Folktale
 url_slug: purenba-and-the-cursed-helloi
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584694/shahriarhaque_oil_painting_of_a_gorgeous_indian_wood_nymph_c7ce3044-ba41-4390-98d8-55e2b1e0fff5_rjbz3d.webp
-source_slug: book-60-new-folktales-of-manipur
-topic_slugs:
-  - manipuri-people
-  - god-sidaba-mapu
-  - helloi
-  - god-lainingthou-sanamahi
-resource_slugs: []
 ---
+
 
 According to Monipuri religion, at the beginning of creation, the supreme God [Sitapa Mapu](https://en.wikipedia.org/wiki/Sidaba_Mapu) decreed that the Earth would be inhabited by the descendants of both Gods and humans. He selected his eldest son, Sanamahi, to lead the race of Gods and other divine beings, while his youngest son, Pakhangba, was chosen to lead the human race. The two brothers descended from Mount Koubru and established their respective tribes. However, over the years, the tribes began to mix. The Gods sometimes took human wives against their will, and human men also fathered children with [Hellois](https://en.wikipedia.org/wiki/Helloi), a race of beautiful celestial women. Unfortunately, these unions resulted in a race of demi-gods who were more powerful than humans but were seen as outcasts by the Gods. Recognizing his mistake, Sitapa Mapu realized that Gods and humans were never meant to coexist. He proclaimed that all divine creatures should abandon Earth and move to the Underworld. Gradually, all the divine beings departed, except for one Haloi who refused to let go of the beautiful forests and valleys she called home. With time, she became a mere myth. If anyone went missing in the forest, people would invent stories of them falling victim to the Haloi.
 

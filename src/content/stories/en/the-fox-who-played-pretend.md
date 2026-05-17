@@ -1,14 +1,9 @@
 ---
 title: The Fox Who Played Pretend
-category: Bengali Folktale
 url_slug: the-fox-who-played-pretend
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754661250/shahriarhaque_watercolor_painting_cartoon_style_depiction_of__cb339075-622d-4843-95c6-926dce4f4f99_1_r7czrv.png
-source_slug: thakurmar-jhuli-dakshinaranjan
-topic_slugs:
-  - thakurmar-jhuli
-resource_slugs: []
 ---
+
 
 There once was a fox whose father had left him nothing but a wall. But the son, not to be outdone, had a grand idea of his own. Twirling his magnificent whiskers, the fox opened a grand school in the middle of a reed forest.
 

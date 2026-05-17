@@ -1,14 +1,10 @@
 ---
 title: The girl who was raised by bears
 title_bn: ভাল্লুক কন্যা
-category: Bengali Folktale
 url_slug: the-girl-who-was-raised-by-bears
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/IMG_4688_kmjzp6.webp
-source_label: Bangla Academy Folklore Shongrohomala - 130
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 King Jalal was deeply sad. He had such a large kingdom, but to whom could he entrust its rule and close his eyes in peace? One by one, he married seven times, but still, no child was born in any of his households. In his sorrow, the king entrusted the kingdom to his vizier and minister and began to walk towards the forest, taking only a bed and a pillow with him.
 

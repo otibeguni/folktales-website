@@ -1,15 +1,10 @@
 ---
 title: The farmer and the beggar from a foreign land
 title_bn: চাষী ও ভিনদেশী ফকির
-category: Indigenous Folktale
 url_slug: the-farmer-and-the-beggar-from-a-foreign-land
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/khasi-beggar_emmy8x.webp
-source_slug: book-41-folk-tales-of-the-khasis
-topic_slugs:
-  - khasi-people
-resource_slugs: []
 ---
+
 
 A long, long time ago, in a certain country, lived a poor farmer's family. They lived from hand to mouth. While the crops of other farmers in the vicinity grew well, theirs, unfortunately, were always very poor. However, every member of the family was very kind and free from greed. As a result, despite having so little wealth and often no rice in the pot, they always had smiles on their faces. They felt no envy towards their neighbors. Although they were somewhat disheartened by their own situation, they never blamed others. Their days passed in this state of hardship.
 

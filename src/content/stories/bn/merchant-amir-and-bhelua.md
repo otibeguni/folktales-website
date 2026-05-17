@@ -1,13 +1,9 @@
 ---
 title: আমির সদাগর ও ভেলুয়া সুন্দরী
-category: Puthi Literature
 url_slug: merchant-amir-and-bhelua
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/IMG_4687_eponaf.webp
-source_slug: amir-shodagor-o-bhelua-shundori
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 তেলৈন্না নগরের রাজা মনোহর আর ময়না সুন্দরীর কোল আলো করে এলেন এক অপূর্ব কন্যা— ভেলুয়া সুন্দরী। তার রূপ? যেন ইন্দ্রলোকের অপরূপ অপ্সরা, যার চেহারায় মিশে আছে স্বর্গীয় জ্যোৎস্নার মায়া। তার চোখ? যেন পদ্ম ফুলের মাঝে কালো ভ্রমর— গভীর, রহস্যময়। তার হাসি? বিজলি রেখার মতো ঝলকে, আর দাঁত যেন মুক্তো ছড়ানো। বারো বসন্ত পেরিয়ে সে যখন মন্দিরঘরে একা একা থাকে,তার সৌন্দর্য ভাসে যেন ধূপছায়া দিঘির জলে।
 

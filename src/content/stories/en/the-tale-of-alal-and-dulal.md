@@ -1,14 +1,10 @@
 ---
 title: The tale of Alal and Dulal
 title_bn: "দেওয়ানা-মদিনা : আলাল ও দুলালের কাহিনী"
-category: Bengali Folktale
 url_slug: the-tale-of-alal-and-dulal
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shahriarhaque_persian_style_painting_of_a_mughal_man_mourning_i_a04556c2-2d18-433a-8760-e6ad72563ff3_rxenlk.webp
-topic_slugs:
-  - maimansingha-gitika
-resource_slugs: []
 ---
+
 
 The Dewan of Boinnachong, Sonafar, sits beside his dying wife, accompanied by his two sons, Alal and Dulal. On her deathbed, Sonafar's wife requests that he never remarry after her passing. She believes that a stepmother can never truly love her stepchildren. Therefore, with the sky, the air, and all the animals and birds as witnesses, she makes this vow to her husband before taking her last breath.
 

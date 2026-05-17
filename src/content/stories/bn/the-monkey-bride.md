@@ -1,14 +1,9 @@
 ---
 title: বাঁদর বউ
-category: Indigenous Folktale
 url_slug: the-monkey-bride
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1759067813/shahriarhaque_comic_book_style_drawing_of_cute_monkey_dressed_c218e6e4-56d0-4c5d-a5ac-4f60a5378719_2_ue2uxg.png
-source_slug: tribal-folk-tales-of-tripura
-topic_slugs:
-  - tripura-people
-resource_slugs: []
 ---
+
 
 পাহাড়ের প্রান্তে এক গাঁয়ে বাস করতো এক জুমচাষী পরিবার। গাঁয়ের মোড়লকে সেখানে ‘নারান’ নামে ডাকতো সকলে। সেই নারানের ছিল এক নয়, দুই নয়— সাত সাতটি ছেলে। কিন্তু তার কোনো ছেলেরই বিয়ে হয়নি। নারানেরও বেশ বয়স হয়ে গেছিল। তাই সে ভাবলো, একসাথে সাত ছেলের বিয়ে দেবে। বুড়ো নারান সব ছেলেকে ডেকে বললো, “আমার মরার আর বেশিদিন বাকি নেই। এখন তোমাদের জন্য গাঁয়ে গাঁয়ে ঘুরে আমি বউ খুঁজতে পারব না। তাই তোমাদের জন্য একটা স্বয়ম্বর সভা করব।”
 

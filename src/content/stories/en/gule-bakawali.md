@@ -1,15 +1,10 @@
 ---
 title: Gule Bakawali
 title_bn: গুলে বকাওলী (পরিস্থানের ফুল)
-category: Bengali Translation
 url_slug: gule-bakawali
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/shahriarhaque_watercolor_painting_of_a_mughal_fairy_sleeping_on_7455ede9-1855-4091-95b5-aa255f043ce8_ty85qm.webp
-source_slug: gule-bokowali
-topic_slugs:
-  - pari
-resource_slugs: []
 ---
+
 
 The King of Shorkostan was Zaynul Muluk. He was fortunate in terms of having sons. Unlike other kings and emperors, he was not childless. Everything was going well, but when it came to his fifth son, Tajul Muluk, fate intervened. The astrologer predicted, 'As soon as the king lays eyes on his fifth son, he will lose his sight.' The time given was twelve years. Within twelve years, this grave misfortune would fall upon the king.
 

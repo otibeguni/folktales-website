@@ -1,22 +1,10 @@
 ---
 title: Byangoma and the prince
 title_bn: বেঙ্গমা ও রাজপুত্র
-category: Bengali Folktale
 url_slug: byangoma-and-the-prince
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/byangoma_btbd27.webp
-source_slug: book-37-fabulous-females-and-peerless-pirs
-topic_slugs:
-  - sundarbans
-  - ganges-river
-  - satya-pir
-  - god-krishna
-  - god-brahma
-  - vedas
-  - rama
-  - byangoma
-resource_slugs: []
 ---
+
 
 King Bhimsen's capital was situated in the western part of Villri. The king was just and fair. Many knowledgeable scholars and Brahmins would visit his court. In that kingdom, there were people of all professions—shepherds, gardeners, oil pressers, blacksmiths, farmers, and even wanderers. Except for the very poor, everyone had homes, and people were generally well-off.
 

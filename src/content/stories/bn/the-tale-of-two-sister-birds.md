@@ -1,13 +1,9 @@
 ---
 title: দুই পাখি বোনের গল্প
-category: Indigenous Folktale
 url_slug: the-tale-of-two-sister-birds
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1759067159/shahriarhaque_watercolor_painting_of_two_indian_village_girls_e9bfd3f0-d4f8-44b0-a4bd-aca44b01cd9b_2_ttfryo.png
-source_slug: bangladesher-adibashi-lokokotha
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 এক গাঁয়ের মোড়লের দুই মেয়ে ছিল। নাম তাদের নছি ও ডিমছি। মা-বাবা প্রতিদিন কাঠ কাটার কাজ করতে যেত, আর দুই মেয়েকে রেখে যেত দাদির কাছে। দুই বোন মিলে সারা দিনভর ধান পাহারা দিত।
 

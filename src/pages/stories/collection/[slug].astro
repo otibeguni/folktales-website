@@ -2,8 +2,8 @@
 import Layout from "@/layouts/Layout.astro";
 import StoryCollectionList from "@/components/StoryCollectionList.astro";
 import {
-  getAllStories,
   getAllStoryCollections,
+  getResolvedStories,
   getStoryRouteSlug,
   renderEntry,
 } from "@/utils/content";
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 
 const { collection } = Astro.props;
 const { Content } = await renderEntry(collection);
-const stories = (await getAllStories()).map((story) => ({
+const stories = (await getResolvedStories()).map((story) => ({
   frontmatter: { ...story.data, slug: getStoryRouteSlug(story) },
 }));
 ---

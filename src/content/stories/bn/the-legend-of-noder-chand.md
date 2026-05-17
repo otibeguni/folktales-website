@@ -1,16 +1,9 @@
 ---
 title: নদের চাদের আখ্যান
-category: Bengal Legend
 url_slug: the-legend-of-noder-chand
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_2861_zki27f.webp
-source_slug: bangla-kingbodonti-two-asaduzzaman-juel
-topic_slugs:
-  - kamakhya-temple
-  - faridpur-district
-resource_slugs:
-  - resource-36-noder-chand-ghaat-travel-vlog
 ---
+
 
 বহুকাল আগে গদাধর নামের এক জেলে বাস করতো। স্ত্রীকে নিয়ে ছোট্ট ঝুপড়ীতে বাস করতো আর মধুমতী নদীতে মাছ ধরে সংসার চালাতো। শীঘ্রই তার স্ত্রী অন্তঃসত্ত্বা হয়। আরো একটা নতুন মুখের আগমনের জন্য আনন্দের সাথে সাথে দুঃশ্চিন্তা ও হয় তার ভরণপোষণের।
 

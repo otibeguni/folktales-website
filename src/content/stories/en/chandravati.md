@@ -1,14 +1,9 @@
 ---
 title: Chandravati
-category: Bengal Legend
 url_slug: chandravati
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1759065112/shahriarhaque_soft_watercolor_illustration_of_a_beautiful_you_46ea2e49-c27e-4361-b850-6f8c0f06b018_3_stzz7m.png
-source_slug: banglar-puronari
-topic_slugs:
-  - god-shiva
-resource_slugs: []
 ---
+
 
 On the banks of the gentle Phuleswari river, nestled like a picture postcard, was the village of Patpari. In this village lived a young girl named Chandravati. Near her home was a pond surrounded by a flower garden, vibrant with the colors of hibiscus, jasmine, and champak flowers. Every day, a graceful young girl and a handsome young man would come to the pond's edge to pick flowers.
 

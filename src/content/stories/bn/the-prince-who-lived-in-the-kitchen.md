@@ -1,13 +1,9 @@
 ---
 title: পাহাইল্যা রাজপুত্র
-category: Bengali Folktale
 url_slug: the-prince-who-lived-in-the-kitchen
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/IMG_4506_clvwff.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 90
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 কয়েকশ বছর পূর্বে আম্মক নামে এক রাজা ছিলেন। রাজার ছিল সাতটি পুত্র কিন্তু সবচেয়ে ছোট পুত্র ছিলো অন্য সবার থেকে আলাদা। সে সারাদিন চুপচাপ থাকতো আর মেয়েদের মতো রান্নার কাজ করতো। এজন্য তার নাম রাখা হয় 'পাহাইল্যা'। বছরের পর বছর রাজার কাছে অপমানিত হতে হতে একদিন সে মনের ক্ষোভে রাজ্য ছেড়ে চলে যায়।
 

@@ -1,14 +1,9 @@
 ---
 title: জাদুকরী আংটি ও জুম চাষী
-category: Indigenous Folktale
 url_slug: the-farmer-and-the-talking-ring
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584689/494763892_993614396305704_2008351711067734708_n_nshnuz.webp
-source_slug: tribal-folk-tales-of-tripura
-topic_slugs:
-  - tripura-people
-resource_slugs: []
 ---
+
 
 এক গায়ে থাকতো দুই বুড়ো-বুড়ি। তাদের ছিল দুই নাতি। ছেলে, ছেলের বউ নাতিরা ছোট থাকতেই মারা গেছে; দাদু-দাদীর হাতেই মানুষ তারা। নাতিরা বেশ শক্ত-সমর্থ, জুমক্ষেতে যায়, কাজ করে। বুড়ো-বুড়ি সারাদিন ধরে বসে থাকে, নাতিরা কখন খাবার নিয়ে আসবে, সেই অপেক্ষায়।
 

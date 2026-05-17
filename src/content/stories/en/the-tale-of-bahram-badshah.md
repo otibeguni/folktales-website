@@ -1,14 +1,10 @@
 ---
 title: The tale of Bahram Badshah
 title_bn: বাহরাম বাদশার কিসসা
-category: Bengali Folktale
 url_slug: the-tale-of-bahram-badshah
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shahriarhaque_persian_miniature_style_painting_of_a_majestic_ro_b935e7fa-5823-4dbe-b0f4-26492518b9ca_bxsfnt.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 33
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 There was once a king named Bahram. Like other kings, he had granaries full of grain, a treasury overflowing with wealth, and a kingdom of subjects. However, unlike many others, this king was not cruel. He had a heart full of kindness and compassion. Whoever stood at his door asking for something, he would grant it without a second thought. This king was a truly generous soul. But this habit of giving brought misfortune upon him. Despite his goodwill toward everyone, his luck began to turn. And the bringer of this ill fate was none other than a beggar who stood at the king’s door one day.
 

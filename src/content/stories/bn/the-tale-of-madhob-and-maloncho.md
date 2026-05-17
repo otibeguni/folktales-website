@@ -1,13 +1,9 @@
 ---
 title: মাধব এবং মালঞ্চ
-category: Bengali Folktale
 url_slug: the-tale-of-madhob-and-maloncho
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/shahriarhaque_watercolor_painting_of_a_Rakshasa_in_a_forest_be43ce0d-1007-4dbe-9432-db47982e0a00_ltbogo.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 33
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 সে বহু বহুকাল আগের কথা। এক দেশে থাকতো এক রাজা। রাজা-রাজড়ার যেমন হয়, তেমনি তার ভাণ্ডারে ধনদৌলতের ছড়াছড়ি। হাতিশালে হাতিরা শূঁড় তুলে আনন্দ করে, ঘোড়াশালে ঘোড়ারা খুর শানায়। লোক-লস্করও যথেষ্ট। শুধু দুঃখ মনে একটাই, রাজার কোনো সন্তান নেই। কী হবে এত ধন-সম্পদ দিয়ে, যদি বংশের প্রদীপই না থাকে? রাজার বড় দুঃখে দিন কাটে।
 

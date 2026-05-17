@@ -1,16 +1,10 @@
 ---
 title: The Mad King
 title_bn: পাগলা রাজা
-category: Indigenous Folktale
 url_slug: the-mad-king
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584697/shahriarhaque_painting_of_a_Chakma_king_doing_yoga_ae3670fa-9fd0-41f0-81d8-04c54f68c9c8_lb6rtt.webp
-source_slug: chakma-puran
-topic_slugs:
-  - chakma-people
-resource_slugs:
-  - resource-49-alikodom-bandarban-travel-vlog
 ---
+
 
 Around the beginning of the 17th century, an extraordinary person named Sattua Borua ruled over the [Chakma](https://en.wikipedia.org/wiki/Chakma_people) kingdom. He was a skilled yoga practitioner. It is said that he attained such a level of mastery over his own body that he could take out his intestines, wash them, and put them back in their place. He kept these abilities of his a secret. Even when he bathed, he did so behind closed curtains. One day, his wife, the queen, decided to peek behind the curtains out of curiosity. She was so horrified at the sight of the king's intestines out in the open that she let out a deafening scream. Out of fear of being exposed, the king tried to put back his intestines hastily. However, something went wrong in the process, and as a result, the king lost his sanity.
 

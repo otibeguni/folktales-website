@@ -1,22 +1,10 @@
 ---
 title: The legend of the Harong-Hurong caves
 title_bn: হাড়ং-হুড়ং গুহার কিংবদন্তি
-category: Bengal Legend
 url_slug: the-legend-of-the-harong-hurong-caves
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584695/shahriarhaque_oil_painting_of_a_sufi_dervish_on_a_flying_carpet_d06d10bd-4ff5-4154-a343-a8ac965faaa4_th0fnj.webp
-source_slug: bangla-kingbodonti-two-asaduzzaman-juel
-topic_slugs:
-  - sylhet-division
-  - gauda-kingdom
-  - shah-jalal
-  - conquest-of-sylhet
-  - kamakhya-temple
-  - shamsuddin-firoz-shah
-  - harong-hurong
-resource_slugs:
-  - resource-3-hazrat-shahjalal-mazar
 ---
+
 
 Seven hundred years ago, the land we now know as Sylhet was part of the Gaur kingdom, called Srihatta at the time. This kingdom was shrouded in mystery, whispered to be a haven for sorcerers since ancient times. Even the king, Gaur Govinda, himself wielded magical powers. He was also a staunch Hindu, intolerant of other religions. One of his most unbending laws was the complete ban on cow slaughter within his realm.
 

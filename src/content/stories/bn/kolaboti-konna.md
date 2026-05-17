@@ -1,14 +1,9 @@
 ---
 title: কলাবতী কন্যা
-category: Indigenous Folktale
 url_slug: kolaboti-konna
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/shahriarhaque_mughal_style_painting_of_an_indian_princess_hidin_07ebb5a3-2c24-4880-b19f-475fbdee2ea8_psrhbk.webp
-source_slug: tripura-lokokahini
-topic_slugs:
-  - tripura-people
-resource_slugs: []
 ---
+
 
 নারাণ ছিলেন ত্রিপুরা রাজ্যের তৈলাফাং পরগণার শাসনকর্তা। তার ছিল পাঁচপুত্র। তার মধ্যে চারপুত্রের বউরা ছিল খুবই সুন্দরী ও আকর্ষণীয়। ছোট কুমার ছিল অবিবাহিত। সে ছিলো চার বৌদির আদরের দেবর।একদিন বৌদিরা ঠাট্টা করে বলল- “অলস কুমারের ঘরে কোন মেয়েই আসবে না”। ছোট কুমার তখন বললো- “দেখে নিও, তোমাদের চেয়ে আমার বউ বেশি সুন্দরী হবে”। এই বলে সে গুমচাক ফল (আপেলের মত দেখতে একটি মিষ্টি ও সুঘ্রাণযুক্ত বন্যফল) একটি লাঠি ও একটি ছুরি নিয়ে বউ খুঁজতে বের হয়ে গেলো।
 

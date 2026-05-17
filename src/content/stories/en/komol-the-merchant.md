@@ -1,13 +1,10 @@
 ---
 title: Komol - The Merchant
 title_bn: কমল সওদাগর
-category: Bengali Folktale
 url_slug: komol-the-merchant
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_4505_pp45zr.webp
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 On the banks of the Karnaphuli river (known locally as Kãichya) was a city named Basanti Nagar. There lived Kamal Saodagar, the merchant. He had a grand two-story building surrounded by a garden filled with countless varieties of flowers and fruits. The sheer grandeur of the main gate of the merchant's house was so dazzling that it left all the townspeople in awe. The merchant's wife, Surongini, was unparalleled in beauty and virtue. Their home was brightened by their two sons—Chanmoni and Surjomoni. There was no lack of motherly affection for her golden, doll-like sons.
 

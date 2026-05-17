@@ -1,12 +1,9 @@
 ---
 title: রাজা খয়বর জং
-category: Bengali Folktale
 url_slug: king-khaybar-jung
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584701/shahriarhaque_watercolor_painting_of_a_indian_baby_girl_curled__73c2bdbf-bef5-4e63-8c0e-b84a365ba715_rnkr3e.webp
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 বহুকাল আগে, জামপুর নামে এক সুখী রাজ্য ছিল। সেখানকার রাজা প্রজাদের সুখ-দুঃখে সবসময় পাশে থাকতেন। তার শাসনে রাজ্যের প্রতিটি পরিবার সুখী ছিল, আর পুরুষরা তাদের স্ত্রীদের প্রতি সদয় ব্যবহার করত। কিন্তু রাজা এবং রানীর জীবনে একটাই অপূর্ণতা ছিল—তাদের কোনো সন্তান ছিল না।
 

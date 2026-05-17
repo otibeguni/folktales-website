@@ -1,14 +1,9 @@
 ---
 title: The Princess Kolabati
-category: Bengali Folktale
 url_slug: princess-kolabati
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754316384/shahriarhaque_oil_painting_of_a_friendly_anime_monkey_and_a_f_c13b7961-d6b7-4ad6-b182-e6d65273411c_0_zogxql.png
-source_slug: thakurmar-jhuli-dakshinaranjan
-topic_slugs:
-  - thakurmar-jhuli
-resource_slugs: []
 ---
+
 
 There was once a king who had seven queens. His kingdom was vast, his palace magnificent, filled with elephants and horses, jewels and gold. His court bustled with ministers, courtiers, and soldiers. But for all his wealth, the king knew no happiness. Not one of his seven queens had given him a child, and a deep sorrow lay over the entire kingdom.
 

@@ -1,15 +1,10 @@
 ---
 title: The farmer and the talking ring
 title_bn: জাদুকরী আংটি ও জুম চাষী
-category: Indigenous Folktale
 url_slug: the-farmer-and-the-talking-ring
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584689/494763892_993614396305704_2008351711067734708_n_nshnuz.webp
-source_slug: tribal-folk-tales-of-tripura
-topic_slugs:
-  - tripura-people
-resource_slugs: []
 ---
+
 
 In a village lived an old man and an old woman. They had two grandsons. The sons and daughters-in-law had passed away when the boys were still little, so it was their grandparents who raised them. The grandsons were strong and hardworking; they worked in the jhum fields. The old couple would spend the whole day sitting and waiting eagerly for their grandsons to return with food.
 

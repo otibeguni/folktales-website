@@ -1,16 +1,10 @@
 ---
 title: The Trial of King Harishchandra
 title_bn: হরিশচন্দ্রের পালা
-category: Hindu Mythology
 url_slug: the-trial-of-king-harishchandra
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589719/shahriarhaque_watercolor_painting_of_a_hindu_sadhu_talking_to_14d2bf6e-58fe-482e-bae3-d970306dd3b1_0_rkdzo4.png
-source_slug: sree-dhormomongol
-topic_slugs:
-  - dharmathakur
-  - dharma-mangal-kavya
-resource_slugs: []
 ---
+
 
 Long, long ago in ancient India, there lived a noble king named **Harishchandra**. He was so well-known for his honesty and righteousness that people in distant kingdoms would swear oaths in his name. Harishchandra’s wife was **Queen Madana**, and together they ruled a peaceful, prosperous kingdom. Their people adored them. But despite all their happiness, one sorrow always lingered in their hearts — they had no child.
 

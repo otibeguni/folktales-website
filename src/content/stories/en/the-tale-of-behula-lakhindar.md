@@ -1,18 +1,10 @@
 ---
 title: The tale of Behula-Lakhindar
 title_bn: বেহুলা-লখিন্দর
-category: Bengali Folktale
 url_slug: the-tale-of-behula-lakhindar
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750588694/shahriarhaque_anime_style_wide-angle_render_of_A_sorrowful_yo_9aca4224-394e-4923-ae2e-ee8c8104ab72_3_ey8owd.png
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - gokul-medh
-  - goddess-manasa
-  - manasamangal-kavya
-resource_slugs:
-  - resource-30-behular-bashorghor-in-champaknagar-travel-vlog
 ---
+
 
 Once upon a time, merchants were making great profits through sea trade. In the city of Champai lived a hot-tempered and daring merchant named Chand Soudagar. People also called him Chand Bena. Chand Soudagar was a great devotee of Mahadev, meaning the supreme god Shiva. He cared for no one else but his deity.
 

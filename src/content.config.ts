@@ -23,9 +23,14 @@ const stories = defineCollection({
   schema: z.object({
     title: z.string(),
     title_bn: z.string().optional(),
-    category: z.string(),
     url_slug: z.string().optional(),
     language: z.enum(["en", "bn"]),
+  }),
+});
+
+const storyMetadata = defineCollection({
+  schema: z.object({
+    category: z.string(),
     cover_image: z.string().url().optional(),
     source_slug: z.string().optional(),
     source_label: z.string().optional(),
@@ -86,6 +91,7 @@ const storyCollections = defineCollection({
 
 export const collections = {
   stories,
+  storyMetadata,
   codex,
   topics,
   books,

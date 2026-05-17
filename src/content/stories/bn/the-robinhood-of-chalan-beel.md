@@ -1,14 +1,9 @@
 ---
 title: চলনবিলের রবিনহুড
-category: Bengal Legend
 url_slug: the-robinhood-of-chalan-beel
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shahriarhaque_poster_of_a_fit_handsome_indian_pirate_showing_of_d7474387-c2ce-427f-aa56-d07c72a1ee58_znww2l.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - chalan-beel
-resource_slugs: []
 ---
+
 
 ইংরেজদের উপহার হিসেবে নিয়ে যেতে খোঁজা হচ্ছে সাধারণ ঘরের মেয়েদের। শুধু কি সাহেব? সাথে বহু সান্ত্রী-সিপাই আছে, সবাইকে খুশি করতে হবে– জমিদারের চ্যালারা এই কাজেই নিযুক্ত আছে। সদ্য বিয়ে হয়েছে একটি মেয়ের, তার যাবার কথা ছিল শ্বশুরবাড়ি। কিন্তু কপাল এমনই মন্দ, তাকে নৌকায় করে ভুল পথে নিয়ে যাচ্ছে জমিদারের চর। উদ্দেশ্য মোটেও ভালো নয়। কাছারিবাড়ির ঘাটে নৌকা ভিড়বে, এমন সময় কোত্থেকে যেন সেখানে উদয় হলো এক বাইশ ছিপের নৌকা। দুর্ধর্ষ বর্শার আঘাতে এই নৌকাটি ভেঙে খানখান হলো।
 

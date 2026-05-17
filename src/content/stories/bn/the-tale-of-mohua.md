@@ -1,13 +1,9 @@
 ---
 title: মহুয়ার পালা
-category: Bengali Folktale
 url_slug: the-tale-of-mohua
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589206/shahriarhaque_surreal_painting_of_a_mughal_prince_sitting_on_a__2c7ccafc-4b71-498d-a5a3-296231a75172_s2rhos.webp
-topic_slugs:
-  - maimansingha-gitika
-resource_slugs: []
 ---
+
 
 একসময় দেশে এক ডাকাত সর্দার ছিলো। নাম ছিল তার হুমরা ডাকাত। রাতের অন্ধকারে একবার হুমরা ডাকাত তার দলবল নিয়ে হানা দেয় সম্পদশালী এক ব্রাহ্মণের বাড়িতে। লুটপাট চালিয়ে বের হয়ে যাবার সময় তার চোখ পরে বৃদ্ধ ব্রাহ্মণের ছয় মাস বয়সী মেয়ের উপর। শিশুটির স্বর্গীয় সৌন্দর্যের কাছে তার অপহরণকৃত সব ধন-সম্পত্তি নিমিষেই তুচ্ছ হয়ে যায়। ব্রাহ্মণের চোখ ফাঁকি দিয়ে শিশুটিকে চুরি করে নিয়ে আসে সে।
 

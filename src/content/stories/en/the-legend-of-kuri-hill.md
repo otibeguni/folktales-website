@@ -1,16 +1,10 @@
 ---
 title: The legend of Kuri Hill
 title_bn: কুড়ি টিলার কিংবদন্তি
-category: Bengal Legend
 url_slug: the-legend-of-kuri-hill
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_a_seven_dervishes_inside_a_cave_havin_759fc4a7-43cb-4abd-af34-125aff29f3c6_dmzbm4.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - habiganj-district
-resource_slugs:
-  - resource-7-the-mysterious-black-stone-of-kuri-hill
 ---
+
 
 Centuries ago, there was a renowned market called Imambazar, located in the present-day district of Habiganj. Among other things, the market was well-known for its fish shops. However, there was one unpleasant aspect of Imambazar - a nearby garbage dump where people would throw away discarded fish pieces. Every day, someone would come and collect the fish pieces, but no one bothered to find out who this person was. No one, except for an infamous robber named Shamsu Miah.
 

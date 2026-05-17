@@ -1,13 +1,10 @@
 ---
 title: The Girl With Rose-Colored Skin
 title_bn: কুঁচবরণ কন্যা
-category: Bengali Folktale
 url_slug: the-girl-with-rose-colored-skin
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750587628/shahriarhaque_a_anime_styl_erender_of_young_indian_village_gi_07af999c-1d38-49fa-b052-7591f9cb62a2_3_xmf8kz.png
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 In a certain kingdom, there lived four friends. Each of them was the son of a powerful man — a prince, a minister’s son, a nobleman’s son, and the son of the chief constable.
 

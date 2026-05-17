@@ -1,16 +1,9 @@
 ---
 title: কমলা রানীর দীঘির কিংবদন্তি
-category: Bengal Legend
 url_slug: the-legend-of-komola-rani-lake
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_dramatic_painting_of_a_ghost_of_a_queen_standing__693a5a86-f192-4091-85ce-30985aa2970c_xzvdm4.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - ganga-devi
-  - moulvibazar-district
-resource_slugs:
-  - resource-73
 ---
+
 
 সময়টি ছিলো ১৮৫০ খ্রিষ্টাব্দ। রাজা সুবিধ নারায়ন বর্তমান মৌলভীবাজারের রাজা ছিলেন। একরাতে গঙ্গাদেবী তার স্বপ্নে এলেন এবং তাকে ১২ বিঘা জমির উপর একটি দিঘি খনন করার আদেশ দিলেন, সেই সাথে দপবি বললেন, প্রথম কোদালের কোপ দানকারীকে স্বর্নের হার উপহার দিতে। দেবীর ক্রোধ ও রাজ্যের অনিষ্ঠের কথা চিন্তা করে রাজা দিঘি খনন শুরু করলেন। কিন্তু যতোই খোড়ে পানি আর উঠে না।
 

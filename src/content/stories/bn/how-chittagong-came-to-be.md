@@ -1,18 +1,9 @@
 ---
 title: চট্টগ্রামের নামকরণের কিংবদন্তি
-category: Bengal Legend
 url_slug: how-chittagong-came-to-be
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584696/shahriarhaque_oil_painting_of_a_sufi_holding_a_blindingly_glowi_186fe4bc-451b-4593-b150-00f4d28bbfb8_yeuddw.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - chittagong-city
-  - jinn
-  - karnaphuli-river
-  - pari
-resource_slugs:
-  - resource-1-the-legend-of-parir-pahar
 ---
+
 
 প্রাচীনকালে বর্তমান চট্টগ্রামের অধিকাংশ অঞ্চল ঘন বনে আবৃত ছিল। কয়েকটি যাযাবর উপজাতি ছাড়া ওই এলাকায় কোনো বড় মানব বসতি ছিল না। যারা বসতির জন্য নতুন এলাকা খুঁজছিলেন সেসব সুফি প্রচারকদের জন্য এটি ছিলো একটি সুবর্ণ সুযোগ সেখানে বসতি স্থাপনের। হযরত বদর শাহ নামে একজন সুফি সাধক এই কথা মাথায় রেখে কর্ণফুলী নদীর তীর ঘুরে দেখতে চেয়েছিলেন। তার অনুসারীরা তাকে এই অঞ্চলে লুকিয়ে থাকা প্রাকৃতিক এবং অতিপ্রাকৃত উভয় ধরনের ভয়ংকর সব প্রাণীর গল্প সম্পর্কে সতর্ক করেছিল। কিন্তু বদর শাহ তাদের কথায় কান দেন নি। তখন তিনি একটি বড় পাথরের উপর পা রাখেন এবং তার জাদুশক্তি ব্যবহার করলে এটি জলে ভাসতে থাকে এবং সেই পাথরের উপর ভর করে তিনি নদী পার হন।
 

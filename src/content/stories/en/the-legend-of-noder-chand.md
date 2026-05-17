@@ -1,17 +1,10 @@
 ---
 title: The legend of Noder Chand
 title_bn: নদের চাদের আখ্যান
-category: Bengal Legend
 url_slug: the-legend-of-noder-chand
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_2861_zki27f.webp
-source_slug: bangla-kingbodonti-two-asaduzzaman-juel
-topic_slugs:
-  - kamakhya-temple
-  - faridpur-district
-resource_slugs:
-  - resource-36-noder-chand-ghaat-travel-vlog
 ---
+
 
 In a time long gone, Gadadhar, a fisherman, lived in a modest hut by the Madhumati River with his wife. They sustained their small family through his skillful catches in the river's depths. Soon, their joy was doubled as his wife became pregnant, bringing with it not only excitement but also the worry of providing for their growing family.
 

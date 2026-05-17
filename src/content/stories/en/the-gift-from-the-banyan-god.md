@@ -1,11 +1,9 @@
 ---
 title: The gift from the Banyan God
-category: Indigenous Folktale
 url_slug: gift-from-the-banyan-god
 language: en
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 Years ago, an elderly couple welcomed a son late in life. When he grew into a young man, they helped him find a bride, and the couple's happiness brought immense joy to his aging parents.
 

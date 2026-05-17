@@ -1,16 +1,9 @@
 ---
 title: Kironmala
-category: Bengali Folktale
 url_slug: kironmala
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754317358/shahriarhaque_oil_painting_of_a_indian_baby_inside_a_small_cl_d43ea3ec-565c-4265-a68b-6a2930312250_3_kmtoz4.png
-source_slug: thakurmar-jhuli-dakshinaranjan
-topic_slugs:
-  - ganges-river
-  - thakurmar-jhuli
-  - brahmin
-resource_slugs: []
 ---
+
 
 Once upon a time, there was a king and his minister. One day, the king said to the minister, "Minister! I have no idea if the people of my kingdom are happy or in sorrow!"
 

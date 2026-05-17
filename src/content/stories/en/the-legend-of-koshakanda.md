@@ -1,15 +1,10 @@
 ---
 title: The legend of Koshakanda
 title_bn: কোশাকান্দার কিংবদন্তি
-category: Bengal Legend
 url_slug: the-legend-of-koshakanda
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584699/shahriarhaque_painting_of_the_sunken_ruins_of_a_traditional_ban_0fc744ef-0e44-4c33-8e95-86a8468cb782_pdcpla.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - ganga-devi
-resource_slugs: []
 ---
+
 
 [Isa Khan](https://en.wikipedia.org/wiki/Isa_Khan), the leader of the [Baro Bhuiyans](https://en.wikipedia.org/wiki/Baro-Bhuyan) (বারো ভূঁইয়া), was once returning to the capital with his convoy of Kosha Boats (কোশা বহর). On the way he stopped for the night at the palace of a local king named Kedar Rai. During his stay, a beautiful young girl named Swarnamoyee caught his attention. He was so infatuated with her, that he had her abducted and taken along with him and his convoy before sunrise. On the trip back to the capital, he filled up his boats with jewels and sweets to prepare for a grand wedding ceremony. While traveling through the Brahmaputra, Isa Khan had a vision of [Gangadevi](<https://en.wikipedia.org/wiki/Ganga_(goddess)>), the water goddess, who demanded a boat full of sweets as tribute. Isa Khan decided to ignore the vision and continue on his journey. But all of a sudden, in the middle of calm waters, one of his boats began to sink. The other boats tried to pull it up with chains. But alas, it was as if something supernatural was dragging the boat into the water.
 

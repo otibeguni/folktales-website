@@ -1,18 +1,9 @@
 ---
 title: আব্দুল আলী গারুলী ও নিবারন সুন্দরী
-category: Puthi Literature
 url_slug: abdul-ali-garuli-and-nibaron-shundori
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584699/shahriarhaque_persian_art_of_snake_strangling_a_mughal_prince_b799af12-6335-4ec8-b662-83550a5529ea_kftje4.webp
-source_slug: abdul-ali-garuli-o-nibaron-shundori
-topic_slugs:
-  - jhalokati
-  - barishal
-resource_slugs:
-  - resource-75-siraj-boyati-abdul-ali-garoli
-  - resource-76
-  - resource-77
 ---
+
 
 সন ১৩১৫। সে সময় ঝালকাঠিতে আব্দুল আলী নামের এক যুবক বাস করতো। ২০ বছর বয়সী এই যুবক অত্যন্ত সুদর্শন ছিল। শখের বশে একটা ঘোড়া কিনে তাতে চেপে সে বিভিন্ন জায়গা ঘুরে বেড়াতো সে। এভাবে ঘুরতে ঘুরতে একদিন গিয়ে পৌঁছালো বরিশালে। সেখানে গিয়ে আলীর দেখা হয় এক সাপুড়ে দলের সাথে। দলের প্রধানের নাম ছিলো ঘাড়ওয়াল। সেই ঘারওয়ালের ঘরে ছিল একটা পরমা সুন্দরী মেয়ে, নাম নিবারণ। নিবারনকে দেখে আলী তার প্রেমে পড়ে যায়।
 

@@ -1,14 +1,10 @@
 ---
 title: The tale of Kajolrekha
 title_bn: কাজলরেখার পালা
-category: Bengali Folktale
 url_slug: the-tale-of-kajolrekha
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shahriarhaque_sketch_of_a_mughal_prince_acupuncture_needles_in__be7a886a-3c76-4a58-9851-28ada9ca4bd7_suggx5.webp
-topic_slugs:
-  - maimansingha-gitika
-resource_slugs: []
 ---
+
 
 Once upon a time in the enchanting Land of the Tides, there lived a merchant named Dhoneshhor. He had a son and a lovely daughter named Kajolrekha. Dhoneshhor, however, had a weakness for gambling, which eventually led to the loss of all his wealth. In the past, he possessed seven boatloads of paddy, but now, none remained. Forced to resort to begging, he wandered from one place to another in search of a better life.
 

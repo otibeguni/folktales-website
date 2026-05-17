@@ -1,14 +1,9 @@
 ---
 title: ইদুরের গর্তে দাঁত কেন ফেলা হয়
-category: Indigenous Folktale
 url_slug: the-story-of-mice-and-baby-teeth
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_fairy_tale_illustration_of_a_cute_furry_rat_791fc7e6-87b1-4a0f-8bb3-57e5092ea34c_gw8cf9.webp
-source_slug: chakma-puran
-topic_slugs:
-  - chakma-people
-resource_slugs: []
 ---
+
 
 অনেক আগে পার্বত্য অঞ্চলের জঙ্গলে বসবাস করত এক নিঃসন্তান দম্পতি। স্বামী সারাদিন কাঠ কাটত বনে। স্ত্রী ঘরে বসে রান্নাবান্না করত আর অপেক্ষা করত কখন স্বামী ঘরে ফিরবে। স্বামী সারাদিন কাঠ কেটে যে কড়ি উপার্জন করত তা দিয়েই তাদের দিন চলে যেত। দুজনের সংসারে কোন অশান্তি ছিল না। ছিল না সুখের কোন কমতি। শুধু দিনশেষে একটা সন্তানের অভাববোধ করতো দুজনেই। তাই প্রতিদিন কাঠুরিয়ার স্ত্রী "মাহ লখি (চাকমাদের দেবী)" মায়ের কাছে প্রার্থনা করতে থাকে।
 

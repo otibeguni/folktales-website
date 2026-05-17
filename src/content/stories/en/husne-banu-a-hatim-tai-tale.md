@@ -1,15 +1,10 @@
 ---
 title: Husne Banu - A Hatim Tai Tale
 title_bn: হুসনে বানু
-category: Bengali Translation
 url_slug: husne-banu-a-hatim-tai-tale
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584696/shahriarhaque_oil_painting_of_a_stunningly_beautiful_persian_pr_01950352-f9dd-4275-8e01-84fc4e77ed88_ywuwpc.webp
-source_slug: book-85-the-adventures-of-hatim-tai
-topic_slugs:
-  - hatim-al-tai
-resource_slugs: []
 ---
+
 
 Once upon a time, in the kingdom of Khorasan, there ruled a king named Khurdan Shah. He had five hundred thousand horses in his stables. In front of and behind the palace, there were ten thousand chariots along with a multitude of swordsmen, guards, and archers. People said that in his realm, even tigers and sheep drank water together, such was the justice of this king. Throughout the kingdom, only his fame and tales of compassion circulated from mouth to mouth among the people.
 

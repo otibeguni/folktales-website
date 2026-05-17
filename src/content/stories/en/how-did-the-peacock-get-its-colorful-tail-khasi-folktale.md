@@ -1,19 +1,10 @@
 ---
 title: How did the peacock get its colorful tail
 title_bn: ময়ূরপুচ্ছে রংধনু কীভাবে এলো?
-category: Indigenous Folktale
 url_slug: how-did-the-peacock-get-its-colorful-tail-khasi-folktale
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_folk_painting_of_a_peacock_731d243c-e330-4bac-9a1a-6fe412a5372e_vathgn.webp
-source_slug: book-41-folk-tales-of-the-khasis
-topic_slugs:
-  - khasi-people
-  - god-u-slap
-  - goddess-ka-sngi
-  - god-u-lyoh
-  - goddess-ka-eriong
-resource_slugs: []
 ---
+
 
 Long long ago, humans spoke the same language as animals and birds. At that time, U Kliew the peacock had the same gray coat as other birds. Even so, U Klew was very arrogant. He walked among the other birds with his head held high in a majestic manner. He was a vain bird, excessively proud of his long tail and feathers, which were longer and higher than any other bird. He flaunted his tail and feathers and demeaned other birds. The peacock was also a very troublesome neighbour. Due to his large body, he could not meet the birds living in the lowlands. He only interacted with big name birds. And these wealthy birds also catered to his ego a lot, causing the peacock’s pride to grow taller than his feathers.
 

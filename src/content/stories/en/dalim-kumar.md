@@ -1,19 +1,9 @@
 ---
 title: Dalim Kumar
-category: Bengali Folktale
 url_slug: dalim-kumar
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754637616/shutashonkho_f2uius.jpg
-source_slug: thakurmar-jhuli-dakshinaranjan
-topic_slugs:
-  - thakurmar-jhuli
-  - rakshasa
-  - pakshiraja
-  - shutashankha
-  - yamuna-river
-  - god-yama
-resource_slugs: []
 ---
+
 
 There was a king, a queen, and a prince. The queen's life was bound to a pair of dice, a secret known only to a Rakshasi (a demoness) who lived in a palm tree in the palace grounds. The Rakshasi had been waiting for an opportunity, but none had come. One day, the king went hunting, and the prince was playing with his friends with the dice. Seeing her chance, the Rakshasi disguised herself as a beggar and asked the prince for the dice. The prince, unaware of their significance, casually gave them to her. With three puffs of her breath, the Rakshasi sent the dice, and with them the queen's life, to some unknown kingdom. In her chamber, the queen fainted. The Rakshasi quickly devoured the queen and took her form.
 

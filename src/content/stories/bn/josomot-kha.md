@@ -1,15 +1,9 @@
 ---
 title: জসমত খাঁ
-category: Bengali Folktale
 url_slug: josomot-kha
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1751771364/shahriarhaque_square_comic_book_style_illustration_of_a_fanta_5e3a5081-4ebc-45b8-8c30-f8b560a7f7e2_2_adp0xa.png
-source_slug: rangpur-geetika
-topic_slugs:
-  - emperor-akbar
-  - angel-gabriel
-resource_slugs: []
 ---
+
 
 এক দেশে এক রাজা ছিল। নাম তার জসমত রাজা। রাজার বয়স টয়স কম হয়নি। তা রাজা একদিন দেওয়ানকে ডেকে বললো, “বুঝলে দেওয়ান,
 আমার রানি বুড়ি হয়ে গেছে। বুড়ো বয়সে আমার মন যে কচি। তাই বড় সাধ হয়েছে— আরেকটা বিয়ে করব। 

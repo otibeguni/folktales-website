@@ -1,14 +1,10 @@
 ---
 title: The prince who lived in the kitchen
 title_bn: পাহাইল্যা রাজপুত্র
-category: Bengali Folktale
 url_slug: the-prince-who-lived-in-the-kitchen
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/IMG_4506_clvwff.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 90
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 Several hundred years ago, there was a king named Ammok. The king had seven sons, but the youngest son was different from the rest. He would remain quiet all day and engage in cooking like the girls. Because of this, he was named 'Pahailya.' After years of enduring humiliation from the king, one day, out of deep resentment, he left the kingdom.
 

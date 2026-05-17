@@ -1,14 +1,10 @@
 ---
 title: King Habachandra and his prime minister Gabachandra
 title_bn: রাজা হাবাচন্দ্র ও মন্ত্রী গাবাচন্দ্র
-category: Bengali Folktale
 url_slug: king-habachandra-and-his-prime-minister-gabachandra
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589963/shahriarhaque_painting_of_a_chubby_panicked_young_man_in_simp_4706b8cc-7148-4e5c-a352-f1bcc0705abf_2_diimq5.png
-source_slug: popular-tales-of-bengal
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 A long time ago, there was a king named Habachandra and his advisor, Gabachandra. Both of them were not very smart. The king was known for being foolish, and his advisor was no better. They were a perfect match because they both made silly decisions. When the king needed advice on tough issues, Gabachandra would give such silly suggestions that only the king, who didn't have much sense, would follow them. Everyone in the country laughed at them. The king and his advisor made a lot of mistakes, and sometimes these mistakes hurt their people. It was hard to find fairness in King Habachandra's court. Usually, the people who did wrong got away with it, and the innocent ones suffered. In the king's city, it was hard to tell what was right or wrong. Everything cost the same, no matter what it was.
 

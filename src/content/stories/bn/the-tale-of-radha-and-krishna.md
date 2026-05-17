@@ -1,16 +1,9 @@
 ---
 title: শ্রীকৃষ্ণকীর্তন
-category: Bengali Folktale
 url_slug: the-tale-of-radha-and-krishna
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589487/shahriarhaque_anime_style_render_of_an_evil_and_fierce_five_h_b1cab879-fdf2-4f5d-b96c-4592207de62b_0_v1l5au.png
-source_slug: book-80
-topic_slugs:
-  - god-krishna
-  - shreekrishna-kirtana
-  - goddess-radha
-resource_slugs: []
 ---
+
 
 রাধা ও কৃষ্ণ স্বর্গে বহুকাল একসঙ্গে থাকার পরে ঈশ্বরের ইচ্ছায় পৃথিবীতে মানুষ রূপে জন্ম নেয়। বালিকা বয়সে নপুংসক আয়ন গোপের সঙ্গে রাধার বিয়ে হয়।
 

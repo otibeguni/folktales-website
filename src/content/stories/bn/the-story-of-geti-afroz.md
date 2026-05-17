@@ -1,27 +1,9 @@
 ---
 title: গেতি আফরোজের পুঁথি
-category: Puthi Literature
 url_slug: the-story-of-geti-afroz
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1759066480/shahriarhaque_watercolor_painting_of_an_indian_fairy_queen_wi_a433074a-201a-4e6e-908e-fee83b392a71_3_cpco3t.png
-source_slug: geti-afrozer-puthi
-topic_slugs:
-  - jinn
-  - pari
-  - khidr
-  - prophet-yusuf
-  - khotan
-  - kandahar
-  - sea-of-kulzum
-  - mount-qaf
-  - damascus
-  - babylon
-  - serendib
-  - azdaha
-  - hamadan
-  - rome
-resource_slugs: []
 ---
+
 
 সে বহু বহুকাল আগের কথা। হিন্দুস্তানের বাদশা ছিলেন আজর শাহ। তার হাতিশালে হাতি, ঘোড়াশালে ঘোড়ায় টগবগ করে। প্রজাদের তিনি নিজের সন্তানের মতোই দেখেন, কিন্তু হায়— রাজার নিজের কোনো সন্তান ছিল না। নিঃসন্তান হবার দুঃখে বাদশা সারাক্ষণ চিন্তায় চিন্তায় কাহিল হয়ে থাকতেন। এভাবেই একদিন চিন্তার জ্বালা-যন্ত্রণায় তিনি একদিন মনের দুঃখে বাদশাহী ছেড়ে জঙ্গলে চলে গেলেন।
 

@@ -1,15 +1,10 @@
 ---
 title: The girl who lived inside a pineapple
 title_bn: আনারসের কলি কইন্যা
-category: Bengali Folktale
 url_slug: the-girl-who-lived-inside-a-pineapple
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/shahriarhaque_watercolor_painting_of_a_mughal_prince_lying_unco_a3755847-aba7-49a6-a2ae-28f8e7826261_uym533.webp
-source_slug: rangpur-geetika
-source_label: Rangpur Geetika
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 In the city of Bairat, there was a prince named Emran. One night, he dreamed of a girl of unmatched beauty. Since then, he lost all desire for food and sleep—the melody of her presence played endlessly in his mind. But finding this girl was no easy task, for she did not reside in any ordinary palace. She lived far away, within a pineapple. Inside the core of the pineapple was a vast palace, and the girl was surrounded by fourteen layers of curtains.
 

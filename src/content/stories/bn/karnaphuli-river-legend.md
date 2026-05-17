@@ -1,14 +1,9 @@
 ---
 title: "কর্ণফুলী: কার কানের ফুল?"
-category: Bengal Legend
 url_slug: karnaphuli-river-legend
 language: bn
-topic_slugs:
-  - karnaphuli-river
-  - pari
-  - dhalghat-location
-resource_slugs: []
 ---
+
 
 সে বহুকাল আগের কথা। কর্ণফুলী তখন এখনের মতো এত খরস্রোতা নয়। ছোট্ট সে নদীর গা ঘেঁষে ছিল দুটি দেশ। এরই একটির নাম গরল রাজ্য।
 

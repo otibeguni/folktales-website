@@ -1,15 +1,9 @@
 ---
 title: The Brahmin and His Wife
-category: Bengali Folktale
 url_slug: the-brahmin-and-his-wife
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1754660501/shahriarhaque_watercolor_painting_cartoon_style_depiction_of__cbb9e6de-42ec-4172-ae49-b64b4dc39445_0_kojmyf.png
-source_slug: thakurmar-jhuli-dakshinaranjan
-topic_slugs:
-  - thakurmar-jhuli
-  - brahmin
-resource_slugs: []
 ---
+
 
 There was once a Brahmani (a Brahmin's wife) and her husband. The Brahmani was as sharp as a tack, but the Brahmin was incredibly foolish. As a result, the Brahmani had to manage all the household affairs while the Brahmin just sat and ate, much to her exasperation. The Brahmani was a fiery woman, and with no oil for her hair or comfort for her body, living on daily alms, her husband's constant chatter was the last straw. She was at her wit's end.
 

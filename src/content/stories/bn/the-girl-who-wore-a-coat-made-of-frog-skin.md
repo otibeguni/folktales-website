@@ -1,16 +1,9 @@
 ---
 title: কা-নাম এবং ব্যাঙের চামড়ার খোলস
-category: Indigenous Folktale
 url_slug: the-girl-who-wore-a-coat-made-of-frog-skin
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_folk_painting_of_a_frog_head_with_the_body_of_an__5eb713b6-c79a-42b7-8d56-9430c100dcb1_ry3bi5.webp
-source_slug: book-41-folk-tales-of-the-khasis
-topic_slugs:
-  - khasi-people
-  - goddess-ka-sngi
-  - u-hynroh
-resource_slugs: []
 ---
+
 
 সে বহুকাল আগের কথা। জঙ্গলের প্রান্তে, বাবা-মায়ের ঘর আলো করে - সীমান্তের ধারঘেঁষা এক গ্রামে জন্ম নিলো ‘কা-নাম’ নামের এক অপূর্ব সুন্দরী বালিকা। কা-নাম এতই ফুটফুটে সুন্দর ছিল যে মা ভয়ে ভয়ে থাকতেন, পাছে তাদের মেয়ের উপর বদ নজর দিয়ে দেবে, আর নয়তো ধরেই নিয়ে যাবে তাদের প্রাণপ্রিয় রাজকন্যাটিকে! কা-নামের পরিবার অতটা বিত্তশালী না হলেও বাবা-মায়ের তার প্রতি যত্নের কোনো কমতি ছিল না। তবে মায়ের এসব ভয়ভীতিতে খুব একটা কান দিতেন না কা নামের বাবা। তিনি চাইতেন আর সকলের মতোই বেড়ে উঠুক সে। নিজেকে করে তুলুক নিজের মতোই যোগ্য।
 

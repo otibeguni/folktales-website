@@ -1,21 +1,9 @@
 ---
 title: বেঙ্গমা ও রাজপুত্র
-category: Bengali Folktale
 url_slug: byangoma-and-the-prince
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/byangoma_btbd27.webp
-source_slug: book-37-fabulous-females-and-peerless-pirs
-topic_slugs:
-  - sundarbans
-  - ganges-river
-  - satya-pir
-  - god-krishna
-  - god-brahma
-  - vedas
-  - rama
-  - byangoma
-resource_slugs: []
 ---
+
 
 রাজা ভীমসেনের রাজধানী ছিল ভিল্লির পশ্চিম অংশে। রাজা ছিলেন ন্যায়পরায়ণ। তার দরবারে হাজির হতেন বহু জ্ঞানীগুণী পণ্ডিত এবং ব্রাহ্মণরা। সে রাজ্যে ছিল রাখাল, মালি, তেলী, কামার, চাষীসহ সকল পেশার মানুষজন, এমনকি ভবঘুরেও। একেবারে হতদরিদ্র বাদে সকলেরই ঘরবাড়ি ছিল। মানুষ ছিল মোটামুটি সচ্ছল।
 

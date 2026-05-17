@@ -1,15 +1,10 @@
 ---
 title: The Robinhood of Chalan Beel
 title_bn: চলনবিলের রবিনহুড
-category: Bengal Legend
 url_slug: the-robinhood-of-chalan-beel
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shahriarhaque_poster_of_a_fit_handsome_indian_pirate_showing_of_d7474387-c2ce-427f-aa56-d07c72a1ee58_znww2l.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - chalan-beel
-resource_slugs: []
 ---
+
 
 The English officers were searching for girls from ordinary homes to take as gifts. It wasn’t just the officers; there were many soldiers and guards who needed to be pleased as well, and the landlord’s lackeys were tasked with this grim job. A young girl, recently married, was supposed to go to her husband’s home, but fate dealt her a cruel hand. Instead, she was being taken in a boat, led astray by the landlord’s men. Their intentions were anything but good. Just as the boat was about to dock at the Kacharibari ghat, out of nowhere, a boat with twenty-two oars appeared. With a fierce strike of spears, the landlord's boat was shattered into pieces.
 

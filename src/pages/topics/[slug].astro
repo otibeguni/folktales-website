@@ -5,10 +5,10 @@ import {
   bookHasDetailPage,
   getAllBooks,
   getAllResources,
-  getAllStories,
   getAllTopics,
   getBookDetailPath,
   getBookCategoryLabel,
+  getResolvedStories,
   getStoryRouteSlug,
 } from "@/utils/content";
 
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 }
 
 const { topic } = Astro.props;
-const stories = (await getAllStories())
+const stories = (await getResolvedStories())
   .filter(
     (story) =>
       story.data.language === "en" &&

@@ -1,13 +1,10 @@
 ---
 title: Shonabhaner Puthi
 title_bn: সোনাভানের পুঁথি
-category: Bengali Folktale
 url_slug: shonabhaner-puthi
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750587161/shahriarhaque_anime_style_painting_of_an_young_indian_queen_r_98de7795-1d34-4476-b36c-5fba4edfe4ee_1_wocheo.png
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 It was a long, long time ago. In the city of Tungi lived a princess named Sonabhan. In a world of men, she possessed a vast kingdom of her own. Elephants, horses, soldiers, and subjects—her kingdom had them all. In strength and pride, she was second to none. Therefore, Sonabhan was exceedingly proud of her own power. One day, she summoned her vizier and said, "Tell me, vizier—is there anyone in the world who can defeat me in battle?" The vizier, with some trepidation, mentioned the name of Hanifa. He was the son of Hazrat Ali, the grandson of the Prophet. The moment she heard the name of the great warrior Hanifa, Sonabhan flew into a rage. She would go to Medina at once, fight Hanifa, and conquer the battlefield. No matter how much the viziers and ministers tried to stop her, she was not one to be deterred. Meanwhile, news had already reached Hanifa in a dream—Bibi Sonabhan would come to fight him in the city of Medina! After first telling his mother the news, Hanifa also saddled his horse. He put a golden bridle in its mouth. After dressing up his horse, he galloped off to meet Bibi Sonabhan.
 

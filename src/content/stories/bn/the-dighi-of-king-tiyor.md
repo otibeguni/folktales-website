@@ -1,15 +1,9 @@
 ---
 title: তিয়র রাজার দিঘী
-category: Bengal Legend
 url_slug: the-dighi-of-king-tiyor
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584694/shahriarhaque_oil_painting_of_a_greedy_indian_king_amazed_at_hi_cf355f46-3366-4ee5-a21e-8e2fa1b52bb5_autxx9.webp
-source_slug: satkhirar-kingbodonti
-topic_slugs:
-  - satkhira-district
-resource_slugs:
-  - resource-71-mound-of-king-tiyor
 ---
+
 
 বেশ অনেক বছর আগের কথা। সুন্দরবনের পাশের একটি অঞ্চল তালা-কলারোয়া। সেখানকারই একটি গ্রামের নাম ‘সুজন সাহা’। এ গ্রামের সকলেই তখন পানির অভাবে ভুগছে। তাই শরফ খাঁ নামে গ্রামেরই এক ভালো লোক একটি বড় পুকুর কেটে দেবার কথা ভাবলেন। কাজ শুরুও হলো। কিন্তু পুকুর কাটার কাজ যেমনি অনেকটা এগিয়ে গেছে, ওমনি রাজার কাছে খবর গেল। রাজা থাকেন পাশের গাঁয়ে। তার রাজধানী মানিকহারে। দিঘির খবর শুনে রাজা তো মনে মনে রেগে আগুন!
 

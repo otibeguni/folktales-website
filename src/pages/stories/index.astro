@@ -4,14 +4,14 @@ import StoryList from "@/components/StoryList";
 import Layout from "@/layouts/Layout.astro";
 import StoryCollectionList from "@/components/StoryCollectionList.astro";
 import {
-  getAllStories,
   getAllStoryCollections,
   getStoryRouteSlug,
+  getResolvedStories,
   renderEntry,
 } from "@/utils/content";
 
 const [storyEntries, collectionEntries] = await Promise.all([
-  getAllStories(),
+  getResolvedStories(),
   getAllStoryCollections(),
 ]);
 

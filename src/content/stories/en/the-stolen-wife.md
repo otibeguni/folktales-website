@@ -1,14 +1,10 @@
 ---
 title: The stolen wife
 title_bn: চুরি যাওয়া বামুনের বউ
-category: Bengali Folktale
 url_slug: the-stolen-wife
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584697/shahriarhaque_oil_painting_of_an_evil_but_beautiful_mughal_brid_660fb922-9bcd-4dcb-a7e5-9b1166896ac7_kpgoas.webp
-source_slug: bengali-household-tales
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 In a village, there lived a Brahmin and a Kayastha. Their houses were next to each other, and they shared a deep friendship. The Brahmin’s household was in a state of constant struggle, living hand to mouth. The Kayastha’s household did not suffer as much from a lack of basic necessities like rice and lentils, but his situation was not much better either. Neither of them was married.
 

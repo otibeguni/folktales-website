@@ -1,13 +1,9 @@
 ---
 title: "দেওয়ানা-মদিনা : আলাল ও দুলালের কাহিনী"
-category: Bengali Folktale
 url_slug: the-tale-of-alal-and-dulal
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shahriarhaque_persian_style_painting_of_a_mughal_man_mourning_i_a04556c2-2d18-433a-8760-e6ad72563ff3_rxenlk.webp
-topic_slugs:
-  - maimansingha-gitika
-resource_slugs: []
 ---
+
 
 বাইন্যাচঙের দেওয়ান সোনাফর তার মুমূর্ষু স্ত্রীর পাশে বসে আছেন। সাথে তার দুই ছেলে– আলাল ও দুলাল। মৃত্যুশয্যায় সোনাফরের স্ত্রী সোনাফরকে অনুরোধ করলেন যেন তার মৃত্যুর পর তিনি আর বিয়ে না করেন। তার বিশ্বাস, সৎমা কখনও সৎ সন্তানদের ভালোবাসতে পারেন না। তাই আকাশ-বাতাস, পশুপাখি সকলকে স্বাক্ষী রেখে স্বামীর কাছে তিনি এই প্রতিজ্ঞা নিলেন এবং শেষনিঃশ্বাস ত্যাগ করলেন।
 

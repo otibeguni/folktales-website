@@ -1,14 +1,9 @@
 ---
 title: কানু গোয়ালা ও মানিক পীরের অভিশাপ
-category: Bengal Legend
 url_slug: kanu-the-milkman-and-the-curse-of-manik-pir
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1753528241/shahriarhaque_watercolor_painting_of_two_ox_locking_horns_und_db105b8f-87a4-45f0-bfaa-8bc0c51cb148_3_lnq2ja.png
-source_slug: jessore-jelar-kingbodonti
-topic_slugs:
-  - manik-pir
-resource_slugs: []
 ---
+
 
 এক নয়, দুই নয়— পাঁচশো বছর আগের কথা। গ্রামের নাম ছিল গোকুল নগর। আজ সে গ্রাম কেউ খুঁজে পাবে না। সময়ের ধুলায় তা বহু আগেই বিলীন হয়েছে। তবে কোথাও একটা এখনো পড়ে আছে এক মাটির ঢিবি, নাম তার কানু ঘোষের ভিটে। কী আছে এই মাটির ঢিবিতে? কে এই কানু ঘোষ? 
 গোকুল নগরের বাসিন্দা, পেশায় গোয়ালা কানু ঘোষ। দুধটুধ বেচে বেশ ভালোই পসার করেছিল সে। তার ছিল গোলা ভরা ধান, পুকুর ভরা মাছ আর গোয়ালা তো— তাই ছিল গোয়াল ভরা গরুও। লোকে বলে, কানুর বাড়িতে নাকি একেবারে রূপকথার মতো একটি দুধপুকুরও ছিল। সেই সময়ে কানু ব্রাহ্মণ নগরের রাজা মুকুট রায়ের বাড়িতে দুধ নিয়ে দিত। 

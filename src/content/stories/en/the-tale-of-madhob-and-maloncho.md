@@ -1,14 +1,10 @@
 ---
 title: The tale of Madhob and Maloncho
 title_bn: মাধব এবং মালঞ্চ
-category: Bengali Folktale
 url_slug: the-tale-of-madhob-and-maloncho
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/shahriarhaque_watercolor_painting_of_a_Rakshasa_in_a_forest_be43ce0d-1007-4dbe-9432-db47982e0a00_ltbogo.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 33
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 Once upon a time, long ago, there lived a king in a certain land. Like most kings and nobles, his treasury was overflowing with wealth. In the elephant stable, the elephants trumpeted joyfully, and in the horse stable, the horses sharpened their hooves. He had plenty of people and soldiers. Yet, there was one sorrow in the king's heart—he had no children. What use is such wealth and prosperity if there is no heir to carry on the family legacy? The king spent his days in deep sorrow.
 

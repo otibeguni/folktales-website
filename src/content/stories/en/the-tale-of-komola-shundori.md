@@ -1,18 +1,10 @@
 ---
 title: The tale of Komola Shundori
 title_bn: কমলা সুন্দরী
-category: Bengal Legend
 url_slug: the-tale-of-komola-shundori
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/shahriarhaque_colored_sketch_of_a_bengali_young_girl_performing_5a5ce18f-e7e2-4303-8ba0-666992d8266f_o6ignk.webp
-source_label: Uttorbonger Kingbodonti - Humayun Rahman
-topic_slugs:
-  - gauda-kingdom
-  - pundra-kingdom
-  - karotoa-river
-resource_slugs:
-  - resource-70-skonder-dhap-video
 ---
+
 
 In the late 8th century, the vast [Gauda Empire](https://en.wikipedia.org/wiki/Kingdom_of_Gauda) was beginning to fracture, giving rise to numerous smaller kingdoms. During this time, the ruler of [Pundranagar](https://en.wikipedia.org/wiki/Pundranagar) was King Jayanta. A beloved and just ruler, adored by his subjects.
 

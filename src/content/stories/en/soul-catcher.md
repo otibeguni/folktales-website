@@ -1,15 +1,10 @@
 ---
 title: Soul Catcher
 title_bn: সোল ক্যাচার
-category: Indigenous Folktale
 url_slug: soul-catcher
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/soul-catcher_g5wjng.webp
-source_slug: book-81-tales-from-marma-folklore
-topic_slugs:
-  - marma-people
-resource_slugs: []
 ---
+
 
 It was long ago, in a kingdom ruled by a wicked king and his even more wicked queen. Together, they subjected the subjects to immense cruelty. Any slightest mistake would lead to the decapitation of soldiers. The maids and servants were always on edge, fearing that any small misstep could cost them their lives. If even a spoonful of sugar was missing or a maid glanced at the queen the wrong way, there was no escape from the wrath of the king and queen.
 

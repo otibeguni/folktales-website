@@ -1,13 +1,9 @@
 ---
 title: আলালের ঘরের দুলাল
-category: Bengali Folktale
 url_slug: the-chronicles-of-dulal
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_oil_painting_of_a_young_mughal_prince_talking_to__52a34537-318e-49c3-9c3c-49d64c77c2cc_sb7yi4.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 32
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 এক দেশে ছিল এক সওদাগর। নাম তার আলাল সওদাগর। বউ রূপ সুন্দরী আর ছেলে দুলালকে নিয়ে তাদের ভালই দিন কাটছিল। দিনে দিনে দুলালও বড় হলো। তার বয়স যখন বারো, সে বায়না ধরলো– গহীন বনে শিকারে যাবে। একমাত্র ছেলের কথা বাবা-মা ফেলতেও পারে না। মন কু ডাকে, তবু তারা দুলালকে বনে যেতে দেয়। বনে যাবার পর সে কেমন যেন পথ গুলিয়ে ফেলে। কোনোমতেই আর বাড়ি যাবার হদিস বের করতে পারে না। নিজের মনে হাঁটতে হাঁটতে দুলাল হয়ে যায় এক ভবঘুরে ছেলে, তার বাবা-মার কাছে ফেরার কথাও যেন আর মনে থাকে না বনের জাদুতে।
 

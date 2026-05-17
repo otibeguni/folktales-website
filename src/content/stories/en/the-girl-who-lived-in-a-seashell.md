@@ -1,15 +1,10 @@
 ---
 title: The girl who lived in a seashell
 title_bn: শামুক কন্যা
-category: Indigenous Folktale
 url_slug: the-girl-who-lived-in-a-seashell
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_3672_zynih4.webp
-source_slug: bangladesher-adibashi-lokokotha
-topic_slugs:
-  - oraon-people
-resource_slugs: []
 ---
+
 
 It was a long time ago. In a corner of the village lived a young orphan named Sushil. Though his father had passed away when he was very young, his mother had only left him a few days ago. Since then, Sushil had neither cared to bathe nor eat. His home, too, had fallen into disarray, with nothing in order.
 

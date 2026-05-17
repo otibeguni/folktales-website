@@ -1,13 +1,9 @@
 ---
 title: নিমাই সন্ন্যাসী
-category: Bengal Legend
 url_slug: nimai-sanyas
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584695/shahriarhaque_oil_painting_of_a_happy_hindu_sanyas_in_his_30s_r_933b2acd-fd9e-46e5-bc2d-d02bb83cfd32_c34pdh.webp
-topic_slugs:
-  - chaitanya-mahaprabhu-nimai
-resource_slugs: []
 ---
+
 
 নিমাইয়ের পাড়ায় অনেক নামডাক। একখানা টোল খুলে সে তার পণ্ডিতি চালিয়ে যায়। পাড়ার ছেলেপুলেরা তার কাছে পড়তে আসে, পড়ার বাইরেও বহু গল্পকথা শুনে তারা মেতে থাকে নিমাই পণ্ডিতের টোলে। ঘরে নিমাইয়ের মা শচীদেবী, আর সদ্য বিয়ে করা বউ বিষ্ণুপ্রিয়া। এর আগেও তার একটি বউ ছিল, সেও ভারি মিষ্টি মেয়ে- নাম লক্ষীপ্রিয়া। বেচারি সাপের কামড়ে মারা যায়।
 

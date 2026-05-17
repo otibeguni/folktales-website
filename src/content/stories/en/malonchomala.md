@@ -1,14 +1,10 @@
 ---
 title: Malonchomala
 title_bn: মালঞ্চমালা
-category: Bengali Folktale
 url_slug: malonchomala
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584697/shahriarhaque_oil_painting_of_an_old_mughal_king_meeting_a_beau_e147db2b-5b91-4cc2-8157-9ed69db1c7ba_zgkqkc.webp
-source_label: Thakurdadar Jhuli
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 There was a king named Chandra. Like all the other sorrowful kings in fairy tales, he had the same old sorrow. He had plenty of kingdom, subjects, and wealth, but he lacked only one thing: a child to brighten his home. In his yearning for a child, the king organized a grand yajna. He fasted for three days and three nights and received the fruits of the yajna. It was decreed in the yajna that the king must break his fast by eating the two fruits that would be found together on the same mango tree in the royal garden.
 

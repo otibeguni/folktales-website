@@ -1,14 +1,10 @@
 ---
 title: The Chronicles of Dulal
 title_bn: আলালের ঘরের দুলাল
-category: Bengali Folktale
 url_slug: the-chronicles-of-dulal
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_oil_painting_of_a_young_mughal_prince_talking_to__52a34537-318e-49c3-9c3c-49d64c77c2cc_sb7yi4.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 32
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 In a certain country, there lived a merchant named Alal Saudagar. He lived happily with his beautiful wife and son, Dulal. As Dulal grew older, when he turned twelve, he insisted on going hunting in the deep forest. His parents couldn’t refuse their only son, even though they had a bad feeling about it. Despite their worries, they allowed Dulal to venture into the woods. Once in the forest, he lost his way and couldn't find the path back home. Wandering aimlessly, Dulal became a drifter, as if the magic of the forest made him forget about returning to his parents.
 

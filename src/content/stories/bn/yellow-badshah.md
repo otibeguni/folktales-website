@@ -1,19 +1,9 @@
 ---
 title: হলুদ বাদশা
-category: Bengali Folktale
 url_slug: yellow-badshah
 language: bn
-topic_slugs:
-  - pari
-  - rakshasa
-  - mount-qaf
-  - allah-deity
-  - dakini
-  - danava-spirit
-  - daitya-asura
-  - swarga-heaven
-resource_slugs: []
 ---
+
 
 অনেক কাল আগে বল্লোব নামে এক শহর ছিল, যার রাজা ছিলেন হলুদ বাদশা। সেই রাজার ঘরে জন্ম নিলো এক রাজকন্যা, নওবাহার। তার হাসি, তার চাহনি—সবকিছুই এমন নির্মল, এমন উজ্জ্বল যে পরী থেকেও লজ্জা পায়। জগৎ থেকে তাকে আড়াল করে রাখার জন্য রাজা এক মায়াবী বাগান তৈরি করালেন, যেখানে পাঁচজন দাসীর তত্ত্বাবধানে নওবাহার বড় হতে লাগল।
 

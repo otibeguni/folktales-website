@@ -1,15 +1,10 @@
 ---
 title: King Manik Pal
 title_bn: মানিক পাল রাজা
-category: Bengali Folktale
 url_slug: king-manik-pal
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_4504_l663az.webp
-source_slug: rangpur-geetika
-source_label: Rangpur Geetika
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 It was a long, long time ago. The king of Ujani Nagar was Manik Pal. At home, he had a beautiful princess named Rajol. With long hair and a radiant beauty like the princesses of fairy tales, Rajol was spending her days happily with her handmaidens. One day, the king thought it was time to get the princess married. No sooner had the king spoken than the viziers and ministers all appeared! The king ordered, "Beat the drums and tell everyone—I will marry off the princess, write this message down." The entire kingdom was enchanted by the princess's beauty, so upon hearing the news, no one delayed. The very next morning, the palace courtyard filled with various young men, all ready to present themselves, each with a hope in their heart—to become the king's son-in-law. Princess Rajol peeked from the second-floor palace, but alas, she didn't like anyone. Not a single prince was worthy of her beauty. Disliking every single one, the princess sat in the middle of the garden, holding her favorite handmaiden's neck, and began to cry. Calling her magic myna bird, she said,
 

@@ -1,13 +1,9 @@
 ---
 title: The Portuguese Pirate and girl from Jessore
-category: Bengal Legend
 url_slug: the-portuguese-pirate-and-girl-from-jessore
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/IMG_4506_clvwff.webp
-topic_slugs:
-  - jessore-district
-resource_slugs: []
 ---
+
 
 A long time ago, long before the British ruled these lands, our coastal villages used to be frequently raided by Portugese pirates. One such village was Godkhali (গদখালী) in the Jessore region.
 

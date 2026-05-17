@@ -1,17 +1,9 @@
 ---
 title: কমলা সুন্দরী
-category: Bengal Legend
 url_slug: the-tale-of-komola-shundori
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/shahriarhaque_colored_sketch_of_a_bengali_young_girl_performing_5a5ce18f-e7e2-4303-8ba0-666992d8266f_o6ignk.webp
-source_label: Uttorbonger Kingbodonti - Humayun Rahman
-topic_slugs:
-  - gauda-kingdom
-  - pundra-kingdom
-  - karotoa-river
-resource_slugs:
-  - resource-70-skonder-dhap-video
 ---
+
 
 ৮ম শতাব্দীর শেষ দিকের কথা। বিশাল গৌড় সাম্রাজ্যে ভাঙন ধরে তখন চারিদিকে ছোট রাজ্যের উত্থান ঘটেছে। এসময় পুন্ড্রনগরের হর্তাকর্তা ছিলেন রাজা জয়ন্ত। প্রজাদরদী রাজাকে প্রজারাও খুব ভালোবাসতো।
 

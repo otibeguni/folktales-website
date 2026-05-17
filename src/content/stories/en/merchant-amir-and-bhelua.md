@@ -1,14 +1,10 @@
 ---
 title: Merchant Amir and Bhelua
 title_bn: আমির সদাগর ও ভেলুয়া সুন্দরী
-category: Puthi Literature
 url_slug: merchant-amir-and-bhelua
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/IMG_4687_eponaf.webp
-source_slug: amir-shodagor-o-bhelua-shundori
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 In the city of Teloinna, King Manohar and the enchanting Moyna Sundari were blessed with a divine daughter—Velua Sundari.
 

@@ -4,8 +4,8 @@ import Search from 'astro-pagefind/components/Search';
 import {
   bookHasDetailPage,
   getAllBooks,
-  getAllStories,
   getBookDetailPath,
+  getResolvedStories,
   getStoryRouteSlug,
 } from '@/utils/content';
 import { getBlogPosts } from '@/utils/storyblok-blog';
@@ -23,7 +23,7 @@ const publicationSlides = [
   },
 ];
 
-const allStories = await getAllStories();
+const allStories = await getResolvedStories();
 const storySlides = allStories
   .filter((story) => story.data.language === 'en')
   .sort((a, b) => a.data.title.localeCompare(b.data.title))

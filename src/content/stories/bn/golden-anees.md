@@ -1,13 +1,9 @@
 ---
 title: সোনার আনিস
-category: Bengali Folktale
 url_slug: golden-anees
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_a_young_indian_prince_holding_a_skull_c969bcae-83e3-4b19-8ee5-de0cd17b594a_mlw7vg.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 90
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 এক যে ছিল রাজা। রাজা ছিলেন বড় মহৎ আর দয়ালু। তার রাজ্যে ঘোড়াশালে ঘোড়া, হাতিশালে হাতি, রাজকোষে ছিলো হিরে মুক্তো পান্না চুন্নি। তবু রাজার মনে বড় দুঃখ। এত ক্ষমতা, এত প্রাচুর্য, এত সম্পদ, কিন্ত তাঁর যে কোন সন্তান নেই! সন্তানের আশায় রাজা একে একে সাত রাণী বিয়ে করলেন। আফসোস! বিধি তাঁর প্রতি সদয় হলোনা। বছরকে বছর যায়, সন্তানের জন্য রাজ্যের হেন বৈদ্য নেই, হেন সন্নাসী নেই যার কাছে রাজা ধরনা দেননি। কিন্তু কিছুতেই কিছু হয়না। হতাশায়, ক্ষোভে, রাজা সমাধানের খোঁজে বনে বেরিয়ে পড়লেন। রাণীরা বাধ সাধলেন, কিন্তু রাজা দৃঢ়প্রতিজ্ঞ। রাণীদের চোখের পানি উপেক্ষা করে তিনি এক কাপড়ে বনে চললেন।
 

@@ -1,15 +1,10 @@
 ---
 title: Kolaboti Konna
 title_bn: কলাবতী কন্যা
-category: Indigenous Folktale
 url_slug: kolaboti-konna
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/shahriarhaque_mughal_style_painting_of_an_indian_princess_hidin_07ebb5a3-2c24-4880-b19f-475fbdee2ea8_psrhbk.webp
-source_slug: tripura-lokokahini
-topic_slugs:
-  - tripura-people
-resource_slugs: []
 ---
+
 
 Narayan was the ruler of the Teylafang region in the Tripura kingdom. He had five sons, of which the wives of four were very beautiful and attractive. The youngest prince was unmarried and was the beloved younger brother of the four sisters-in-law. One day, the sisters-in-law joked, “No girl will ever come to the house of the lazy prince.” The youngest prince replied, “Just watch; my wife will be more beautiful than all of you.” Saying this, he set out to find a bride, carrying a branch of the gumchak fruit (a sweet and fragrant wild fruit that resembles an apple), a stick, and a knife.
 

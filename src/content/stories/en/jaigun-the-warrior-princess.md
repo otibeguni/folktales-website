@@ -1,14 +1,10 @@
 ---
 title: Jaigun - The warrior princess
 title_bn: জৈগুনের পুঁথি
-category: Puthi Literature
 url_slug: jaigun-the-warrior-princess
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584691/jaigun_qljuxo.webp
-source_slug: book-48
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 In a kingdom, there was an extraordinary princess named Jaigun. The sight of her beauty would dazzle everyone around her. Raised with much affection by her parents, Jaigun grew up surrounded by forty maidens. When she was ten years old, Jaigun developed an interest in learning wrestling. However, princesses are not taught wrestling, so she had to disguise herself as a man. Secretly, Jaigun trained in wrestling and horseback riding, showing remarkable strength. She could easily grab the trunk of a huge elephant and throw it if she wished.
 

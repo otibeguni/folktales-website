@@ -1,14 +1,9 @@
 ---
 title: গুলে বকাওলী (পরিস্থানের ফুল)
-category: Bengali Translation
 url_slug: gule-bakawali
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/shahriarhaque_watercolor_painting_of_a_mughal_fairy_sleeping_on_7455ede9-1855-4091-95b5-aa255f043ce8_ty85qm.webp
-source_slug: gule-bokowali
-topic_slugs:
-  - pari
-resource_slugs: []
 ---
+
 
 শর্কস্তানের বাদশা ছিলেন জয়নুল মুলুক। পুত্রভাগ্য ভালো ছিল তার। অন্যান্য রাজা-বাদশার মতো নিঃসন্তান তিনি ছিলেন না। সব ভালোই চলছিল কিন্তু পঞ্চম পুত্র তাজুল মুলুকের বেলায় ভাগ্য বাদ সাধলো। জ্যোতিষী ভবিষ্যদ্বাণী করলেন, পঞ্চম পুত্রের চেহারা চোখের সামনে এলেই অন্ধ হয়ে যাবেন বাদশা। সময় বারো বছর। বারো বছরের মধ্যেই বাদশাহের কপালে নেমে আসবে এই ঘোর বিপদ।
 

@@ -1,15 +1,10 @@
 ---
 title: Manikpirer Jahuranama
 title_bn: মানিক পীরের জহুরানামা
-category: Puthi Literature
 url_slug: manikpirer-jahuranama
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584703/manikpirer-jahuranama.webp
-source_slug: book-95-witness-to-marvels
-topic_slugs:
-  - manik-pir
-resource_slugs: []
 ---
+
 
 It was Allah’s divine will to send a prophet named Manik to the world—an avatar who would spread His word. In the age of Kali Yuga, this chosen one would come to Earth and enlighten people about Hajj, Ghazi, Muhammad, Rahim, Karim, Rasul, Paygamber, Izzat, and Mother.
 

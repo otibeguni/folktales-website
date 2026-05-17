@@ -1,15 +1,9 @@
 ---
 title: Gule Deogandha
-category: Puthi Literature
 url_slug: gule-deogandha
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1759069962/shahriarhaque_A_watercolor_illustration_featuring_a_South_Asi_eef39b77-d19c-4e92-ae2d-30aa63ee5a4d_1_xz9klb.png
-source_slug: gole-deogandhar-puthi
-topic_slugs:
-  - jinn
-  - yunan
-resource_slugs: []
 ---
+
 
 That was long ago. In a distant land, there once lived a king—kind-hearted and beloved by his people. But despite all his blessings, the king remained childless for many years. After countless prayers and years of devotion to Allah, his fate finally changed. One by one, his three queens gave birth to three radiant princes, bringing joy and light into the palace. Their names were Firoz Shah, Nowroz Shah, and Bahraj Shah. But fate can be cruel. Just as the boys began to grow, they were struck by a strange and mysterious illness. No one knew the name of the disease. Healers and herbalists came from far and wide, but no remedy could cure the princes. They all eventually gave up and left. At last, a peculiar healer arrived from the distant land of Yunan. Unlike the others, he offered no medicines and performed no treatments. Instead, he gave the king a single name—the name of the only cure: “Only the Gul-e-Deogandha can heal you,” he said. But alas, the healer did not possess this cure himself.
 

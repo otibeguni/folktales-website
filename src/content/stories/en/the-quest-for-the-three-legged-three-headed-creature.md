@@ -1,14 +1,9 @@
 ---
 title: The quest for the three-legged, three-headed creature
-category: Bengali Folktale
 url_slug: the-quest-for-the-three-legged-three-headed-creature
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1759064631/Gemini_Generated_Image_vpbtunvpbtunvpbt_gqxup1.png
-source_slug: dadamoshayer-thole
-topic_slugs:
-  - shuk-bird
-resource_slugs: []
 ---
+
 
 There was once a kingdom ruled by a wise King who had a single son. The Prince lived a life of ease, studying various arts, enjoying the company of his friends, and hunting in the royal forests. In this way, his days passed without a care.
 

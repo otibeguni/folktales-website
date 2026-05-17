@@ -1,16 +1,10 @@
 ---
 title: The love story of Ushaboti
 title_bn: উষাবতীর প্রেম
-category: Bengal Legend
 url_slug: the-love-story-of-ushaboti
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584689/62955496-FA75-4F47-9284-0BC1CB55C422_qaon4t.webp
-source_label: Uttorbonger Kingbodonti - Humayun Rahman
-topic_slugs:
-  - ganges-river
-  - pala-empire
-resource_slugs: []
 ---
+
 
 Long ago, in a kingdom by the river, there lived a princess named Ushaboti. She was the only daughter of King Banraj, a powerful ruler from the early days of the Pal dynasty. Ushaboti was known across the land for her golden complexion, her grace, and the quiet strength in her eyes.
 

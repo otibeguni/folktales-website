@@ -1,16 +1,10 @@
 ---
 title: The Dighi of King Tiyor
 title_bn: তিয়র রাজার দিঘী
-category: Bengal Legend
 url_slug: the-dighi-of-king-tiyor
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584694/shahriarhaque_oil_painting_of_a_greedy_indian_king_amazed_at_hi_cf355f46-3366-4ee5-a21e-8e2fa1b52bb5_autxx9.webp
-source_slug: satkhirar-kingbodonti
-topic_slugs:
-  - satkhira-district
-resource_slugs:
-  - resource-71-mound-of-king-tiyor
 ---
+
 
 Many years ago, in a region adjacent to the Sundarbans called Tala-Kalaroa, there was a village named “Sujan Saha”. The villagers were suffering from a severe lack of water. A kind-hearted man from the village named Sharaf Khan decided to address the issue by digging a large pond. Work began on the pond, but as the project progressed, news reached the king.The king lives in a nearby village.In the capital of Manikhar. The king was furious when he heard about the pond being dug.
 

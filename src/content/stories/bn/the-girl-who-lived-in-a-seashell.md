@@ -1,14 +1,9 @@
 ---
 title: শামুক কন্যা
-category: Indigenous Folktale
 url_slug: the-girl-who-lived-in-a-seashell
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584690/IMG_3672_zynih4.webp
-source_slug: bangladesher-adibashi-lokokotha
-topic_slugs:
-  - oraon-people
-resource_slugs: []
 ---
+
 
 সে বহুদিন আগের কথা। গাঁয়ের এক কোণে বাস করতো সুশীল নামের এক অনাথ যুবক। বাবা সেই ছোটবেলায় মারা গেলেও মা চলে গেলেন এই ক’দিন আগেই। সেই থেকে সুশীলের নাওয়া নেই, খাওয়া নেই। ঘরদোরে কিছুর কোনো ঠিক নেই। সুশীল শুধু ঘরের কোণে পড়ে থেকে নিজের আগেকার দিন আর মায়ের আদরের কথা মনে করে। মা বেঁচে থাকতে সে কেমন সারাটা দিন সৈকতপাড়ে শামুক কুড়াতে যেত। কতদিন সে আর শামুক কুড়ায় না। ভুলেই গেছে সেসব দিন।
 

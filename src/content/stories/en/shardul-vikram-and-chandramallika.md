@@ -1,15 +1,9 @@
 ---
 title: The Tale of Shardul Vikram and Chandramallika
-category: Bengal Legend
 url_slug: shardul-vikram-and-chandramallika
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1753274388/shahriarhaque_anime_style_close_up_render_of_a_hindu_sadhu_wi_cd7b0ee9-106d-4173-ba25-5f19cd820ef8_0_au7aai.png
-source_slug: mohasthaner-kingbodonoti
-topic_slugs:
-  - pundravardhana-kingdom
-  - kapalika
-resource_slugs: []
 ---
+
 
 It was a time long, long ago. In the kingdom of Pundravardhana, there ruled a mighty and valiant king named Shardul Vikram. The name “Shardul” meant tiger—and just like a tiger, the king was known for his fierce spirit and strength. The title stuck to him like his shadow.
 

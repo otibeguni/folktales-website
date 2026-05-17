@@ -1,12 +1,9 @@
 ---
 title: কুঁচবরণ কন্যা
-category: Bengali Folktale
 url_slug: the-girl-with-rose-colored-skin
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750587628/shahriarhaque_a_anime_styl_erender_of_young_indian_village_gi_07af999c-1d38-49fa-b052-7591f9cb62a2_3_xmf8kz.png
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 এক রাজ্যে বাস করতো চার বন্ধু। তারা সকলেই ছিল বড় বড় লোকের ছেলে। রাজপুত্র, উজিরপুত্র, নাজিপুত্র ও কোটালপুত্র। সারাদিন তারা একসাথে হাসেখেলে আর ফূর্তি করে বেড়ায়। পড়ালেখায় কারোরই মন নেই। ছেলেরা বখে যাচ্ছে দেখে তাদের মায়েরা একদিন ভাতের পাতে ছাই দিয়ে দিল। সেই দেখে চার বন্ধু মনের দুঃখে দেশ ছেড়ে চলে গেল। তবে তারা একা গেল না , রাজার আস্তাবল থেকে চারটি শক্তপোক্ত ঘোড়াও সঙ্গে নিল। যেতে যেতে তারা গিয়ে পৌঁছালো এক গহীন বনে।
 

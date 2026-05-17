@@ -12,11 +12,15 @@ export const BOOK_CATEGORY_LABELS: Record<string, string> = {
 };
 
 export type StoryEntry = CollectionEntry<"stories">;
+export type StoryMetadataEntry = CollectionEntry<"storyMetadata">;
 export type TopicEntry = CollectionEntry<"topics">;
 export type BookEntry = CollectionEntry<"books">;
 export type ResourceEntry = CollectionEntry<"resources">;
 export type StoryCollectionEntry = CollectionEntry<"storyCollections">;
 export type CodexEntry = CollectionEntry<"codex">;
+export type ResolvedStoryEntry = StoryEntry & {
+  data: StoryEntry["data"] & StoryMetadataEntry["data"];
+};
 type BookLinkFields = {
   slug: string;
   library_url?: string;
@@ -38,12 +42,50 @@ export function getStoryRouteSlug(story: StoryEntry) {
   return story.data.url_slug ?? story.slug.split("/").pop() ?? story.slug;
 }
 
+export function getStoryMetadataSlug(story: StoryEntry) {
+  return getStoryRouteSlug(story);
+}
+
 export async function getAllStories() {
   return getCollection("stories");
 }
 
 export async function getStoriesByLanguage(language: string) {
   return getCollection("stories", ({ data }) => data.language === language);
+}
+
+export async function getAllStoryMetadata() {
+  return getCollection("storyMetadata");
+}
+
+export function resolveStoryMetadata(
+  story: StoryEntry,
+  metadataBySlug: Map<string, StoryMetadataEntry>,
+): ResolvedStoryEntry {
+  const metadataSlug = getStoryMetadataSlug(story);
+  const metadata = metadataBySlug.get(metadataSlug);
+
+  if (!metadata) {
+    throw new Error(`Missing story metadata for "${metadataSlug}"`);
+  }
+
+  return {
+    ...story,
+    data: {
+      ...metadata.data,
+      ...story.data,
+    },
+  };
+}
+
+export async function getResolvedStories() {
+  const [stories, metadata] = await Promise.all([
+    getAllStories(),
+    getAllStoryMetadata(),
+  ]);
+  const metadataBySlug = indexEntriesBySlug(metadata);
+
+  return stories.map((story) => resolveStoryMetadata(story, metadataBySlug));
 }
 
 export async function getAllTopics() {

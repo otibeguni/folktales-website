@@ -1,15 +1,10 @@
 ---
 title: Shotto Pirer Puthi
 title_bn: সত্যপীরের পুথি
-category: Puthi Literature
 url_slug: shotto-pirer-puthi
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584699/shahriarhaque_persian_miniature_style_painting_of_a_golden_bird_178f8b32-e9b5-4d4c-b8a4-934f5f360750_lpiqow.webp
-source_slug: book-79
-topic_slugs:
-  - satya-pir
-resource_slugs: []
 ---
+
 
 In the land of India, in Chandanagar of Hooghly, was born a merchant named Joydhor Sadagar. He had three sons—Madan, Kamdev, and Sundar.
 

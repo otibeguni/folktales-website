@@ -1,14 +1,9 @@
 ---
 title: The tale of two princesses
-category: Indigenous Folktale
 url_slug: tale-of-two-princesses
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1752896551/shahriarhaque_anime_style_render_of_a_ghostly_spirit_indian_i_152d75a9-5891-4dd0-8a7a-94d97c132c2d_2_gjoejd.png
-source_slug: santal-folk-tales
-topic_slugs:
-  - santal-people
-resource_slugs: []
 ---
+
 
 A king had two daughters. Even though the princesses were supposed to live in the four walls of the castle – but these two princesses were a bit different. Two sisters used to go out of the Rajmahal if they got a chance together. One day we met them with a crow. The crow was bringing a pretty ripe fruit on his lips. The princesses want to eat after seeing the fruit. They said- "Oh what a sweet and toastous fruit! ”
 

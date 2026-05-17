@@ -1,15 +1,10 @@
 ---
 title: How alcohol came to be
 title_bn: অ্যালকোহলের উতপত্তি হলো কিভাবে
-category: Indigenous Folktale
 url_slug: how-alcohol-came-to-be
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_Painting_of_an_indian_maharaja_having_alcohol_wit_2e750c5f-a0ad-43dd-a190-757a8ac7b1e4_c3jtbu.webp
-source_slug: tripura-lokokahini
-topic_slugs:
-  - tripura-people
-resource_slugs: []
 ---
+
 
 A long time ago, when King Shukradeva ruled over Tripura, ghosts used to roam freely in his kingdom. One day, one of his spies came to him and exclaimed, “O Maharaja! The peasants from the southern part of your kingdom are fed up of ghosts and are fleeing their homes. When the women bathe, the ghosts pierce holes in their water buckets. During meals, the ghosts desecrate their plates with urine and feces. Even in their sleep, the ghosts tug at their hair. And when they engage in no activity at all, the mischievous spirits incessantly tickle them. Please do something.” “Why hasn’t the local governor done anything to address this issue?” asked the King furiously. “He tried his best, my lord. But every time he took any initiative, the ghosts would throw stones at his men.” answered the spy.
 

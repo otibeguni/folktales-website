@@ -1,18 +1,9 @@
 ---
 title: Abdul Ali Garuli and Nibaron Shundori
-category: Puthi Literature
 url_slug: abdul-ali-garuli-and-nibaron-shundori
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584699/shahriarhaque_persian_art_of_snake_strangling_a_mughal_prince_b799af12-6335-4ec8-b662-83550a5529ea_kftje4.webp
-source_slug: abdul-ali-garuli-o-nibaron-shundori
-topic_slugs:
-  - jhalokati
-  - barishal
-resource_slugs:
-  - resource-75-siraj-boyati-abdul-ali-garoli
-  - resource-76
-  - resource-77
 ---
+
 
 In the year 1315, amidst the bustling town of Jhalokati, there dwelled a young lad by the name of Abdul Ali. At just twenty years old, he possessed a striking handsomeness that caught the eye of many. Abdul had a penchant for adventure, and so he often found himself traversing the countryside on horseback, exploring every nook and cranny.
 

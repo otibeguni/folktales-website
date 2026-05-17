@@ -1,15 +1,10 @@
 ---
 title: The story of mice and baby teeth
 title_bn: ইদুরের গর্তে দাঁত কেন ফেলা হয়
-category: Indigenous Folktale
 url_slug: the-story-of-mice-and-baby-teeth
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584692/shahriarhaque_fairy_tale_illustration_of_a_cute_furry_rat_791fc7e6-87b1-4a0f-8bb3-57e5092ea34c_gw8cf9.webp
-source_slug: chakma-puran
-topic_slugs:
-  - chakma-people
-resource_slugs: []
 ---
+
 
 Once upon a time in a forested mountain area, there lived a couple without kids. Every day, the husband worked hard chopping wood in the forest, while his wife took care of their home, eagerly awaiting his return. They lived comfortably on the income from selling the wood, enjoying a peaceful life filled with joy. However, each evening they felt something was missing – a child to complete their family. Hoping for a miracle, the wife began praying daily to Mah Lakhi, a revered goddess of the [Chakma people](https://en.wikipedia.org/wiki/Chakma_people).
 

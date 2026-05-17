@@ -1,14 +1,10 @@
 ---
 title: The Witch’s Dinner
 title_bn: জাদুর পিঠার গাছ ও ডাইনি বুড়ি
-category: Bengali Folktale
 url_slug: the-witchs-dinner
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589719/shahriarhaque_watercolor_painting_of_a_hindu_sadhu_talking_to_14d2bf6e-58fe-482e-bae3-d970306dd3b1_0_rkdzo4.png
-source_slug: bengali-household-tales
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 That was long ago. At the edge of a small village lived a shepherd boy and his mother. They barely managed to get by, tending to their cows and sheep. One day, the shepherd boy had a strong craving for some pitha (traditional rice cakes). But when he went to his mother and expressed his wish, she snapped at him, "We barely have enough to eat every day, and you want pitha? Making pitha requires so many things! Where will we get them, where will we find them?" Hearing this, the boy quickly replied, "Write down a list of what you need. I'll go and get everything. Then you can make pitha for me." And so, no sooner said than done. His mother handed him the shopping list and said:
 

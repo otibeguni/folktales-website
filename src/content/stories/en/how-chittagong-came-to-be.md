@@ -1,19 +1,10 @@
 ---
 title: How Chittagong came to be
 title_bn: চট্টগ্রামের নামকরণের কিংবদন্তি
-category: Bengal Legend
 url_slug: how-chittagong-came-to-be
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584696/shahriarhaque_oil_painting_of_a_sufi_holding_a_blindingly_glowi_186fe4bc-451b-4593-b150-00f4d28bbfb8_yeuddw.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - chittagong-city
-  - jinn
-  - karnaphuli-river
-  - pari
-resource_slugs:
-  - resource-1-the-legend-of-parir-pahar
 ---
+
 
 In ancient times, most of the present-day region of Chittagong was covered in dense forests. Apart from a few nomadic tribes there weren't any large human settlements in the area. This presented a golden opportunity for Sufi preachers who were looking for new areas to settle. One particular Sufi saint named Hazrat Badar Shah was fascinated with this prospect and wanted to explore the banks of the Karnaphuli river. His followers warned him of the rumors of deadly creatures of both natural and supernatural origins that lurked in the area. But Badr Shah was undeterred. He stepped on a large stone and using his mystical powers, commanded it to float in the water and take him on a voyage through the river.
 

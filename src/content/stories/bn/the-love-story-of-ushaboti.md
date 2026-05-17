@@ -1,15 +1,9 @@
 ---
 title: উষাবতীর প্রেম
-category: Bengal Legend
 url_slug: the-love-story-of-ushaboti
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584689/62955496-FA75-4F47-9284-0BC1CB55C422_qaon4t.webp
-source_label: Uttorbonger Kingbodonti - Humayun Rahman
-topic_slugs:
-  - ganges-river
-  - pala-empire
-resource_slugs: []
 ---
+
 
 সে বহুকাল আগের কথা। নদীর ধারের এক সাম্রাজ্য, আর তার রাজকন্যার নাম ছিল উষাবতী। পাল বংশে প্রথম দিকের রাজা বানরাজ, তারই কন্যা উষাবতী। বানরাজের শৌর্য-বীর্য, ধন-সম্পদ সবই ছিল অফুরন্ত। রাজকন্যা উষাবতীরও রূপ-গুণের কমতি নেই।
 

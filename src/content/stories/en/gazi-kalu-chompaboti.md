@@ -1,22 +1,10 @@
 ---
 title: Gazi Kalu Chompaboti
 title_bn: গাজী, কালু, চম্পাবতীর আখ্যান
-category: Puthi Literature
 url_slug: gazi-kalu-chompaboti
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584696/shahriarhaque_oil_painting_of_a_sufi_sleeping_on_a_royal_bed_fl_ba1939fe-b750-49dd-b582-088a3b171dae_g4op5r.webp
-source_slug: book-43
-topic_slugs:
-  - sundarbans
-  - gazi-pir
-  - khidr
-  - god-shiva
-  - goddess-parvati
-  - rahu
-  - ganga-devi
-  - patala
-resource_slugs: []
 ---
+
 
 Long, long ago, the king of Biratnagar was Shah Sikandar, and his queen was the beautiful Ajoopa. The royal couple carried deep sorrow in their hearts after losing their first child during a hunting trip in the forest.
 

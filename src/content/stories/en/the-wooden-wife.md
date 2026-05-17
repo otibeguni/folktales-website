@@ -1,15 +1,10 @@
 ---
 title: The wooden wife
 title_bn: কাঠের বউ
-category: Indigenous Folktale
 url_slug: the-wooden-wife
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584693/shahriarhaque_illustration_of_a_middle-aged_indian_villager_car_43af5a3e-d7a1-44ac-9f68-c5f3da77900c_wpflrg.webp
-source_slug: monipuri-lokokahini
-topic_slugs:
-  - manipuri-people
-resource_slugs: []
 ---
+
 
 Once upon a time, there lived a day-labourer who struggled to make ends meet. All day long, he did various odd-jobs around the village, and when he returned home he busied himself with domestic chores. He never had the time to socialize with people and as the years went by, a sense of lonliness enveloped him. Driven by the desire for companionship, he spent his evenings sculpting a lifelike wooden figure of a beautiful woman. Once finished, he envisioned it as his wife. He would affectionately utter, “Honey, can you hear me?" and even make requests like "Could you please roll me some tobacco?". He'd then proceed to make tobacco for himself. Whenever he finished cooking, he'd ask his wooden creation, "My dear wife, is the food ready?" and proceeded to serve food on his own plate. Somehow, the poor man found a semblance of happiness in this imaginary family.
 

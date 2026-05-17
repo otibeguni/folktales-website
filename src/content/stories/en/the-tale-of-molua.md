@@ -1,14 +1,10 @@
 ---
 title: The tale of Molua
 title_bn: মলুয়ার পালা
-category: Bengali Folktale
 url_slug: the-tale-of-molua
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584701/shahriarhaque_watercolor_painting_of_a_beautiful_indian_princes_6400f012-acf5-41be-9087-254381c5324b_s0zvga.webp
-topic_slugs:
-  - maimansingha-gitika
-resource_slugs: []
 ---
+
 
 At that time, the country was going through an unseasonal period of rain. The autumn paddy was being destroyed by the downpour. During this time, a widow and her son, Chand Binod, were struggling to survive. In search of some extra income, Binod took up hunting kites or eagles. One day, he went to the pond bank in the village of Aralia to hunt kites. As he became exhausted while hunting, he sat under a tree to rest and soon fell asleep. Evening was approaching then. At that moment, Molua, the young daughter of the village chief in Aralia, came to the riverbank to fetch water.
 

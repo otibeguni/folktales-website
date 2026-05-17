@@ -1,14 +1,9 @@
 ---
 title: শ্বেত রাজহস্তী, রাজকন্যা, রাক্ষস এবং অন্যান্য
-category: Indigenous Folktale
 url_slug: the-princess-and-the-royal-elephant
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1753528993/shahriarhaque_watercolor_painting_of_an_ancient_Indian_prince_2149f685-89fe-4b38-892f-22d36d510b8f_0_jdyhuf.png
-source_slug: tripura-lokokahini
-topic_slugs:
-  - tripura-people
-resource_slugs: []
 ---
+
 
 অনেক অনেক বছর আগে নাকি মানুষ ও পশুপাখি একে অপরের কথা বুঝতে পারতো। একে অন্যকে কুটুম মানতো, তাই এ ওর কাছে মুখ ফুটে সাহায্যও চাইত। 
 

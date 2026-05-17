@@ -1,17 +1,10 @@
 ---
 title: The tale of Kalketu and Fullora
 title_bn: কালকেতু ও ফুল্লরার আখ্যান
-category: Bengali Folktale
 url_slug: the-tale-of-kalketu-and-fullora
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584695/shahriarhaque_oil_painting_of_a_hindu_village_archer_in_a_fores_e7b5022d-8a00-49ca-b939-185b93f01eeb_msopak.webp
-topic_slugs:
-  - chandi-deity
-  - god-shiva
-  - chandimangal-kavya
-  - god-indra
-resource_slugs: []
 ---
+
 
 A long time before the [Goddess Chandi](https://en.wikipedia.org/wiki/Chandi) became a household name in Bengal, she wasn't worshipped by anybody at all. However, Chandi longed for the adoration of people, so she decided to make Nilambor, the son of the mighty King of the Gods, [Indra](https://en.wikipedia.org/wiki/Indra), her first devotee. Chandi spoke to her husband, [Lord Shiva](https://en.wikipedia.org/wiki/Shiva). They devised a plan to get Nilambor expelled from the divine realm. However, Shiva hesitated, uncertain about banishing someone who hadn't done anything wrong. Undeterred, Chandi crafted a clever scheme. One day, as Nilambor gathered flowers for his prayers, Chandi transformed into a bee and concealed herself among the petals. When Nilambor presented the flowers to Lord Shiva, the bee stung him. Enraged, Shiva cursed Nilambor and his wife out of heaven. The two were reborn as children in the human world, in separate hunter families. Nilambor became Kalketu, and his wife, Chaya, took on the name Fullora.
 

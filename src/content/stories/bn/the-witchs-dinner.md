@@ -1,13 +1,9 @@
 ---
 title: জাদুর পিঠার গাছ ও ডাইনি বুড়ি
-category: Bengali Folktale
 url_slug: the-witchs-dinner
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589719/shahriarhaque_watercolor_painting_of_a_hindu_sadhu_talking_to_14d2bf6e-58fe-482e-bae3-d970306dd3b1_0_rkdzo4.png
-source_slug: bengali-household-tales
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 সে বেশ অনেকদিন আগের কথা। ছোট্ট এক গাঁয়ের ধারে বাস করতো এক রাখাল বালক আর তার মা। গরু-ভেড়া চড়িয়ে কোনোমতে তাদের দিন কেটে যাচ্ছিল। একদিন রাখালের বড় ইচ্ছে করলো পিঠা খাবে। কিন্তু মায়ের কাছে গিয়ে বলতেই মা মুখ ঝামটা দিয়ে বললো– “দিন আনতে দিন খাই, পিঠা বানাতে কতকিছু চাই! কোথায় পাই, কোথায় পাই?” মায়ের কথা শুনে সে তক্ষুনি জবাব দিলো, “তুমি ফর্দ লিখে দাও। আমি সবকিছু নিয়ে আসছি। এরপর তুমি আমায় পিঠা বানিয়ে দিও।” যে-ই কথা সে-ই কাজ। মা বাজারের ফর্দ হাতে ধরিয়ে দিলো–
 

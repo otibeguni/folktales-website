@@ -5,10 +5,10 @@ import Layout from "@/layouts/Layout.astro";
 import {
   bookHasDetailPage,
   getAllBooks,
-  getAllStories,
   getAllTopics,
   getBookAvailability,
   getBookCategoryLabel,
+  getResolvedStories,
   getStoryRouteSlug,
   indexEntriesBySlug,
   storyBasePath,
@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 
 const { book } = Astro.props;
 const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
-const stories = await getAllStories();
+const stories = await getResolvedStories();
 const topics = await getAllTopics();
 const topicBySlug = indexEntriesBySlug(topics);
 const categoryLabel = getBookCategoryLabel(book.data.category);

@@ -1,14 +1,10 @@
 ---
 title: Golden Anees
 title_bn: সোনার আনিস
-category: Bengali Folktale
 url_slug: golden-anees
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_a_young_indian_prince_holding_a_skull_c969bcae-83e3-4b19-8ee5-de0cd17b594a_mlw7vg.webp
-source_label: Bangla Academy Folklore Sangrahamala Volume 90
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 Once upon a time, there lived a kind and noble king. Despite having a powerful army and great wealth, there was a void in his life, for he had no children. Over the years, the king had married seven different queens, but to his sorrow, none of them could give him a child. He sought counsel from healers and saints across the kingdom, but no remedy could be found. In his desperation, the king decided to venture into the dense jungle in search of answers. His seven queens pleaded with him not to go, but he set off with nothing but the clothes on his back.
 

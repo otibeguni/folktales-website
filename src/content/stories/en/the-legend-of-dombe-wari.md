@@ -1,16 +1,10 @@
 ---
 title: The legend of Dombe Wari
 title_bn: ডম্বে ওয়ারির কিংবদন্তি
-category: Indigenous Folktale
 url_slug: the-legend-of-dombe-wari
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_an_evil_indian_merman_2766da2a-50de-4e80-85fa-8d695a986133_pasxjp.webp
-source_slug: bangla-kingbodonti-asaduzzaman-juel
-topic_slugs:
-  - garo-people
-resource_slugs:
-  - resource-44-exploring-garo-hills-and-dombe-wari
 ---
+
 
 A long time ago, in a village nestled in the forests of the [Garo Hills](https://en.wikipedia.org/wiki/Garo_Hills), lived a man named Joreng. He lived with his beautiful wife, Dombe, and their two daughters. It was said that Dombe was the most beautiful woman in the area. In fact, Joreng never missed an opportunity to remind his fellow villagers of this fact. One day, while walking back home with his friends he exclaimed with great pride, "My wife's beauty remains untarnished even after delivering our second child". A merman (মৎসকুমার) from the nearby [Rongdik river](https://www.meghalayatourism.in/experiences-4/into-the-land-of-wonders/) overheard these words and was awestruck at such a proclamation of beauty. He was curious to catch a glimpse of this legendary woman. As the days passed, curiosity turned into obsession. The merman began to wait impatiently in shallow waters, hoping to cross paths with her. One day, his wishes came true. Dombe and her two daughters came to collect water from a nearby stream. The merman wasted no time and dragged Dombe into the river. But miraculously, the merman's magic allowed her to continue to breath underwater. All of this happened so fast that her elder daughter didn't get time to process the situation. She waited for a long time and finally when her newborn sister began to cry, she gave up and concluded that her mother must've drowned. Meanwhile, hearing her baby's cries, Dombe begged the merman to allow her to feed her baby. With his permission, Dombe swam to the surface to breastfeed her daughter. However, the merman held her feet tightly to ensure she doesn't escape. After the breastfeeding was over, he once again dragged Dombe down to his underwater kingdom. The two sisters returned to their village and narrated the whole story to their father. Joreng was furious and he vowed to bring back his wife at any cost. The next day, he sharpened his dagger and took his children back to the river bank where his wife was last seen. Upon hearing her newborn's cries, Dombe once again came to the surface to breastfeed. But this time Joren was prepared. He jumped into the water, slashed the merman with his dagger and set his wife free.
 

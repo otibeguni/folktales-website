@@ -1,14 +1,10 @@
 ---
 title: The tale of Mohua
 title_bn: মহুয়ার পালা
-category: Bengali Folktale
 url_slug: the-tale-of-mohua
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589206/shahriarhaque_surreal_painting_of_a_mughal_prince_sitting_on_a__2c7ccafc-4b71-498d-a5a3-296231a75172_s2rhos.webp
-topic_slugs:
-  - maimansingha-gitika
-resource_slugs: []
 ---
+
 
 In the heart of a dense forest, nestled within the Garo Hills, lived a notorious bandit leader named Humra Dakaat. His life was one of lawlessness and plunder, marked by the fear he instilled in the hearts of villagers. One fateful night, while raiding the home of a wealthy Brahmin, Humra's gaze fell upon a six-month-old girl, her beauty as radiant as the moon. This innocent child stirred a change within him, awakening a long-dormant emotion: love. Unable to leave her behind, Humra took the child and raised her as his own. Years passed, and the stolen child, named Mahua Sundari for her breathtaking beauty, blossomed into a young woman. Humra, now a [snake charmer](https://en.wikipedia.org/wiki/Bede_people), showered her with affection, teaching her the secrets of his trade. Their bond transcended the boundaries of their unconventional family, woven together by love and mutual respect.
 

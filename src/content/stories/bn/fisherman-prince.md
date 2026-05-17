@@ -1,11 +1,9 @@
 ---
 title: মাঝির ছেলে যখন রাজপুত্র
-category: Bengali Folktale
 url_slug: fisherman-prince
 language: bn
-topic_slugs: []
-resource_slugs: []
 ---
+
 
 > *উদয় নগর রাজ্যের রাজা বিনোদ নারায়ণ*  
 > *সুন্দরী রমণী ঘরে বেবী তারো নাম।*  

@@ -1,15 +1,9 @@
 ---
 title: হরিশচন্দ্রের পালা
-category: Hindu Mythology
 url_slug: the-trial-of-king-harishchandra
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750589719/shahriarhaque_watercolor_painting_of_a_hindu_sadhu_talking_to_14d2bf6e-58fe-482e-bae3-d970306dd3b1_0_rkdzo4.png
-source_slug: sree-dhormomongol
-topic_slugs:
-  - dharmathakur
-  - dharma-mangal-kavya
-resource_slugs: []
 ---
+
 
 বহুকাল আগে ভারতবর্ষে এক রাজা বাস করতেন। নাম তার হরিশ্চন্দ্র। রাজার স্বভাব এতই ভালো ছিল যে রাজ্যে রাজ্যে তার নামে মানুষ কিরে-কসম কাটতো। হরিশচন্দ্রের রানি ছিলেন মদনা। তাদের দুজনের সংসার আর রাজ্যের প্রজাদের নিয়ে ভালোই দিন কেটে যাচ্ছিল। কিন্তু ঘরে কোনো সন্তান না থাকায় দুজনেই বড় কষ্ট পেতেন।
 

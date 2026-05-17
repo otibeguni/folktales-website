@@ -1,14 +1,10 @@
 ---
 title: Nimai Sanyas
 title_bn: নিমাই সন্ন্যাসী
-category: Bengal Legend
 url_slug: nimai-sanyas
 language: en
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584695/shahriarhaque_oil_painting_of_a_happy_hindu_sanyas_in_his_30s_r_933b2acd-fd9e-46e5-bc2d-d02bb83cfd32_c34pdh.webp
-topic_slugs:
-  - chaitanya-mahaprabhu-nimai
-resource_slugs: []
 ---
+
 
 Nimai was quite renowned in his neighborhood. He ran a small school, or 'tol,' where he not only taught but also entertained the local boys with various stories beyond the usual lessons. His charismatic presence and engaging storytelling made his 'tol' a lively hub for learning and laughter.
 

@@ -1,14 +1,9 @@
 ---
 title: হুসনে বানু
-category: Bengali Translation
 url_slug: husne-banu-a-hatim-tai-tale
 language: bn
-cover_image: https://res.cloudinary.com/dx0tajutq/image/upload/v1750584696/shahriarhaque_oil_painting_of_a_stunningly_beautiful_persian_pr_01950352-f9dd-4275-8e01-84fc4e77ed88_ywuwpc.webp
-source_slug: book-85-the-adventures-of-hatim-tai
-topic_slugs:
-  - hatim-al-tai
-resource_slugs: []
 ---
+
 
 সে বহুকাল আগের কথা। খোরাসান রাজ্যের বাদশা তখন খুরদান শাহ। ঘোড়াশালে তার ছিল পাঁচ লক্ষ ঘোড়া। মহলের আগেপিছে দশ হাজার রথ আর তলোয়ারবাজ, রক্ষী, তীরন্দাজদের ছড়াছড়ি। লোকে বলে, তার রাজ্যে নাকি বাঘে-ভেড়ায় একসাথে জল খায়, এতই ন্যায়পরায়ণ ছিলেন এই বাদশা। রাজ্যজুড়ে শুধু তার সুনাম আর দয়ার কথা ঘুরেফেরে মানুষের মুখে মুখে।
 
