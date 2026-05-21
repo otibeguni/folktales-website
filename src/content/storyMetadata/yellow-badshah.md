@@ -1,5 +1,6 @@
 ---
 category: "Bengali Folktale"
+source_slug: "rangpur-geetika"
 topic_slugs:
   - "pari"
   - "rakshasa"
