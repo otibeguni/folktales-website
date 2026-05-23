@@ -5,5 +5,6 @@ topic_slugs:
   - "pari"
   - "dhalghat-location"
 resource_slugs: []
+source_slug: "bangla-kingbodonti-two-asaduzzaman-juel"
 ---
 
