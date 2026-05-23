@@ -1,10 +1,13 @@
-import { useDeferredValue, useState } from 'react';
+import { useDeferredValue, useEffect, useState } from 'react';
 
 import BookListItem from '@/components/BookListItem';
 import type { SourceItemAlt, WikidataItemAlt } from '@/types';
 import { sortTopicTags } from '@/utils/topic-tags';
 
 const MAX_BOOKS = 12;
+const DEFAULT_LANGUAGE = 'bn';
+const VALID_LANGUAGES = new Set(['bn', 'en']);
+const VALID_AVAILABILITY = new Set(['read-online', 'purchase']);
 
 const getOptionValue = (value: unknown) => {
   if (typeof value === 'string') {
@@ -19,6 +22,48 @@ const getOptionValue = (value: unknown) => {
   return '';
 };
 
+const parsePositivePage = (value: string | null) => {
+  if (!value) {
+    return 1;
+  }
+
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+};
+
+const parseBookListState = ({
+  search,
+  validCategories,
+  validTopics,
+}: {
+  search: string;
+  validCategories: Set<string>;
+  validTopics: Set<string>;
+}) => {
+  const params = new URLSearchParams(search);
+  const language = params.get('language');
+  const availability = params.get('availability');
+  const category = params.get('category');
+  const query = params.get('q')?.trim() ?? '';
+  const topics = params
+    .getAll('topic')
+    .filter((topic, index, allTopics) => {
+      return validTopics.has(topic) && allTopics.indexOf(topic) === index;
+    });
+
+  return {
+    selectedLanguage: language && VALID_LANGUAGES.has(language)
+      ? language
+      : DEFAULT_LANGUAGE,
+    selectedAvailability:
+      availability && VALID_AVAILABILITY.has(availability) ? availability : '',
+    selectedCategory: category && validCategories.has(category) ? category : '',
+    searchQuery: query,
+    selectedTopics: topics,
+    currentPage: parsePositivePage(params.get('page')),
+  };
+};
+
 const BookList = ({
   books,
   topics,
@@ -28,14 +73,6 @@ const BookList = ({
   topics: WikidataItemAlt[];
   labels: { [key: string]: string };
 }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState('bn');
-  const [selectedAvailability, setSelectedAvailability] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [topicQuery, setTopicQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const deferredTopicQuery = useDeferredValue(topicQuery);
-
   const allCategories = Array.from(
     new Set(
       books
@@ -48,6 +85,7 @@ const BookList = ({
     label: category,
     value: category,
   }));
+  const validCategories = new Set(categories.map((category) => category.value));
 
   const availableTopicSlugs = new Set(
     books.flatMap((book) => book.topic_slugs ?? []),
@@ -55,6 +93,35 @@ const BookList = ({
   const availableTopics = [...topics]
     .filter((topic) => availableTopicSlugs.has(topic.slug))
     .sort((a, b) => a.item.localeCompare(b.item));
+  const validTopicSlugs = new Set(availableTopics.map((topic) => topic.slug));
+  const getInitialState = () =>
+    parseBookListState({
+      search:
+        typeof window === 'undefined' ? '' : window.location.search,
+      validCategories,
+      validTopics: validTopicSlugs,
+    });
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    () => getInitialState().selectedLanguage,
+  );
+  const [selectedAvailability, setSelectedAvailability] = useState(
+    () => getInitialState().selectedAvailability,
+  );
+  const [selectedCategory, setSelectedCategory] = useState(
+    () => getInitialState().selectedCategory,
+  );
+  const [searchQuery, setSearchQuery] = useState(
+    () => getInitialState().searchQuery,
+  );
+  const [selectedTopics, setSelectedTopics] = useState<string[]>(
+    () => getInitialState().selectedTopics,
+  );
+  const [topicQuery, setTopicQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(
+    () => getInitialState().currentPage,
+  );
+  const deferredSearchQuery = useDeferredValue(searchQuery);
+  const deferredTopicQuery = useDeferredValue(topicQuery);
   const allTypes = sortTopicTags(
     Array.from(new Set(availableTopics.flatMap((topic) => topic.types))),
   );
@@ -77,9 +144,25 @@ const BookList = ({
   const selectedTopicItems = selectedTopics
     .map((slug) => availableTopics.find((topic) => topic.slug === slug))
     .filter(Boolean) as WikidataItemAlt[];
+  const normalizedSearchQuery = deferredSearchQuery.trim().toLowerCase();
 
   const filteredBooks = [
     ...books
+      .filter((book) => {
+        if (!normalizedSearchQuery) {
+          return true;
+        }
+
+        const searchableText = [
+          book.name,
+          book.slug,
+          book.author ?? '',
+        ]
+          .join(' ')
+          .toLowerCase();
+
+        return searchableText.includes(normalizedSearchQuery);
+      })
       .filter((book) => getOptionValue(book.language) === selectedLanguage)
       .filter((book) => {
         if (selectedAvailability) {
@@ -109,6 +192,78 @@ const BookList = ({
     currentPage * MAX_BOOKS,
   );
 
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages > 0 ? totalPages : 1);
+    }
+  }, [currentPage, totalPages]);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (selectedLanguage !== DEFAULT_LANGUAGE) {
+      params.set('language', selectedLanguage);
+    }
+
+    if (selectedAvailability) {
+      params.set('availability', selectedAvailability);
+    }
+
+    if (selectedCategory) {
+      params.set('category', selectedCategory);
+    }
+
+    if (searchQuery.trim()) {
+      params.set('q', searchQuery.trim());
+    }
+
+    selectedTopics.forEach((topic) => {
+      params.append('topic', topic);
+    });
+
+    if (currentPage > 1) {
+      params.set('page', String(currentPage));
+    }
+
+    const nextSearch = params.toString();
+    const nextUrl = nextSearch
+      ? `${window.location.pathname}?${nextSearch}`
+      : window.location.pathname;
+    const currentUrl = `${window.location.pathname}${window.location.search}`;
+
+    if (currentUrl !== nextUrl) {
+      window.history.replaceState(window.history.state, '', nextUrl);
+    }
+  }, [
+    currentPage,
+    searchQuery,
+    selectedAvailability,
+    selectedCategory,
+    selectedLanguage,
+    selectedTopics,
+  ]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const nextState = parseBookListState({
+        search: window.location.search,
+        validCategories,
+        validTopics: validTopicSlugs,
+      });
+
+      setSelectedLanguage(nextState.selectedLanguage);
+      setSelectedAvailability(nextState.selectedAvailability);
+      setSelectedCategory(nextState.selectedCategory);
+      setSearchQuery(nextState.searchQuery);
+      setSelectedTopics(nextState.selectedTopics);
+      setCurrentPage(nextState.currentPage);
+      setTopicQuery('');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [validCategories, validTopicSlugs]);
+
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
@@ -133,6 +288,12 @@ const BookList = ({
     setSelectedAvailability(event.target.value);
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setCurrentPage(1);
+    setSearchQuery(event.target.value);
+  };
+
   const toggleTopic = (topicSlug: string) => {
     setCurrentPage(1);
     setSelectedTopics((current) =>
@@ -145,8 +306,10 @@ const BookList = ({
 
   const clearFilters = () => {
     setCurrentPage(1);
+    setSelectedLanguage(DEFAULT_LANGUAGE);
     setSelectedAvailability('');
     setSelectedCategory('');
+    setSearchQuery('');
     setSelectedTopics([]);
     setTopicQuery('');
   };
@@ -176,6 +339,8 @@ const BookList = ({
                 type="button"
                 className="btn btn-ghost btn-sm self-start md:self-auto"
                 disabled={
+                  selectedLanguage === DEFAULT_LANGUAGE &&
+                  !searchQuery.trim() &&
                   !selectedAvailability &&
                   !selectedCategory &&
                   selectedTopics.length === 0
@@ -187,6 +352,22 @@ const BookList = ({
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
+              <label className="form-control w-full md:col-span-3">
+                <span className="mb-2 text-sm font-medium text-slate-700">
+                  {labels.searchLabel}
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="input input-bordered w-full"
+                  placeholder={labels.searchPlaceholder}
+                />
+                <span className="mt-2 text-sm text-slate-500">
+                  {labels.searchHelperText}
+                </span>
+              </label>
+
               <label className="form-control w-full">
                 <span className="mb-2 text-sm font-medium text-slate-700">
                   {labels.languageLabel}
