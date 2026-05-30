@@ -43,10 +43,24 @@ const BookListItem = ({ book }: { book: SourceItemAlt }) => {
               : {}),
           }
         : {})}
-      className="bg-base-100 hover:bg-base-200/60 flex flex-col gap-4 rounded-2xl border border-base-300 px-4 py-4 no-underline transition md:px-5 md:py-5"
+      className="bg-base-100 hover:bg-base-200/60 flex flex-col gap-4 rounded-2xl border border-base-300 px-4 py-4 no-underline transition sm:flex-row sm:items-start md:px-5 md:py-5"
     >
-      <div className="min-w-0">
-        <h3 className="mt-3 text-lg font-semibold leading-snug md:text-xl">
+      {book.cover_image ? (
+        <img
+          src={book.cover_image}
+          alt={`${book.name} cover`}
+          className="h-40 w-28 shrink-0 rounded-xl border border-base-300 object-cover shadow-sm"
+          loading="lazy"
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="h-40 w-28 shrink-0 rounded-xl border border-dashed border-base-300 bg-slate-100"
+        />
+      )}
+
+      <div className="min-w-0 flex-1">
+        <h3 className="text-lg font-semibold leading-snug md:text-xl">
           {book.name}
         </h3>
         <div className="mt-2 text-sm text-slate-600 md:text-base">

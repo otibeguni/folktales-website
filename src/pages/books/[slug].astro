@@ -136,33 +136,51 @@ const schemaData = {
   <article class="mx-auto max-w-5xl px-4 py-8 md:py-12" data-pagefind-body>
     <div class="flex flex-col gap-8">
       <section>
-        <div class="space-y-5">
-          <div class="space-y-3">
-            <h1 class="text-3xl font-bold tracking-tight md:text-4xl">
-              {book.data.name}
-            </h1>
-            <p class="text-base text-slate-600 md:text-lg">
-              {book.data.author ?? "Author unknown"}
-            </p>
-          </div>
+        <div class="flex flex-col gap-6 md:flex-row md:items-start">
+          {
+            book.data.cover_image ? (
+              <img
+                src={book.data.cover_image}
+                alt={`${book.data.name} cover`}
+                class="h-72 w-48 shrink-0 rounded-2xl border border-base-300 object-cover shadow-sm"
+                loading="eager"
+              />
+            ) : (
+              <div
+                aria-hidden="true"
+                class="h-72 w-48 shrink-0 rounded-2xl border border-dashed border-base-300 bg-slate-100"
+              />
+            )
+          }
 
-          <div class="flex flex-wrap items-center gap-2">
-            {categoryLabel && (
-              <span class="badge badge-soft badge-primary">{categoryLabel}</span>
-            )}
-            <span class="badge badge-soft">{languageLabel}</span>
-            {
-              !isReadOnline && book.data.url && (
-                <a
-                  href={book.data.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn btn-sm btn-outline h-8 min-h-0"
-                >
-                  Visit Page
-                </a>
-              )
-            }
+          <div class="space-y-5">
+            <div class="space-y-3">
+              <h1 class="text-3xl font-bold tracking-tight md:text-4xl">
+                {book.data.name}
+              </h1>
+              <p class="text-base text-slate-600 md:text-lg">
+                {book.data.author ?? "Author unknown"}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              {categoryLabel && (
+                <span class="badge badge-soft badge-primary">{categoryLabel}</span>
+              )}
+              <span class="badge badge-soft">{languageLabel}</span>
+              {
+                !isReadOnline && book.data.url && (
+                  <a
+                    href={book.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm btn-outline h-8 min-h-0"
+                  >
+                    Visit Page
+                  </a>
+                )
+              }
+            </div>
           </div>
         </div>
       </section>
