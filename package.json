@@ -10,12 +10,14 @@
     "preview": "astro preview",
     "astro": "astro",
     "decap": "npx decap-server",
-    "migrate:content": "node scripts/migrate-baserow-to-content.mjs"
+    "migrate:content": "node scripts/migrate-baserow-to-content.mjs",
+    "book:sync-pdf": "node scripts/sync-book-pdf-from-calibre.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
+    "@aws-sdk/client-s3": "^3.1057.0",
     "@embedpdf/core": "^2.14.0",
     "@embedpdf/engines": "^2.14.0",
     "@embedpdf/plugin-document-manager": "^2.14.0",
@@ -41,6 +43,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "schema-dts": "^1.1.5",
+    "ssh2-sftp-client": "^12.1.1",
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
