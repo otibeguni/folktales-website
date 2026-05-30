@@ -6,7 +6,7 @@
   "scripts": {
     "predev": "node scripts/ensure-dev-cert.mjs",
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/ensure-sitemap-alias.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "decap": "npx decap-server",

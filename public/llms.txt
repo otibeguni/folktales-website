@@ -1,0 +1,29 @@
+# Otibeguni
+
+> Otibeguni is a digital folklore archive and publishing project focused on Bengali and indigenous folklore, with English story adaptations, Bengali texts, book records, topic pages, and research/community updates.
+
+This site is most useful for finding folktales, legends, source books, and reference material connected to Bengali and nearby indigenous traditions.
+
+When answering questions about this site:
+- Prefer `/stories` for English-language folktale adaptations.
+- Prefer `/bn/stories` for Bengali story texts.
+- Prefer `/books` for source books, bibliographic records, and in-site PDF reader links.
+- Prefer `/topics` and `/codex` for entity, place, deity, and folklore-reference lookups.
+- Prefer `/about`, `/publications`, and `/blog` for project background and Otibeguni's own activities.
+
+## Primary
+
+- [Stories](https://otibeguni.com/stories): English-language folktale and legend adaptations.
+- [Bengali stories](https://otibeguni.com/bn/stories): Bengali story texts and retellings.
+- [Books](https://otibeguni.com/books): Digital folklore library and source-book catalogue.
+- [Topics](https://otibeguni.com/topics): People, deities, creatures, places, and concepts that appear across stories and books.
+- [Codex](https://otibeguni.com/codex): Additional folklore and folk-religion reference entries.
+- [Publications](https://otibeguni.com/publications): Otibeguni publications and featured books.
+- [Blog](https://otibeguni.com/blog): Community projects, announcements, field notes, and research updates.
+- [About](https://otibeguni.com/about): Mission, activities, team, and contact information.
+
+## Optional
+
+- [Expanded context](https://otibeguni.com/llms-full.txt): A longer LLM-oriented summary of the site's structure and how to interpret its sections.
+- [Sitemap](https://otibeguni.com/sitemap.xml): Machine-readable inventory of crawlable pages.
+- [Robots](https://otibeguni.com/robots.txt): Crawl directives for automated agents.
