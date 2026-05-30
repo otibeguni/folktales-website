@@ -1,5 +1,6 @@
 ---
 import BookPdfViewer from "@/components/BookPdfViewer";
+import BookListItem from "@/components/BookListItem";
 import RelatedItemsList from "@/components/RelatedItemsList.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
@@ -8,6 +9,7 @@ import {
   getAllTopics,
   getBookAvailability,
   getBookCategoryLabel,
+  getBookDetailPath,
   getResolvedStories,
   getStoryRouteSlug,
   indexEntriesBySlug,
@@ -79,9 +81,11 @@ const seriesBooks = book.data.series_slug
       )
       .sort((left, right) => left.data.name.localeCompare(right.data.name))
       .map((entry) => ({
-        name: entry.data.name,
-        url: `/books/${entry.slug}`,
-        isExternal: false,
+        slug: entry.slug,
+        ...entry.data,
+        category: getBookCategoryLabel(entry.data.category),
+        detailHref: bookHasDetailPage(entry) ? getBookDetailPath(entry.slug) : undefined,
+        availability: getBookAvailability(entry),
       }))
   : [];
 
@@ -194,10 +198,12 @@ const schemaData = {
 
         {
           seriesBooks.length > 0 && book.data.series_title && (
-            <RelatedItemsList
-              title={book.data.series_title}
-              items={seriesBooks}
-            />
+            <div class="flex flex-col gap-3">
+              <h3 class="mb-4 text-2xl font-bold">{book.data.series_title}</h3>
+              <div class="flex flex-col gap-4">
+                {seriesBooks.map((seriesBook) => <BookListItem book={seriesBook} />)}
+              </div>
+            </div>
           )
         }
 
