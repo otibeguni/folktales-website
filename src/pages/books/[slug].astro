@@ -28,6 +28,7 @@ export async function getStaticPaths() {
 
 const { book } = Astro.props;
 const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
+const books = await getAllBooks();
 const stories = await getResolvedStories();
 const topics = await getAllTopics();
 const topicBySlug = indexEntriesBySlug(topics);
@@ -69,6 +70,20 @@ const relatedTopics = (book.data.topic_slugs ?? [])
     url: `/topics/${topic.slug}`,
     isExternal: false,
   }));
+const seriesBooks = book.data.series_slug
+  ? books
+      .filter(
+        (entry) =>
+          entry.slug !== book.slug &&
+          entry.data.series_slug === book.data.series_slug,
+      )
+      .sort((left, right) => left.data.name.localeCompare(right.data.name))
+      .map((entry) => ({
+        name: entry.data.name,
+        url: `/books/${entry.slug}`,
+        isExternal: false,
+      }))
+  : [];
 
 const descriptionSegments = [
   isReadOnline ? `Read ${book.data.name} online` : `Explore ${book.data.name}`,
@@ -157,6 +172,15 @@ const schemaData = {
           isReadOnline && previewUrl ? (
             <BookPdfViewer client:only="react" src={previewUrl} title={book.data.name} />
           ) : null
+        }
+
+        {
+          seriesBooks.length > 0 && book.data.series_title && (
+            <RelatedItemsList
+              title={book.data.series_title}
+              items={seriesBooks}
+            />
+          )
         }
 
         {

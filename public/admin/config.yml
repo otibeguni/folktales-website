@@ -203,6 +203,8 @@ collections:
       - { label: "Author", name: "author", widget: "string", required: false }
       - { label: "Purchase URL", name: "url", widget: "string", required: false }
       - { label: "Library URL", name: "library_url", widget: "string", required: false }
+      - { label: "Series Slug", name: "series_slug", widget: "string", required: false }
+      - { label: "Series Title", name: "series_title", widget: "string", required: false }
       - label: "Language"
         name: "language"
         widget: "select"

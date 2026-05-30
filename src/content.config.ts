@@ -64,6 +64,8 @@ const books = defineCollection({
     author: z.string().optional(),
     url: z.string().url().optional(),
     library_url: z.string().url().optional(),
+    series_slug: z.string().optional(),
+    series_title: z.string().optional(),
     language: z.string(),
     category: z.string().optional(),
     categories: z.array(z.string()).default([]),

@@ -33,6 +33,8 @@ export interface SourceItem {
   author?: string;
   url?: string;
   library_url?: string;
+  series_slug?: string;
+  series_title?: string;
   language?: string;
   category?: string;
   categories?: string[];
