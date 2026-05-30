@@ -11,7 +11,8 @@
     "astro": "astro",
     "decap": "npx decap-server",
     "migrate:content": "node scripts/migrate-baserow-to-content.mjs",
-    "book:sync-pdf": "node scripts/sync-book-pdf-from-calibre.mjs"
+    "book:sync-pdf": "node scripts/sync-book-pdf-from-calibre.mjs",
+    "book:sync-covers": "node scripts/sync-book-covers-from-calibre.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",

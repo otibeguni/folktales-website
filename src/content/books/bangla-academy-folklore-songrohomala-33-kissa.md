@@ -3,6 +3,7 @@ slug: bangla-academy-folklore-songrohomala-33-kissa
 name: বাংলা একাডেমি ফোকলোর সংগ্রহমালা - ৩৩ (কিসসা)
 author: Bangla Academy
 library_url: https://data.otibeguni.com/books/bangla-academy-folklore-songrohomala-33-kissa.pdf
+cover_image: "/images/books/bangla-academy-folklore-songrohomala-33-kissa.jpg"
 series_slug: bangla-academy-folklore-songrohomala
 series_title: বাংলা একাডেমি ফোকলোর সংগ্রহমালা
 language: bn
