@@ -56,7 +56,7 @@ const { collections, stories, path } = Astro.props;
                           )
                       )
                       .map((story: IStoryList) => (
-                        <li class="splide__slide p-2">
+                        <li class="splide__slide px-2 py-1">
                           <CardStory
                             frontmatter={story.frontmatter}
                             coverImage={story.frontmatter.cover_image}
