@@ -26,6 +26,7 @@ type StoryblokBlogContent = {
   body?: unknown;
   seo_title?: string;
   seo_description?: string;
+  related_story_slugs?: string[] | string;
 };
 
 type StoryblokStory = {
@@ -70,6 +71,7 @@ export type BlogPost = {
   content?: StoryblokBlogContent;
   seoTitle?: string;
   seoDescription?: string;
+  relatedStorySlugs: string[];
 };
 
 let blogPostsPromise: Promise<BlogPost[]> | null = null;
@@ -82,6 +84,21 @@ const getDeliveryToken = () =>
 
 const normalizeSlug = (slug: string) =>
   slug.replace(/^\/+|\/+$/g, "").replace(new RegExp(`^${BLOG_PREFIX}`), "");
+
+const parseRelatedStorySlugs = (value?: string[] | string) => {
+  if (Array.isArray(value)) {
+    return value.filter((slug): slug is string => typeof slug === "string" && slug.trim().length > 0);
+  }
+
+  if (typeof value !== "string") {
+    return [];
+  }
+
+  return value
+    .split(/[\r\n,]+/)
+    .map((slug) => slug.trim())
+    .filter(Boolean);
+};
 
 const getExternalHref = (link?: StoryblokMultilink) => {
   const href = link?.cached_url || link?.url || "";
@@ -229,6 +246,7 @@ const mapStoryblokPost = async (story: StoryblokStory): Promise<BlogPost> => {
     content,
     seoTitle: content.seo_title,
     seoDescription: content.seo_description || clampSummary(bookmarkCommentary, 155),
+    relatedStorySlugs: parseRelatedStorySlugs(content.related_story_slugs),
   };
 };
 

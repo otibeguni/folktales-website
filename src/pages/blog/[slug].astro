@@ -3,8 +3,11 @@ import dayjs from "dayjs";
 import { renderRichText } from "@storyblok/astro";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
 import ArticleBody from "@/components/ArticleBody.astro";
+import CardStory from "@/components/CardStory";
 import { getBlogPosts } from "@/utils/storyblok-blog";
+import { getResolvedStories, getStoryRouteSlug } from "@/utils/content";
 import { getYouTubeEmbedUrl, getYouTubeHref } from "@/utils/youtube";
+import type { IStoryList } from "@/types";
 
 type StoryblokRichTextNode = {
   type: string;
@@ -123,9 +126,24 @@ export async function getStaticPaths() {
     props: { blog },
   }));
 }
-const { blog } = Astro.props;
+const { blog } = Astro.props as {
+  blog: Awaited<ReturnType<typeof getBlogPosts>>[number];
+};
 const bodySegments = getBodySegments(blog.content?.body);
 const isBookmark = blog.postType === "bookmark" && blog.bookmark;
+const storyEntries = await getResolvedStories();
+const storiesBySlug = new Map<string, IStoryList>();
+
+for (const story of storyEntries.filter((entry) => entry.data.language === "en")) {
+  const slug = getStoryRouteSlug(story);
+  storiesBySlug.set(slug, {
+    frontmatter: { ...story.data, slug },
+  });
+}
+
+const relatedStories = blog.relatedStorySlugs
+  .map((slug) => storiesBySlug.get(slug))
+  .filter((story): story is IStoryList => Boolean(story));
 ---
 
 <MarkdownBreadcrumbLayout
@@ -258,6 +276,22 @@ const isBookmark = blog.postType === "bookmark" && blog.bookmark;
           );
         })
       }
+      {relatedStories.length > 0 && (
+        <section class="mt-12">
+          <h2 class="mb-6 border-l-4 border-primary pl-4 text-2xl font-bold md:text-3xl">
+            Related Stories
+          </h2>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {relatedStories.map((story) => (
+              <CardStory
+                frontmatter={story.frontmatter}
+                coverImage={story.frontmatter.cover_image}
+                path="stories"
+              />
+            ))}
+          </div>
+        </section>
+      )}
     </ArticleBody>
   </div>
 </MarkdownBreadcrumbLayout>
