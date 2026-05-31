@@ -4,6 +4,7 @@ import { renderRichText } from "@storyblok/astro";
 import MarkdownBreadcrumbLayout from "@/layouts/MarkdownBreadcrumbLayout.astro";
 import ArticleBody from "@/components/ArticleBody.astro";
 import CardStory from "@/components/CardStory";
+import BlogCard from "@/components/blog/BlogCard";
 import { getBlogPosts } from "@/utils/storyblok-blog";
 import { getResolvedStories, getStoryRouteSlug } from "@/utils/content";
 import { getYouTubeEmbedUrl, getYouTubeHref } from "@/utils/youtube";
@@ -129,6 +130,7 @@ export async function getStaticPaths() {
 const { blog } = Astro.props as {
   blog: Awaited<ReturnType<typeof getBlogPosts>>[number];
 };
+const allBlogs = await getBlogPosts();
 const bodySegments = getBodySegments(blog.content?.body);
 const isBookmark = blog.postType === "bookmark" && blog.bookmark;
 const storyEntries = await getResolvedStories();
@@ -144,6 +146,15 @@ for (const story of storyEntries.filter((entry) => entry.data.language === "en")
 const relatedStories = blog.relatedStorySlugs
   .map((slug) => storiesBySlug.get(slug))
   .filter((story): story is IStoryList => Boolean(story));
+const blogsById = new Map(allBlogs.map((post) => [post.id, post]));
+const relatedPosts = blog.relatedPostIds
+  .map((id) => blogsById.get(id))
+  .filter(
+    (
+      post,
+    ): post is Awaited<ReturnType<typeof getBlogPosts>>[number] =>
+      Boolean(post) && post.id !== blog.id,
+  );
 ---
 
 <MarkdownBreadcrumbLayout
@@ -288,6 +299,18 @@ const relatedStories = blog.relatedStorySlugs
                 coverImage={story.frontmatter.cover_image}
                 path="stories"
               />
+            ))}
+          </div>
+        </section>
+      )}
+      {relatedPosts.length > 0 && (
+        <section class="mt-12 not-prose">
+          <h2 class="mb-6 border-l-4 border-primary pl-4 text-2xl font-bold md:text-3xl">
+            Related Posts
+          </h2>
+          <div class="divide-y divide-base-300 border-y border-base-300">
+            {relatedPosts.map((post) => (
+              <BlogCard post={post} path="blog" />
             ))}
           </div>
         </section>

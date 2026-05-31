@@ -11,6 +11,7 @@
     "astro": "astro",
     "decap": "npx decap-server",
     "migrate:content": "node scripts/migrate-baserow-to-content.mjs",
+    "storyblok:sync-related-posts": "node scripts/sync-storyblok-related-posts.mjs",
     "book:sync-pdf": "node scripts/sync-book-pdf-from-calibre.mjs",
     "book:sync-covers": "node scripts/sync-book-covers-from-calibre.mjs"
   },

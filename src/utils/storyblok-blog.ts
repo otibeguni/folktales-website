@@ -27,6 +27,7 @@ type StoryblokBlogContent = {
   seo_title?: string;
   seo_description?: string;
   related_story_slugs?: string[] | string;
+  related_posts?: string[] | string;
 };
 
 type StoryblokStory = {
@@ -72,6 +73,7 @@ export type BlogPost = {
   seoTitle?: string;
   seoDescription?: string;
   relatedStorySlugs: string[];
+  relatedPostIds: string[];
 };
 
 let blogPostsPromise: Promise<BlogPost[]> | null = null;
@@ -97,6 +99,21 @@ const parseRelatedStorySlugs = (value?: string[] | string) => {
   return value
     .split(/[\r\n,]+/)
     .map((slug) => slug.trim())
+    .filter(Boolean);
+};
+
+const parseRelatedPostIds = (value?: string[] | string) => {
+  if (Array.isArray(value)) {
+    return value.filter((id): id is string => typeof id === "string" && id.trim().length > 0);
+  }
+
+  if (typeof value !== "string") {
+    return [];
+  }
+
+  return value
+    .split(/[\r\n,]+/)
+    .map((id) => id.trim())
     .filter(Boolean);
 };
 
@@ -247,6 +264,7 @@ const mapStoryblokPost = async (story: StoryblokStory): Promise<BlogPost> => {
     seoTitle: content.seo_title,
     seoDescription: content.seo_description || clampSummary(bookmarkCommentary, 155),
     relatedStorySlugs: parseRelatedStorySlugs(content.related_story_slugs),
+    relatedPostIds: parseRelatedPostIds(content.related_posts),
   };
 };
 
