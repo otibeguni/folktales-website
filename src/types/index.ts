@@ -23,6 +23,8 @@ export interface WikidataItem {
   description?: string;
   wikidata_id?: string;
   item_bn?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface WikidataItemAlt extends WikidataItem {}

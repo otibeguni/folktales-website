@@ -21,6 +21,29 @@ export type CodexEntry = CollectionEntry<"codex">;
 export type ResolvedStoryEntry = StoryEntry & {
   data: StoryEntry["data"] & StoryMetadataEntry["data"];
 };
+export interface AtlasStoryLink {
+  slug: string;
+  title: string;
+  href: string;
+}
+
+export interface AtlasResourceLink {
+  slug: string;
+  title: string;
+  type: string;
+  url: string;
+}
+
+export interface AtlasEntry {
+  slug: string;
+  item: string;
+  description: string;
+  types: TopicEntry["data"]["types"];
+  latitude: number;
+  longitude: number;
+  relatedStories: AtlasStoryLink[];
+  relatedResources: AtlasResourceLink[];
+}
 type BookLinkFields = {
   slug: string;
   library_url?: string;
@@ -90,6 +113,59 @@ export async function getResolvedStories() {
 
 export async function getAllTopics() {
   return getCollection("topics");
+}
+
+export async function getFolkloreAtlasEntries(): Promise<AtlasEntry[]> {
+  const [topics, stories, resources] = await Promise.all([
+    getAllTopics(),
+    getResolvedStories(),
+    getAllResources(),
+  ]);
+
+  return topics
+    .filter((topic) => {
+      return typeof topic.data.latitude === "number" && typeof topic.data.longitude === "number";
+    })
+    .map((topic) => {
+      const relatedStories = stories
+        .filter(
+          (story) =>
+            story.data.language === "en" && (story.data.topic_slugs ?? []).includes(topic.slug),
+        )
+        .map((story) => ({
+          slug: getStoryRouteSlug(story),
+          title: story.data.title,
+          href: `${storyBasePath(story.data.language)}/${getStoryRouteSlug(story)}`,
+        }));
+
+      const relatedResources = resources
+        .filter((resource) => (resource.data.topic_slugs ?? []).includes(topic.slug))
+        .map((resource) => {
+          if (!resource.data.url) {
+            return null;
+          }
+
+          return {
+            slug: resource.slug,
+            title: resource.data.title,
+            type: resource.data.type,
+            url: resource.data.url,
+          };
+        })
+        .filter((resource): resource is AtlasResourceLink => resource !== null);
+
+      return {
+        slug: topic.slug,
+        item: topic.data.item,
+        description: topic.data.description?.trim() ?? "",
+        types: topic.data.types,
+        latitude: topic.data.latitude,
+        longitude: topic.data.longitude,
+        relatedStories,
+        relatedResources,
+      };
+    })
+    .sort((left, right) => left.item.localeCompare(right.item));
 }
 
 export async function getAllBooks() {

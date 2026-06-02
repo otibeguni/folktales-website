@@ -7,6 +7,7 @@ const translations = {
   header: {
     navHome: "Home",
     navStories: "Stories",
+    navExperiences: "Experiences",
     navBlog: "Blog",
     navCodex: "Codex",
     navResources: "Resources",
@@ -64,6 +65,22 @@ const translations = {
       topicSearchPlaceholder: "Search topics to add",
       noMatchingTopicsLabel: "No matching topics found.",
       noBooksFoundLabel: "No books found.",
+    },
+    experiences: {
+      pageTitle: "Experiences",
+      pageDescription:
+        "Interactive ways to explore Bengali and indigenous folklore through maps, visual storytelling, and research-driven interfaces.",
+      atlasCardTitle: "Folklore Atlas",
+      atlasCardDescription:
+        "Browse folklore-linked places, rivers, kingdoms, and heritage sites on a static interactive map.",
+      atlasPageTitle: "Folklore Atlas",
+      atlasPageDescription:
+        "Explore a build-time map of places tied to Bengali and indigenous folklore, then open each marker to see stories linked to that location.",
+      atlasRelatedStoriesTitle: "Related Stories",
+      atlasRelatedResourcesTitle: "Related Resources",
+      atlasNoStoriesLabel: "No related stories are linked to this location yet.",
+      atlasPanelPrompt: "Select a marker to explore a location and its related stories.",
+      atlasMarkerCountLabel: "mapped locations",
     },
   },
 } as const;
