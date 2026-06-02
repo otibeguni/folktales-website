@@ -55,6 +55,8 @@ const topics = defineCollection({
     wikidata_id: z.string().optional(),
     types: z.array(z.enum(topicTypes)).min(1),
     description: z.string().nullable().optional(),
+    latitude: z.number().optional(),
+    longitude: z.number().optional(),
   }),
 });
 

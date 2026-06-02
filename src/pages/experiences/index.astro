@@ -1,0 +1,39 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/utils/site-text";
+
+const breadcrumbs = [{ label: "Experiences", href: "/experiences" }];
+---
+
+<Layout
+  title={`${t("pages.experiences.pageTitle")} | ${t("common.siteTitle")}`}
+  description={t("pages.experiences.pageDescription")}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="mx-auto flex max-w-5xl flex-col gap-8">
+    <div class="flex flex-col gap-3">
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+        {t("pages.experiences.pageTitle")}
+      </h1>
+      <p class="max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
+        {t("pages.experiences.pageDescription")}
+      </p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+      <a
+        href="/experiences/folklore-atlas"
+        class="group flex flex-col gap-5 rounded-[2rem] border border-slate-200 bg-white p-6 no-underline shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+      >
+        <div class="flex flex-col gap-3">
+          <h2 class="text-2xl font-semibold tracking-tight text-slate-900">
+            {t("pages.experiences.atlasCardTitle")}
+          </h2>
+          <p class="text-base leading-7 text-slate-600">
+            {t("pages.experiences.atlasCardDescription")}
+          </p>
+        </div>
+      </a>
+    </div>
+  </section>
+</Layout>

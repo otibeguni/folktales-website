@@ -5,5 +5,7 @@ item_bn: পুণ্ড্রবর্ধন
 wikidata_id: Q3350794
 types: ["Place", "Kingdom", "Historical"]
 description: An ancient administrative and geographical unit located in northern Bengal, which served as a major center for political, cultural, and commercial activities from the Mauryan period through several successive dynasties.
+latitude: 24.96
+longitude: 89.35
 ---
 
