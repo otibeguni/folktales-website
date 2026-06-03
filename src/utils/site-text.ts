@@ -73,14 +73,27 @@ const translations = {
       atlasCardTitle: "Folklore Atlas",
       atlasCardDescription:
         "Browse folklore-linked places, rivers, kingdoms, and heritage sites on a static interactive map.",
+      dialectCardTitle: "Dialect Map",
+      dialectCardDescription:
+        "Listen to regional Bangladeshi dialect samples on an interactive map with labeled locations.",
       atlasPageTitle: "Folklore Atlas",
       atlasPageDescription:
         "Explore a build-time map of places tied to Bengali and indigenous folklore, then open each marker to see stories linked to that location.",
+      dialectPageTitle: "Dialect Map",
+      dialectPageDescription:
+        "Explore regional dialect recordings from across Bangladesh by selecting a labeled location on the map.",
+      dialectSourceTitle: "Dataset Source",
+      dialectSourceDescription:
+        "Audio samples in this experience are drawn from RegSpeech12, a regional corpus of Bengali spontaneous speech across dialects.",
+      dialectSourceAuthorsLabel: "Contributors",
+      dialectSourceCitationLabel: "Citation",
       atlasRelatedStoriesTitle: "Related Stories",
       atlasRelatedResourcesTitle: "Related Resources",
       atlasNoStoriesLabel: "No related stories are linked to this location yet.",
       atlasPanelPrompt: "Select a marker to explore a location and its related stories.",
       atlasMarkerCountLabel: "mapped locations",
+      dialectPanelPrompt: "Select a marker to hear a dialect recording from that region.",
+      dialectMarkerCountLabel: "dialect regions",
     },
   },
 } as const;

@@ -1,0 +1,76 @@
+---
+import DialectMap from "@/components/DialectMap";
+import { DIALECT_MAP_ENTRIES } from "@/data/dialect-map";
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/utils/site-text";
+
+const breadcrumbs = [
+  { label: "Experiences", href: "/experiences" },
+  { label: "Dialect Map", href: "/experiences/dialect-map" },
+];
+---
+
+<Layout
+  title={`${t("pages.experiences.dialectPageTitle")} | ${t("common.siteTitle")}`}
+  description={t("pages.experiences.dialectPageDescription")}
+  breadcrumbs={breadcrumbs}
+>
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-3">
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+        {t("pages.experiences.dialectPageTitle")}
+      </h1>
+      <p class="max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
+        {t("pages.experiences.dialectPageDescription")}
+      </p>
+    </div>
+
+    <DialectMap
+      entries={DIALECT_MAP_ENTRIES}
+      labels={{
+        panelPrompt: t("pages.experiences.dialectPanelPrompt"),
+        markerCountLabel: t("pages.experiences.dialectMarkerCountLabel"),
+      }}
+      client:load
+    />
+
+    <section class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+      <div class="flex flex-col gap-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+          {t("pages.experiences.dialectSourceTitle")}
+        </p>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">
+          RegSpeech12
+        </h2>
+        <p class="max-w-3xl text-base leading-7 text-slate-600">
+          {t("pages.experiences.dialectSourceDescription")}
+        </p>
+        <p class="text-sm leading-7 text-slate-600">
+          <span class="font-semibold text-slate-900">
+            {t("pages.experiences.dialectSourceAuthorsLabel")}:
+          </span>{" "}
+          Md. Rezuwan Hassan, Azmol Hossain, Kanij Fatema, Rubayet Sabbir Faruque,
+          Tanmoy Shome, Ruwad Naswan, Trina Chakraborty, Md. Foriduzzaman Zihad,
+          Tawsif Tashwar Dipto, Nazia Tasnim, Nazmuddoha Ansary, Md. Mehedi Hasan
+          Shawon, Ahmed Imtiaz Humayun, Md. Golam Rabiul Alam, Farig Sadeque, and
+          Asif Sushmit.
+        </p>
+        <p class="text-sm leading-7 text-slate-600">
+          <span class="font-semibold text-slate-900">
+            {t("pages.experiences.dialectSourceCitationLabel")}:
+          </span>{" "}
+          Hassan, Md. Rezuwan, et al. "RegSpeech12: A Regional Corpus of Bengali
+          Spontaneous Speech Across Dialects." arXiv, 2025.{" "}
+          <a
+            href="https://arxiv.org/abs/2510.24096"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-slate-900 underline decoration-slate-300 underline-offset-4 transition hover:decoration-slate-900"
+          >
+            https://arxiv.org/abs/2510.24096
+          </a>
+        </p>
+      </div>
+    </section>
+  </div>
+</Layout>
