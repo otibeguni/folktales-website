@@ -19,7 +19,7 @@ const {
 ---
 
 <div
-  class="pointer-events-none invisible absolute inset-0 z-10 flex items-center justify-center"
+  class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
   data-read-aloud-root
   data-language={language}
   data-body-selector={bodySelector}
@@ -148,6 +148,14 @@ const {
     let completedChars = 0;
     let currentCharOffset = 0;
     let state = "idle";
+    let detectionSettled = false;
+    let detectionAttempts = 0;
+    let detectionTimer = null;
+    let interactionRetryArmed = true;
+
+    const setOverlayVisible = (visible) => {
+      root.classList.toggle("invisible", !visible);
+    };
 
     const setProgress = (value) => {
       const clampedValue = Math.max(0, Math.min(100, value));
@@ -170,7 +178,7 @@ const {
     };
 
     if (!speech) {
-      root.classList.add("invisible");
+      setOverlayVisible(false);
       return;
     }
 
@@ -214,7 +222,7 @@ const {
       const narrationText = getBodyText();
 
       if (!selectedVoice || !narrationText) {
-        root.classList.add("invisible");
+        updateVoiceAvailability({ forceSettle: true });
         return;
       }
 
@@ -279,24 +287,58 @@ const {
       setButtonState("speaking", false, "");
     };
 
-    const updateVoiceAvailability = () => {
-      const voices = speech.getVoices();
-      const prefix = `${language.toLowerCase()}-`;
+    const pickVoice = (voices) => {
+      const normalizedLanguage = language.toLowerCase();
+      const prefix = `${normalizedLanguage}-`;
 
-      selectedVoice =
-        voices.find((voice) => voice.lang.toLowerCase() === language.toLowerCase()) ??
+      return (
+        voices.find((voice) => voice.lang.toLowerCase() === normalizedLanguage) ??
         voices.find((voice) => voice.lang.toLowerCase().startsWith(prefix)) ??
-        null;
+        null
+      );
+    };
 
-      if (selectedVoice) {
-        root.classList.remove("invisible");
+    const finishDetection = (available) => {
+      detectionSettled = true;
+
+      if (detectionTimer !== null) {
+        window.clearInterval(detectionTimer);
+        detectionTimer = null;
+      }
+
+      if (available) {
+        setOverlayVisible(true);
         if (state === "disabled" || state === "idle") {
           setButtonState("idle", false, "");
         }
       } else {
         stopReading();
-        root.classList.add("invisible");
+        setOverlayVisible(false);
       }
+    };
+
+    const updateVoiceAvailability = ({ forceSettle = false } = {}) => {
+      const voices = speech.getVoices();
+      selectedVoice = pickVoice(voices);
+
+      if (selectedVoice) {
+        finishDetection(true);
+      } else {
+        detectionAttempts += 1;
+
+        if (forceSettle || detectionAttempts >= 12) {
+          finishDetection(false);
+        } else if (!detectionSettled) {
+          setOverlayVisible(true);
+          setButtonState("disabled", true, "Checking voice availability...");
+        }
+      }
+    };
+
+    const retryVoiceDetectionFromInteraction = () => {
+      if (!interactionRetryArmed || detectionSettled) return;
+      interactionRetryArmed = false;
+      window.setTimeout(() => updateVoiceAvailability({ forceSettle: true }), 150);
     };
 
     button.addEventListener("click", () => {
@@ -310,7 +352,13 @@ const {
     });
 
     window.addEventListener("beforeunload", stopReading);
+    document.addEventListener("pointerdown", retryVoiceDetectionFromInteraction, { passive: true, once: true });
+    document.addEventListener("touchstart", retryVoiceDetectionFromInteraction, { passive: true, once: true });
     speech.addEventListener("voiceschanged", updateVoiceAvailability);
+    detectionTimer = window.setInterval(() => {
+      if (detectionSettled) return;
+      updateVoiceAvailability();
+    }, 250);
     updateVoiceAvailability();
   });
 </script>
