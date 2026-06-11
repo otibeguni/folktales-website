@@ -1,0 +1,316 @@
+---
+interface Props {
+  language: string;
+  bodySelector: string;
+  idleLabel: string;
+  pauseLabel: string;
+  resumeLabel: string;
+  unavailableTooltip: string;
+}
+
+const {
+  language,
+  bodySelector,
+  idleLabel,
+  pauseLabel,
+  resumeLabel,
+  unavailableTooltip,
+} = Astro.props;
+---
+
+<div
+  class="pointer-events-none invisible absolute inset-0 z-10 flex items-center justify-center"
+  data-read-aloud-root
+  data-language={language}
+  data-body-selector={bodySelector}
+  data-idle-label={idleLabel}
+  data-pause-label={pauseLabel}
+  data-resume-label={resumeLabel}
+  data-unavailable-tooltip={unavailableTooltip}
+>
+  <button
+    type="button"
+    class="btn btn-circle btn-primary pointer-events-auto h-12 min-h-12 w-12 border-0 bg-slate-950/78 text-white shadow-lg backdrop-blur-sm transition hover:bg-slate-950/88 disabled:border-0 disabled:bg-slate-950/45 disabled:text-white/70 md:h-16 md:min-h-16 md:w-16"
+    data-read-aloud-button
+    disabled
+    aria-disabled="true"
+    aria-pressed="false"
+    aria-label={idleLabel}
+    title={unavailableTooltip}
+  >
+    <span data-icon-play aria-hidden="true">
+      <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current md:h-6 md:w-6">
+        <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98A1 1 0 0 0 8 6.82Z"></path>
+      </svg>
+    </span>
+    <span data-icon-pause aria-hidden="true" class="hidden">
+      <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current md:h-6 md:w-6">
+        <path d="M7 5h3v14H7zM14 5h3v14h-3z"></path>
+      </svg>
+    </span>
+  </button>
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1 overflow-hidden rounded-b-lg bg-slate-950/15">
+    <div
+      class="h-full w-0 bg-primary transition-[width] duration-200 ease-linear"
+      data-read-aloud-progress
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    ></div>
+  </div>
+</div>
+
+<script>
+  const roots = document.querySelectorAll("[data-read-aloud-root]");
+
+  const normalizeText = (text) => text.replace(/\s+/g, " ").trim();
+
+  const splitTextIntoChunks = (text, maxLength = 180) => {
+    const normalized = normalizeText(text);
+
+    if (!normalized) return [];
+
+    const sentences = normalized.match(/[^.!?\u0964\uFF01\uFF1F]+[.!?\u0964\uFF01\uFF1F]*/g) ?? [normalized];
+    const chunks = [];
+    let currentChunk = "";
+
+    for (const sentence of sentences) {
+      const trimmedSentence = normalizeText(sentence);
+
+      if (!trimmedSentence) continue;
+
+      if ((currentChunk + " " + trimmedSentence).trim().length <= maxLength) {
+        currentChunk = `${currentChunk} ${trimmedSentence}`.trim();
+        continue;
+      }
+
+      if (currentChunk) {
+        chunks.push(currentChunk);
+      }
+
+      if (trimmedSentence.length <= maxLength) {
+        currentChunk = trimmedSentence;
+        continue;
+      }
+
+      const words = trimmedSentence.split(" ");
+      let wordChunk = "";
+
+      for (const word of words) {
+        if ((wordChunk + " " + word).trim().length <= maxLength) {
+          wordChunk = `${wordChunk} ${word}`.trim();
+        } else {
+          if (wordChunk) {
+            chunks.push(wordChunk);
+          }
+          wordChunk = word;
+        }
+      }
+
+      currentChunk = wordChunk;
+    }
+
+    if (currentChunk) {
+      chunks.push(currentChunk);
+    }
+
+    return chunks;
+  };
+
+  roots.forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+
+    const button = root.querySelector("[data-read-aloud-button]");
+    const progressBar = root.querySelector("[data-read-aloud-progress]");
+    const playIcon = root.querySelector("[data-icon-play]");
+    const pauseIcon = root.querySelector("[data-icon-pause]");
+
+    if (
+      !(button instanceof HTMLButtonElement) ||
+      !(progressBar instanceof HTMLElement) ||
+      !(playIcon instanceof HTMLElement) ||
+      !(pauseIcon instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const speech = window.speechSynthesis;
+    const language = root.dataset.language ?? "en";
+    const bodySelector = root.dataset.bodySelector ?? "";
+    const idleLabel = root.dataset.idleLabel ?? "Read out loud";
+    const pauseLabel = root.dataset.pauseLabel ?? "Pause reading";
+    const resumeLabel = root.dataset.resumeLabel ?? "Resume reading";
+    const unavailableTooltip = root.dataset.unavailableTooltip ?? "";
+    let selectedVoice = null;
+    let activeUtterances = [];
+    let totalChars = 0;
+    let completedChars = 0;
+    let currentCharOffset = 0;
+    let state = "idle";
+
+    const setProgress = (value) => {
+      const clampedValue = Math.max(0, Math.min(100, value));
+      progressBar.style.width = `${clampedValue}%`;
+      progressBar.setAttribute("aria-valuenow", clampedValue.toFixed(0));
+    };
+
+    const setButtonState = (nextState, disabledState, tooltip) => {
+      state = nextState;
+      button.disabled = disabledState;
+      button.setAttribute("aria-disabled", String(disabledState));
+      button.setAttribute("aria-pressed", String(nextState !== "idle" && nextState !== "disabled"));
+      button.title = tooltip ?? "";
+      button.setAttribute(
+        "aria-label",
+        nextState === "speaking" ? pauseLabel : nextState === "paused" ? resumeLabel : idleLabel,
+      );
+      playIcon.classList.toggle("hidden", nextState === "speaking");
+      pauseIcon.classList.toggle("hidden", nextState !== "speaking");
+    };
+
+    if (!speech) {
+      root.classList.add("invisible");
+      return;
+    }
+
+    const getBodyText = () => {
+      const body = document.querySelector(bodySelector);
+
+      if (!(body instanceof HTMLElement)) return "";
+
+      return normalizeText(body.innerText);
+    };
+
+    const updateProgressFromCurrentPosition = () => {
+      if (!totalChars) {
+        setProgress(0);
+        return;
+      }
+
+      const progressChars = Math.min(totalChars, completedChars + currentCharOffset);
+      setProgress((progressChars / totalChars) * 100);
+    };
+
+    const resetPlaybackMetrics = () => {
+      activeUtterances = [];
+      totalChars = 0;
+      completedChars = 0;
+      currentCharOffset = 0;
+      setProgress(0);
+    };
+
+    const stopReading = () => {
+      speech.cancel();
+      resetPlaybackMetrics();
+      setButtonState(
+        selectedVoice === null ? "disabled" : "idle",
+        selectedVoice === null,
+        selectedVoice === null ? unavailableTooltip : "",
+      );
+    };
+
+    const startReading = () => {
+      const narrationText = getBodyText();
+
+      if (!selectedVoice || !narrationText) {
+        root.classList.add("invisible");
+        return;
+      }
+
+      speech.cancel();
+      completedChars = 0;
+      currentCharOffset = 0;
+      activeUtterances = splitTextIntoChunks(narrationText).map((chunk) => {
+        const utterance = new SpeechSynthesisUtterance(chunk);
+        utterance.lang = selectedVoice.lang;
+        utterance.voice = selectedVoice;
+        return utterance;
+      });
+      totalChars = activeUtterances.reduce((sum, utterance) => sum + utterance.text.length, 0);
+
+      if (activeUtterances.length === 0) {
+        setButtonState("idle", false, "");
+        return;
+      }
+
+      let remaining = activeUtterances.length;
+
+      activeUtterances.forEach((utterance, index) => {
+        utterance.onboundary = (event) => {
+          currentCharOffset = event.charIndex;
+          updateProgressFromCurrentPosition();
+        };
+
+        utterance.onend = () => {
+          completedChars += utterance.text.length;
+          currentCharOffset = 0;
+          updateProgressFromCurrentPosition();
+          remaining -= 1;
+
+          if (remaining === 0) {
+            resetPlaybackMetrics();
+            setButtonState("idle", false, "");
+          }
+        };
+
+        utterance.onerror = () => {
+          stopReading();
+        };
+
+        if (index === 0) {
+          utterance.onstart = () => {
+            setButtonState("speaking", false, "");
+            updateProgressFromCurrentPosition();
+          };
+        }
+
+        speech.speak(utterance);
+      });
+    };
+
+    const pauseReading = () => {
+      speech.pause();
+      setButtonState("paused", false, "");
+    };
+
+    const resumeReading = () => {
+      speech.resume();
+      setButtonState("speaking", false, "");
+    };
+
+    const updateVoiceAvailability = () => {
+      const voices = speech.getVoices();
+      const prefix = `${language.toLowerCase()}-`;
+
+      selectedVoice =
+        voices.find((voice) => voice.lang.toLowerCase() === language.toLowerCase()) ??
+        voices.find((voice) => voice.lang.toLowerCase().startsWith(prefix)) ??
+        null;
+
+      if (selectedVoice) {
+        root.classList.remove("invisible");
+        if (state === "disabled" || state === "idle") {
+          setButtonState("idle", false, "");
+        }
+      } else {
+        stopReading();
+        root.classList.add("invisible");
+      }
+    };
+
+    button.addEventListener("click", () => {
+      if (state === "idle") {
+        startReading();
+      } else if (state === "speaking") {
+        pauseReading();
+      } else if (state === "paused") {
+        resumeReading();
+      }
+    });
+
+    window.addEventListener("beforeunload", stopReading);
+    speech.addEventListener("voiceschanged", updateVoiceAvailability);
+    updateVoiceAvailability();
+  });
+</script>

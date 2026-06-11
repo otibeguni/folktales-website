@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import StoryHeader from "../../components/StoryHeader.astro";
 import StoryMetadata from "../../components/StoryMetadata.astro";
+import StoryReadAloudControl from "../../components/StoryReadAloudControl.astro";
 import ArticleBody from "../../components/ArticleBody.astro";
 import RelatedItemsList from "../../components/RelatedItemsList.astro";
 import {
@@ -139,6 +140,7 @@ const breadcrumbs = [
   { label: "Stories", href: "/stories" },
   { label: story.data.title },
 ];
+const sourceText = sourceBook?.data.name || resolvedStory.data.source_label;
 ---
 
 <Layout
@@ -153,11 +155,19 @@ const breadcrumbs = [
     <div class="container mx-auto max-w-4xl px-4">
       <div class="bg-base-100 rounded-xl shadow-lg">
         <article class="p-6 md:p-10">
-          <StoryHeader story={{ ...resolvedStory.data, slug: storyRouteSlug }} />
-
+          <StoryHeader story={{ ...resolvedStory.data, slug: storyRouteSlug }}>
+            <StoryReadAloudControl
+              language="en"
+              bodySelector="[data-story-body]"
+              idleLabel="Read out loud"
+              pauseLabel="Pause reading"
+              resumeLabel="Resume reading"
+              unavailableTooltip="An English voice needs to be installed in your operating system to use read aloud."
+            />
+          </StoryHeader>
           <StoryMetadata
             category={resolvedStory.data.category}
-            sourceBook={sourceBook?.data.name || resolvedStory.data.source_label}
+            sourceBook={sourceText}
             sourceAuthor={sourceBook?.data.author}
             sourceUrl={sourceBookUrl}
             translationLink={bnStory ? `/bn/stories/${getStoryRouteSlug(bnStory)}` : undefined}
