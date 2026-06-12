@@ -9,6 +9,8 @@
     "build": "astro build && node scripts/ensure-sitemap-alias.mjs",
     "preview": "astro preview",
     "astro": "astro",
+    "comic:author": "node tools/comic-author/dev-server.mjs",
+    "comic:prepare-pdf": "node scripts/prepare-comic-pdf.mjs",
     "decap": "npx decap-server",
     "migrate:content": "node scripts/migrate-baserow-to-content.mjs",
     "storyblok:sync-related-posts": "node scripts/sync-storyblok-related-posts.mjs",
@@ -54,7 +56,10 @@
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
+    "@napi-rs/canvas": "^1.0.0",
+    "@vitejs/plugin-react": "^4.5.1",
     "daisyui": "^5.0.43",
-    "decap-server": "^3.3.1"
+    "decap-server": "^3.3.1",
+    "pdfjs-dist": "^6.0.227"
   }
 }

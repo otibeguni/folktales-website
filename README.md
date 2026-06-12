@@ -51,6 +51,22 @@ To run the Decap server on localhost, use the following command:
 npm run decap
 ```
 
+## Comic Authoring Workflow
+
+To prepare a comic PDF into committed page images plus a JSON manifest:
+
+```
+npm run comic:prepare-pdf -- --slug <comic-slug> --input <path-to-pdf> --title "<comic title>"
+```
+
+To start the standalone comic authoring tool:
+
+```
+npm run comic:author
+```
+
+The authoring tool writes metadata to `src/data/comics/<comic-slug>.json` and reads page images from `public/images/comics/<comic-slug>/`.
+
 ## Deploying on Production
 
 To deploy the application for production use, follow these command:

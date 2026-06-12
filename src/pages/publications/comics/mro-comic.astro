@@ -1,0 +1,37 @@
+---
+import ComicReader from "@/components/comics/ComicReader";
+import Layout from "@/layouts/Layout.astro";
+import comicManifest from "@/data/comics/mro-comic.json";
+import { buildCanonicalUrl } from "@/utils/seo";
+
+const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
+const comicTitle = comicManifest.title;
+const comicDescription =
+  "A first look at our new comics format, guiding readers through each page with focused panel-by-panel navigation.";
+const breadcrumbs = [
+  { label: "Publications", href: "/publications" },
+  { label: "Comics", href: "/publications" },
+  { label: comicTitle },
+];
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: comicTitle,
+  url: canonicalUrl,
+  image: "/images/comics/mro-comic-cover.png",
+  description: comicDescription,
+  isAccessibleForFree: true,
+};
+---
+
+<Layout
+  title={`${comicTitle} | Comics | Otibeguni`}
+  description={comicDescription}
+  canonicalUrl={canonicalUrl}
+  schema={schemaData}
+  breadcrumbs={breadcrumbs}
+>
+  <article class="mx-auto max-w-6xl px-4 py-8 md:py-12">
+    <ComicReader client:only="react" comic={comicManifest} />
+  </article>
+</Layout>
