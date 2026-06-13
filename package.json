@@ -9,6 +9,8 @@
     "build": "astro build && node scripts/ensure-sitemap-alias.mjs",
     "preview": "astro preview",
     "astro": "astro",
+    "content": "node tools/content-cli/cli.mjs",
+    "test:content-cli": "node --test tools/content-cli/**/*.test.mjs",
     "comic:author": "node tools/comic-author/dev-server.mjs",
     "comic:prepare-pdf": "node scripts/prepare-comic-pdf.mjs",
     "decap": "npx decap-server",
