@@ -5,6 +5,7 @@ import StoryMetadata from "../../components/StoryMetadata.astro";
 import StoryReadAloudControl from "../../components/StoryReadAloudControl.astro";
 import ArticleBody from "../../components/ArticleBody.astro";
 import RelatedItemsList from "../../components/RelatedItemsList.astro";
+import BlogCard from "@/components/blog/BlogCard";
 import {
   bookHasDetailPage,
   findStoryTranslation,
@@ -21,6 +22,7 @@ import {
   resolveStoryMetadata,
 } from "@/utils/content";
 import { buildCanonicalUrl } from "@/utils/seo";
+import { getBlogPosts } from "@/utils/storyblok-blog";
 
 export async function getStaticPaths() {
   const stories = await getStoriesByLanguage("en");
@@ -40,6 +42,7 @@ const [allStories, allTopics, allBooks, allResources, allStoryMetadata] = await 
   getAllResources(),
   getAllStoryMetadata(),
 ]);
+const allBlogs = await getBlogPosts();
 
 const topicBySlug = indexEntriesBySlug(allTopics);
 const bookBySlug = indexEntriesBySlug(allBooks);
@@ -136,6 +139,9 @@ const relatedResources = (resolvedStory.data.resource_slugs ?? [])
     url: resource.data.url || "",
     isExternal: true,
   }));
+const relatedBlogPosts = allBlogs.filter((post) =>
+  post.relatedStorySlugs.includes(storyRouteSlug),
+);
 const breadcrumbs = [
   { label: "Stories", href: "/stories" },
   { label: story.data.title },
@@ -202,6 +208,24 @@ const sourceText = sourceBook?.data.name || resolvedStory.data.source_label;
                   items={relatedResources}
                   iconMap={iconMap}
                 />
+              </>
+            )
+          }
+
+          {
+            relatedBlogPosts.length > 0 && (
+              <>
+                <div class="divider mt-12" />
+                <section class="not-prose">
+                  <h3 class="mb-4 text-2xl font-bold">
+                    Related Blog Posts
+                  </h3>
+                  <div class="divide-y divide-base-300 border-y border-base-300">
+                    {relatedBlogPosts.map((post) => (
+                      <BlogCard post={post} path="blog" />
+                    ))}
+                  </div>
+                </section>
               </>
             )
           }
