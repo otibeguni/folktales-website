@@ -11,6 +11,7 @@ interface Props {
   title?: string | null;
   description?: string | null;
   lang?: string;
+  robots?: string | null;
   canonicalUrl?: string;
   alternateLinks?: AlternateLink[];
   openGraphType?: string;
@@ -22,6 +23,7 @@ const {
   title = null,
   description = null,
   lang = "en",
+  robots = null,
   canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site),
   alternateLinks = [],
   openGraphType = schema ? "article" : "website",
@@ -77,6 +79,7 @@ const { structuredData: breadcrumbStructuredData } = normalizeBreadcrumbs(
     <meta name="generator" content={Astro.generator} />
     <title>{metaTitle}</title>
     <meta name="description" content={metaDescription} />
+    {robots && <meta name="robots" content={robots} />}
     {schema && <Schema item={schema} />}
     {breadcrumbStructuredData && <Schema item={breadcrumbStructuredData} />}
   </head>

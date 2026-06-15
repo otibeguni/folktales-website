@@ -6,10 +6,12 @@ import Layout from "@/layouts/Layout.astro";
 import {
   bookHasDetailPage,
   getAllBooks,
+  getAllBookFullTexts,
   getAllTopics,
   getBookAvailability,
   getBookCategoryLabel,
   getBookDetailPath,
+  getBookFullTextPath,
   getResolvedStories,
   getStoryRouteSlug,
   indexEntriesBySlug,
@@ -31,13 +33,17 @@ export async function getStaticPaths() {
 const { book } = Astro.props;
 const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
 const books = await getAllBooks();
+const fullTexts = await getAllBookFullTexts();
 const stories = await getResolvedStories();
 const topics = await getAllTopics();
+const fullTextByBookSlug = new Map(fullTexts.map((entry) => [entry.data.book_slug, entry]));
 const topicBySlug = indexEntriesBySlug(topics);
 const categoryLabel = getBookCategoryLabel(book.data.category);
 const languageLabel = book.data.language === "bn" ? "Bengali" : "English";
 const availability = getBookAvailability(book);
 const isReadOnline = availability === "read-online";
+const fullTextEntry = fullTextByBookSlug.get(book.slug);
+const fullTextUrl = fullTextEntry ? getBookFullTextPath(book.slug) : undefined;
 const previewUrl = isReadOnline
   ? import.meta.env.DEV
     ? book.data.library_url?.replace("https://data.otibeguni.com", "/__pdfproxy")
@@ -172,6 +178,16 @@ const schemaData = {
                 <span class="badge badge-soft badge-primary">{categoryLabel}</span>
               )}
               <span class="badge badge-soft">{languageLabel}</span>
+              {
+                fullTextUrl && (
+                  <a
+                    href={fullTextUrl}
+                    class="btn btn-sm h-8 min-h-0 border-0 bg-amber-700 text-white shadow-sm hover:bg-amber-800"
+                  >
+                    Read Full Text
+                  </a>
+                )
+              }
               {
                 !isReadOnline && book.data.url && (
                   <a

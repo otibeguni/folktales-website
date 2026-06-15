@@ -76,6 +76,16 @@ const books = defineCollection({
   }),
 });
 
+const bookFullTexts = defineCollection({
+  schema: z.object({
+    book_slug: z.string(),
+    title: z.string(),
+    subtitle: z.string().optional(),
+    language: z.enum(["bn"]),
+    intro_note: z.string().optional(),
+  }),
+});
+
 const resources = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -100,6 +110,7 @@ export const collections = {
   codex,
   topics,
   books,
+  bookFullTexts,
   resources,
   storyCollections,
 };

@@ -1,0 +1,496 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props as Props;
+---
+
+<section
+  class="reader-shell mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-10"
+  data-reader-root
+  data-reader-theme="light"
+  style="--reader-font-size: 1.28rem; --reader-line-height: 2.05; --reader-max-width: 44rem;"
+>
+  <div class="space-y-5">
+    <aside class="reader-controls" aria-label="Reading controls">
+      <div class="reader-controls-card">
+        <div class="reader-controls-row">
+          <p class="reader-controls-label">Theme</p>
+          <div class="reader-chip-row">
+            <button type="button" class="reader-chip" data-theme-option="light">Light</button>
+            <button type="button" class="reader-chip" data-theme-option="dark">Dark</button>
+            <button type="button" class="reader-chip" data-theme-option="sepia">Sepia</button>
+          </div>
+        </div>
+
+        <div class="reader-controls-row">
+          <p class="reader-controls-label">Text Size</p>
+          <div
+            class="reader-stepper"
+            data-reader-stepper="font-size"
+            data-min="1.05"
+            data-max="1.75"
+            data-step="0.05"
+          >
+            <button type="button" class="reader-stepper-button" data-reader-action="decrease">
+              -
+            </button>
+            <output class="reader-stepper-value" data-reader-value="font-size">1.28</output>
+            <button type="button" class="reader-stepper-button" data-reader-action="increase">
+              +
+            </button>
+          </div>
+        </div>
+
+        <div class="reader-controls-row">
+          <p class="reader-controls-label">Line Spacing</p>
+          <div
+            class="reader-stepper"
+            data-reader-stepper="line-height"
+            data-min="1.65"
+            data-max="2.5"
+            data-step="0.05"
+          >
+            <button type="button" class="reader-stepper-button" data-reader-action="decrease">
+              -
+            </button>
+            <output class="reader-stepper-value" data-reader-value="line-height">2.05</output>
+            <button type="button" class="reader-stepper-button" data-reader-action="increase">
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <article class="reader-stage min-w-0">
+      <div class="reader-paper mx-auto">
+        <header class="reader-header">
+          <p class="reader-kicker">পূর্ণপাঠ</p>
+          <h1 class="reader-title">{title}</h1>
+          {subtitle && <p class="reader-subtitle">{subtitle}</p>}
+        </header>
+
+        <div class="reader-body">
+          <slot />
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-reader-root]");
+
+    if (!(root instanceof HTMLElement)) return;
+
+    const storageKey = "otibeguni-book-reader-prefs";
+    const defaultPrefs = {
+      theme: "light",
+      fontSize: 1.28,
+      lineHeight: 2.05,
+    };
+
+    const readPrefs = () => {
+      try {
+        const raw = window.localStorage.getItem(storageKey);
+        if (!raw) return defaultPrefs;
+
+        const parsed = JSON.parse(raw);
+        return {
+          theme: ["light", "dark", "sepia"].includes(parsed.theme) ? parsed.theme : defaultPrefs.theme,
+          fontSize:
+            typeof parsed.fontSize === "number" ? parsed.fontSize : defaultPrefs.fontSize,
+          lineHeight:
+            typeof parsed.lineHeight === "number" ? parsed.lineHeight : defaultPrefs.lineHeight,
+        };
+      } catch {
+        return defaultPrefs;
+      }
+    };
+
+    const prefs = readPrefs();
+    const themeButtons = root.querySelectorAll("[data-theme-option]");
+    const steppers = Array.from(root.querySelectorAll("[data-reader-stepper]"));
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const roundToStep = (value, step) => Number(value.toFixed(step === 0.05 ? 2 : 3));
+    const formatValue = (value) => value.toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
+
+    const applyPrefs = () => {
+      root.dataset.readerTheme = prefs.theme;
+      root.style.setProperty("--reader-font-size", `${prefs.fontSize}rem`);
+      root.style.setProperty("--reader-line-height", String(prefs.lineHeight));
+
+      themeButtons.forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+        const isActive = button.dataset.themeOption === prefs.theme;
+        button.dataset.active = String(isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+
+      steppers.forEach((stepper) => {
+        if (!(stepper instanceof HTMLElement)) return;
+        const key = stepper.dataset.readerStepper;
+        if (!key) return;
+
+        const min = Number(stepper.dataset.min);
+        const max = Number(stepper.dataset.max);
+        const value = key === "font-size" ? prefs.fontSize : prefs.lineHeight;
+        const output = stepper.querySelector("[data-reader-value]");
+        const decreaseButton = stepper.querySelector('[data-reader-action="decrease"]');
+        const increaseButton = stepper.querySelector('[data-reader-action="increase"]');
+
+        if (output instanceof HTMLOutputElement) {
+          output.value = formatValue(value);
+          output.textContent = formatValue(value);
+        }
+
+        if (decreaseButton instanceof HTMLButtonElement) {
+          decreaseButton.disabled = value <= min;
+        }
+
+        if (increaseButton instanceof HTMLButtonElement) {
+          increaseButton.disabled = value >= max;
+        }
+      });
+    };
+
+    const persistPrefs = () => {
+      window.localStorage.setItem(storageKey, JSON.stringify(prefs));
+    };
+
+    themeButtons.forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      button.addEventListener("click", () => {
+        prefs.theme = button.dataset.themeOption || defaultPrefs.theme;
+        applyPrefs();
+        persistPrefs();
+      });
+    });
+
+    steppers.forEach((stepper) => {
+      if (!(stepper instanceof HTMLElement)) return;
+      const key = stepper.dataset.readerStepper;
+      if (!key) return;
+
+      const min = Number(stepper.dataset.min);
+      const max = Number(stepper.dataset.max);
+      const step = Number(stepper.dataset.step);
+
+      stepper.querySelectorAll("[data-reader-action]").forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+        button.addEventListener("click", () => {
+          const direction = button.dataset.readerAction === "increase" ? 1 : -1;
+          const currentValue = key === "font-size" ? prefs.fontSize : prefs.lineHeight;
+          const nextValue = roundToStep(clamp(currentValue + step * direction, min, max), step);
+
+          if (key === "font-size") {
+            prefs.fontSize = nextValue;
+          } else {
+            prefs.lineHeight = nextValue;
+          }
+
+          applyPrefs();
+          persistPrefs();
+        });
+      });
+    });
+
+    applyPrefs();
+  })();
+</script>
+
+<style>
+  @font-face {
+    font-family: "Li Helal Rupkotha Unicode";
+    src: url("/fonts/books/li-helal-rupkotha-unicode.ttf") format("truetype");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Li Subha Letterpress Unicode";
+    src: url("/fonts/books/li-subha-letterpress-unicode.ttf") format("truetype");
+    font-display: swap;
+  }
+
+  .reader-shell {
+    --reader-bg: linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
+    --reader-surface: rgba(255, 255, 255, 0.92);
+    --reader-border: rgba(109, 122, 141, 0.14);
+    --reader-ink: #1f2937;
+    --reader-muted: #607086;
+    --reader-shadow: 0 24px 80px rgba(67, 84, 104, 0.12);
+    --reader-accent: var(--color-primary, #2563eb);
+    --reader-accent-contrast: var(--color-primary-content, #f8fbff);
+    --reader-controls-surface: rgba(255, 255, 255, 0.96);
+    --reader-controls-border: rgba(109, 122, 141, 0.16);
+    --reader-controls-ink: #1f2937;
+    --reader-controls-muted: #607086;
+    --reader-controls-shadow: 0 18px 48px rgba(67, 84, 104, 0.1);
+    color: var(--reader-ink);
+  }
+
+  .reader-shell[data-reader-theme="dark"] {
+    --reader-bg: radial-gradient(circle at top, #263041 0%, #161d27 56%, #10151d 100%);
+    --reader-surface: rgba(18, 24, 34, 0.82);
+    --reader-border: rgba(163, 177, 199, 0.14);
+    --reader-ink: #e5dece;
+    --reader-muted: #a9b3c2;
+    --reader-shadow: 0 24px 80px rgba(3, 8, 18, 0.48);
+  }
+
+  .reader-shell[data-reader-theme="sepia"] {
+    --reader-bg: linear-gradient(180deg, #d6c0a0 0%, #c6ad88 100%);
+    --reader-surface: rgba(247, 236, 214, 0.86);
+    --reader-border: rgba(98, 66, 28, 0.18);
+    --reader-ink: #3c2916;
+    --reader-muted: #7a5b38;
+    --reader-shadow: 0 24px 80px rgba(88, 56, 18, 0.16);
+  }
+
+  .reader-stage {
+    border-radius: 2rem;
+    background: var(--reader-bg);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    padding: 1rem;
+  }
+
+  .reader-paper {
+    max-width: var(--reader-max-width);
+    border: 1px solid var(--reader-border);
+    border-radius: 1.75rem;
+    background: var(--reader-surface);
+    box-shadow: var(--reader-shadow);
+    backdrop-filter: blur(12px);
+    padding: 2rem 1.25rem 2.5rem;
+  }
+
+  .reader-header {
+    margin: 0 auto 2rem;
+    max-width: 32rem;
+    text-align: center;
+  }
+
+  .reader-kicker {
+    margin: 0 0 0.75rem;
+    color: var(--reader-muted);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .reader-title {
+    margin: 0;
+    color: var(--reader-ink);
+    font-family: "Li Helal Rupkotha Unicode", serif;
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    line-height: 1.08;
+  }
+
+  .reader-subtitle {
+    margin: 1rem auto 0;
+    max-width: 28rem;
+    color: var(--reader-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .reader-body {
+    color: var(--reader-ink);
+    font-family: "Li Subha Letterpress Unicode", serif;
+    font-size: var(--reader-font-size);
+    line-height: var(--reader-line-height);
+  }
+
+  .reader-body :global(h2),
+  .reader-body :global(h3) {
+    margin: 2.5rem 0 1rem;
+    color: var(--reader-ink);
+    font-family: "Li Helal Rupkotha Unicode", serif;
+    font-weight: 400;
+    line-height: 1.18;
+    text-align: center;
+  }
+
+  .reader-body :global(h2) {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+
+  .reader-body :global(h3) {
+    font-size: clamp(1.45rem, 2vw, 1.9rem);
+  }
+
+  .reader-body :global(p) {
+    margin: 0 0 1.15em;
+    text-wrap: pretty;
+  }
+
+  .reader-body :global(hr) {
+    margin: 2.5rem auto;
+    width: 5rem;
+    border: 0;
+    border-top: 1px solid var(--reader-border);
+  }
+
+  .reader-controls {
+    width: 100%;
+  }
+
+  .reader-controls-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem 1.25rem;
+    border: 1px solid var(--reader-controls-border);
+    border-radius: 1.25rem;
+    background: var(--reader-controls-surface);
+    box-shadow: var(--reader-controls-shadow);
+    padding: 0.8rem 1rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .reader-controls-label {
+    display: block;
+    color: var(--reader-controls-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .reader-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: fit-content;
+    border: 1px solid color-mix(in srgb, var(--reader-accent) 14%, var(--reader-controls-border));
+    border-radius: 999px;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--reader-accent) 7%, transparent),
+        transparent
+      ),
+      color-mix(in srgb, var(--reader-controls-surface) 92%, white 8%);
+    padding: 0.45rem 0.55rem 0.45rem 0.8rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+
+  .reader-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .reader-chip {
+    border: 1px solid var(--reader-controls-border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--reader-controls-ink);
+    cursor: pointer;
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 0.48rem 0.72rem;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .reader-chip:hover {
+    border-color: color-mix(in srgb, var(--reader-accent) 34%, var(--reader-controls-border));
+    background: color-mix(in srgb, var(--reader-accent) 9%, transparent);
+  }
+
+  .reader-chip:focus-visible,
+  .reader-range-group input[type="range"]:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--reader-accent) 45%, transparent);
+    outline-offset: 2px;
+  }
+
+  .reader-chip[data-active="true"] {
+    background: var(--reader-accent);
+    border-color: var(--reader-accent);
+    color: var(--reader-accent-contrast);
+    transform: translateY(-1px);
+  }
+
+  .reader-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 0.15rem;
+  }
+
+  .reader-stepper-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--reader-controls-border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--reader-controls-ink);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      opacity 180ms ease;
+  }
+
+  .reader-stepper-button:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--reader-accent) 34%, var(--reader-controls-border));
+    background: color-mix(in srgb, var(--reader-accent) 9%, transparent);
+  }
+
+  .reader-stepper-button:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--reader-accent) 45%, transparent);
+    outline-offset: 2px;
+  }
+
+  .reader-stepper-button:disabled {
+    cursor: default;
+    opacity: 0.4;
+  }
+
+  .reader-stepper-value {
+    min-width: 2.6rem;
+    color: var(--reader-controls-ink);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--reader-accent) 8%, transparent);
+    padding: 0.32rem 0.2rem;
+  }
+
+  @media (min-width: 768px) {
+    .reader-stage {
+      padding: 1.5rem;
+    }
+
+    .reader-paper {
+      padding: 3rem 3rem 3.5rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .reader-controls-row {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-radius: 1rem;
+      width: 100%;
+    }
+  }
+</style>

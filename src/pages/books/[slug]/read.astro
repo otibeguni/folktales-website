@@ -1,0 +1,74 @@
+---
+import BookFullTextReader from "@/components/BookFullTextReader.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  getAllBooks,
+  getAllBookFullTexts,
+  indexEntriesBySlug,
+  renderEntry,
+} from "@/utils/content";
+import { buildCanonicalUrl } from "@/utils/seo";
+
+export async function getStaticPaths() {
+  const [books, fullTexts] = await Promise.all([getAllBooks(), getAllBookFullTexts()]);
+  const booksBySlug = indexEntriesBySlug(books);
+
+  return fullTexts
+    .filter((entry) => booksBySlug.has(entry.data.book_slug))
+    .map((entry) => ({
+      params: { slug: entry.data.book_slug },
+      props: {
+        book: booksBySlug.get(entry.data.book_slug),
+        fullText: entry,
+      },
+    }));
+}
+
+const { book, fullText } = Astro.props;
+const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
+const { Content } = await renderEntry(fullText);
+const pageDescription = `Read the full Bengali text of ${book.data.name} with Otibeguni's immersive web reader.`;
+const breadcrumbs = [
+  { label: "Books", href: "/books" },
+  { label: book.data.name, href: `/books/${book.slug}` },
+  { label: "Read Full Text" },
+];
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: book.data.name,
+  url: canonicalUrl,
+  inLanguage: fullText.data.language,
+  isAccessibleForFree: true,
+  bookFormat: "EBook",
+  encodingFormat: "text/html",
+  ...(book.data.author && {
+    author: {
+      "@type": "Person",
+      name: book.data.author,
+    },
+  }),
+  potentialAction: {
+    "@type": "ReadAction",
+    target: canonicalUrl,
+  },
+};
+---
+
+<Layout
+  title={`${book.data.name} | Full Text Reader | Otibeguni`}
+  description={pageDescription}
+  lang="bn"
+  robots="index,follow,max-image-preview:large"
+  schema={schemaData}
+  canonicalUrl={canonicalUrl}
+  openGraphType="book"
+  breadcrumbs={breadcrumbs}
+>
+  <BookFullTextReader
+    title={fullText.data.title}
+    subtitle={fullText.data.subtitle}
+  >
+    <Content />
+  </BookFullTextReader>
+</Layout>
