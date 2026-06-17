@@ -25,10 +25,15 @@ const translations = {
   },
   pages: {
     stories: {
-      filterLabel: "Filter Stories",
+      searchLabel: "Search Stories",
+      searchPlaceholder: "Search by title, slug, or category",
+      searchHelperText:
+        "Use search with language and category filters to narrow the list.",
+      clearFiltersLabel: "Clear filters",
       languageLabel: "Language",
       categoryLabel: "Category",
       allCategoryLabel: "All Categories",
+      noStoriesFoundLabel: "No stories found.",
     },
     topics: {
       pageTitle: "Topics",

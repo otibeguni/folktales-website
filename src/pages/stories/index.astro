@@ -18,15 +18,19 @@ const stories = storyEntries.map((story) => ({
   title={"Stories | " + t("common.siteTitle")}
   breadcrumbs={[{ label: "Stories", href: "/stories" }]}
 >
-  <div class="container mx-auto max-w-4xl px-4 py-8" data-pagefind-ignore>
+  <div data-pagefind-ignore>
     <StoryList
       stories={stories}
       lang={currentLanguage}
       labels={{
-        filterLabel: t("pages.stories.filterLabel"),
+        searchLabel: t("pages.stories.searchLabel"),
+        searchPlaceholder: t("pages.stories.searchPlaceholder"),
+        searchHelperText: t("pages.stories.searchHelperText"),
+        clearFiltersLabel: t("pages.stories.clearFiltersLabel"),
         languageLabel: t("pages.stories.languageLabel"),
         categoryLabel: t("pages.stories.categoryLabel"),
         allCategoryLabel: t("pages.stories.allCategoryLabel"),
+        noStoriesFoundLabel: t("pages.stories.noStoriesFoundLabel"),
       }}
       path="stories"
       client:load
