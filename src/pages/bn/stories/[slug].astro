@@ -5,6 +5,7 @@ import StoryMetadata from "../../../components/StoryMetadata.astro";
 import StoryReadAloudControl from "../../../components/StoryReadAloudControl.astro";
 import ArticleBody from "../../../components/ArticleBody.astro";
 import RelatedItemsList from "../../../components/RelatedItemsList.astro";
+import StoryRelationEditor from "../../../components/StoryRelationEditor";
 import BlogCard from "@/components/blog/BlogCard";
 import {
   bookHasDetailPage,
@@ -150,6 +151,22 @@ const breadcrumbs = [
   { label: story.data.title },
 ];
 const sourceText = sourceBook?.data.name || resolvedStory.data.source_label;
+const isDev = import.meta.env.DEV;
+const availableTopicOptions = [...allTopics]
+  .map((topic) => ({
+    slug: topic.slug,
+    item: topic.data.item,
+    types: topic.data.types || [],
+  }))
+  .sort((left, right) => left.item.localeCompare(right.item));
+const availableResourceOptions = [...allResources]
+  .map((resource) => ({
+    slug: resource.slug,
+    title: resource.data.title,
+    type: resource.data.type,
+    url: resource.data.url || "",
+  }))
+  .sort((left, right) => left.title.localeCompare(right.title));
 ---
 
 <Layout
@@ -191,27 +208,61 @@ const sourceText = sourceBook?.data.name || resolvedStory.data.source_label;
           </ArticleBody>
 
           {
-            relatedTopics.length > 0 && (
+            (relatedTopics.length > 0 || isDev) && (
               <>
                 <div class="divider mt-12" />
                 <RelatedItemsList
                   title="Related Topics"
                   items={relatedTopics}
+                  emptyMessage={isDev ? "No related topics yet." : undefined}
                   iconMap={iconMap}
-                />
+                >
+                  {
+                    isDev && (
+                      <StoryRelationEditor
+                        slot="actions"
+                        client:load
+                        entityType="topic"
+                        storySlug={storyRouteSlug}
+                        storyLanguage={story.data.language}
+                        currentTopicSlugs={resolvedStory.data.topic_slugs ?? []}
+                        currentResourceSlugs={resolvedStory.data.resource_slugs ?? []}
+                        availableTopics={availableTopicOptions}
+                        availableResources={availableResourceOptions}
+                      />
+                    )
+                  }
+                </RelatedItemsList>
               </>
             )
           }
 
           {
-            relatedResources.length > 0 && (
+            (relatedResources.length > 0 || isDev) && (
               <>
                 <div class="divider mt-12" />
                 <RelatedItemsList
                   title="Related Resources"
                   items={relatedResources}
+                  emptyMessage={isDev ? "No related resources yet." : undefined}
                   iconMap={iconMap}
-                />
+                >
+                  {
+                    isDev && (
+                      <StoryRelationEditor
+                        slot="actions"
+                        client:load
+                        entityType="resource"
+                        storySlug={storyRouteSlug}
+                        storyLanguage={story.data.language}
+                        currentTopicSlugs={resolvedStory.data.topic_slugs ?? []}
+                        currentResourceSlugs={resolvedStory.data.resource_slugs ?? []}
+                        availableTopics={availableTopicOptions}
+                        availableResources={availableResourceOptions}
+                      />
+                    )
+                  }
+                </RelatedItemsList>
               </>
             )
           }

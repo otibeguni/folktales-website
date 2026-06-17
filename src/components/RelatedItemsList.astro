@@ -16,57 +16,74 @@ interface Item {
 interface Props {
   title?: string;
   items?: Item[];
+  emptyMessage?: string;
 }
 
-const { title, items } = Astro.props;
+const { title, items, emptyMessage } = Astro.props;
+const hasActions = Astro.slots.has("actions");
 
-if (!items || items.length === 0) {
+if ((!items || items.length === 0) && !title && !hasActions) {
   return null;
 }
 ---
 
 <div class:list={["flex flex-col gap-3", title ? "mt-8" : "mt-4"]}>
-  {title && <h3 class="mb-4 text-2xl font-bold">{title}</h3>}
-  <div class="flex flex-col gap-4">
-    {
-      items.map((item) => {
-        const linkUrl = item.isExternal ? item.url : localizePath(item.url);
+  {
+    (title || hasActions) && (
+      <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+        {title ? <h3 class="text-2xl font-bold">{title}</h3> : <div />}
+        {hasActions && <slot name="actions" />}
+      </div>
+    )
+  }
+  {
+    items && items.length > 0 ? (
+      <div class="flex flex-col gap-4">
+        {
+          items.map((item) => {
+            const linkUrl = item.isExternal ? item.url : localizePath(item.url);
 
-        if (!linkUrl) return null;
+            if (!linkUrl) return null;
 
-        const subtitle = item.subtitle ?? item.meta;
-        const badges = item.badges ?? [
-          ...(item.types ? sortTopicTags(item.types) : []),
-          ...(item.type ? [item.type] : []),
-        ];
+            const subtitle = item.subtitle ?? item.meta;
+            const badges = item.badges ?? [
+              ...(item.types ? sortTopicTags(item.types) : []),
+              ...(item.type ? [item.type] : []),
+            ];
 
-        return (
-          <a
-            href={linkUrl}
-            target={item.isExternal ? "_blank" : "_self"}
-            rel={item.isExternal ? "noopener noreferrer" : null}
-            class="bg-base-100 hover:bg-base-200/60 flex flex-col gap-3 rounded-2xl border border-base-300 px-4 py-4 no-underline transition md:px-5 md:py-5"
-          >
-            <div class="min-w-0">
-              <h4 class="mt-0 text-lg font-semibold leading-snug md:text-xl">
-                {item.name}
-              </h4>
-              {subtitle && (
-                <p class="mt-1 text-sm leading-6 text-slate-600 md:text-base">
-                  {subtitle}
-                </p>
-              )}
-              {badges.length > 0 && (
-                <div class="mt-3 flex flex-wrap items-center gap-2">
-                  {badges.map((badge) => (
-                    <span class="badge badge-soft badge-primary">{badge}</span>
-                  ))}
+            return (
+              <a
+                href={linkUrl}
+                target={item.isExternal ? "_blank" : "_self"}
+                rel={item.isExternal ? "noopener noreferrer" : null}
+                class="bg-base-100 hover:bg-base-200/60 flex flex-col gap-3 rounded-2xl border border-base-300 px-4 py-4 no-underline transition md:px-5 md:py-5"
+              >
+                <div class="min-w-0">
+                  <h4 class="mt-0 text-lg font-semibold leading-snug md:text-xl">
+                    {item.name}
+                  </h4>
+                  {subtitle && (
+                    <p class="mt-1 text-sm leading-6 text-slate-600 md:text-base">
+                      {subtitle}
+                    </p>
+                  )}
+                  {badges.length > 0 && (
+                    <div class="mt-3 flex flex-wrap items-center gap-2">
+                      {badges.map((badge) => (
+                        <span class="badge badge-soft badge-primary">{badge}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          </a>
-        );
-      })
-    }
-  </div>
+              </a>
+            );
+          })
+        }
+      </div>
+    ) : emptyMessage ? (
+      <div class="rounded-2xl border border-dashed border-base-300 px-5 py-6 text-sm text-slate-500">
+        {emptyMessage}
+      </div>
+    ) : null
+  }
 </div>

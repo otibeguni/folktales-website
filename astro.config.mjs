@@ -6,6 +6,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import pagefind from "astro-pagefind";
 import { storyblok } from "@storyblok/astro";
+import { createStoryRelationDevPlugin } from "./src/dev/story-relation-dev-plugin.mjs";
 
 const storyblokAccessToken =
   process.env.STORYBLOK_DELIVERY_TOKEN || process.env.PUBLIC_STORYBLOK_TOKEN;
@@ -33,7 +34,7 @@ export default defineConfig({
   output: "static",
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), createStoryRelationDevPlugin()],
     server: {
       https: hasTrustedDevCertificate
         ? {
