@@ -1,8 +1,6 @@
 ---
 title: Rangpur Geetika - রংপুর গীতিকা
 slug: rangpur-geetika
-order: 4
-isShow: true
 stories:
   - the-girl-who-lived-inside-a-pineapple
   - king-manik-pal

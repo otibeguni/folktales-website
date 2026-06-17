@@ -18,9 +18,17 @@ export async function getStaticPaths() {
 
 const { collection } = Astro.props;
 const { Content } = await renderEntry(collection);
-const stories = (await getResolvedStories()).map((story) => ({
-  frontmatter: { ...story.data, slug: getStoryRouteSlug(story) },
-}));
+const storyByRouteSlug = new Map(
+  (await getResolvedStories())
+    .filter((story) => story.data.language === "en")
+    .map((story) => [getStoryRouteSlug(story), story]),
+);
+const stories = (collection.data.stories ?? [])
+  .map((storySlug) => storyByRouteSlug.get(storySlug))
+  .filter(Boolean)
+  .map((story) => ({
+    frontmatter: { ...story.data, slug: getStoryRouteSlug(story) },
+  }));
 ---
 
 <Layout
@@ -32,8 +40,11 @@ const stories = (await getResolvedStories()).map((story) => ({
 >
   <div class="container mx-auto max-w-4xl px-4 py-8">
     <StoryCollectionList
-      collections={[{ frontmatter: { ...collection.data, slug: collection.slug }, Content }]}
-      stories={stories}
+      collections={[{
+        frontmatter: { ...collection.data, slug: collection.slug },
+        stories,
+        Content,
+      }]}
       path="stories"
     />
   </div>

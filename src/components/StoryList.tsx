@@ -80,10 +80,7 @@ const StoryList = ({
   return (
     <>
       {/* Filter Section */}
-      <h2 className="text-2xl md:text-3xl font-bold border-l-4 border-primary pl-4">
-        All Stories
-      </h2>
-      <div className="bg-base-100 mt-8 mb-8 flex flex-row items-center justify-between gap-4 rounded-xl p-6 shadow-sm">
+      <div className="bg-base-100 mb-8 flex flex-row items-center justify-between gap-4 rounded-xl p-6 shadow-sm">
         <div className="btn-group">
           <button
             className={`btn btn-sm sm:btn-md ${

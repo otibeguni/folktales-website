@@ -200,6 +200,33 @@ export async function getAllStoryCollections() {
   return getCollection("storyCollections");
 }
 
+export function indexStoryCollectionsByStorySlug(
+  collections: StoryCollectionEntry[],
+) {
+  const collectionsByStorySlug = new Map<string, StoryCollectionEntry[]>();
+
+  for (const collection of collections) {
+    for (const storySlug of collection.data.stories ?? []) {
+      const existingCollections = collectionsByStorySlug.get(storySlug) ?? [];
+      existingCollections.push(collection);
+      collectionsByStorySlug.set(storySlug, existingCollections);
+    }
+  }
+
+  for (const storyCollections of collectionsByStorySlug.values()) {
+    storyCollections.sort((left, right) => left.data.title.localeCompare(right.data.title));
+  }
+
+  return collectionsByStorySlug;
+}
+
+export function getStoryCollectionsForStory(
+  story: StoryEntry,
+  collectionsByStorySlug: Map<string, StoryCollectionEntry[]>,
+) {
+  return collectionsByStorySlug.get(getStoryRouteSlug(story)) ?? [];
+}
+
 export function indexEntriesBySlug<
   T extends { slug: string },
 >(entries: T[]) {

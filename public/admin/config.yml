@@ -29,7 +29,6 @@ collections:
     folder: "src/content/storyCollections"
     slug: "{{slug}}"
     create: true
-    sortable_fields: ["order"]
     fields:
       - label: "Title"
         name: "title"
@@ -38,14 +37,6 @@ collections:
       - label: "Slug"
         name: "slug"
         widget: "string"
-        required: true
-      - label: "Order"
-        name: "order"
-        widget: "number"
-        required: true
-      - label: "Visible"
-        name: "isShow"
-        widget: "boolean"
         required: true
       - label: "Stories"
         name: "stories"

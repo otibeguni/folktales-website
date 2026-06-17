@@ -98,8 +98,6 @@ const resources = defineCollection({
 const storyCollections = defineCollection({
   schema: z.object({
     title: z.string(),
-    order: z.number(),
-    isShow: z.boolean(),
     stories: z.array(z.string()).default([]),
   }),
 });

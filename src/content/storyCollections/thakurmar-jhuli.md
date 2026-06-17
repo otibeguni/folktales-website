@@ -1,8 +1,6 @@
 ---
 title: Thakurmar Jhuli - ঠাকুরমার ঝুলি
 slug: thakurmar-jhuli
-order: 5
-isShow: true
 stories:
   - dalim-kumar
   - kakonmala-and-kanchonmala

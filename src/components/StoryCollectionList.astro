@@ -1,89 +1,60 @@
 ---
 import CardStory from "./CardStory";
-import type { IStoryCollectionList, IStoryList } from "@/types";
+import type { IStoryCollection, IStoryList } from "@/types";
 
-const { collections, stories, path } = Astro.props;
+interface StoryCollectionSection {
+  frontmatter: IStoryCollection;
+  stories: IStoryList[];
+  Content?: any;
+}
+
+const {
+  collections,
+  path,
+  title,
+} = Astro.props as {
+  collections: StoryCollectionSection[];
+  path: string;
+  title?: string;
+};
 ---
 
-<div class="space-y-8">
-  {
-    collections
-      .filter(
-        (collection: IStoryCollectionList) => collection.frontmatter.isShow
-      )
-      .sort(
-        (
-          collectionPrev: IStoryCollectionList,
-          collectionNext: IStoryCollectionList
-        ) => collectionPrev.frontmatter.order - collectionNext.frontmatter.order
-      )
-      .map(
-        (collection: IStoryCollectionList & { Content?: any }) => (
-          <div class="space-y-2 pb-12" data-pagefind-body>
-            <h2 class="text-2xl md:text-3xl font-bold border-l-4 border-primary pl-4">
-              {collection?.frontmatter?.title}
-            </h2>
-            <div class="text-gray-600 mb-4">
-              {collection.Content && <collection.Content />}
-            </div>
-            <div class="hidden md:grid grid-cols-1 gap-4 md:grid-cols-2 hi">
-              {stories
-                .filter(
-                  (story: IStoryList) =>
-                    story.frontmatter.language === "en" &&
-                    collection.frontmatter.stories.includes(
-                      story.frontmatter.slug
-                    )
-                )
-                .map((story: IStoryList) => (
-                  <CardStory
-                    frontmatter={story.frontmatter}
-                    coverImage={story.frontmatter.cover_image}
-                    path={path}
-                  />
-                ))}
-            </div>
-            <section class="grid grid-cols-1 md:hidden">
-              <div class="splide splide-collection">
-                <div class="splide__track">
-                  <ul class="splide__list">
-                    {stories
-                      .filter(
-                        (story: IStoryList) =>
-                          story.frontmatter.language === "en" &&
-                          collection.frontmatter.stories.includes(
-                            story.frontmatter.slug
-                          )
-                      )
-                      .map((story: IStoryList) => (
-                        <li class="splide__slide px-2 py-1">
-                          <CardStory
-                            frontmatter={story.frontmatter}
-                            coverImage={story.frontmatter.cover_image}
-                            path={path}
-                          />
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              </div>
-            </section>
-          </div>
-        )
-      )
-  }
-</div>
-<script>
-  import "@splidejs/splide/css";
-  import Splide from "@splidejs/splide";
+{
+  collections.length > 0 && (
+    <section class="not-prose" data-pagefind-body>
+      {title && (
+        <h3 class="mb-4 text-2xl font-bold">
+          {title}
+        </h3>
+      )}
 
-  const splides = document.querySelectorAll(".splide-collection");
-  for (let i = 0; i < splides.length; i++) {
-    const splideElement = splides[i] as HTMLElement;
-    new Splide(splideElement, {
-      type: "slide",
-      perPage: 1,
-      pagination: false,
-    }).mount();
-  }
-</script>
+      <div class="space-y-10">
+        {collections.map((collection) => (
+          <div class="space-y-4">
+            <h4 class="text-lg font-semibold leading-snug md:text-xl">
+              {collection.frontmatter.title}
+            </h4>
+
+            {
+              collection.Content && (
+                <div class="text-gray-600">
+                  <collection.Content />
+                </div>
+              )
+            }
+
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {collection.stories.map((story) => (
+                <CardStory
+                  frontmatter={story.frontmatter}
+                  coverImage={story.frontmatter.cover_image}
+                  path={path}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}

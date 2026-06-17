@@ -103,8 +103,6 @@ export const ENTITY_DEFINITIONS = {
     fields: [
       { name: "title", required: true, type: "string" },
       { name: "slug", required: false, type: "string" },
-      { name: "order", required: true, type: "number" },
-      { name: "isShow", required: true, type: "boolean" },
       { name: "stories", required: false, type: "array", defaultValue: [] },
     ],
   },
@@ -602,8 +600,6 @@ export function summarizeEntry(entry, context) {
         entity: entry.entity,
         slug: entry.slug,
         title: entry.data.title,
-        order: entry.data.order,
-        isShow: entry.data.isShow,
         stories: entry.data.stories || [],
         path: entry.relativePath,
       };
@@ -795,7 +791,7 @@ function getSearchFieldsForEntry(entry, context) {
     case "story-collection":
       return {
         title: [entry.slug, entry.data.title],
-        metadata: [String(entry.data.order), String(entry.data.isShow), ...(entry.data.stories || [])],
+        metadata: [...(entry.data.stories || [])],
         body: [entry.body],
       };
     default:
@@ -1444,8 +1440,6 @@ export function buildTemplate(entityName) {
   }
   if (resolveEntityName(entityName) === "story-collection") {
     data.title = "Example Collection";
-    data.order = 1;
-    data.isShow = true;
     data.stories = ["example-story"];
   }
 

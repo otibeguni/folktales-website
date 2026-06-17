@@ -104,8 +104,6 @@ topic_slugs:
     "src/content/storyCollections/featured.md",
     `---
 title: Featured
-order: 1
-isShow: true
 stories:
   - forest-story
 ---

@@ -97,13 +97,7 @@ export interface IBreadcrumbs {
 export interface IStoryCollection {
   title: string;
   slug: string;
-  order: number;
-  isShow: boolean;
   stories: string[];
-}
-
-export interface IStoryCollectionList {
-  frontmatter: IStoryCollection;
 }
 
 export interface IBlog {

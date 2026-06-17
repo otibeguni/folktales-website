@@ -1,8 +1,6 @@
 ---
 title: Maimansingha Gitika - মৈমনসিংহ গীতিকা
 slug: maimansingha-gitika
-order: 3
-isShow: true
 stories:
   - the-tale-of-mohua
   - the-tale-of-molua

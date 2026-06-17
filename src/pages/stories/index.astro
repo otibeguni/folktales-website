@@ -2,32 +2,16 @@
 import { currentLanguage, t } from "@/utils/site-text";
 import StoryList from "@/components/StoryList";
 import Layout from "@/layouts/Layout.astro";
-import StoryCollectionList from "@/components/StoryCollectionList.astro";
 import {
-  getAllStoryCollections,
   getStoryRouteSlug,
   getResolvedStories,
-  renderEntry,
 } from "@/utils/content";
 
-const [storyEntries, collectionEntries] = await Promise.all([
-  getResolvedStories(),
-  getAllStoryCollections(),
-]);
+const storyEntries = await getResolvedStories();
 
 const stories = storyEntries.map((story) => ({
   frontmatter: { ...story.data, slug: getStoryRouteSlug(story) },
 }));
-
-const collections = await Promise.all(
-  collectionEntries.map(async (collection) => {
-    const { Content } = await renderEntry(collection);
-    return {
-      frontmatter: { ...collection.data, slug: collection.slug },
-      Content,
-    };
-  }),
-);
 ---
 
 <Layout
@@ -35,12 +19,6 @@ const collections = await Promise.all(
   breadcrumbs={[{ label: "Stories", href: "/stories" }]}
 >
   <div class="container mx-auto max-w-4xl px-4 py-8" data-pagefind-ignore>
-    <StoryCollectionList
-      collections={collections}
-      stories={stories}
-      path="stories"
-    />
-
     <StoryList
       stories={stories}
       lang={currentLanguage}

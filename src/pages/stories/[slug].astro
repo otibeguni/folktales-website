@@ -5,6 +5,7 @@ import StoryMetadata from "../../components/StoryMetadata.astro";
 import StoryReadAloudControl from "../../components/StoryReadAloudControl.astro";
 import ArticleBody from "../../components/ArticleBody.astro";
 import RelatedItemsList from "../../components/RelatedItemsList.astro";
+import StoryCollectionList from "../../components/StoryCollectionList.astro";
 import StoryRelationEditor from "../../components/StoryRelationEditor";
 import BlogCard from "@/components/blog/BlogCard";
 import {
@@ -12,12 +13,15 @@ import {
   findStoryTranslation,
   getAllBooks,
   getAllResources,
+  getAllStoryCollections,
   getAllStoryMetadata,
   getAllStories,
   getAllTopics,
   getBookDetailPath,
+  getStoryCollectionsForStory,
   getStoryRouteSlug,
   getStoriesByLanguage,
+  indexStoryCollectionsByStorySlug,
   indexEntriesBySlug,
   renderEntry,
   resolveStoryMetadata,
@@ -36,12 +40,13 @@ export async function getStaticPaths() {
 const { story } = Astro.props;
 const { Content } = await renderEntry(story);
 
-const [allStories, allTopics, allBooks, allResources, allStoryMetadata] = await Promise.all([
+const [allStories, allTopics, allBooks, allResources, allStoryMetadata, allStoryCollections] = await Promise.all([
   getAllStories(),
   getAllTopics(),
   getAllBooks(),
   getAllResources(),
   getAllStoryMetadata(),
+  getAllStoryCollections(),
 ]);
 const allBlogs = await getBlogPosts();
 
@@ -49,8 +54,15 @@ const topicBySlug = indexEntriesBySlug(allTopics);
 const bookBySlug = indexEntriesBySlug(allBooks);
 const resourceBySlug = indexEntriesBySlug(allResources);
 const storyMetadataBySlug = indexEntriesBySlug(allStoryMetadata);
+const storyCollectionsByStorySlug = indexStoryCollectionsByStorySlug(allStoryCollections);
 const storyRouteSlug = getStoryRouteSlug(story);
 const resolvedStory = resolveStoryMetadata(story, storyMetadataBySlug);
+const resolvedStories = allStories.map((entry) => resolveStoryMetadata(entry, storyMetadataBySlug));
+const resolvedStoriesByRouteSlug = new Map(
+  resolvedStories
+    .filter((entry) => entry.data.language === story.data.language)
+    .map((entry) => [getStoryRouteSlug(entry), entry]),
+);
 const bnStory = findStoryTranslation(allStories, storyRouteSlug, "bn");
 const sourceBook = resolvedStory.data.source_slug
   ? bookBySlug.get(resolvedStory.data.source_slug)
@@ -143,6 +155,21 @@ const relatedResources = (resolvedStory.data.resource_slugs ?? [])
 const relatedBlogPosts = allBlogs.filter((post) =>
   post.relatedStorySlugs.includes(storyRouteSlug),
 );
+const storyCollections = getStoryCollectionsForStory(story, storyCollectionsByStorySlug)
+  .map((collection) => ({
+    frontmatter: {
+      ...collection.data,
+      slug: collection.slug,
+    },
+    stories: (collection.data.stories ?? [])
+      .filter((slug) => slug !== storyRouteSlug)
+      .map((slug) => resolvedStoriesByRouteSlug.get(slug))
+      .filter(Boolean)
+      .map((entry) => ({
+        frontmatter: { ...entry.data, slug: getStoryRouteSlug(entry) },
+      })),
+  }))
+  .filter((collection) => collection.stories.length > 0);
 const breadcrumbs = [
   { label: "Stories", href: "/stories" },
   { label: story.data.title },
@@ -277,6 +304,19 @@ const availableResourceOptions = [...allResources]
                     ))}
                   </div>
                 </section>
+              </>
+            )
+          }
+
+          {
+            storyCollections.length > 0 && (
+              <>
+                <div class="divider mt-12" />
+                <StoryCollectionList
+                  title="Story Collections"
+                  collections={storyCollections}
+                  path="stories"
+                />
               </>
             )
           }
