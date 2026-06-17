@@ -5,7 +5,6 @@ url_slug: the-tale-of-behula-lakhindar
 language: en
 ---
 
-
 Once upon a time, merchants were making great profits through sea trade. In the city of Champai lived a hot-tempered and daring merchant named Chand Soudagar. People also called him Chand Bena. Chand Soudagar was a great devotee of Mahadev, meaning the supreme god Shiva. He cared for no one else but his deity.
 
 Meanwhile, a conflict arose in Kailash between Shiva and the serpent goddess Manasa. Manasa felt immense sorrow. Although her father had granted her the status of a goddess, people on Earth still did not worship her. On the other hand, Mahadev had told her, "You will meet my dear devotee, Chand Soudagar, on Earth."
