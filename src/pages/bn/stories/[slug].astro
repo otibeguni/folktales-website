@@ -121,21 +121,6 @@ const schemaData = {
   ...(resolvedStory.data.cover_image && { image: resolvedStory.data.cover_image }),
 };
 
-const iconMap = {
-  Deity: "fa-solid fa-burst",
-  Person: "fa-solid fa-user",
-  People: "fa-solid fa-users",
-  Place: "fa-solid fa-location-dot",
-  Site: "fa-solid fa-landmark",
-  Kingdom: "fa-solid fa-chess-rook",
-  Being: "fa-solid fa-ghost",
-  Work: "fa-solid fa-book-open",
-  Religion: "fa-solid fa-hands-praying",
-  Event: "fa-solid fa-calendar-days",
-  video: "fa-solid fa-video",
-  website: "fa-solid fa-newspaper",
-};
-
 const relatedTopics = (resolvedStory.data.topic_slugs ?? [])
   .map((slug) => topicBySlug.get(slug))
   .filter(Boolean)
@@ -241,8 +226,8 @@ const availableResourceOptions = [...allResources]
                 <RelatedItemsList
                   title="Related Topics"
                   items={relatedTopics}
+                  layout="topic-chips"
                   emptyMessage={isDev ? "No related topics yet." : undefined}
-                  iconMap={iconMap}
                 >
                   {
                     isDev && (
@@ -272,7 +257,6 @@ const availableResourceOptions = [...allResources]
                   title="Related Resources"
                   items={relatedResources}
                   emptyMessage={isDev ? "No related resources yet." : undefined}
-                  iconMap={iconMap}
                 >
                   {
                     isDev && (
