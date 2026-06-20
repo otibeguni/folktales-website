@@ -7,23 +7,79 @@ interface Props {
 
 const { story } = Astro.props;
 const { title, slug, cover_image } = story;
+const coverImageSrc =
+  cover_image ??
+  `https://placehold.co/640x800/f5f5f5/333333?text=${slug.toUpperCase().charAt(0)}`;
+const titleLength = title.trim().length;
+const clampedTitleLength = Math.min(Math.max(titleLength, 24), 96);
+const coverSizeRem = titleLength > 72 ? 17 : 18;
+const desktopTitleSizeRem = (3.35 - (clampedTitleLength - 24) * 0.022).toFixed(2);
+const tabletTitleSizeRem = (2.7 - (clampedTitleLength - 24) * 0.014).toFixed(2);
+const mobileTitleSizeRem = (2.2 - (clampedTitleLength - 24) * 0.007).toFixed(2);
+const titleLineHeight = titleLength > 64 ? "1.05" : "1";
+const titleMaxWidthCh =
+  titleLength > 84 ? 14 : titleLength > 64 ? 13 : titleLength > 44 ? 11 : 10;
+const contentGapClass = titleLength > 64 ? "gap-3" : "gap-4";
+const headerStyle = [
+  `--story-cover-size:${coverSizeRem}rem`,
+  `--story-title-mobile:${mobileTitleSizeRem}rem`,
+  `--story-title-tablet:${tabletTitleSizeRem}rem`,
+  `--story-title-desktop:${desktopTitleSizeRem}rem`,
+  `--story-title-max-width:${titleMaxWidthCh}ch`,
+  `--story-title-leading:${titleLineHeight}`,
+].join(";");
 ---
 
-<!-- NEW: Integrated Header Section -->
-<div class="border-base-200 border-b p-6 text-center md:p-10">
-  <div class="flex justify-center">
-    <div class="relative -mb-20 h-40 w-40 md:-mb-28 md:h-56 md:w-56">
-      <img
-        src={cover_image ??
-          `https://placehold.co/150x150/f0f0f0/333333?text=${slug.toUpperCase().charAt(0)}`}
-        alt={`Cover illustration for ${title}`}
-        class="h-full w-full rounded-lg object-cover shadow-lg"
-      />
-      <slot />
+<section class="hero overflow-hidden rounded-[28px] border border-[#d61b80] bg-[#fb2398] text-white" style={headerStyle}>
+  <div class="hero-content w-full max-w-none flex-col gap-8 px-5 py-6 sm:px-6 md:px-8 md:py-8 lg:flex-row lg:items-start lg:gap-8">
+    <figure class="w-full max-w-[18rem] shrink-0 lg:w-[var(--story-cover-size)]">
+      <div class="border-base-300 bg-base-100 relative overflow-hidden rounded-[24px] border p-3 shadow-sm">
+        <div class="relative aspect-square overflow-hidden rounded-[18px] bg-white">
+          <img
+            src={coverImageSrc}
+            alt={`Cover illustration for ${title}`}
+            class="h-full w-full object-cover"
+          />
+          <slot />
+        </div>
+      </div>
+    </figure>
+
+    <div class:list={[
+      "w-full text-center lg:flex lg:h-[var(--story-cover-size)] lg:flex-col lg:justify-end lg:text-left",
+      contentGapClass,
+    ]}>
+      <div class="min-h-0">
+        <h1
+          class="story-header-title font-bold text-balance"
+          style={[
+            "font-size:var(--story-title-mobile)",
+            "line-height:var(--story-title-leading)",
+            "max-width:100%",
+            "padding-top:0",
+          ].join(";")}
+        >
+          {title}
+        </h1>
+      </div>
+      <div class="shrink-0">
+        <slot name="metadata" />
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="pt-20 text-center">
-  <h1 class="mt-2 text-3xl leading-tight font-bold md:text-5xl">{title}</h1>
-</div>
+<style>
+  @media (min-width: 768px) {
+    .story-header-title {
+      font-size: var(--story-title-tablet);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .story-header-title {
+      font-size: var(--story-title-desktop);
+      max-width: var(--story-title-max-width);
+    }
+  }
+</style>

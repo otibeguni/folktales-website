@@ -13,40 +13,52 @@ const { category, sourceBook, sourceAuthor, sourceUrl, translationLink, translat
 const sourceIsExternal = sourceUrl ? /^https?:\/\//.test(sourceUrl) : false;
 ---
 
-<div
-  class="bg-base-200/50 mt-8 mb-6 grid grid-cols-1 items-start gap-6 rounded-lg p-4 sm:grid-cols-2 md:grid-cols-3"
->
-  <div class="text-center sm:text-left">
-    <div class="text-xs font-bold opacity-60">CATEGORY</div>
-    <div class="text-secondary text-lg font-semibold">{category}</div>
-  </div>
-  { sourceBook && (<div
-    class="border-base-300 border-t-2 pt-4 text-center sm:border-t-0 sm:border-l-2 sm:pt-0 sm:pl-6 sm:text-left"
-  >
-    <p class="text-xs font-bold opacity-60">BASED ON THE BOOK</p>
+<div class="flex flex-col gap-4 text-center lg:text-left">
+  {
+    sourceBook && (
+      <p class="max-w-2xl text-sm leading-6 text-white/80">
+        {
+          sourceUrl ? (
+            <a
+              href={sourceUrl}
+              class="font-semibold text-white no-underline transition hover:text-[#ffe306]"
+              target={sourceIsExternal ? "_blank" : undefined}
+              rel={sourceIsExternal ? "noopener noreferrer" : undefined}
+            >
+              {sourceBook}
+            </a>
+          ) : (
+            <span class="font-semibold text-white">{sourceBook}</span>
+          )
+        }
+        {
+          sourceAuthor && (
+            <>
+              <span class="text-white/50"> - </span>
+              <span class="text-white/75">{sourceAuthor}</span>
+            </>
+          )
+        }
+      </p>
+    )
+  }
+  <div class="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+    <div>
+      <span class="inline-flex rounded-full bg-[#ffe306] px-3 py-1.5 text-sm font-semibold text-[#271133]">
+        {category}
+      </span>
+    </div>
     {
-      sourceUrl ? (
-        <a
-          href={sourceUrl}
-          class="link link-hover text-lg font-semibold"
-          target={sourceIsExternal ? "_blank" : undefined}
-          rel={sourceIsExternal ? "noopener noreferrer" : undefined}
-        >
-          {sourceBook}
-        </a>
-      ) : (
-        <p class="text-lg font-semibold">{sourceBook}</p>
+      translationLink && (
+        <div>
+          <a
+            href={translationLink}
+            class="inline-flex rounded-full bg-[#01abf2] px-3 py-1.5 text-sm font-semibold text-[#0d1b33] no-underline transition hover:bg-white hover:text-[#7811a7]"
+          >
+            {translationLabel}
+          </a>
+        </div>
       )
     }
-    <p class="text-sm opacity-80">by {sourceAuthor || 'Unknown'}</p>
-  </div>)
-  }
-  { translationLink && (
-      <div class="border-base-300 border-t-2 pt-4 text-center sm:border-t-0 sm:border-l-2 sm:pt-0 sm:pl-6 sm:text-left md:border-t-0 md:border-l-2">
-        <div class="text-xs font-bold opacity-60">LANGUAGE</div>
-        <a href={translationLink} class="link link-hover text-lg font-semibold text-primary">
-          {translationLabel}
-        </a>
-      </div>
-  )}
+  </div>
 </div>
