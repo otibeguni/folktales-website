@@ -5,12 +5,15 @@ import {
   bookHasDetailPage,
   getAllBooks,
   getAllResources,
+  getAllTopicRelations,
   getAllTopics,
   getBookDetailPath,
   getBookCategoryLabel,
+  getTopicRelationSections,
   getResolvedStories,
   getStoryRouteSlug,
 } from "@/utils/content";
+import { TOPIC_RELATION_LABELS } from "@/utils/topic-relations.mjs";
 
 export async function getStaticPaths() {
   const topics = await getAllTopics();
@@ -21,6 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { topic } = Astro.props;
+const isDev = import.meta.env.DEV;
 const stories = (await getResolvedStories())
   .filter(
     (story) =>
@@ -41,6 +45,57 @@ const books = (await getAllBooks())
 const resources = (await getAllResources())
   .filter((resource) => (resource.data.topic_slugs ?? []).includes(topic.slug))
   .map((resource) => ({ ...resource.data, slug: resource.slug }));
+const relationSections = await getTopicRelationSections(topic.slug);
+const availableTopicOptions = (await getAllTopics())
+  .map((entry) => ({
+    slug: entry.slug,
+    item: entry.data.item,
+    types: entry.data.types || [],
+  }))
+  .sort((left, right) => left.item.localeCompare(right.item));
+const currentTopicRelations = (await getAllTopicRelations())
+  .flatMap((relation) => {
+    if (relation.data.source_topic_slug === topic.slug) {
+      const targetTopic = availableTopicOptions.find(
+        (entry) => entry.slug === relation.data.target_topic_slug,
+      );
+      if (!targetTopic) return [];
+      return [{
+        slug: relation.slug,
+        relationType: relation.data.type,
+        direction: "outbound",
+        topicSlug: targetTopic.slug,
+        topicItem: targetTopic.item,
+        relationLabel: TOPIC_RELATION_LABELS[relation.data.type].forward,
+      }];
+    }
+
+    if (relation.data.target_topic_slug === topic.slug) {
+      const sourceTopic = availableTopicOptions.find(
+        (entry) => entry.slug === relation.data.source_topic_slug,
+      );
+      if (!sourceTopic) return [];
+      return [{
+        slug: relation.slug,
+        relationType: relation.data.type,
+        direction: "inbound",
+        topicSlug: sourceTopic.slug,
+        topicItem: sourceTopic.item,
+        relationLabel: TOPIC_RELATION_LABELS[relation.data.type].reverse,
+      }];
+    }
+
+    return [];
+  })
+  .sort((left, right) => {
+    if (left.direction !== right.direction) {
+      return left.direction.localeCompare(right.direction);
+    }
+    if (left.relationLabel !== right.relationLabel) {
+      return left.relationLabel.localeCompare(right.relationLabel);
+    }
+    return left.topicItem.localeCompare(right.topicItem);
+  });
 
 const currentUrl = Astro.url.href;
 const breadcrumbs = [
@@ -61,10 +116,14 @@ const breadcrumbs = [
 >
   <div data-pagefind-body>
     <ArticleTopic
-      topic={topic.data}
+      topic={{ ...topic.data, slug: topic.slug }}
       stories={stories}
       books={books}
       resources={resources}
+      relationSections={relationSections}
+      isDev={isDev}
+      availableTopics={availableTopicOptions}
+      currentTopicRelations={currentTopicRelations}
     />
   </div>
 </Layout>

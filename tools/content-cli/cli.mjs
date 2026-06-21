@@ -40,7 +40,7 @@ function printUsage() {
   content doctor [--json]
 
 Entities:
-  story, topic, resource, book, story-collection`);
+  story, topic, topic-relation, resource, book, story-collection`);
 }
 
 function parseArgs(argv) {
@@ -104,6 +104,7 @@ function printTable(items) {
     slug: item.routeSlug || item.slug,
     label: pickPrimaryLabel(item),
     detail:
+      item.detail ||
       item.language ||
       item.category ||
       item.type ||

@@ -2,9 +2,19 @@
 import type { IStory } from '@/types';
 import BookListItem from '@/components/BookListItem';
 import RelatedItemsList from '@/components/RelatedItemsList.astro';
+import TopicRelationEditor from '@/components/TopicRelationEditor';
 import { sortTopicTags } from '@/utils/topic-tags';
 
-const { topic, stories, books, resources } = Astro.props;
+const {
+  topic,
+  stories,
+  books,
+  resources,
+  relationSections = [],
+  isDev = false,
+  availableTopics = [],
+  currentTopicRelations = [],
+} = Astro.props;
 const sortedTags = sortTopicTags(topic.types ?? []);
 
 const relatedStories = stories.map(({ frontmatter }: { frontmatter: IStory }) => ({
@@ -42,6 +52,50 @@ const relatedResources = resources
     <div class="divider"></div>
 
     {topic.description && <p class="mb-8">{topic.description}</p>}
+
+    {
+      (relationSections.length > 0 || isDev) && (
+        <section class="not-prose mb-8">
+          <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-3xl font-bold">Topic Relationships</h2>
+            {
+              isDev && (
+                <TopicRelationEditor
+                  client:load
+                  topicSlug={topic.slug}
+                  topicItem={topic.item}
+                  availableTopics={availableTopics}
+                  currentRelations={currentTopicRelations}
+                />
+              )
+            }
+          </div>
+
+          <div class="flex flex-col gap-3">
+            {
+              relationSections.length > 0 ? (
+                relationSections.map((section) => (
+                  <RelatedItemsList
+                    title={section.title}
+                    items={section.items.map((item) => ({
+                      name: item.item,
+                      types: item.types,
+                      url: item.href,
+                      isExternal: false,
+                    }))}
+                    layout="topic-chips"
+                  />
+                ))
+              ) : (
+                <div class="rounded-2xl border border-dashed border-base-300 px-5 py-6 text-sm text-slate-500">
+                  No topic relationships yet.
+                </div>
+              )
+            }
+          </div>
+        </section>
+      )
+    }
 
     {
       relatedStories.length > 0 && (

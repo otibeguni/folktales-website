@@ -1,4 +1,5 @@
 import { mutateStoryRelations, StoryRelationEditorError } from "./story-relation-editor.mjs";
+import { mutateTopicRelations } from "./topic-relation-editor.mjs";
 
 function readRequestBody(req) {
   return new Promise((resolve, reject) => {
@@ -24,11 +25,15 @@ function sendJson(res, statusCode, payload) {
 
 function getRelationType(pathname) {
   if (pathname === "/__local-content/story-relations/topic") {
-    return "topic";
+    return { scope: "story", relationType: "topic" };
   }
 
   if (pathname === "/__local-content/story-relations/resource") {
-    return "resource";
+    return { scope: "story", relationType: "resource" };
+  }
+
+  if (pathname === "/__local-content/topic-relations") {
+    return { scope: "topic" };
   }
 
   return null;
@@ -40,9 +45,9 @@ export function createStoryRelationDevPlugin({ rootDir = process.cwd() } = {}) {
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const requestUrl = req.url ? new URL(req.url, "http://localhost") : null;
-        const relationType = requestUrl ? getRelationType(requestUrl.pathname) : null;
+        const relationRequest = requestUrl ? getRelationType(requestUrl.pathname) : null;
 
-        if (!relationType) {
+        if (!relationRequest) {
           next();
           return;
         }
@@ -55,12 +60,18 @@ export function createStoryRelationDevPlugin({ rootDir = process.cwd() } = {}) {
         try {
           const rawBody = await readRequestBody(req);
           const payload = rawBody ? JSON.parse(rawBody) : {};
-          const result = await mutateStoryRelations({
-            rootDir,
-            isDev: true,
-            relationType,
-            payload,
-          });
+          const result = relationRequest.scope === "story"
+            ? await mutateStoryRelations({
+                rootDir,
+                isDev: true,
+                relationType: relationRequest.relationType,
+                payload,
+              })
+            : await mutateTopicRelations({
+                rootDir,
+                isDev: true,
+                payload,
+              });
 
           sendJson(res, 200, {
             ok: true,

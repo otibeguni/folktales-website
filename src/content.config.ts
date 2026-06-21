@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { TOPIC_RELATION_TYPES } from "./utils/topic-relations.mjs";
 
 const topicTypes = [
   "Deity",
@@ -76,6 +77,14 @@ const books = defineCollection({
   }),
 });
 
+const topicRelations = defineCollection({
+  schema: z.object({
+    source_topic_slug: z.string(),
+    target_topic_slug: z.string(),
+    type: z.enum(TOPIC_RELATION_TYPES),
+  }),
+});
+
 const bookFullTexts = defineCollection({
   schema: z.object({
     book_slug: z.string(),
@@ -107,6 +116,7 @@ export const collections = {
   storyMetadata,
   codex,
   topics,
+  topicRelations,
   books,
   bookFullTexts,
   resources,

@@ -4,6 +4,12 @@ import os from "node:os";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import { pathToFileURL } from "node:url";
+import {
+  TOPIC_RELATION_LABELS,
+  TOPIC_RELATION_TYPES,
+  getTopicRelationSlug,
+  isTopicRelationType,
+} from "../../../src/utils/topic-relations.mjs";
 
 const execAsync = promisify(exec);
 
@@ -54,6 +60,20 @@ export const ENTITY_DEFINITIONS = {
       { name: "description", required: false, type: "string" },
       { name: "latitude", required: false, type: "number" },
       { name: "longitude", required: false, type: "number" },
+    ],
+  },
+  topicRelation: {
+    canonical: "topic-relation",
+    aliases: ["topic-relation", "topic-relations", "topicRelation", "topicrelations"],
+    label: "Topic Relation",
+    collectionName: "topicRelations",
+    pathParts: ["src", "content", "topicRelations"],
+    requiresBody: false,
+    fields: [
+      { name: "slug", required: true, type: "string" },
+      { name: "source_topic_slug", required: true, type: "string" },
+      { name: "target_topic_slug", required: true, type: "string" },
+      { name: "type", required: true, type: "string" },
     ],
   },
   resource: {
@@ -111,6 +131,7 @@ export const ENTITY_DEFINITIONS = {
 export const ENTITY_ORDER = [
   "story",
   "topic",
+  "topic-relation",
   "resource",
   "book",
   "story-collection",
@@ -490,6 +511,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
   const stories = await loadStories(rootDir);
   const storyMetadata = await loadFlatCollection(rootDir, "story-metadata");
   const topics = await loadFlatCollection(rootDir, "topic");
+  const topicRelations = await loadFlatCollection(rootDir, "topic-relation");
   const books = await loadFlatCollection(rootDir, "book");
   const resources = await loadFlatCollection(rootDir, "resource");
   const storyCollections = await loadFlatCollection(rootDir, "story-collection");
@@ -499,6 +521,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
     storiesBySlug: indexBy(stories, (story) => `${story.slug}:${story.language}`),
     metadataBySlug: indexBy(storyMetadata, (entry) => entry.slug),
     topicsBySlug: indexBy(topics, (entry) => entry.slug),
+    topicRelationsBySlug: indexBy(topicRelations, (entry) => entry.slug),
     booksBySlug: indexBy(books, (entry) => entry.slug),
     resourcesBySlug: indexBy(resources, (entry) => entry.slug),
     storyCollectionsBySlug: indexBy(storyCollections, (entry) => entry.slug),
@@ -517,6 +540,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
         stories,
         storyMetadata,
         topics,
+        topicRelations,
         books,
         resources,
         storyCollections,
@@ -532,6 +556,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
     stories,
     storyMetadata,
     topics,
+    topicRelations,
     books,
     resources,
     storyCollections,
@@ -577,6 +602,16 @@ export function summarizeEntry(entry, context) {
         types: entry.data.types || [],
         path: entry.relativePath,
       };
+    case "topic-relation":
+      return {
+        entity: entry.entity,
+        slug: entry.slug,
+        sourceTopicSlug: entry.data.source_topic_slug,
+        targetTopicSlug: entry.data.target_topic_slug,
+        type: entry.data.type,
+        label: `${entry.data.source_topic_slug} -> ${entry.data.target_topic_slug}`,
+        path: entry.relativePath,
+      };
     case "resource":
       return {
         entity: entry.entity,
@@ -618,6 +653,8 @@ export function getEntriesForEntity(context, entityName) {
       return context.stories;
     case "topic":
       return context.topics;
+    case "topic-relation":
+      return context.topicRelations;
     case "resource":
       return context.resources;
     case "book":
@@ -667,6 +704,14 @@ function normalizeText(value) {
     .trim();
 }
 
+function getTopicRelationLabel(type, direction = "forward") {
+  const labels = TOPIC_RELATION_LABELS[type];
+  if (!labels) {
+    return type;
+  }
+  return direction === "reverse" ? labels.reverse : labels.forward;
+}
+
 function matchesFilterValue(actual, expected) {
   const actualValues = arrayify(actual).map((value) => String(value));
   const expectedValues = arrayify(expected).map((value) => String(value));
@@ -714,6 +759,10 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
     if (options.type) {
       if (entry.entity === "topic") {
         if (!matchesFilterValue(entry.data.types || [], options.type)) {
+          return false;
+        }
+      } else if (entry.entity === "topic-relation") {
+        if (String(entry.data.type) !== String(options.type)) {
           return false;
         }
       } else if (entry.entity === "resource") {
@@ -768,6 +817,17 @@ function getSearchFieldsForEntry(entry, context) {
       return {
         title: [entry.slug, entry.data.item, entry.data.item_bn],
         metadata: [...(entry.data.types || []), entry.data.description || ""],
+        body: [],
+      };
+    case "topic-relation":
+      return {
+        title: [entry.slug],
+        metadata: [
+          entry.data.type,
+          getTopicRelationLabel(entry.data.type, "forward"),
+          entry.data.source_topic_slug,
+          entry.data.target_topic_slug,
+        ],
         body: [],
       };
     case "resource":
@@ -932,6 +992,34 @@ export function getRelatedEntries(context, entityName, slug, options = {}) {
   }
 
   if (entry.entity === "topic") {
+    for (const relation of context.topicRelations) {
+      if (relation.data.source_topic_slug === entry.slug) {
+        const targetTopic = context.indexes.topicsBySlug.get(relation.data.target_topic_slug);
+        if (targetTopic) {
+          outbound.push({
+            entity: "topic",
+            slug: targetTopic.slug,
+            label: targetTopic.data.item,
+            type: relation.data.type,
+            detail: getTopicRelationLabel(relation.data.type, "forward"),
+          });
+        }
+      }
+
+      if (relation.data.target_topic_slug === entry.slug) {
+        const sourceTopic = context.indexes.topicsBySlug.get(relation.data.source_topic_slug);
+        if (sourceTopic) {
+          inbound.push({
+            entity: "topic",
+            slug: sourceTopic.slug,
+            label: sourceTopic.data.item,
+            type: relation.data.type,
+            detail: getTopicRelationLabel(relation.data.type, "reverse"),
+          });
+        }
+      }
+    }
+
     for (const story of context.resolvedStories) {
       if ((story.metadata?.topic_slugs || []).includes(entry.slug)) {
         inbound.push({
@@ -968,6 +1056,29 @@ export function getRelatedEntries(context, entityName, slug, options = {}) {
     for (const topicSlug of entry.data.topic_slugs || []) {
       const topic = context.indexes.topicsBySlug.get(topicSlug);
       if (topic) outbound.push({ entity: "topic", slug: topic.slug, label: topic.data.item });
+    }
+  }
+
+  if (entry.entity === "topic-relation") {
+    const sourceTopic = context.indexes.topicsBySlug.get(entry.data.source_topic_slug);
+    const targetTopic = context.indexes.topicsBySlug.get(entry.data.target_topic_slug);
+
+    if (sourceTopic) {
+      outbound.push({
+        entity: "topic",
+        slug: sourceTopic.slug,
+        label: sourceTopic.data.item,
+        detail: "Source topic",
+      });
+    }
+
+    if (targetTopic) {
+      outbound.push({
+        entity: "topic",
+        slug: targetTopic.slug,
+        label: targetTopic.data.item,
+        detail: "Target topic",
+      });
     }
   }
 
@@ -1110,6 +1221,92 @@ export function validateContext(context, scope = "all") {
           });
         }
       }
+    }
+  }
+
+  if (selectedEntities.includes("topic-relation")) {
+    const seenKeys = new Set();
+    const reverseConflictKeys = new Set();
+
+    for (const relation of context.topicRelations) {
+      const { slug, source_topic_slug: sourceTopicSlug, target_topic_slug: targetTopicSlug, type } =
+        relation.data;
+
+      if (!context.indexes.topicsBySlug.get(sourceTopicSlug)) {
+        issues.push({
+          severity: "error",
+          entity: "topic-relation",
+          slug: relation.slug,
+          message: `Broken source_topic_slug "${sourceTopicSlug}"`,
+          path: relation.relativePath,
+        });
+      }
+
+      if (!context.indexes.topicsBySlug.get(targetTopicSlug)) {
+        issues.push({
+          severity: "error",
+          entity: "topic-relation",
+          slug: relation.slug,
+          message: `Broken target_topic_slug "${targetTopicSlug}"`,
+          path: relation.relativePath,
+        });
+      }
+
+      if (sourceTopicSlug === targetTopicSlug) {
+        issues.push({
+          severity: "error",
+          entity: "topic-relation",
+          slug: relation.slug,
+          message: "source_topic_slug and target_topic_slug cannot match",
+          path: relation.relativePath,
+        });
+      }
+
+      if (!isTopicRelationType(type)) {
+        issues.push({
+          severity: "error",
+          entity: "topic-relation",
+          slug: relation.slug,
+          message: `Invalid relation type "${type}"`,
+          path: relation.relativePath,
+        });
+      }
+
+      const canonicalSlug = getTopicRelationSlug(type, sourceTopicSlug, targetTopicSlug);
+      if (slug !== canonicalSlug) {
+        issues.push({
+          severity: "error",
+          entity: "topic-relation",
+          slug: relation.slug,
+          message: `Expected slug "${canonicalSlug}" for this relation`,
+          path: relation.relativePath,
+        });
+      }
+
+      const relationKey = `${type}:${sourceTopicSlug}:${targetTopicSlug}`;
+      if (seenKeys.has(relationKey)) {
+        issues.push({
+          severity: "error",
+          entity: "topic-relation",
+          slug: relation.slug,
+          message: "Duplicate topic relation entry",
+          path: relation.relativePath,
+        });
+      } else {
+        seenKeys.add(relationKey);
+      }
+
+      const reverseKey = `${type}:${targetTopicSlug}:${sourceTopicSlug}`;
+      if (reverseConflictKeys.has(relationKey)) {
+        issues.push({
+          severity: "error",
+          entity: "topic-relation",
+          slug: relation.slug,
+          message: "Conflicting inverse topic relation entry",
+          path: relation.relativePath,
+        });
+      }
+      reverseConflictKeys.add(reverseKey);
     }
   }
 
@@ -1434,6 +1631,12 @@ export function buildTemplate(entityName) {
     data.item = "Example Topic";
     data.types = ["Place"];
   }
+  if (resolveEntityName(entityName) === "topic-relation") {
+    data.slug = "located_in--example-site--example-region";
+    data.source_topic_slug = "example-site";
+    data.target_topic_slug = "example-region";
+    data.type = "located_in";
+  }
   if (resolveEntityName(entityName) === "book") {
     data.name = "Example Book";
     data.language = "bn";
@@ -1453,6 +1656,7 @@ export function getDoctorReport(context) {
     counts: {
       stories: context.stories.length,
       topics: context.topics.length,
+      topicRelations: context.topicRelations.length,
       resources: context.resources.length,
       books: context.books.length,
       storyCollections: context.storyCollections.length,

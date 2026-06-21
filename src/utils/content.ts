@@ -1,4 +1,8 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
+import {
+  TOPIC_RELATION_LABELS,
+  TOPIC_RELATION_TYPES,
+} from "./topic-relations.mjs";
 
 export const BOOK_CATEGORY_LABELS: Record<string, string> = {
   puthi: "Puthi",
@@ -14,6 +18,7 @@ export const BOOK_CATEGORY_LABELS: Record<string, string> = {
 export type StoryEntry = CollectionEntry<"stories">;
 export type StoryMetadataEntry = CollectionEntry<"storyMetadata">;
 export type TopicEntry = CollectionEntry<"topics">;
+export type TopicRelationEntry = CollectionEntry<"topicRelations">;
 export type BookEntry = CollectionEntry<"books">;
 export type BookFullTextEntry = CollectionEntry<"bookFullTexts">;
 export type ResourceEntry = CollectionEntry<"resources">;
@@ -45,6 +50,22 @@ export interface AtlasEntry {
   relatedStories: AtlasStoryLink[];
   relatedResources: AtlasResourceLink[];
 }
+
+export interface TopicRelationLink {
+  slug: string;
+  item: string;
+  types: TopicEntry["data"]["types"];
+  href: string;
+}
+
+export interface TopicRelationSection {
+  key: string;
+  title: string;
+  direction: "outbound" | "inbound";
+  relationType: TopicRelationEntry["data"]["type"];
+  items: TopicRelationLink[];
+}
+
 type BookLinkFields = {
   slug: string;
   library_url?: string;
@@ -114,6 +135,92 @@ export async function getResolvedStories() {
 
 export async function getAllTopics() {
   return getCollection("topics");
+}
+
+export async function getAllTopicRelations() {
+  return getCollection("topicRelations");
+}
+
+function buildTopicRelationSections({
+  topicSlug,
+  topicsBySlug,
+  topicRelations,
+}: {
+  topicSlug: string;
+  topicsBySlug: Map<string, TopicEntry>;
+  topicRelations: TopicRelationEntry[];
+}): TopicRelationSection[] {
+  const outboundSections: TopicRelationSection[] = [];
+  const inboundSections: TopicRelationSection[] = [];
+
+  for (const relationType of TOPIC_RELATION_TYPES) {
+    const outboundItems = topicRelations
+      .filter(
+        (relation) =>
+          relation.data.type === relationType &&
+          relation.data.source_topic_slug === topicSlug,
+      )
+      .map((relation) => topicsBySlug.get(relation.data.target_topic_slug))
+      .filter((topic): topic is TopicEntry => Boolean(topic))
+      .map((topic) => ({
+        slug: topic.slug,
+        item: topic.data.item,
+        types: topic.data.types ?? [],
+        href: `/topics/${topic.slug}`,
+      }))
+      .sort((left, right) => left.item.localeCompare(right.item));
+
+    if (outboundItems.length > 0) {
+      outboundSections.push({
+        key: `outbound-${relationType}`,
+        title: TOPIC_RELATION_LABELS[relationType].forward,
+        direction: "outbound",
+        relationType,
+        items: outboundItems,
+      });
+    }
+
+    const inboundItems = topicRelations
+      .filter(
+        (relation) =>
+          relation.data.type === relationType &&
+          relation.data.target_topic_slug === topicSlug,
+      )
+      .map((relation) => topicsBySlug.get(relation.data.source_topic_slug))
+      .filter((topic): topic is TopicEntry => Boolean(topic))
+      .map((topic) => ({
+        slug: topic.slug,
+        item: topic.data.item,
+        types: topic.data.types ?? [],
+        href: `/topics/${topic.slug}`,
+      }))
+      .sort((left, right) => left.item.localeCompare(right.item));
+
+    if (inboundItems.length > 0) {
+      inboundSections.push({
+        key: `inbound-${relationType}`,
+        title: TOPIC_RELATION_LABELS[relationType].reverse,
+        direction: "inbound",
+        relationType,
+        items: inboundItems,
+      });
+    }
+  }
+
+  return [...outboundSections, ...inboundSections];
+}
+
+export async function getTopicRelationSections(topicSlug: string) {
+  const [topics, topicRelations] = await Promise.all([
+    getAllTopics(),
+    getAllTopicRelations(),
+  ]);
+
+  return buildTopicRelationSections({
+    topicSlug,
+    topicsBySlug: indexEntriesBySlug(topics),
+    topicRelations,
+  });
 }
 
 export async function getFolkloreAtlasEntries(): Promise<AtlasEntry[]> {

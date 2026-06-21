@@ -72,6 +72,32 @@ description: Sacred woodland topic.
 
   await writeFile(
     rootDir,
+    "src/content/topics/river-topic.md",
+    `---
+slug: river-topic
+item: River Topic
+types:
+  - Place
+  - Natural
+description: River topic.
+---
+`,
+  );
+
+  await writeFile(
+    rootDir,
+    "src/content/topicRelations/located_in--forest-topic--river-topic.md",
+    `---
+slug: located_in--forest-topic--river-topic
+source_topic_slug: forest-topic
+target_topic_slug: river-topic
+type: located_in
+---
+`,
+  );
+
+  await writeFile(
+    rootDir,
     "src/content/resources/moon-resource.md",
     `---
 slug: moon-resource
@@ -194,11 +220,23 @@ resource_slugs:
 ---
 `,
   );
+  await writeFile(
+    rootDir,
+    "src/content/topicRelations/located_in--forest-topic--missing-topic.md",
+    `---
+slug: located_in--forest-topic--missing-topic
+source_topic_slug: forest-topic
+target_topic_slug: missing-topic
+type: located_in
+---
+`,
+  );
   const validate = await runCli(rootDir, ["validate", "all", "--json"]);
   assert.equal(validate.code, 1);
   const issues = JSON.parse(validate.stdout);
   assert.ok(issues.some((issue) => issue.message.includes('Broken source_slug "missing-book"')));
   assert.ok(issues.some((issue) => issue.message.includes('Broken topic_slugs reference "missing-topic"')));
+  assert.ok(issues.some((issue) => issue.message.includes('Broken target_topic_slug "missing-topic"')));
 });
 
 test("create and update local entries preserve body and patch arrays", async () => {
@@ -207,9 +245,9 @@ test("create and update local entries preserve body and patch arrays", async () 
     "create",
     "topic",
     "--slug",
-    "river-topic",
+    "lake-topic",
     "--item",
-    "River Topic",
+    "Lake Topic",
     "--types",
     "Place,Natural",
   ]);
@@ -220,13 +258,13 @@ test("create and update local entries preserve body and patch arrays", async () 
     "book",
     "moon-book",
     "--add",
-    "topic_slugs=river-topic",
+    "topic_slugs=lake-topic",
     "--set",
     "series_title=Moon Series",
     "--json",
   ]);
   const updated = JSON.parse(update.stdout);
-  assert.deepEqual(updated.data.topic_slugs.sort(), ["forest-topic", "river-topic"]);
+  assert.deepEqual(updated.data.topic_slugs.sort(), ["forest-topic", "lake-topic"]);
   assert.equal(updated.data.series_title, "Moon Series");
 });
 
@@ -268,6 +306,36 @@ test("story collection get and search include body and stories", async () => {
   ]);
   const results = JSON.parse(search.stdout);
   assert.equal(results[0].slug, "featured");
+});
+
+test("topic relation entity supports list/get and topic related includes typed lookups", async () => {
+  const rootDir = await makeFixture();
+
+  const list = await runCli(rootDir, ["list", "topic-relations", "--json"]);
+  assert.equal(list.code, 0);
+  const relations = JSON.parse(list.stdout);
+  assert.equal(relations.length, 1);
+  assert.equal(relations[0].type, "located_in");
+
+  const get = await runCli(rootDir, [
+    "get",
+    "topic-relation",
+    "located_in--forest-topic--river-topic",
+    "--json",
+  ]);
+  assert.equal(get.code, 0);
+  const relation = JSON.parse(get.stdout);
+  assert.equal(relation.data.source_topic_slug, "forest-topic");
+  assert.equal(relation.data.target_topic_slug, "river-topic");
+
+  const related = await runCli(rootDir, ["related", "topic", "forest-topic", "--json"]);
+  assert.equal(related.code, 0);
+  const relatedRecord = JSON.parse(related.stdout);
+  assert.ok(
+    relatedRecord.outbound.some(
+      (item) => item.slug === "river-topic" && item.detail === "Located in",
+    ),
+  );
 });
 
 test("help includes tui usage", async () => {
