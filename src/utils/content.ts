@@ -3,6 +3,7 @@ import {
   TOPIC_RELATION_LABELS,
   TOPIC_RELATION_TYPES,
 } from "./topic-relations.mjs";
+import { buildTopicExplorerGraphData } from "./topic-explorer-graph.mjs";
 
 export const BOOK_CATEGORY_LABELS: Record<string, string> = {
   puthi: "Puthi",
@@ -49,6 +50,43 @@ export interface AtlasEntry {
   longitude: number;
   relatedStories: AtlasStoryLink[];
   relatedResources: AtlasResourceLink[];
+}
+
+export type TopicExplorerNodeType = "topic" | "story" | "resource" | "book";
+export type TopicExplorerEdgeType =
+  | "topic_relation"
+  | "story_topic"
+  | "resource_topic"
+  | "book_topic";
+
+export interface TopicExplorerNode {
+  id: string;
+  type: TopicExplorerNodeType;
+  slug: string;
+  label: string;
+  href?: string;
+  description?: string;
+  itemBn?: string;
+  topicTypes?: TopicEntry["data"]["types"];
+  storyLanguages?: string[];
+  resourceType?: string;
+  bookLanguage?: string;
+  bookCategory?: string;
+  bookAvailability?: ReturnType<typeof getBookAvailability>;
+}
+
+export interface TopicExplorerEdge {
+  id: string;
+  type: TopicExplorerEdgeType;
+  source: string;
+  target: string;
+  label?: string;
+  relationType?: TopicRelationEntry["data"]["type"];
+}
+
+export interface TopicExplorerGraph {
+  nodes: TopicExplorerNode[];
+  edges: TopicExplorerEdge[];
 }
 
 export interface TopicRelationLink {
@@ -274,6 +312,37 @@ export async function getFolkloreAtlasEntries(): Promise<AtlasEntry[]> {
       };
     })
     .sort((left, right) => left.item.localeCompare(right.item));
+}
+
+function getTopicExplorerBookHref(book: BookEntry) {
+  if (bookHasDetailPage(book)) {
+    return getBookDetailPath(book.slug);
+  }
+
+  return book.data.library_url ?? book.data.url;
+}
+
+export async function getTopicExplorerGraph(): Promise<TopicExplorerGraph> {
+  const [topics, topicRelations, stories, resources, books] = await Promise.all([
+    getAllTopics(),
+    getAllTopicRelations(),
+    getResolvedStories(),
+    getAllResources(),
+    getAllBooks(),
+  ]);
+
+  return buildTopicExplorerGraphData({
+    topics,
+    topicRelations,
+    stories,
+    resources,
+    books: books.filter((book) => (book.data.topic_slugs ?? []).length > 0),
+    getBookAvailability,
+    getBookHref: getTopicExplorerBookHref,
+    getStoryRouteSlug,
+    storyBasePath,
+    topicRelationLabels: TOPIC_RELATION_LABELS,
+  }) as TopicExplorerGraph;
 }
 
 export async function getAllBooks() {

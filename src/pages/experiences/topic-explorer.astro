@@ -1,0 +1,83 @@
+---
+import TopicExplorer from "@/components/TopicExplorer";
+import Layout from "@/layouts/Layout.astro";
+import { getTopicExplorerGraph } from "@/utils/content";
+import { t } from "@/utils/site-text";
+
+const graph = await getTopicExplorerGraph();
+const serializedGraph = JSON.stringify(graph).replace(/</g, "\\u003c");
+const breadcrumbs = [
+  { label: "Experiences", href: "/experiences" },
+  { label: "Topic Explorer", href: "/experiences/topic-explorer" },
+];
+---
+
+<Layout
+  title={`${t("pages.experiences.explorerPageTitle")} | ${t("common.siteTitle")}`}
+  description={t("pages.experiences.explorerPageDescription")}
+  breadcrumbs={breadcrumbs}
+>
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-3">
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+        {t("pages.experiences.explorerPageTitle")}
+      </h1>
+      <p class="max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
+        {t("pages.experiences.explorerPageDescription")}
+      </p>
+    </div>
+
+    <TopicExplorer
+      graphDataId="topic-explorer-graph-data"
+      labels={{
+        browseTitle: t("pages.experiences.explorerBrowseTitle"),
+        graphTitle: t("pages.experiences.explorerGraphTitle"),
+        searchLabel: t("pages.experiences.explorerSearchLabel"),
+        searchPlaceholder: t("pages.experiences.explorerSearchPlaceholder"),
+        searchHelperText: t("pages.experiences.explorerSearchHelperText"),
+        graphSummaryLabel: t("pages.experiences.explorerGraphSummaryLabel"),
+        visibleNodesLabel: t("pages.experiences.explorerVisibleNodesLabel"),
+        visibleEdgesLabel: t("pages.experiences.explorerVisibleEdgesLabel"),
+        clearFiltersLabel: t("pages.experiences.explorerClearFiltersLabel"),
+        clearFocusLabel: t("pages.experiences.explorerClearFocusLabel"),
+        entityTypesLabel: t("pages.experiences.explorerEntityTypesLabel"),
+        topicTypesLabel: t("pages.experiences.explorerTopicTypesLabel"),
+        relationTypesLabel: t("pages.experiences.explorerRelationTypesLabel"),
+        storyLanguageLabel: t("pages.experiences.explorerStoryLanguageLabel"),
+        resourceTypeLabel: t("pages.experiences.explorerResourceTypeLabel"),
+        bookLanguageLabel: t("pages.experiences.explorerBookLanguageLabel"),
+        bookCategoryLabel: t("pages.experiences.explorerBookCategoryLabel"),
+        bookAvailabilityLabel: t("pages.experiences.explorerBookAvailabilityLabel"),
+        allOptionLabel: t("pages.experiences.explorerAllOptionLabel"),
+        allBooksAvailabilityLabel: t("pages.experiences.explorerAllBooksAvailabilityLabel"),
+        readOnlineLabel: t("pages.experiences.explorerReadOnlineLabel"),
+        purchaseLabel: t("pages.experiences.explorerPurchaseLabel"),
+        topicEntityLabel: t("pages.experiences.explorerTopicEntityLabel"),
+        storyEntityLabel: t("pages.experiences.explorerStoryEntityLabel"),
+        resourceEntityLabel: t("pages.experiences.explorerResourceEntityLabel"),
+        bookEntityLabel: t("pages.experiences.explorerBookEntityLabel"),
+        noMatchingTopicsLabel: t("pages.experiences.explorerNoMatchingTopicsLabel"),
+        noVisibleResultsLabel: t("pages.experiences.explorerNoVisibleResultsLabel"),
+        panelPrompt: t("pages.experiences.explorerPanelPrompt"),
+        detailsTitle: t("pages.experiences.explorerDetailsTitle"),
+        neighborsTitle: t("pages.experiences.explorerNeighborsTitle"),
+        topicDetailsLabel: t("pages.experiences.explorerTopicDetailsLabel"),
+        storyDetailsLabel: t("pages.experiences.explorerStoryDetailsLabel"),
+        resourceDetailsLabel: t("pages.experiences.explorerResourceDetailsLabel"),
+        bookDetailsLabel: t("pages.experiences.explorerBookDetailsLabel"),
+        relatedTopicsLabel: t("pages.experiences.explorerRelatedTopicsLabel"),
+        relatedStoriesLabel: t("pages.experiences.explorerRelatedStoriesLabel"),
+        relatedResourcesLabel: t("pages.experiences.explorerRelatedResourcesLabel"),
+        relatedBooksLabel: t("pages.experiences.explorerRelatedBooksLabel"),
+        noNeighborsLabel: t("pages.experiences.explorerNoNeighborsLabel"),
+        openItemLabel: t("pages.experiences.explorerOpenItemLabel"),
+      }}
+      client:only="react"
+    />
+  </div>
+  <script
+    id="topic-explorer-graph-data"
+    type="application/json"
+    set:html={serializedGraph}
+  ></script>
+</Layout>
