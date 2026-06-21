@@ -1,5 +1,6 @@
 ---
 import { localizePath } from "@/utils/site-text";
+import ResourceTypeIcon from "@/components/ResourceTypeIcon.astro";
 import { sortTopicTags } from "@/utils/topic-tags";
 
 interface Item {
@@ -17,12 +18,13 @@ interface Props {
   title?: string;
   items?: Item[];
   emptyMessage?: string;
-  layout?: "cards" | "topic-chips";
+  layout?: "cards" | "topic-chips" | "resource-rows";
 }
 
 const { title, items, emptyMessage, layout = "cards" } = Astro.props;
 const hasActions = Astro.slots.has("actions");
 const useTopicChips = layout === "topic-chips";
+const useResourceRows = layout === "resource-rows";
 
 if ((!items || items.length === 0) && !title && !hasActions) {
   return null;
@@ -40,7 +42,15 @@ if ((!items || items.length === 0) && !title && !hasActions) {
   }
   {
     items && items.length > 0 ? (
-      <div class:list={useTopicChips ? "flex flex-wrap gap-3" : "flex flex-col gap-4"}>
+      <div
+        class:list={
+          useTopicChips
+            ? "flex flex-wrap gap-3"
+            : useResourceRows
+              ? "grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2"
+              : "flex flex-col gap-4"
+        }
+      >
         {
           items.map((item) => {
             const linkUrl = item.isExternal ? item.url : localizePath(item.url);
@@ -52,7 +62,6 @@ if ((!items || items.length === 0) && !title && !hasActions) {
               ...(item.types ? sortTopicTags(item.types) : []),
               ...(item.type ? [item.type] : []),
             ];
-
             return (
               <a
                 href={linkUrl}
@@ -61,12 +70,25 @@ if ((!items || items.length === 0) && !title && !hasActions) {
                 class:list={
                   useTopicChips
                     ? "inline-flex max-w-full items-center rounded-[14px] border border-[#7811a7] bg-white px-3.5 py-2 text-sm font-semibold text-slate-900 no-underline transition hover:border-[#01abf2] md:text-[0.95rem]"
-                    : "bg-base-100 hover:bg-base-200/60 flex flex-col gap-3 rounded-2xl border border-base-300 px-4 py-4 no-underline transition md:px-5 md:py-5"
+                    : useResourceRows
+                      ? "group flex min-w-0 items-center gap-3 rounded-[14px] border border-[#7811a7] bg-white px-3.5 py-2 text-slate-900 no-underline transition hover:border-[#01abf2]"
+                      : "bg-base-100 hover:bg-base-200/60 flex flex-col gap-3 rounded-2xl border border-base-300 px-4 py-4 no-underline transition md:px-5 md:py-5"
                 }
               >
                 {
                   useTopicChips ? (
                     <span class="block min-w-0 truncate">{item.name}</span>
+                  ) : useResourceRows ? (
+                    <>
+                      <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#f3e8fb] text-[#7811a7] group-hover:text-[#01abf2]">
+                        <ResourceTypeIcon type={item.type} url={item.url} />
+                      </span>
+                      <div class="min-w-0">
+                        <h4 class="mt-0 text-sm font-semibold leading-5 text-slate-900">
+                          {item.name}
+                        </h4>
+                      </div>
+                    </>
                   ) : (
                     <div class="min-w-0">
                       <h4 class="mt-0 text-lg font-semibold leading-snug md:text-xl">

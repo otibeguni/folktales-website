@@ -216,7 +216,6 @@ const availableResourceOptions = [...allResources]
         {
           (relatedTopics.length > 0 || isDev) && (
             <>
-              <div class="divider mt-12" />
               <RelatedItemsList
                 title="Related Topics"
                 items={relatedTopics}
@@ -246,10 +245,10 @@ const availableResourceOptions = [...allResources]
         {
           (relatedResources.length > 0 || isDev) && (
             <>
-              <div class="divider mt-12" />
               <RelatedItemsList
                 title="Related Resources"
                 items={relatedResources}
+                layout="resource-rows"
                 emptyMessage={isDev ? "No related resources yet." : undefined}
               >
                 {

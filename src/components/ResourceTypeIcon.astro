@@ -1,0 +1,39 @@
+---
+import LinkIcon from "@/assets/icons/resource-link.svg";
+import VideoIcon from "@/assets/icons/resource-video.svg";
+
+interface Props {
+  type?: string;
+  url?: string;
+  class?: string;
+}
+
+const { type, url, class: className } = Astro.props;
+
+const normalizedType = (type ?? "").trim().toLowerCase();
+let hostname = "";
+
+if (url) {
+  try {
+    hostname = new URL(url).hostname.toLowerCase();
+  } catch {
+    hostname = "";
+  }
+}
+
+const isVideo =
+  normalizedType.includes("video") ||
+  normalizedType.includes("youtube") ||
+  hostname.includes("youtube.com") ||
+  hostname.includes("youtu.be");
+
+const Icon = isVideo ? VideoIcon : LinkIcon;
+---
+
+<Icon
+  aria-hidden="true"
+  width={20}
+  height={20}
+  fill="currentColor"
+  class:list={["h-5 w-5 shrink-0", className]}
+/>
