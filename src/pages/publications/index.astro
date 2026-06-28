@@ -55,9 +55,6 @@ const showUpcomingProjects = false;
   breadcrumbs={[{ label: "Publications", href: "/publications" }]}
 >
   <div slot="hero" class="max-w-4xl space-y-4">
-    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-600">
-      Books and Research
-    </p>
     <h1 class="text-4xl font-bold leading-[1.1] text-slate-900 sm:text-5xl">
       Publications that keep folklore alive
     </h1>
@@ -70,13 +67,12 @@ const showUpcomingProjects = false;
   <section class="rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-100 sm:p-8">
     <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sky-600">Available now</p>
         <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">Published works</h2>
       </div>
     </div>
-    <div class="mt-6 grid auto-rows-[1fr] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-6 space-y-6">
       {publications.map((publication) => (
-        <PublicationCard {...publication} />
+        <PublicationCard {...publication} layout="horizontal" />
       ))}
     </div>
   </section>
@@ -84,13 +80,12 @@ const showUpcomingProjects = false;
   <section class="rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-100 sm:p-8">
     <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sky-600">Read online</p>
         <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">Comics</h2>
       </div>
     </div>
-    <div class="mt-6 grid auto-rows-[1fr] gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-6 space-y-6">
       {comics.map((comic) => (
-        <PublicationCard {...comic} />
+        <PublicationCard {...comic} layout="horizontal" />
       ))}
     </div>
   </section>
@@ -99,7 +94,6 @@ const showUpcomingProjects = false;
     <section class="rounded-3xl bg-white p-6 shadow-lg ring-1 ring-slate-100 sm:p-8">
       <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sky-600">On the horizon</p>
           <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl">Upcoming projects</h2>
         </div>
       </div>

@@ -50,16 +50,12 @@ const { structuredData: breadcrumbStructuredData } = normalizeBreadcrumbs(
   </head>
   <body class="bg-white text-slate-900">
     <AppShell breadcrumbs={breadcrumbs} site={Astro.site} currentPath={Astro.url.pathname}>
-      <section class="relative isolate overflow-hidden">
-        <div
-          class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12)_0,_transparent_42%),radial-gradient(circle_at_20%_20%,_rgba(14,165,233,0.12)_0,_transparent_36%),radial-gradient(circle_at_80%_0,_rgba(56,189,248,0.14)_0,_transparent_32%)]"
-          aria-hidden="true"
-        />
-        <div class="mx-auto max-w-4xl py-12 sm:py-16 lg:py-20">
+      <section>
+        <div class="mx-auto max-w-4xl pb-12 pt-2 sm:pb-16 sm:pt-4 lg:pb-20 lg:pt-6">
           <slot name="hero" />
         </div>
       </section>
-      <section class="-mt-6 mx-auto max-w-4xl space-y-12 sm:-mt-10">
+      <section class="mx-auto max-w-4xl space-y-12 pb-12 sm:pb-16 lg:pb-20">
         <slot />
       </section>
     </AppShell>
