@@ -49,91 +49,26 @@ const { currentPath = "/" } = Astro.props as Props;
 
   <div class="min-h-0 flex-1 overflow-y-auto px-3 py-5 sm:px-4">
     <nav aria-label="Primary" class="space-y-6">
-      <div class="space-y-1.5">
-        {
-          siteNav
-            .filter((item) => item.href)
-            .map((item) => {
-              const isCurrent = isCurrentNavPath(currentPath, item.href);
-
-              return (
-                <a
-                  href={item.href!}
-                  aria-current={isCurrent ? "page" : undefined}
-                  class:list={[
-                    "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[0.97rem] font-medium no-underline transition",
-                    isCurrent
-                      ? "bg-primary text-primary-content shadow-sm"
-                      : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
-                  ]}
-                  data-sidebar-link
-                >
-                  <span class="truncate">{item.label}</span>
-                </a>
-              );
-            })
-        }
-      </div>
-
       {
-        siteNav
-          .filter((item) => item.children?.length)
-          .map((group) => {
-            const hasActiveChild = group.children?.some((child) =>
-              isCurrentNavPath(currentPath, child.href),
-            );
+        siteNav.map((item) => {
+          const isCurrent = isCurrentNavPath(currentPath, item.href);
 
-            return (
-              <section class="space-y-2.5">
-                <div
-                  class:list={[
-                    "px-3 text-[0.68rem] font-semibold uppercase tracking-[0.18em]",
-                    hasActiveChild ? "text-primary" : "text-slate-500",
-                  ]}
-                >
-                  {group.label}
-                </div>
-
-                <div class="space-y-1">
-                  {group.children?.map((child) => {
-                    const isCurrent = isCurrentNavPath(currentPath, child.href);
-                    const isExternal = !child.href.startsWith("/");
-
-                    return (
-                      <a
-                        href={child.href}
-                        aria-current={isCurrent ? "page" : undefined}
-                        class:list={[
-                          "flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-sm no-underline transition",
-                          isCurrent
-                            ? "bg-primary/8 font-semibold text-primary"
-                            : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
-                        ]}
-                        data-sidebar-link
-                      >
-                        <span class="truncate">{child.label}</span>
-                        {isExternal && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            class="h-3.5 w-3.5 shrink-0 stroke-current opacity-60"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="1.8"
-                              d="M7 17L17 7M9 7h8v8"
-                            ></path>
-                          </svg>
-                        )}
-                      </a>
-                    );
-                  })}
-                </div>
-              </section>
-            );
-          })
+          return (
+            <a
+              href={item.href}
+              aria-current={isCurrent ? "page" : undefined}
+              class:list={[
+                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[0.97rem] font-medium no-underline transition",
+                isCurrent
+                  ? "bg-primary text-primary-content shadow-sm"
+                  : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+              ]}
+              data-sidebar-link
+            >
+              <span class="truncate">{item.label}</span>
+            </a>
+          );
+        })
       }
     </nav>
   </div>

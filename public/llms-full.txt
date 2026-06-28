@@ -6,7 +6,7 @@ Otibeguni combines several related kinds of material in one site:
 - English-language story adaptations intended for general readers.
 - Bengali-language story pages preserving or retelling source material in Bangla.
 - A digital library of folklore books, many with in-site PDF reader links.
-- Topic and codex reference pages for recurring figures, deities, places, creatures, and concepts.
+- Topic reference pages for recurring figures, deities, places, creatures, and concepts.
 - Project information, publications, and blog updates about Otibeguni's own research and cultural work.
 
 Interpret the major sections as follows:
@@ -14,7 +14,6 @@ Interpret the major sections as follows:
 - `/bn/stories` is the best place to answer questions about Bengali titles or Bengali versions of stories.
 - `/books` is the best place to identify source books, authors, editions, and reading links.
 - `/topics` is the best place for concise encyclopedia-style explanations of entities and concepts mentioned across the archive.
-- `/codex` contains additional reference writing related to folk beliefs, folk religion, and connected traditions.
 - `/publications`, `/blog`, and `/about` describe Otibeguni's own publishing, research, and community work rather than archival source material.
 
 Important caveats:
@@ -30,7 +29,6 @@ Important caveats:
 - [Bengali stories](https://otibeguni.com/bn/stories): Bengali story texts and retellings.
 - [Books](https://otibeguni.com/books): Book catalogue with source information and PDF reader links where available.
 - [Topics](https://otibeguni.com/topics): Cross-linked topic index for figures, places, deities, supernatural beings, and concepts.
-- [Codex](https://otibeguni.com/codex): Reference entries on folk beliefs, ritual traditions, and cultural subjects.
 - [Publications](https://otibeguni.com/publications): Otibeguni publications and featured works.
 - [Blog](https://otibeguni.com/blog): Project updates, public notes, and community work.
 - [About](https://otibeguni.com/about): Project mission, activities, team, and contact details.

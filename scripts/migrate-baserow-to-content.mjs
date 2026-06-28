@@ -297,21 +297,6 @@ async function main() {
     }
   }
 
-  const codexFiles = await loadMarkdownFiles(path.join(rootDir, "src", "codex"));
-  for (const file of codexFiles) {
-    await writeMarkdownFile(
-      path.join(contentDir, "codex", file.file),
-      {
-        title: file.data.title,
-        slug: file.data.slug,
-        category: file.data.category,
-        language: file.data.language || "en",
-        date: file.data.date || undefined,
-      },
-      file.body,
-    );
-  }
-
   const collectionFiles = await loadMarkdownFiles(
     path.join(rootDir, "src", "stories", "collections"),
   );

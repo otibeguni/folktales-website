@@ -40,15 +40,6 @@ const storyMetadata = defineCollection({
   }),
 });
 
-const codex = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    category: z.string(),
-    language: z.string(),
-    date: z.union([z.string(), z.date()]).optional(),
-  }),
-});
-
 const topics = defineCollection({
   schema: z.object({
     item: z.string(),
@@ -114,7 +105,6 @@ const storyCollections = defineCollection({
 export const collections = {
   stories,
   storyMetadata,
-  codex,
   topics,
   topicRelations,
   books,

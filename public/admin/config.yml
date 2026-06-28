@@ -241,16 +241,3 @@ collections:
         multiple: true
         required: false
 
-  - name: "codex"
-    label: "Codex"
-    folder: "src/content/codex"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string", required: true }
-      - { label: "Slug", name: "slug", widget: "string", required: true }
-      - { label: "Category", name: "category", widget: "string", required: true }
-      - { label: "Language", name: "language", widget: "string", required: true, default: "en" }
-      - { label: "Date", name: "date", widget: "datetime", required: false }
-      - { label: "Body", name: "body", widget: "markdown", required: true }
-

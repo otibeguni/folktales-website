@@ -24,7 +24,6 @@ export type BookEntry = CollectionEntry<"books">;
 export type BookFullTextEntry = CollectionEntry<"bookFullTexts">;
 export type ResourceEntry = CollectionEntry<"resources">;
 export type StoryCollectionEntry = CollectionEntry<"storyCollections">;
-export type CodexEntry = CollectionEntry<"codex">;
 export type ResolvedStoryEntry = StoryEntry & {
   data: StoryEntry["data"] & StoryMetadataEntry["data"];
 };
@@ -368,10 +367,6 @@ export async function getAllResources() {
   return getCollection("resources");
 }
 
-export async function getAllCodexEntries() {
-  return getCollection("codex");
-}
-
 export async function getAllStoryCollections() {
   return getCollection("storyCollections");
 }
@@ -446,7 +441,7 @@ export function getBookDetailPath(slug: string) {
 }
 
 export async function renderEntry(
-  entry: StoryEntry | StoryCollectionEntry | CodexEntry | BookFullTextEntry,
+  entry: StoryEntry | StoryCollectionEntry | BookFullTextEntry,
 ) {
   return render(entry);
 }

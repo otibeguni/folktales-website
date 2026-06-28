@@ -5,18 +5,12 @@ const translations = {
       "Pioneering Bangladeshi Folklore R&D company dedicated to revitalizing interest in Bengali and indigenous folklore.",
   },
   header: {
-    navHome: "Home",
     navStories: "Stories",
     navExperiences: "Experiences",
     navBlog: "Blog",
-    navCodex: "Codex",
-    navResources: "Resources",
     navTopics: "Topics",
     navBooks: "Books",
-    navProjects: "Projects",
     navPublish: "Publications",
-    navLibrary: "Folklore Library",
-    navGallery: "Art Gallery",
     navAbout: "About Us",
   },
   footer: {

@@ -7,15 +7,10 @@ export interface SiteNavLink {
 
 export interface SiteNavItem {
   label: string;
-  href?: string | null;
-  children?: SiteNavLink[];
+  href: string;
 }
 
 export const siteNav: SiteNavItem[] = [
-  {
-    label: t("header.navHome"),
-    href: localizePath("/"),
-  },
   {
     label: t("header.navStories"),
     href: localizePath("/stories"),
@@ -29,40 +24,16 @@ export const siteNav: SiteNavItem[] = [
     href: localizePath("/blog"),
   },
   {
-    label: t("header.navCodex"),
-    href: localizePath("/codex"),
+    label: t("header.navBooks"),
+    href: localizePath("/books"),
   },
   {
-    label: t("header.navResources"),
-    href: null,
-    children: [
-      {
-        label: t("header.navBooks"),
-        href: localizePath("/books"),
-      },
-      {
-        label: t("header.navTopics"),
-        href: localizePath("/topics"),
-      },
-    ],
+    label: t("header.navTopics"),
+    href: localizePath("/topics"),
   },
   {
-    label: t("header.navProjects"),
-    href: null,
-    children: [
-      {
-        label: t("header.navPublish"),
-        href: localizePath("/publications"),
-      },
-      {
-        label: t("header.navLibrary"),
-        href: "https://library.otibeguni.com/",
-      },
-      {
-        label: t("header.navGallery"),
-        href: "https://art.otibeguni.com/",
-      },
-    ],
+    label: t("header.navPublish"),
+    href: localizePath("/publications"),
   },
   {
     label: t("header.navAbout"),
