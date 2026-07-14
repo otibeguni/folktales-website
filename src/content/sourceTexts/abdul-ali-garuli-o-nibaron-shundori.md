@@ -1,9 +1,12 @@
 ---
-book_slug: abdul-ali-garuli-o-nibaron-shundori
 title: আবদুল আলী গারুলী ও নিবারণ সুন্দরীর পুথি
-subtitle: সায়ের — মুন্সী মোহাম্মদ ইউনুছ
 language: bn
+source_book_slug: abdul-ali-garuli-o-nibaron-shundori
+work_slug: abdul-ali-garuli-o-nibaron-shundori
+story_slug: abdul-ali-garuli-and-nibaron-shundori
+intro_note: সায়ের — মুন্সী মোহাম্মদ ইউনুছ
 ---
+
 
 ## প্রশস্তি
 

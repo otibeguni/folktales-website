@@ -8,6 +8,7 @@ export interface IStory {
   cover_image?: string;
   source_slug?: string;
   source_label?: string;
+  source_text_slug?: string;
   topic_slugs?: string[];
   resource_slugs?: string[];
 }
@@ -51,6 +52,22 @@ export interface SourceItemAlt extends SourceItem {
   topic_slugs?: string[];
   detailHref?: string;
   availability?: "read-online" | "purchase";
+}
+
+export interface SourceTextListItem {
+  slug: string;
+  title: string;
+  workSlug: string;
+  language: string;
+  sourceBookSlug: string;
+  sourceBookName: string;
+  sourceBookAuthor?: string;
+  sourceTextHref: string;
+  sourceBookHref: string;
+  storySlug?: string;
+  storyTitle?: string;
+  storyHref?: string;
+  order?: number;
 }
 
 export interface MetadataItem {

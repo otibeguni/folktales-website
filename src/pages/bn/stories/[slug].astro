@@ -13,11 +13,13 @@ import {
   findStoryTranslation,
   getAllBooks,
   getAllResources,
+  getAllSourceTexts,
   getAllStoryCollections,
   getAllStoryMetadata,
   getAllStories,
   getAllTopics,
   getBookDetailPath,
+  getSourceTextPath,
   getStoryCollectionsForStory,
   getStoryRouteSlug,
   getStoriesByLanguage,
@@ -40,11 +42,20 @@ export async function getStaticPaths() {
 const { story } = Astro.props;
 const { Content } = await renderEntry(story);
 
-const [allStories, allTopics, allBooks, allResources, allStoryMetadata, allStoryCollections] = await Promise.all([
+const [
+  allStories,
+  allTopics,
+  allBooks,
+  allResources,
+  allSourceTexts,
+  allStoryMetadata,
+  allStoryCollections,
+] = await Promise.all([
   getAllStories(),
   getAllTopics(),
   getAllBooks(),
   getAllResources(),
+  getAllSourceTexts(),
   getAllStoryMetadata(),
   getAllStoryCollections(),
 ]);
@@ -53,6 +64,7 @@ const allBlogs = await getBlogPosts();
 const topicBySlug = indexEntriesBySlug(allTopics);
 const bookBySlug = indexEntriesBySlug(allBooks);
 const resourceBySlug = indexEntriesBySlug(allResources);
+const sourceTextBySlug = indexEntriesBySlug(allSourceTexts);
 const storyMetadataBySlug = indexEntriesBySlug(allStoryMetadata);
 const storyCollectionsByStorySlug = indexStoryCollectionsByStorySlug(allStoryCollections);
 const storyRouteSlug = getStoryRouteSlug(story);
@@ -72,6 +84,15 @@ const sourceBookUrl = sourceBook
     ? getBookDetailPath(sourceBook.slug)
     : sourceBook.data.library_url || sourceBook.data.url
   : undefined;
+const sourceTextEntry = resolvedStory.data.source_text_slug
+  ? sourceTextBySlug.get(resolvedStory.data.source_text_slug)
+  : undefined;
+const sourceTextBook = sourceTextEntry
+  ? bookBySlug.get(sourceTextEntry.data.source_book_slug)
+  : undefined;
+const sourceTextUrl = sourceTextEntry
+  ? getSourceTextPath(sourceTextEntry.slug)
+  : undefined;
 
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
@@ -88,7 +109,25 @@ const alternateLinks = enStory
       },
     ]
   : [];
-const isBasedOn = sourceBook
+const isBasedOn = sourceTextEntry
+  ? {
+      "@type": "CreativeWork",
+      name: sourceTextEntry.data.title,
+      url: buildCanonicalUrl(getSourceTextPath(sourceTextEntry.slug), Astro.site),
+      ...(sourceTextBook && {
+        isPartOf: {
+          "@type": "Book",
+          name: sourceTextBook.data.name,
+          ...(sourceTextBook.data.author && {
+            author: {
+              "@type": "Person",
+              name: sourceTextBook.data.author,
+            },
+          }),
+        },
+      }),
+    }
+  : sourceBook
   ? {
       "@type": "CreativeWork",
       name: sourceBook.data.name,
@@ -162,7 +201,7 @@ const breadcrumbs = [
   { label: "Stories", href: "/bn/stories" },
   { label: story.data.title },
 ];
-const sourceText = sourceBook?.data.name || resolvedStory.data.source_label;
+const sourceBookText = sourceBook?.data.name || resolvedStory.data.source_label;
 const isDev = import.meta.env.DEV;
 const availableTopicOptions = [...allTopics]
   .map((topic) => ({
@@ -204,9 +243,11 @@ const availableResourceOptions = [...allResources]
           <StoryMetadata
             slot="metadata"
             category={resolvedStory.data.category}
-            sourceBook={sourceText}
+            sourceBook={sourceBookText}
             sourceAuthor={sourceBook?.data.author}
             sourceUrl={sourceBookUrl}
+            sourceText={sourceTextEntry?.data.title}
+            sourceTextUrl={sourceTextUrl}
             translationLink={enStory ? `/stories/${getStoryRouteSlug(enStory)}` : undefined}
             translationLabel="Read in English"
           />

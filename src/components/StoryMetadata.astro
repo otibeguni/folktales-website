@@ -5,18 +5,53 @@ interface Props {
   sourceBook?: string;
   sourceAuthor?: string;
   sourceUrl?: string;
+  sourceText?: string;
+  sourceTextUrl?: string;
   translationLink?: string;
   translationLabel?: string;
 }
 
-const { category, sourceBook, sourceAuthor, sourceUrl, translationLink, translationLabel } = Astro.props;
+const {
+  category,
+  sourceBook,
+  sourceAuthor,
+  sourceUrl,
+  sourceText,
+  sourceTextUrl,
+  translationLink,
+  translationLabel,
+} = Astro.props;
 const sourceIsExternal = sourceUrl ? /^https?:\/\//.test(sourceUrl) : false;
+const sourceTextIsExternal = sourceTextUrl ? /^https?:\/\//.test(sourceTextUrl) : false;
+const labelSourceBook = Boolean(sourceText);
 ---
 
 <div class="flex flex-col gap-4 text-center lg:text-left">
   {
+    sourceText && (
+      <p class="max-w-2xl text-sm leading-6 text-white/80">
+        <span class="text-white/60">Source text: </span>
+        {
+          sourceTextUrl ? (
+            <a
+              href={sourceTextUrl}
+              class="font-semibold text-white no-underline transition hover:text-[#ffe306]"
+              target={sourceTextIsExternal ? "_blank" : undefined}
+              rel={sourceTextIsExternal ? "noopener noreferrer" : undefined}
+            >
+              {sourceText}
+            </a>
+          ) : (
+            <span class="font-semibold text-white">{sourceText}</span>
+          )
+        }
+      </p>
+    )
+  }
+  {
     sourceBook && (
       <p class="max-w-2xl text-sm leading-6 text-white/80">
+        {labelSourceBook && <span class="text-white/60">Source book: </span>}
         {
           sourceUrl ? (
             <a

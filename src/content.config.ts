@@ -35,6 +35,7 @@ const storyMetadata = defineCollection({
     cover_image: z.string().url().optional(),
     source_slug: z.string().optional(),
     source_label: z.string().optional(),
+    source_text_slug: z.string().optional(),
     topic_slugs: z.array(z.string()).default([]),
     resource_slugs: z.array(z.string()).default([]),
   }),
@@ -76,12 +77,14 @@ const topicRelations = defineCollection({
   }),
 });
 
-const bookFullTexts = defineCollection({
+const sourceTexts = defineCollection({
   schema: z.object({
-    book_slug: z.string(),
     title: z.string(),
-    subtitle: z.string().optional(),
     language: z.enum(["bn"]),
+    source_book_slug: z.string(),
+    work_slug: z.string(),
+    story_slug: z.string().optional(),
+    order: z.number().optional(),
     intro_note: z.string().optional(),
   }),
 });
@@ -108,7 +111,7 @@ export const collections = {
   topics,
   topicRelations,
   books,
-  bookFullTexts,
+  sourceTexts,
   resources,
   storyCollections,
 };

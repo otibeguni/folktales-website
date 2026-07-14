@@ -1,0 +1,82 @@
+---
+import FullTextReader from "@/components/FullTextReader.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  getAllBooks,
+  getAllSourceTexts,
+  getBookDetailPath,
+  indexEntriesBySlug,
+  renderEntry,
+} from "@/utils/content";
+import { buildCanonicalUrl } from "@/utils/seo";
+
+export async function getStaticPaths() {
+  const [books, sourceTexts] = await Promise.all([getAllBooks(), getAllSourceTexts()]);
+  const booksBySlug = indexEntriesBySlug(books);
+
+  return sourceTexts
+    .filter((entry) => booksBySlug.has(entry.data.source_book_slug))
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: {
+        sourceBook: booksBySlug.get(entry.data.source_book_slug),
+        sourceText: entry,
+      },
+    }));
+}
+
+const { sourceBook, sourceText } = Astro.props;
+const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
+const { Content } = await renderEntry(sourceText);
+const sourceBookPath = getBookDetailPath(sourceBook.slug);
+const readerSubtitle = sourceBook.data.author
+  ? `${sourceBook.data.name} - ${sourceBook.data.author}`
+  : sourceBook.data.name;
+const pageDescription = `Read the Bengali source text of ${sourceText.data.title} from ${sourceBook.data.name}.`;
+const breadcrumbs = [
+  { label: "Source Texts", href: "/source-texts" },
+  { label: sourceText.data.title },
+];
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: sourceText.data.title,
+  url: canonicalUrl,
+  inLanguage: sourceText.data.language,
+  isAccessibleForFree: true,
+  encodingFormat: "text/html",
+  isPartOf: {
+    "@type": "Book",
+    name: sourceBook.data.name,
+    url: buildCanonicalUrl(sourceBookPath, Astro.site),
+    ...(sourceBook.data.author && {
+      author: {
+        "@type": "Person",
+        name: sourceBook.data.author,
+      },
+    }),
+  },
+  potentialAction: {
+    "@type": "ReadAction",
+    target: canonicalUrl,
+  },
+};
+---
+
+<Layout
+  title={`${sourceText.data.title} | Source Text | Otibeguni`}
+  description={pageDescription}
+  lang="bn"
+  robots="index,follow,max-image-preview:large"
+  schema={schemaData}
+  canonicalUrl={canonicalUrl}
+  openGraphType="article"
+  breadcrumbs={breadcrumbs}
+>
+  <FullTextReader
+    title={sourceText.data.title}
+    subtitle={sourceText.data.intro_note ?? readerSubtitle}
+  >
+    <Content />
+  </FullTextReader>
+</Layout>

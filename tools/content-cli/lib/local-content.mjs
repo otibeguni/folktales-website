@@ -40,6 +40,7 @@ export const ENTITY_DEFINITIONS = {
       { name: "cover_image", required: false, type: "string" },
       { name: "source_slug", required: false, type: "string" },
       { name: "source_label", required: false, type: "string" },
+      { name: "source_text_slug", required: false, type: "string" },
       { name: "topic_slugs", required: false, type: "array", defaultValue: [] },
       { name: "resource_slugs", required: false, type: "array", defaultValue: [] },
     ],
@@ -113,6 +114,24 @@ export const ENTITY_DEFINITIONS = {
       { name: "topic_slugs", required: false, type: "array", defaultValue: [] },
     ],
   },
+  sourceText: {
+    canonical: "source-text",
+    aliases: ["source-text", "source-texts", "sourceText", "sourceTexts", "sourcetext", "sourcetexts"],
+    label: "Source Text",
+    collectionName: "sourceTexts",
+    pathParts: ["src", "content", "sourceTexts"],
+    requiresBody: true,
+    fields: [
+      { name: "slug", required: true, type: "string" },
+      { name: "title", required: true, type: "string" },
+      { name: "language", required: true, type: "string" },
+      { name: "source_book_slug", required: true, type: "string" },
+      { name: "work_slug", required: true, type: "string" },
+      { name: "story_slug", required: false, type: "string" },
+      { name: "order", required: false, type: "number" },
+      { name: "intro_note", required: false, type: "string" },
+    ],
+  },
   storyCollection: {
     canonical: "story-collection",
     aliases: ["story-collection", "story-collections", "storyCollection", "storycollections"],
@@ -134,6 +153,7 @@ export const ENTITY_ORDER = [
   "topic-relation",
   "resource",
   "book",
+  "source-text",
   "story-collection",
 ];
 
@@ -478,6 +498,9 @@ function buildStoryMetadataLinks(context, resolvedStory) {
   const sourceBook = resolvedStory.metadata.source_slug
     ? context.indexes.booksBySlug.get(resolvedStory.metadata.source_slug) || null
     : null;
+  const sourceText = resolvedStory.metadata.source_text_slug
+    ? context.indexes.sourceTextsBySlug.get(resolvedStory.metadata.source_text_slug) || null
+    : null;
 
   const translations = context.stories
     .filter((story) => getStoryRouteSlug(story) === resolvedStory.routeSlug)
@@ -503,6 +526,13 @@ function buildStoryMetadataLinks(context, resolvedStory) {
           author: null,
         }
       : null,
+    sourceText: sourceText
+      ? {
+          slug: sourceText.slug,
+          title: sourceText.data.title,
+          sourceBookSlug: sourceText.data.source_book_slug,
+        }
+      : null,
     translations,
   };
 }
@@ -513,6 +543,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
   const topics = await loadFlatCollection(rootDir, "topic");
   const topicRelations = await loadFlatCollection(rootDir, "topic-relation");
   const books = await loadFlatCollection(rootDir, "book");
+  const sourceTexts = await loadFlatCollection(rootDir, "source-text");
   const resources = await loadFlatCollection(rootDir, "resource");
   const storyCollections = await loadFlatCollection(rootDir, "story-collection");
 
@@ -523,6 +554,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
     topicsBySlug: indexBy(topics, (entry) => entry.slug),
     topicRelationsBySlug: indexBy(topicRelations, (entry) => entry.slug),
     booksBySlug: indexBy(books, (entry) => entry.slug),
+    sourceTextsBySlug: indexBy(sourceTexts, (entry) => entry.slug),
     resourcesBySlug: indexBy(resources, (entry) => entry.slug),
     storyCollectionsBySlug: indexBy(storyCollections, (entry) => entry.slug),
   };
@@ -542,6 +574,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
         topics,
         topicRelations,
         books,
+        sourceTexts,
         resources,
         storyCollections,
         indexes,
@@ -558,6 +591,7 @@ export async function loadContentContext(rootDir = getRepoRoot()) {
     topics,
     topicRelations,
     books,
+    sourceTexts,
     resources,
     storyCollections,
     resolvedStories,
@@ -580,6 +614,7 @@ export function summarizeEntry(entry, context) {
         metadataCategory: resolved?.metadata?.category || null,
         sourceSlug: resolved?.metadata?.source_slug || null,
         sourceLabel: resolved?.metadata?.source_label || null,
+        sourceTextSlug: resolved?.metadata?.source_text_slug || null,
         path: entry.relativePath,
       };
     }
@@ -590,6 +625,7 @@ export function summarizeEntry(entry, context) {
         category: entry.data.category,
         sourceSlug: entry.data.source_slug || null,
         sourceLabel: entry.data.source_label || null,
+        sourceTextSlug: entry.data.source_text_slug || null,
         topicCount: (entry.data.topic_slugs || []).length,
         resourceCount: (entry.data.resource_slugs || []).length,
         path: entry.relativePath,
@@ -630,6 +666,18 @@ export function summarizeEntry(entry, context) {
         category: entry.data.category || null,
         path: entry.relativePath,
       };
+    case "source-text":
+      return {
+        entity: entry.entity,
+        slug: entry.slug,
+        title: entry.data.title,
+        language: entry.data.language || null,
+        sourceBookSlug: entry.data.source_book_slug || null,
+        workSlug: entry.data.work_slug || null,
+        storySlug: entry.data.story_slug || null,
+        order: entry.data.order ?? null,
+        path: entry.relativePath,
+      };
     case "story-collection":
       return {
         entity: entry.entity,
@@ -659,6 +707,8 @@ export function getEntriesForEntity(context, entityName) {
       return context.resources;
     case "book":
       return context.books;
+    case "source-text":
+      return context.sourceTexts;
     case "story-collection":
       return context.storyCollections;
     default:
@@ -776,7 +826,10 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
 
     if (options["source-slug"]) {
       const resolved = entry.entity === "story" ? getResolvedStory(context, entry) : null;
-      if ((resolved?.metadata?.source_slug || null) !== options["source-slug"]) {
+      const sourceSlug = entry.entity === "source-text"
+        ? entry.data.source_book_slug || null
+        : resolved?.metadata?.source_slug || null;
+      if (sourceSlug !== options["source-slug"]) {
         return false;
       }
     }
@@ -795,6 +848,7 @@ function getSearchFieldsForEntry(entry, context) {
           resolved?.metadata?.category,
           resolved?.metadata?.source_slug,
           resolved?.metadata?.source_label,
+          resolved?.metadata?.source_text_slug,
           ...(resolved?.metadata?.topic_slugs || []),
           ...(resolved?.metadata?.resource_slugs || []),
         ],
@@ -808,6 +862,7 @@ function getSearchFieldsForEntry(entry, context) {
           entry.data.category,
           entry.data.source_slug,
           entry.data.source_label,
+          entry.data.source_text_slug,
           ...(entry.data.topic_slugs || []),
           ...(entry.data.resource_slugs || []),
         ],
@@ -847,6 +902,17 @@ function getSearchFieldsForEntry(entry, context) {
           ...(entry.data.topic_slugs || []),
         ],
         body: [],
+      };
+    case "source-text":
+      return {
+        title: [entry.slug, entry.data.title, entry.data.work_slug],
+        metadata: [
+          entry.data.language,
+          entry.data.source_book_slug,
+          entry.data.story_slug || "",
+          entry.data.intro_note || "",
+        ],
+        body: [entry.body],
       };
     case "story-collection":
       return {
@@ -964,6 +1030,7 @@ export function getRelatedEntries(context, entityName, slug, options = {}) {
     const topicSlugs = resolved?.metadata?.topic_slugs || [];
     const resourceSlugs = resolved?.metadata?.resource_slugs || [];
     const sourceSlug = resolved?.metadata?.source_slug || null;
+    const sourceTextSlug = resolved?.metadata?.source_text_slug || null;
 
     for (const topicSlug of topicSlugs) {
       const topic = context.indexes.topicsBySlug.get(topicSlug);
@@ -978,6 +1045,16 @@ export function getRelatedEntries(context, entityName, slug, options = {}) {
     if (sourceSlug) {
       const book = context.indexes.booksBySlug.get(sourceSlug);
       if (book) outbound.push({ entity: "book", slug: book.slug, label: book.data.name });
+    }
+    if (sourceTextSlug) {
+      const sourceText = context.indexes.sourceTextsBySlug.get(sourceTextSlug);
+      if (sourceText) {
+        outbound.push({
+          entity: "source-text",
+          slug: sourceText.slug,
+          label: sourceText.data.title,
+        });
+      }
     }
 
     for (const collection of context.storyCollections) {
@@ -1053,9 +1130,47 @@ export function getRelatedEntries(context, entityName, slug, options = {}) {
         });
       }
     }
+    for (const sourceText of context.sourceTexts) {
+      if (sourceText.data.source_book_slug === entry.slug) {
+        inbound.push({
+          entity: "source-text",
+          slug: sourceText.slug,
+          label: sourceText.data.title,
+        });
+      }
+    }
     for (const topicSlug of entry.data.topic_slugs || []) {
       const topic = context.indexes.topicsBySlug.get(topicSlug);
       if (topic) outbound.push({ entity: "topic", slug: topic.slug, label: topic.data.item });
+    }
+  }
+
+  if (entry.entity === "source-text") {
+    const book = context.indexes.booksBySlug.get(entry.data.source_book_slug);
+    if (book) outbound.push({ entity: "book", slug: book.slug, label: book.data.name });
+
+    if (entry.data.story_slug) {
+      for (const story of context.resolvedStories) {
+        if (story.routeSlug === entry.data.story_slug) {
+          outbound.push({
+            entity: "story",
+            slug: story.routeSlug,
+            label: story.data.title,
+            language: story.language,
+          });
+        }
+      }
+    }
+
+    for (const story of context.resolvedStories) {
+      if (story.metadata?.source_text_slug === entry.slug) {
+        inbound.push({
+          entity: "story",
+          slug: story.routeSlug,
+          label: story.data.title,
+          language: story.language,
+        });
+      }
     }
   }
 
@@ -1166,6 +1281,34 @@ export function validateContext(context, scope = "all") {
         });
       }
 
+      const sourceText = metadata.data.source_text_slug
+        ? context.indexes.sourceTextsBySlug.get(metadata.data.source_text_slug)
+        : null;
+
+      if (metadata.data.source_text_slug && !sourceText) {
+        issues.push({
+          severity: "error",
+          entity: "story-metadata",
+          slug: metadata.slug,
+          message: `Broken source_text_slug "${metadata.data.source_text_slug}"`,
+          path: metadata.relativePath,
+        });
+      }
+
+      if (
+        metadata.data.source_slug &&
+        sourceText &&
+        sourceText.data.source_book_slug !== metadata.data.source_slug
+      ) {
+        issues.push({
+          severity: "error",
+          entity: "story-metadata",
+          slug: metadata.slug,
+          message: `source_text_slug "${metadata.data.source_text_slug}" belongs to source_book_slug "${sourceText.data.source_book_slug}", not source_slug "${metadata.data.source_slug}"`,
+          path: metadata.relativePath,
+        });
+      }
+
       for (const topicSlug of metadata.data.topic_slugs || []) {
         if (!context.indexes.topicsBySlug.get(topicSlug)) {
           issues.push({
@@ -1188,6 +1331,33 @@ export function validateContext(context, scope = "all") {
             path: metadata.relativePath,
           });
         }
+      }
+    }
+  }
+
+  if (selectedEntities.includes("source-text")) {
+    for (const sourceText of context.sourceTexts) {
+      if (!context.indexes.booksBySlug.get(sourceText.data.source_book_slug)) {
+        issues.push({
+          severity: "error",
+          entity: "source-text",
+          slug: sourceText.slug,
+          message: `Broken source_book_slug "${sourceText.data.source_book_slug}"`,
+          path: sourceText.relativePath,
+        });
+      }
+
+      if (
+        sourceText.data.story_slug &&
+        !context.resolvedStories.some((story) => story.routeSlug === sourceText.data.story_slug)
+      ) {
+        issues.push({
+          severity: "error",
+          entity: "source-text",
+          slug: sourceText.slug,
+          message: `Broken story_slug "${sourceText.data.story_slug}"`,
+          path: sourceText.relativePath,
+        });
       }
     }
   }
@@ -1641,6 +1811,12 @@ export function buildTemplate(entityName) {
     data.name = "Example Book";
     data.language = "bn";
   }
+  if (resolveEntityName(entityName) === "source-text") {
+    data.title = "Example Source Text";
+    data.language = "bn";
+    data.source_book_slug = "example-book";
+    data.work_slug = "example-work";
+  }
   if (resolveEntityName(entityName) === "story-collection") {
     data.title = "Example Collection";
     data.stories = ["example-story"];
@@ -1659,6 +1835,7 @@ export function getDoctorReport(context) {
       topicRelations: context.topicRelations.length,
       resources: context.resources.length,
       books: context.books.length,
+      sourceTexts: context.sourceTexts.length,
       storyCollections: context.storyCollections.length,
     },
     issues: validation,

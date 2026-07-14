@@ -6,13 +6,13 @@ import Layout from "@/layouts/Layout.astro";
 import {
   bookHasDetailPage,
   getAllBooks,
-  getAllBookFullTexts,
+  getAllSourceTexts,
   getAllTopics,
   getBookAvailability,
   getBookCategoryLabel,
   getBookDetailPath,
-  getBookFullTextPath,
   getResolvedStories,
+  getSourceTextPath,
   getStoryRouteSlug,
   indexEntriesBySlug,
   storyBasePath,
@@ -33,17 +33,14 @@ export async function getStaticPaths() {
 const { book } = Astro.props;
 const canonicalUrl = buildCanonicalUrl(Astro.url.pathname, Astro.site);
 const books = await getAllBooks();
-const fullTexts = await getAllBookFullTexts();
+const sourceTexts = await getAllSourceTexts();
 const stories = await getResolvedStories();
 const topics = await getAllTopics();
-const fullTextByBookSlug = new Map(fullTexts.map((entry) => [entry.data.book_slug, entry]));
 const topicBySlug = indexEntriesBySlug(topics);
 const categoryLabel = getBookCategoryLabel(book.data.category);
 const languageLabel = book.data.language === "bn" ? "Bengali" : "English";
 const availability = getBookAvailability(book);
 const isReadOnline = availability === "read-online";
-const fullTextEntry = fullTextByBookSlug.get(book.slug);
-const fullTextUrl = fullTextEntry ? getBookFullTextPath(book.slug) : undefined;
 const previewUrl = isReadOnline
   ? import.meta.env.DEV
     ? book.data.library_url?.replace("https://data.otibeguni.com", "/__pdfproxy")
@@ -69,6 +66,21 @@ const relatedStories = Array.from(relatedStoryMap.values()).map((story) => ({
   url: `${storyBasePath(story.data.language)}/${getStoryRouteSlug(story)}`,
   isExternal: false,
 }));
+const relatedSourceTexts = sourceTexts
+  .filter((entry) => entry.data.source_book_slug === book.slug)
+  .sort((left, right) => {
+    const leftOrder = left.data.order ?? Number.MAX_SAFE_INTEGER;
+    const rightOrder = right.data.order ?? Number.MAX_SAFE_INTEGER;
+    if (leftOrder !== rightOrder) return leftOrder - rightOrder;
+    return left.data.title.localeCompare(right.data.title);
+  })
+  .map((entry) => ({
+    name: entry.data.title,
+    subtitle: "Source text",
+    badges: [entry.data.language === "bn" ? "Bengali" : entry.data.language],
+    url: getSourceTextPath(entry.slug),
+    isExternal: false,
+  }));
 const relatedTopics = (book.data.topic_slugs ?? [])
   .map((slug) => topicBySlug.get(slug))
   .filter(Boolean)
@@ -179,16 +191,6 @@ const schemaData = {
               )}
               <span class="badge badge-soft">{languageLabel}</span>
               {
-                fullTextUrl && (
-                  <a
-                    href={fullTextUrl}
-                    class="btn btn-sm h-8 min-h-0 border-0 bg-amber-700 text-white shadow-sm hover:bg-amber-800"
-                  >
-                    Read Full Text
-                  </a>
-                )
-              }
-              {
                 !isReadOnline && book.data.url && (
                   <a
                     href={book.data.url}
@@ -220,6 +222,15 @@ const schemaData = {
                 {seriesBooks.map((seriesBook) => <BookListItem book={seriesBook} />)}
               </div>
             </div>
+          )
+        }
+
+        {
+          relatedSourceTexts.length > 0 && (
+            <RelatedItemsList
+              title="Source Texts"
+              items={relatedSourceTexts}
+            />
           )
         }
 

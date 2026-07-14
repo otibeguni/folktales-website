@@ -49,6 +49,7 @@ Bengali translation body.
     `---
 category: Folktale
 source_slug: moon-book
+source_text_slug: forest-song
 topic_slugs:
   - forest-topic
 resource_slugs:
@@ -127,6 +128,22 @@ topic_slugs:
 
   await writeFile(
     rootDir,
+    "src/content/sourceTexts/forest-song.md",
+    `---
+title: Forest Song
+language: bn
+source_book_slug: moon-book
+work_slug: forest-song
+story_slug: forest-story
+order: 1
+---
+
+The source song remembers the moonlit forest.
+`,
+  );
+
+  await writeFile(
+    rootDir,
     "src/content/storyCollections/featured.md",
     `---
 title: Featured
@@ -187,6 +204,7 @@ test("list and get story resolve metadata", async () => {
   const record = JSON.parse(get.stdout);
   assert.equal(record.metadata.category, "Folktale");
   assert.equal(record.links.sourceBook.slug, "moon-book");
+  assert.equal(record.links.sourceText.slug, "forest-song");
 });
 
 test("search matches body text and ranks title/body hits", async () => {
@@ -213,10 +231,62 @@ test("validate reports broken references", async () => {
     `---
 category: Folktale
 source_slug: missing-book
+source_text_slug: missing-source-text
 topic_slugs:
   - missing-topic
 resource_slugs:
   - missing-resource
+---
+`,
+  );
+  await writeFile(
+    rootDir,
+    "src/content/sourceTexts/broken-source-text.md",
+    `---
+title: Broken Source Text
+language: bn
+source_book_slug: missing-book
+work_slug: broken-source-text
+story_slug: missing-story
+---
+
+Broken body.
+`,
+  );
+  await writeFile(
+    rootDir,
+    "src/content/books/river-book.md",
+    `---
+slug: river-book
+name: River Book
+language: en
+category: folklore
+---
+`,
+  );
+  await writeFile(
+    rootDir,
+    "src/content/sourceTexts/river-song.md",
+    `---
+title: River Song
+language: bn
+source_book_slug: river-book
+work_slug: river-song
+story_slug: forest-story
+---
+
+River body.
+`,
+  );
+  await writeFile(
+    rootDir,
+    "src/content/storyMetadata/mismatched-source-text.md",
+    `---
+category: Folktale
+source_slug: moon-book
+source_text_slug: river-song
+topic_slugs: []
+resource_slugs: []
 ---
 `,
   );
@@ -235,6 +305,16 @@ type: located_in
   assert.equal(validate.code, 1);
   const issues = JSON.parse(validate.stdout);
   assert.ok(issues.some((issue) => issue.message.includes('Broken source_slug "missing-book"')));
+  assert.ok(issues.some((issue) => issue.message.includes('Broken source_text_slug "missing-source-text"')));
+  assert.ok(
+    issues.some((issue) =>
+      issue.message.includes(
+        'source_text_slug "river-song" belongs to source_book_slug "river-book", not source_slug "moon-book"',
+      ),
+    ),
+  );
+  assert.ok(issues.some((issue) => issue.message.includes('Broken source_book_slug "missing-book"')));
+  assert.ok(issues.some((issue) => issue.message.includes('Broken story_slug "missing-story"')));
   assert.ok(issues.some((issue) => issue.message.includes('Broken topic_slugs reference "missing-topic"')));
   assert.ok(issues.some((issue) => issue.message.includes('Broken target_topic_slug "missing-topic"')));
 });
@@ -308,6 +388,41 @@ test("story collection get and search include body and stories", async () => {
   assert.equal(results[0].slug, "featured");
 });
 
+test("source text entity supports list, get, search, and related links", async () => {
+  const rootDir = await makeFixture();
+
+  const list = await runCli(rootDir, ["list", "source-texts", "--source-slug", "moon-book", "--json"]);
+  assert.equal(list.code, 0);
+  const sourceTexts = JSON.parse(list.stdout);
+  assert.equal(sourceTexts.length, 1);
+  assert.equal(sourceTexts[0].slug, "forest-song");
+  assert.equal(sourceTexts[0].sourceBookSlug, "moon-book");
+
+  const get = await runCli(rootDir, ["get", "source-text", "forest-song", "--json"]);
+  assert.equal(get.code, 0);
+  const sourceText = JSON.parse(get.stdout);
+  assert.equal(sourceText.data.work_slug, "forest-song");
+
+  const search = await runCli(rootDir, [
+    "search",
+    "source-text",
+    "--query",
+    "moonlit forest",
+    "--include-snippets",
+    "--json",
+  ]);
+  assert.equal(search.code, 0);
+  const results = JSON.parse(search.stdout);
+  assert.equal(results[0].slug, "forest-song");
+  assert.match(results[0].snippet, /moonlit forest/i);
+
+  const related = await runCli(rootDir, ["related", "source-text", "forest-song", "--json"]);
+  assert.equal(related.code, 0);
+  const relatedRecord = JSON.parse(related.stdout);
+  assert.ok(relatedRecord.outbound.some((item) => item.entity === "book" && item.slug === "moon-book"));
+  assert.ok(relatedRecord.inbound.some((item) => item.entity === "story" && item.slug === "forest-story"));
+});
+
 test("topic relation entity supports list/get and topic related includes typed lookups", async () => {
   const rootDir = await makeFixture();
 
@@ -344,4 +459,5 @@ test("help includes tui usage", async () => {
   assert.equal(help.code, 0);
   assert.doesNotMatch(help.stdout, /content tui/);
   assert.doesNotMatch(help.stdout, /story-metadata/);
+  assert.match(help.stdout, /source-text/);
 });

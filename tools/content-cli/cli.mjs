@@ -40,7 +40,7 @@ function printUsage() {
   content doctor [--json]
 
 Entities:
-  story, topic, topic-relation, resource, book, story-collection`);
+  story, topic, topic-relation, resource, book, source-text, story-collection`);
 }
 
 function parseArgs(argv) {
@@ -140,6 +140,10 @@ function printInspect(record) {
   if (record.types) console.log(`types: ${record.types.join(", ")}`);
   if (record.sourceSlug) console.log(`source_slug: ${record.sourceSlug}`);
   if (record.sourceLabel) console.log(`source_label: ${record.sourceLabel}`);
+  if (record.sourceTextSlug) console.log(`source_text_slug: ${record.sourceTextSlug}`);
+  if (record.sourceBookSlug) console.log(`source_book_slug: ${record.sourceBookSlug}`);
+  if (record.workSlug) console.log(`work_slug: ${record.workSlug}`);
+  if (record.storySlug) console.log(`story_slug: ${record.storySlug}`);
   if (record.metadata) {
     console.log(`metadata: ${JSON.stringify(record.metadata)}`);
   } else if (record.data) {

@@ -21,7 +21,7 @@ export type StoryMetadataEntry = CollectionEntry<"storyMetadata">;
 export type TopicEntry = CollectionEntry<"topics">;
 export type TopicRelationEntry = CollectionEntry<"topicRelations">;
 export type BookEntry = CollectionEntry<"books">;
-export type BookFullTextEntry = CollectionEntry<"bookFullTexts">;
+export type SourceTextEntry = CollectionEntry<"sourceTexts">;
 export type ResourceEntry = CollectionEntry<"resources">;
 export type StoryCollectionEntry = CollectionEntry<"storyCollections">;
 export type ResolvedStoryEntry = StoryEntry & {
@@ -348,19 +348,12 @@ export async function getAllBooks() {
   return getCollection("books");
 }
 
-export async function getAllBookFullTexts() {
-  return getCollection("bookFullTexts");
+export async function getAllSourceTexts() {
+  return getCollection("sourceTexts");
 }
 
-export function bookHasFullText(
-  book: Pick<BookEntry, "slug">,
-  fullTextByBookSlug: Map<string, BookFullTextEntry>,
-) {
-  return fullTextByBookSlug.has(book.slug);
-}
-
-export function getBookFullTextPath(slug: string) {
-  return `/books/${slug}/read`;
+export function getSourceTextPath(slug: string) {
+  return `/source-texts/${slug}`;
 }
 
 export async function getAllResources() {
@@ -441,7 +434,7 @@ export function getBookDetailPath(slug: string) {
 }
 
 export async function renderEntry(
-  entry: StoryEntry | StoryCollectionEntry | BookFullTextEntry,
+  entry: StoryEntry | StoryCollectionEntry | SourceTextEntry,
 ) {
   return render(entry);
 }

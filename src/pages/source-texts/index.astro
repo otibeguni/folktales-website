@@ -1,0 +1,110 @@
+---
+import SourceTextList from "@/components/SourceTextList";
+import Layout from "@/layouts/Layout.astro";
+import type { SourceTextListItem } from "@/types";
+import {
+  getAllBooks,
+  getAllSourceTexts,
+  getBookDetailPath,
+  getResolvedStories,
+  getSourceTextPath,
+  getStoryRouteSlug,
+  indexEntriesBySlug,
+  storyBasePath,
+} from "@/utils/content";
+import { t } from "@/utils/site-text";
+
+const [books, sourceTexts, stories] = await Promise.all([
+  getAllBooks(),
+  getAllSourceTexts(),
+  getResolvedStories(),
+]);
+const booksBySlug = indexEntriesBySlug(books);
+const storiesByRouteSlug = new Map();
+
+for (const story of stories) {
+  const routeSlug = getStoryRouteSlug(story);
+  const existingStory = storiesByRouteSlug.get(routeSlug);
+
+  if (!existingStory || story.data.language === "en") {
+    storiesByRouteSlug.set(routeSlug, story);
+  }
+}
+
+const listingItems = sourceTexts
+  .map((sourceText): SourceTextListItem | null => {
+    const sourceBook = booksBySlug.get(sourceText.data.source_book_slug);
+
+    if (!sourceBook) {
+      return null;
+    }
+
+    const story = sourceText.data.story_slug
+      ? storiesByRouteSlug.get(sourceText.data.story_slug)
+      : undefined;
+
+    return {
+      slug: sourceText.slug,
+      title: sourceText.data.title,
+      workSlug: sourceText.data.work_slug,
+      language: sourceText.data.language,
+      sourceBookSlug: sourceBook.slug,
+      sourceBookName: sourceBook.data.name,
+      sourceBookAuthor: sourceBook.data.author,
+      sourceTextHref: getSourceTextPath(sourceText.slug),
+      sourceBookHref: getBookDetailPath(sourceBook.slug),
+      storySlug: sourceText.data.story_slug,
+      storyTitle: story?.data.title,
+      storyHref: story
+        ? `${storyBasePath(story.data.language)}/${getStoryRouteSlug(story)}`
+        : undefined,
+      order: sourceText.data.order,
+    };
+  })
+  .filter((item): item is SourceTextListItem => Boolean(item))
+  .sort((left, right) => {
+    const sourceBookCompare = left.sourceBookName.localeCompare(right.sourceBookName);
+    if (sourceBookCompare !== 0) return sourceBookCompare;
+
+    const leftOrder = left.order ?? Number.MAX_SAFE_INTEGER;
+    const rightOrder = right.order ?? Number.MAX_SAFE_INTEGER;
+    if (leftOrder !== rightOrder) return leftOrder - rightOrder;
+
+    return left.title.localeCompare(right.title);
+  });
+---
+
+<Layout
+  title={`${t("pages.sourceTexts.pageTitle")} | ${t("common.siteTitle")}`}
+  description={t("pages.sourceTexts.pageDescription")}
+  breadcrumbs={[{ label: t("pages.sourceTexts.pageTitle"), href: "/source-texts" }]}
+>
+  <div data-pagefind-ignore>
+    <SourceTextList
+      sourceTexts={listingItems}
+      labels={{
+        pageTitle: t("pages.sourceTexts.pageTitle"),
+        pageDescription: t("pages.sourceTexts.pageDescription"),
+        resultsLabel: t("pages.sourceTexts.resultsLabel"),
+        searchLabel: t("pages.sourceTexts.searchLabel"),
+        searchPlaceholder: t("pages.sourceTexts.searchPlaceholder"),
+        sourceBookLabel: t("pages.sourceTexts.sourceBookLabel"),
+        linkedLabel: t("pages.sourceTexts.linkedLabel"),
+        clearFiltersLabel: t("pages.sourceTexts.clearFiltersLabel"),
+        allSourceBooksLabel: t("pages.sourceTexts.allSourceBooksLabel"),
+        allLinkedLabel: t("pages.sourceTexts.allLinkedLabel"),
+        linkedStoryLabel: t("pages.sourceTexts.linkedStoryLabel"),
+        notLinkedLabel: t("pages.sourceTexts.notLinkedLabel"),
+        linkedStoryBadge: t("pages.sourceTexts.linkedStoryBadge"),
+        unlinkedBadge: t("pages.sourceTexts.unlinkedBadge"),
+        storyLabel: t("pages.sourceTexts.storyLabel"),
+        readLabel: t("pages.sourceTexts.readLabel"),
+        noSourceTextsFoundLabel: t("pages.sourceTexts.noSourceTextsFoundLabel"),
+        previousLabel: t("pages.sourceTexts.previousLabel"),
+        nextLabel: t("pages.sourceTexts.nextLabel"),
+        pageLabel: t("pages.sourceTexts.pageLabel"),
+      }}
+      client:load
+    />
+  </div>
+</Layout>

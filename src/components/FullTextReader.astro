@@ -2,16 +2,26 @@
 interface Props {
   title: string;
   subtitle?: string;
+  kicker?: string;
+  storageKey?: string;
+  maxWidth?: string;
 }
 
-const { title, subtitle } = Astro.props as Props;
+const {
+  title,
+  subtitle,
+  kicker,
+  storageKey = "otibeguni-reader-prefs",
+  maxWidth = "44rem",
+} = Astro.props as Props;
 ---
 
 <section
   class="reader-shell mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-10"
   data-reader-root
   data-reader-theme="light"
-  style="--reader-font-size: 1.28rem; --reader-line-height: 2.05; --reader-max-width: 44rem;"
+  data-reader-storage-key={storageKey}
+  style={`--reader-font-size: 1.28rem; --reader-line-height: 2.05; --reader-max-width: ${maxWidth};`}
 >
   <div class="space-y-5">
     <aside class="reader-controls" aria-label="Reading controls">
@@ -68,7 +78,7 @@ const { title, subtitle } = Astro.props as Props;
     <article class="reader-stage min-w-0">
       <div class="reader-paper mx-auto">
         <header class="reader-header">
-          <p class="reader-kicker">পূর্ণপাঠ</p>
+          {kicker && <p class="reader-kicker">{kicker}</p>}
           <h1 class="reader-title">{title}</h1>
           {subtitle && <p class="reader-subtitle">{subtitle}</p>}
         </header>
@@ -87,7 +97,7 @@ const { title, subtitle } = Astro.props as Props;
 
     if (!(root instanceof HTMLElement)) return;
 
-    const storageKey = "otibeguni-book-reader-prefs";
+    const storageKey = root.getAttribute("data-reader-storage-key") || "otibeguni-reader-prefs";
     const defaultPrefs = {
       theme: "light",
       fontSize: 1.28,

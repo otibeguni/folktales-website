@@ -28,6 +28,10 @@ export const siteNav: SiteNavItem[] = [
     href: localizePath("/books"),
   },
   {
+    label: t("header.navSourceTexts"),
+    href: localizePath("/source-texts"),
+  },
+  {
     label: t("header.navTopics"),
     href: localizePath("/topics"),
   },
