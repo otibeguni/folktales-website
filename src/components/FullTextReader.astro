@@ -336,7 +336,12 @@ const {
 
   .reader-body :global(p) {
     margin: 0 0 1.15em;
+    white-space: pre-line;
     text-wrap: pretty;
+  }
+
+  .reader-body :global(p br) {
+    display: none;
   }
 
   .reader-body :global(hr) {
