@@ -1,0 +1,25 @@
+---
+import VintageIllustrationsGallery from "@/components/VintageIllustrationsGallery";
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/utils/site-text";
+
+const breadcrumbs = [
+  { label: t("pages.vintageIllustrations.pageTitle"), href: "/vintage-illustrations" },
+];
+---
+
+<Layout
+  title={`${t("pages.vintageIllustrations.pageTitle")} | ${t("common.siteTitle")}`}
+  description={t("pages.vintageIllustrations.pageDescription")}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="mx-auto flex max-w-6xl flex-col gap-8">
+    <div class="flex flex-col gap-3">
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+        {t("pages.vintageIllustrations.pageTitle")}
+      </h1>
+    </div>
+
+    <VintageIllustrationsGallery client:load />
+  </section>
+</Layout>

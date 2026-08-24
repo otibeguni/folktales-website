@@ -7,6 +7,7 @@ const translations = {
   header: {
     navStories: "Stories",
     navExperiences: "Experiences",
+    navVintageIllustrations: "Vintage Illustrations",
     navBlog: "Blog",
     navTopics: "Topics",
     navBooks: "Books",
@@ -65,6 +66,10 @@ const translations = {
       topicSearchPlaceholder: "Search topics to add",
       noMatchingTopicsLabel: "No matching topics found.",
       noBooksFoundLabel: "No books found.",
+    },
+    vintageIllustrations: {
+      pageTitle: "Vintage Illustrations",
+      pageDescription: "Browse vintage illustrations from the Otibeguni archive.",
     },
     sourceTexts: {
       pageTitle: "Source Texts",

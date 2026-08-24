@@ -20,6 +20,10 @@ export const siteNav: SiteNavItem[] = [
     href: localizePath("/experiences"),
   },
   {
+    label: t("header.navVintageIllustrations"),
+    href: localizePath("/vintage-illustrations"),
+  },
+  {
     label: t("header.navBlog"),
     href: localizePath("/blog"),
   },
