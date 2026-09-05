@@ -11,7 +11,7 @@ import {
   getBookCategoryLabel,
   getMazarTraditionPath,
   getResolvedMazarTraditions,
-  getTopicRelationSections,
+  getTopicNeighborhoodGraph,
   getResolvedStories,
   getStoryRouteSlug,
 } from "@/utils/content";
@@ -55,7 +55,7 @@ const mazarTraditions = (await getResolvedMazarTraditions())
     url: getMazarTraditionPath(entry.slug),
     isExternal: false,
   }));
-const relationSections = await getTopicRelationSections(topic.slug);
+const topicGraph = await getTopicNeighborhoodGraph(topic.slug, 3);
 const availableTopicOptions = (await getAllTopics())
   .map((entry) => ({
     slug: entry.slug,
@@ -131,7 +131,7 @@ const breadcrumbs = [
       books={books}
       resources={resources}
       mazarTraditions={mazarTraditions}
-      relationSections={relationSections}
+      topicGraph={topicGraph}
       isDev={isDev}
       availableTopics={availableTopicOptions}
       currentTopicRelations={currentTopicRelations}

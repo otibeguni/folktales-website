@@ -2,6 +2,7 @@
 import type { IStory } from '@/types';
 import BookListItem from '@/components/BookListItem';
 import RelatedItemsList from '@/components/RelatedItemsList.astro';
+import RelatedTopicGraph from '@/components/RelatedTopicGraph.astro';
 import TopicRelationEditor from '@/components/TopicRelationEditor';
 import { sortTopicTags } from '@/utils/topic-tags';
 
@@ -11,7 +12,7 @@ const {
   books,
   resources,
   mazarTraditions = [],
-  relationSections = [],
+  topicGraph,
   isDev = false,
   availableTopics = [],
   currentTopicRelations = [],
@@ -55,7 +56,7 @@ const relatedResources = resources
     {topic.description && <p class="mb-8">{topic.description}</p>}
 
     {
-      (relationSections.length > 0 || isDev) && (
+      (topicGraph.edges.length > 0 || isDev) && (
         <section class="not-prose mb-8">
           <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-3xl font-bold">Topic Relationships</h2>
@@ -72,21 +73,13 @@ const relatedResources = resources
             }
           </div>
 
-          <div class="flex flex-col gap-3">
+          <div>
             {
-              relationSections.length > 0 ? (
-                relationSections.map((section) => (
-                  <RelatedItemsList
-                    title={section.title}
-                    items={section.items.map((item) => ({
-                      name: item.item,
-                      types: item.types,
-                      url: item.href,
-                      isExternal: false,
-                    }))}
-                    layout="topic-chips"
-                  />
-                ))
+              topicGraph.edges.length > 0 ? (
+                <RelatedTopicGraph
+                  graph={topicGraph}
+                  accessibleLabel={`Topic relationships within three levels of ${topic.item}`}
+                />
               ) : (
                 <div class="rounded-2xl border border-dashed border-base-300 px-5 py-6 text-sm text-slate-500">
                   No topic relationships yet.

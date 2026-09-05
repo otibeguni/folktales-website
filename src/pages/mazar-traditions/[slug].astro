@@ -1,9 +1,11 @@
 ---
 import RelatedItemsList from "@/components/RelatedItemsList.astro";
+import RelatedTopicGraph from "@/components/RelatedTopicGraph.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
   getMazarTraditionPath,
   getResolvedMazarTraditions,
+  getTopicNeighborhoodGraph,
   renderEntry,
 } from "@/utils/content";
 import { buildCanonicalUrl } from "@/utils/seo";
@@ -27,6 +29,12 @@ const relatedTopics = topics.map((topic) => ({
   url: `/topics/${topic.slug}`,
   isExternal: false,
 }));
+const saintTopic = topics.find(
+  (topic) => topic.slug === entry.slug && topic.data.types.includes("Person"),
+);
+const topicGraph = saintTopic
+  ? await getTopicNeighborhoodGraph(saintTopic.slug, 3)
+  : null;
 const relatedResources = resources.map((resource) => ({
   name: resource.data.title,
   type: resource.data.type,
@@ -93,11 +101,20 @@ const schemaData = {
         layout="resource-rows"
       />
 
-      <RelatedItemsList
-        title="Related Topics"
-        items={relatedTopics}
-        layout="topic-chips"
-      />
+      <div class="mt-8 flex flex-col gap-3">
+        <h3 class="mb-4 text-2xl font-bold">Related Topics</h3>
+        {
+          topicGraph && topicGraph.nodes.length > 0 ? (
+            <RelatedTopicGraph
+              graph={topicGraph}
+              accessibleLabel={`Topic relationships within three levels of ${entry.data.title}`}
+              height="compact"
+            />
+          ) : (
+            <RelatedItemsList items={relatedTopics} layout="topic-chips" />
+          )
+        }
+      </div>
     </div>
   </article>
 </Layout>

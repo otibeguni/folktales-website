@@ -1,0 +1,72 @@
+---
+import RelatedTopicGraphCanvas from '@/components/RelatedTopicGraphCanvas';
+import type {
+  TopicNeighborhoodGraph,
+  TopicNeighborhoodNode,
+} from '@/utils/content';
+
+interface Props {
+  graph: TopicNeighborhoodGraph;
+  accessibleLabel: string;
+  height?: 'compact' | 'standard';
+}
+
+const { graph, accessibleLabel, height = 'standard' } = Astro.props;
+const nodesById = new Map<string, TopicNeighborhoodNode>(
+  graph.nodes.map((node) => [node.id, node]),
+);
+const rootNode = nodesById.get(graph.rootNodeId);
+const relationshipLinks = graph.edges.flatMap((edge) => {
+  const source = nodesById.get(edge.source);
+  const target = nodesById.get(edge.target);
+  return source && target ? [{ edge, source, target }] : [];
+});
+---
+
+<div class="flex flex-col gap-3">
+  <RelatedTopicGraphCanvas
+    graph={graph}
+    accessibleLabel={accessibleLabel}
+    height={height}
+    client:only="react"
+  >
+    <div
+      slot="fallback"
+      class:list={[
+        'flex items-center justify-center rounded-2xl border border-slate-200 bg-white text-sm text-slate-500',
+        height === 'compact' ? 'h-[52rem] md:h-[48rem]' : 'h-[60rem] md:h-[56rem]',
+      ]}
+    >
+      Loading topic graph…
+    </div>
+  </RelatedTopicGraphCanvas>
+
+  <details class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700">
+    <summary class="cursor-pointer font-semibold text-slate-900">
+      Browse relationships as links
+    </summary>
+    {
+      relationshipLinks.length > 0 ? (
+        <ul class="mt-3 space-y-2 pl-5">
+          {relationshipLinks.map(({ edge, source, target }) => (
+            <li>
+              <a class="font-medium text-[#7811a7] underline-offset-2 hover:underline" href={source.href}>
+                {source.label}
+              </a>
+              <span class="text-slate-500"> — {edge.label} → </span>
+              <a class="font-medium text-[#7811a7] underline-offset-2 hover:underline" href={target.href}>
+                {target.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : rootNode ? (
+        <p class="mt-3">
+          <a class="font-medium text-[#7811a7] underline-offset-2 hover:underline" href={rootNode.href}>
+            {rootNode.label}
+          </a>
+        </p>
+      ) : null
+    }
+  </details>
+</div>

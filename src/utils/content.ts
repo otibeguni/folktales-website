@@ -4,6 +4,7 @@ import {
   TOPIC_RELATION_TYPES,
 } from "./topic-relations.mjs";
 import { buildTopicExplorerGraphData } from "./topic-explorer-graph.mjs";
+import { buildTopicNeighborhoodGraphData } from "./topic-neighborhood-graph.mjs";
 
 export const BOOK_CATEGORY_LABELS: Record<string, string> = {
   puthi: "Puthi",
@@ -92,6 +93,30 @@ export interface TopicExplorerEdge {
 export interface TopicExplorerGraph {
   nodes: TopicExplorerNode[];
   edges: TopicExplorerEdge[];
+}
+
+export interface TopicNeighborhoodNode {
+  id: string;
+  slug: string;
+  label: string;
+  href: string;
+  types: TopicEntry["data"]["types"];
+  depth: number;
+  isRoot: boolean;
+}
+
+export interface TopicNeighborhoodEdge {
+  id: string;
+  source: string;
+  target: string;
+  relationType: TopicRelationEntry["data"]["type"];
+  label: string;
+}
+
+export interface TopicNeighborhoodGraph {
+  rootNodeId: string;
+  nodes: TopicNeighborhoodNode[];
+  edges: TopicNeighborhoodEdge[];
 }
 
 export interface TopicRelationLink {
@@ -264,6 +289,24 @@ export async function getTopicRelationSections(topicSlug: string) {
     topicsBySlug: indexEntriesBySlug(topics),
     topicRelations,
   });
+}
+
+export async function getTopicNeighborhoodGraph(
+  rootTopicSlug: string,
+  maxDepth = 3,
+): Promise<TopicNeighborhoodGraph> {
+  const [topics, topicRelations] = await Promise.all([
+    getAllTopics(),
+    getAllTopicRelations(),
+  ]);
+
+  return buildTopicNeighborhoodGraphData({
+    topics,
+    topicRelations,
+    rootTopicSlug,
+    maxDepth,
+    topicRelationLabels: TOPIC_RELATION_LABELS,
+  }) as TopicNeighborhoodGraph;
 }
 
 export async function getFolkloreAtlasEntries(): Promise<AtlasEntry[]> {

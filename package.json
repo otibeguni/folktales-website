@@ -12,7 +12,7 @@
     "content": "node tools/content-cli/cli.mjs",
     "test:content-cli": "node --test tools/content-cli/**/*.test.mjs",
     "test:story-relations": "node --test src/dev/**/*.test.mjs",
-    "test:topic-explorer": "node --test src/utils/topic-explorer-graph.test.mjs",
+    "test:topic-explorer": "node --test src/utils/*graph.test.mjs",
     "comic:author": "node tools/comic-author/dev-server.mjs",
     "comic:prepare-pdf": "node scripts/prepare-comic-pdf.mjs",
     "decap": "npx decap-server",
