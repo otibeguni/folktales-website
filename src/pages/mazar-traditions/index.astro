@@ -1,0 +1,53 @@
+---
+import MazarTraditionList from "@/components/MazarTraditionList";
+import Layout from "@/layouts/Layout.astro";
+import { getAllTopics, getResolvedMazarTraditions } from "@/utils/content";
+import { t } from "@/utils/site-text";
+
+const traditions = (await getResolvedMazarTraditions()).map(
+  ({ entry, topics }) => ({
+    slug: entry.slug,
+    ...entry.data,
+    topics: topics.map((topic) => ({
+      slug: topic.slug,
+      ...topic.data,
+    })),
+  }),
+);
+const topics = (await getAllTopics()).map((topic) => ({
+  slug: topic.slug,
+  ...topic.data,
+}));
+---
+
+<Layout
+  title={`Mazar Traditions | ${t("common.siteTitle")}`}
+  description={t("pages.mazarTraditions.pageDescription")}
+  breadcrumbs={[{ label: "Mazar Traditions", href: "/mazar-traditions" }]}
+>
+  <div data-pagefind-ignore>
+    <MazarTraditionList
+      traditions={traditions}
+      topics={topics}
+      labels={{
+        pageTitle: t("pages.mazarTraditions.pageTitle"),
+        pageDescription: t("pages.mazarTraditions.pageDescription"),
+        browseLabel: t("pages.mazarTraditions.browseLabel"),
+        resultsLabel: t("pages.mazarTraditions.resultsLabel"),
+        searchLabel: t("pages.mazarTraditions.searchLabel"),
+        searchPlaceholder: t("pages.mazarTraditions.searchPlaceholder"),
+        searchHelperText: t("pages.mazarTraditions.searchHelperText"),
+        topicsLabel: t("pages.mazarTraditions.topicsLabel"),
+        topicHelperText: t("pages.mazarTraditions.topicHelperText"),
+        topicSearchPlaceholder: t("pages.mazarTraditions.topicSearchPlaceholder"),
+        noMatchingTopicsLabel: t("pages.mazarTraditions.noMatchingTopicsLabel"),
+        clearFiltersLabel: t("pages.mazarTraditions.clearFiltersLabel"),
+        noSaintsFoundLabel: t("pages.mazarTraditions.noSaintsFoundLabel"),
+        previousLabel: t("pages.mazarTraditions.previousLabel"),
+        nextLabel: t("pages.mazarTraditions.nextLabel"),
+        pageLabel: t("pages.mazarTraditions.pageLabel"),
+      }}
+      client:load
+    />
+  </div>
+</Layout>

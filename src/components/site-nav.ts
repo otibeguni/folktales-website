@@ -16,6 +16,10 @@ export const siteNav: SiteNavItem[] = [
     href: localizePath("/stories"),
   },
   {
+    label: t("header.navMazarTraditions"),
+    href: localizePath("/mazar-traditions"),
+  },
+  {
     label: t("header.navExperiences"),
     href: localizePath("/experiences"),
   },

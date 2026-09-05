@@ -9,6 +9,8 @@ import {
   getAllTopics,
   getBookDetailPath,
   getBookCategoryLabel,
+  getMazarTraditionPath,
+  getResolvedMazarTraditions,
   getTopicRelationSections,
   getResolvedStories,
   getStoryRouteSlug,
@@ -45,6 +47,14 @@ const books = (await getAllBooks())
 const resources = (await getAllResources())
   .filter((resource) => (resource.data.topic_slugs ?? []).includes(topic.slug))
   .map((resource) => ({ ...resource.data, slug: resource.slug }));
+const mazarTraditions = (await getResolvedMazarTraditions())
+  .filter(({ entry }) => (entry.data.topic_slugs ?? []).includes(topic.slug))
+  .map(({ entry }) => ({
+    name: entry.data.title,
+    subtitle: entry.data.summary,
+    url: getMazarTraditionPath(entry.slug),
+    isExternal: false,
+  }));
 const relationSections = await getTopicRelationSections(topic.slug);
 const availableTopicOptions = (await getAllTopics())
   .map((entry) => ({
@@ -120,6 +130,7 @@ const breadcrumbs = [
       stories={stories}
       books={books}
       resources={resources}
+      mazarTraditions={mazarTraditions}
       relationSections={relationSections}
       isDev={isDev}
       availableTopics={availableTopicOptions}

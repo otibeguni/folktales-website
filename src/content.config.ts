@@ -105,6 +105,15 @@ const storyCollections = defineCollection({
   }),
 });
 
+const mazarTraditions = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    topic_slugs: z.array(z.string()).default([]),
+    resource_slugs: z.array(z.string()).default([]),
+  }),
+});
+
 export const collections = {
   stories,
   storyMetadata,
@@ -114,4 +123,5 @@ export const collections = {
   sourceTexts,
   resources,
   storyCollections,
+  mazarTraditions,
 };

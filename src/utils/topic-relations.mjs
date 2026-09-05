@@ -2,6 +2,7 @@ export const TOPIC_RELATION_TYPES = [
   "located_in",
   "part_of_tradition",
   "about",
+  "related_to",
 ];
 
 export const TOPIC_RELATION_LABELS = {
@@ -16,6 +17,10 @@ export const TOPIC_RELATION_LABELS = {
   about: {
     forward: "About",
     reverse: "Works about this topic",
+  },
+  related_to: {
+    forward: "Related to",
+    reverse: "Related to",
   },
 };
 

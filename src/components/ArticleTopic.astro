@@ -10,6 +10,7 @@ const {
   stories,
   books,
   resources,
+  mazarTraditions = [],
   relationSections = [],
   isDev = false,
   availableTopics = [],
@@ -119,6 +120,15 @@ const relatedResources = resources
             ))}
           </div>
         </>
+      )
+    }
+
+    {
+      mazarTraditions.length > 0 && (
+        <RelatedItemsList
+          title="Mazar Traditions"
+          items={mazarTraditions}
+        />
       )
     }
 

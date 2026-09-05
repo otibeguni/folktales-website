@@ -24,6 +24,12 @@ export type BookEntry = CollectionEntry<"books">;
 export type SourceTextEntry = CollectionEntry<"sourceTexts">;
 export type ResourceEntry = CollectionEntry<"resources">;
 export type StoryCollectionEntry = CollectionEntry<"storyCollections">;
+export type MazarTraditionEntry = CollectionEntry<"mazarTraditions">;
+export interface ResolvedMazarTraditionEntry {
+  entry: MazarTraditionEntry;
+  topics: TopicEntry[];
+  resources: ResourceEntry[];
+}
 export type ResolvedStoryEntry = StoryEntry & {
   data: StoryEntry["data"] & StoryMetadataEntry["data"];
 };
@@ -364,6 +370,53 @@ export async function getAllStoryCollections() {
   return getCollection("storyCollections");
 }
 
+export async function getAllMazarTraditions() {
+  return getCollection("mazarTraditions");
+}
+
+export async function getResolvedMazarTraditions(): Promise<ResolvedMazarTraditionEntry[]> {
+  const [entries, topics, resources] = await Promise.all([
+    getAllMazarTraditions(),
+    getAllTopics(),
+    getAllResources(),
+  ]);
+  const topicsBySlug = indexEntriesBySlug(topics);
+  const resourcesBySlug = indexEntriesBySlug(resources);
+
+  return entries
+    .map((entry) => {
+      const resolvedTopics = entry.data.topic_slugs.map((slug) => {
+        const topic = topicsBySlug.get(slug);
+        if (!topic) {
+          throw new Error(
+            `Mazar tradition "${entry.slug}" references missing topic "${slug}"`,
+          );
+        }
+        return topic;
+      });
+      const resolvedResources = entry.data.resource_slugs.map((slug) => {
+        const resource = resourcesBySlug.get(slug);
+        if (!resource) {
+          throw new Error(
+            `Mazar tradition "${entry.slug}" references missing resource "${slug}"`,
+          );
+        }
+        return resource;
+      });
+
+      return {
+        entry,
+        topics: resolvedTopics,
+        resources: resolvedResources,
+      };
+    })
+    .sort((left, right) => left.entry.data.title.localeCompare(right.entry.data.title));
+}
+
+export function getMazarTraditionPath(slug: string) {
+  return `/mazar-traditions/${slug}`;
+}
+
 export function indexStoryCollectionsByStorySlug(
   collections: StoryCollectionEntry[],
 ) {
@@ -434,7 +487,7 @@ export function getBookDetailPath(slug: string) {
 }
 
 export async function renderEntry(
-  entry: StoryEntry | StoryCollectionEntry | SourceTextEntry,
+  entry: StoryEntry | StoryCollectionEntry | SourceTextEntry | MazarTraditionEntry,
 ) {
   return render(entry);
 }

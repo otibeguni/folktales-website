@@ -6,6 +6,7 @@ const translations = {
   },
   header: {
     navStories: "Stories",
+    navMazarTraditions: "Mazar Traditions",
     navExperiences: "Experiences",
     navVintageIllustrations: "Vintage Illustrations",
     navBlog: "Blog",
@@ -30,6 +31,25 @@ const translations = {
       categoryLabel: "Category",
       allCategoryLabel: "All Categories",
       noStoriesFoundLabel: "No stories found.",
+    },
+    mazarTraditions: {
+      pageTitle: "Mazar Traditions",
+      pageDescription:
+        "Explore saints, shrines, sacred places, and the living traditions associated with them across Bangladesh.",
+      browseLabel: "Browse Saints",
+      resultsLabel: "saints found",
+      searchLabel: "Search Saints",
+      searchPlaceholder: "Search by saint, place, or topic",
+      searchHelperText: "Use search and topic filters together to narrow the list.",
+      topicsLabel: "Topics",
+      topicHelperText: "Search and add one or more topics to narrow the list.",
+      topicSearchPlaceholder: "Search topics to add",
+      noMatchingTopicsLabel: "No matching topics found.",
+      clearFiltersLabel: "Clear filters",
+      noSaintsFoundLabel: "No saints found.",
+      previousLabel: "Previous",
+      nextLabel: "Next",
+      pageLabel: "Page",
     },
     topics: {
       pageTitle: "Topics",

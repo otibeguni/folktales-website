@@ -1,0 +1,103 @@
+---
+import RelatedItemsList from "@/components/RelatedItemsList.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  getMazarTraditionPath,
+  getResolvedMazarTraditions,
+  renderEntry,
+} from "@/utils/content";
+import { buildCanonicalUrl } from "@/utils/seo";
+
+export async function getStaticPaths() {
+  const traditions = await getResolvedMazarTraditions();
+  return traditions.map((tradition) => ({
+    params: { slug: tradition.entry.slug },
+    props: { tradition },
+  }));
+}
+
+const { tradition } = Astro.props;
+const { entry, topics, resources } = tradition;
+const { Content } = await renderEntry(entry);
+const pagePath = getMazarTraditionPath(entry.slug);
+const canonicalUrl = buildCanonicalUrl(pagePath, Astro.site);
+const relatedTopics = topics.map((topic) => ({
+  name: topic.data.item,
+  types: topic.data.types,
+  url: `/topics/${topic.slug}`,
+  isExternal: false,
+}));
+const relatedResources = resources.map((resource) => ({
+  name: resource.data.title,
+  type: resource.data.type,
+  url: resource.data.url,
+  isExternal: true,
+}));
+const breadcrumbs = [
+  { label: "Mazar Traditions", href: "/mazar-traditions" },
+  { label: entry.data.title },
+];
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: entry.data.title,
+  description: entry.data.summary,
+  url: canonicalUrl,
+  inLanguage: "en",
+  author: {
+    "@type": "Organization",
+    name: "Otibeguni",
+    url: buildCanonicalUrl("/", Astro.site),
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Otibeguni",
+    url: buildCanonicalUrl("/", Astro.site),
+  },
+  about: topics.map((topic) => ({
+    "@type": topic.data.types.includes("Person") ? "Person" : "Thing",
+    name: topic.data.item,
+    url: buildCanonicalUrl(`/topics/${topic.slug}`, Astro.site),
+  })),
+};
+---
+
+<Layout
+  title={`${entry.data.title} | Mazar Traditions | Otibeguni`}
+  description={entry.data.summary}
+  schema={schemaData}
+  canonicalUrl={canonicalUrl}
+  openGraphType="article"
+  breadcrumbs={breadcrumbs}
+>
+  <article class="mx-auto max-w-4xl px-4 pb-12 pt-2 md:pb-16" data-pagefind-body>
+    <header class="space-y-4">
+      <h1 class="text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+        {entry.data.title}
+      </h1>
+      <p class="max-w-3xl text-lg leading-8 text-slate-600">
+        {entry.data.summary}
+      </p>
+    </header>
+
+    <div class="divider my-10"></div>
+
+    <div class="prose article-content max-w-none">
+      <Content />
+    </div>
+
+    <div class="not-prose mt-12">
+      <RelatedItemsList
+        title="Related Resources"
+        items={relatedResources}
+        layout="resource-rows"
+      />
+
+      <RelatedItemsList
+        title="Related Topics"
+        items={relatedTopics}
+        layout="topic-chips"
+      />
+    </div>
+  </article>
+</Layout>

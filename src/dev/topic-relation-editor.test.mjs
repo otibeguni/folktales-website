@@ -155,7 +155,7 @@ test("invalid relation type is rejected", async () => {
         action: "attach-existing",
         sourceTopicSlug: "forest-topic",
         targetTopicSlug: "hinduism-topic",
-        relationType: "related_to",
+        relationType: "unsupported_relation",
       },
     }),
     (error) =>

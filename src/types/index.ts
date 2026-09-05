@@ -17,6 +17,14 @@ export interface IStoryList {
   frontmatter: IStory;
 }
 
+export interface IMazarTraditionListItem {
+  slug: string;
+  title: string;
+  summary: string;
+  topic_slugs: string[];
+  topics: WikidataItemAlt[];
+}
+
 export interface WikidataItem {
   slug: string;
   item: string;
