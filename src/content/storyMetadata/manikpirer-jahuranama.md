@@ -4,6 +4,7 @@ cover_image: "https://res.cloudinary.com/dx0tajutq/image/upload/v1750584703/mani
 source_slug: "book-95-witness-to-marvels"
 topic_slugs:
   - "manik-pir"
+  - "mecca"
+  - "medina"
 resource_slugs: []
 ---
-

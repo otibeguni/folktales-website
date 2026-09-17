@@ -6,8 +6,14 @@ topic_slugs:
   - "bonbibi-deity"
   - "sundarbans"
   - "ganges-river"
+  - "dakshin-rai"
+  - "shah-jongoli"
+  - "raymoni"
+  - "gulal-bibi"
+  - "mecca"
+  - "medina"
+  - "prophet-muhammad"
 resource_slugs:
   - "resource-78"
   - "resource-79"
 ---
-

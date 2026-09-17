@@ -11,6 +11,6 @@ topic_slugs:
   - "vedas"
   - "rama"
   - "byangoma"
+  - "mecca"
 resource_slugs: []
 ---
-

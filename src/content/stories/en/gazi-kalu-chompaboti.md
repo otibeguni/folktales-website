@@ -288,7 +288,7 @@ She was always guarded by her seven brothers,
 
 And by the fierce commander of the royal army,
 
-A man named Dakshin Ray —
+A man named Dakshin Rai —
 
 Whose presence alone could stir fear in the hearts of warriors.
 
@@ -414,7 +414,7 @@ Gazi, startled to find himself in a new place, sat up and said,
 
 Champavati replied,
 
-> "Listen, thief, you must have heard of the crown prince of Brahman Nagar. Only Brahmins are allowed to enter here. Do you not fear the king's general, Dakshin Ray? He can destroy you in the blink of an eye. Where have you come from?"
+> "Listen, thief, you must have heard of the crown prince of Brahman Nagar. Only Brahmins are allowed to enter here. Do you not fear the king's general, Dakshin Rai? He can destroy you in the blink of an eye. Where have you come from?"
 
 >
 

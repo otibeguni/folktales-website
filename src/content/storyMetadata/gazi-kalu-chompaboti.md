@@ -5,12 +5,13 @@ source_slug: "book-43"
 topic_slugs:
   - "sundarbans"
   - "gazi-pir"
+  - "dakshin-rai"
   - "khidr"
   - "god-shiva"
   - "goddess-parvati"
   - "rahu"
   - "ganga-devi"
   - "patala"
+  - "mecca"
 resource_slugs: []
 ---
-

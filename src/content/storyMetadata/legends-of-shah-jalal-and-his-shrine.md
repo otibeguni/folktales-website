@@ -6,7 +6,7 @@ topic_slugs:
   - "conquest-of-sylhet"
   - "gour-govinda"
   - "nizamuddin-auliya"
+  - "mecca"
 resource_slugs:
   - "resource-3-hazrat-shahjalal-mazar"
 ---
-

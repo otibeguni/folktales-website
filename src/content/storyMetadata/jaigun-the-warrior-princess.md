@@ -8,6 +8,6 @@ topic_slugs:
   - angel-gabriel
   - mount-qaf
   - iram-of-the-pillars
+  - medina
 resource_slugs: []
 ---
-
