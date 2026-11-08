@@ -1,110 +1,22 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Search from 'astro-pagefind/components/Search';
-import {
-  bookHasDetailPage,
-  getAllBooks,
-  getBookDetailPath,
-  getResolvedStories,
-  getStoryRouteSlug,
-} from '@/utils/content';
-import { getBlogPosts } from '@/utils/storyblok-blog';
+import HomepageMasonry from '@/components/HomepageMasonry';
+import HomepageEditor from '@/components/HomepageEditor';
+import homepageConfig from '@/data/homepage-tiles.json';
+import { getHomepageCatalog, resolveHomepageTiles } from '@/utils/homepage';
 
-const publicationSlides = [
-  {
-    title: 'Otiprakrito - Volume 1',
-    copy: 'A beautifully illustrated bestiary with over one hundred mythical creatures from Bengali and indigenous folklore.',
-    href: '/publications/otiprakrito',
-  },
-  {
-    title: 'Chonde Chonde Golpo Boli',
-    copy: 'Fourteen traditional puthi narratives and twelve palas drawn from the song-based traditions of ancient Mymensingh and North Bengal.',
-    href: 'https://chonde-chonde.com/',
-  },
-];
-
-const allStories = await getResolvedStories();
-const storySlides = allStories
-  .filter((story) => story.data.language === 'en')
-  .sort((a, b) => a.data.title.localeCompare(b.data.title))
-  .slice(0, 3)
-  .map((story) => ({
-    title: story.data.title,
-    copy: `${story.data.category} story adaptation from the Otibeguni archive.`,
-    href: `/stories/${getStoryRouteSlug(story)}`,
-  }));
-
-const allBooks = await getAllBooks();
-const bookSlides = allBooks
-  .filter((book) => bookHasDetailPage(book))
-  .sort((a, b) => a.data.name.localeCompare(b.data.name))
-  .slice(0, 3)
-  .map((book) => ({
-    title: book.data.name,
-    copy: book.data.author
-      ? `By ${book.data.author}. Browse this book in the Otibeguni library.`
-      : 'Browse this book in the Otibeguni library.',
-    href: getBookDetailPath(book.slug),
-  }));
-
-const blogs = await getBlogPosts();
-
-const blogSlides = blogs.slice(0, 3).map((blog) => ({
-  title: blog.title,
-  copy: new Date(blog.publishedAt).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }),
-  href: `/blog/${blog.slug}`,
-}));
-
-const areas = [
-  {
-    label: 'Publications',
-    title: 'Books that keep folklore alive',
-    description:
-      'Books, editions, and long-form publications that preserve and share folklore in print.',
-    href: '/publications',
-    cardClass: 'bg-sky-50/70',
-    slides: publicationSlides,
-  },
-  {
-    label: 'Folktale Adaptions',
-    title: 'Folktales and legends of Bengal',
-    description:
-      'Short story adaptations of Bengali and indigenous folktales.',
-    href: '/stories',
-    cardClass: 'bg-amber-50/70',
-    slides: storySlides,
-  },
-  {
-    label: 'Folklore Library',
-    title: 'Folklore Preservation',
-    description:
-      'Digital library featuring over 70 folklore collections, including rare works compiled by Bangla Academy and independent authors.',
-    href: '/books',
-    cardClass: 'bg-emerald-50/70',
-    slides: bookSlides,
-  },
-  {
-    label: 'Community Projects',
-    title: 'Community & research work',
-    description:
-      'Updates, field notes, and public-facing work from Otibeguni community and research projects.',
-    href: '/blog',
-    cardClass: 'bg-rose-50/70',
-    slides: blogSlides,
-  },
-];
+const catalog = await getHomepageCatalog();
+const { config, tiles } = resolveHomepageTiles(homepageConfig, catalog);
+const isDev = import.meta.env.DEV;
 ---
 
 <Layout
   title="Otibeguni | Reviving Bengali and Indigenous Folklore"
   description="We preserve, adapt, and share the rich cultural heritage of our oral traditions through books, archives, and storytelling projects built for modern audiences."
 >
-  <div class="mx-auto max-w-[56rem] px-4 py-8 sm:px-6 lg:px-8">
-    <section class="space-y-6">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <section class="max-w-4xl space-y-6">
       <div class="space-y-3">
         <h1 class="max-w-4xl text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
           Reviving Bengali and Indigenous Folklore
@@ -120,105 +32,19 @@ const areas = [
       </div>
     </section>
 
-    <section class="mt-10 grid gap-5 lg:grid-cols-2" aria-label="Otibeguni areas">
-      {areas.map((area) => (
-        <article
-          class:list={[
-            'group flex min-h-[20rem] flex-col rounded-[1.75rem] border border-slate-300 p-6 no-underline transition hover:border-slate-400',
-            area.cardClass,
-          ]}
-          data-home-area
-        >
-          <span class="inline-flex self-start rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-900">
-            {area.label}
-          </span>
-          <h2 class="mt-4 text-2xl font-semibold leading-tight text-slate-900 sm:text-[1.75rem]">
-            <a href={area.href} class="hover:text-slate-700">
-              {area.title}
-            </a>
-          </h2>
-          <p class="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
-            {area.description}
-          </p>
-
-          <div class="mt-5">
-            <div class="homepage-slide-frame relative min-h-[9.5rem] overflow-hidden p-0">
-              {area.slides.map((slide, index) => (
-                <a
-                  href={slide.href}
-                  class:list={[
-                    'homepage-slide absolute inset-0 rounded-2xl border border-slate-200 bg-white p-4 no-underline hover:border-slate-300 sm:p-5',
-                    index === 0 && 'is-active',
-                  ]}
-                >
-                  <h3 class="text-base font-semibold leading-snug text-slate-900 sm:text-lg">
-                    {slide.title}
-                  </h3>
-                  <p class="mt-2 text-sm leading-6 text-slate-600 sm:text-[0.95rem]">
-                    {slide.copy}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </article>
-      ))}
+    <section class="mt-10" aria-label="Featured folklore and publications">
+      {
+        isDev ? (
+          <HomepageEditor
+            initialConfig={config}
+            initialTiles={tiles}
+            catalog={catalog}
+            client:load
+          />
+        ) : (
+          <HomepageMasonry tiles={tiles} client:load />
+        )
+      }
     </section>
   </div>
-
-  <style>
-    .homepage-slide {
-      opacity: 0;
-      transform: translateY(10px) scale(0.985);
-      transition:
-        opacity 420ms ease,
-        transform 420ms ease;
-      pointer-events: none;
-      will-change: opacity, transform;
-    }
-
-    .homepage-slide.is-active {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-  </style>
-
-  <script>
-    const cards = document.querySelectorAll('[data-home-area]');
-
-    cards.forEach((card) => {
-      const slides = Array.from(card.querySelectorAll('.homepage-slide'));
-      if (slides.length < 2) return;
-
-      let index = 0;
-      let isPaused = false;
-
-      const intervalId = window.setInterval(() => {
-        if (isPaused) return;
-
-        slides[index].classList.remove('is-active');
-        index = (index + 1) % slides.length;
-        slides[index].classList.add('is-active');
-      }, 2600);
-
-      slides.forEach((slide) => {
-        slide.addEventListener('mouseenter', () => {
-          isPaused = true;
-        });
-
-        slide.addEventListener('mouseleave', () => {
-          isPaused = false;
-        });
-      });
-
-      card.addEventListener('focusin', () => {
-        isPaused = true;
-      });
-
-      card.addEventListener('focusout', () => {
-        isPaused = false;
-      });
-    });
-  </script>
 </Layout>

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "tiles": [
+    {
+      "id": "publication-otiprakrito-volume-1",
+      "source": {
+        "type": "publication",
+        "slug": "otiprakrito-volume-1"
+      }
+    },
+    {
+      "id": "blog-bengali-puthi-mistaken-for-quran-outback-mosque",
+      "source": {
+        "type": "blogPost",
+        "slug": "bengali-puthi-mistaken-for-quran-outback-mosque"
+      }
+    },
+    {
+      "id": "mazarTradition-syed-yaqub-shah",
+      "source": {
+        "type": "mazarTradition",
+        "slug": "syed-yaqub-shah"
+      },
+      "titleOverride": "Mazar of Syed Yaqub Shah",
+      "descriptionOverride": "Can a piece of taro catch a thief? At this shrine in Moulvibazar, folklore says crushing one between two bricks can make stolen goods come back.",
+      "imageOverride": "/images/homepage/taro-root-wedged-between-bricks-f354dc3b3f48.png"
+    },
+    {
+      "id": "story-en-gule-deogandha",
+      "source": {
+        "type": "story",
+        "slug": "gule-deogandha",
+        "language": "en"
+      },
+      "descriptionOverride": "A mythical flower said to cure any illness. A journey through strange kingdoms, monstrous serpents, and a princess who devours humans. Prince Firoz Shah will risk everything to find the legendary Gul-e-Deogandha. But the flower holds a terrible secret—and some miracles come at a price far greater than anyone imagines."
+    }
+  ]
+}

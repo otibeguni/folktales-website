@@ -4,14 +4,14 @@
   "version": "0.0.11",
   "author": "Yasin Junet (hello@yasinjunet.com)",
   "scripts": {
-    "predev": "node scripts/ensure-dev-cert.mjs",
     "dev": "astro dev",
+    "dev:https": "node scripts/ensure-dev-cert.mjs && ASTRO_DEV_HTTPS=true astro dev",
     "build": "astro build && node scripts/ensure-sitemap-alias.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "content": "node tools/content-cli/cli.mjs",
     "test:content-cli": "node --test tools/content-cli/**/*.test.mjs",
-    "test:story-relations": "node --test src/dev/**/*.test.mjs",
+    "test:story-relations": "node --test src/dev/*.test.mjs",
     "test:topic-explorer": "node --test src/utils/*graph.test.mjs",
     "comic:author": "node tools/comic-author/dev-server.mjs",
     "comic:prepare-pdf": "node scripts/prepare-comic-pdf.mjs",
@@ -53,12 +53,14 @@
     "dayjs": "^1.11.18",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
+    "muuri": "^0.9.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-h5-audio-player": "^3.10.2",
     "schema-dts": "^1.1.5",
     "ssh2-sftp-client": "^12.1.1",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.8",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@napi-rs/canvas": "^1.0.0",
