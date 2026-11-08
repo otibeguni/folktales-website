@@ -55,7 +55,7 @@ const mazarTraditions = (await getResolvedMazarTraditions())
     url: getMazarTraditionPath(entry.slug),
     isExternal: false,
   }));
-const topicGraph = await getTopicNeighborhoodGraph(topic.slug, 3);
+const topicGraph = await getTopicNeighborhoodGraph(topic.slug, 1);
 const availableTopicOptions = (await getAllTopics())
   .map((entry) => ({
     slug: entry.slug,

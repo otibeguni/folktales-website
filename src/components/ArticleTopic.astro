@@ -2,7 +2,7 @@
 import type { IStory } from '@/types';
 import BookListItem from '@/components/BookListItem';
 import RelatedItemsList from '@/components/RelatedItemsList.astro';
-import RelatedTopicGraph from '@/components/RelatedTopicGraph.astro';
+import TopicRelationshipTour from '@/components/TopicRelationshipTour';
 import TopicRelationEditor from '@/components/TopicRelationEditor';
 import { sortTopicTags } from '@/utils/topic-tags';
 
@@ -76,9 +76,10 @@ const relatedResources = resources
           <div>
             {
               topicGraph.edges.length > 0 ? (
-                <RelatedTopicGraph
+                <TopicRelationshipTour
+                  client:load
                   graph={topicGraph}
-                  accessibleLabel={`Topic relationships within three levels of ${topic.item}`}
+                  accessibleLabel={`Direct topic relationships around ${topic.item}`}
                 />
               ) : (
                 <div class="rounded-2xl border border-dashed border-base-300 px-5 py-6 text-sm text-slate-500">
