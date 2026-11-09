@@ -4,7 +4,6 @@ url_slug: gift-from-the-banyan-god
 language: en
 ---
 
-
 Years ago, an elderly couple welcomed a son late in life. When he grew into a young man, they helped him find a bride, and the couple's happiness brought immense joy to his aging parents.
 
 The young wife was deeply spiritual. Every day, she visited a massive banyan tree near their home, leaving offerings of flowers and fruit at its roots. One morning, as she knelt in prayer, the tree began to shimmer. The God of the Banyan emerged from within the ancient trunk.
