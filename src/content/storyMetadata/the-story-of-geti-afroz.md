@@ -17,6 +17,7 @@ topic_slugs:
   - "azdaha"
   - "hamadan"
   - "rome"
+  - "geti-afroz"
 resource_slugs: []
 ---
 

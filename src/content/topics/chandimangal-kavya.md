@@ -4,5 +4,6 @@ item: Chandimangal
 item_bn: চণ্ডীমঙ্গল কাব্য
 wikidata_id: Q5071089
 types: ["Work", "Literary"]
+subtype: Narrative poem
 ---
 

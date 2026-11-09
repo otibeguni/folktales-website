@@ -1,24 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { TOPIC_RELATION_TYPES } from "./utils/topic-relations.mjs";
-
-const topicTypes = [
-  "Deity",
-  "Person",
-  "People",
-  "Place",
-  "Site",
-  "Kingdom",
-  "Being",
-  "Work",
-  "Religion",
-  "Event",
-  "Sacred",
-  "Historical",
-  "Legendary",
-  "Mythic",
-  "Natural",
-  "Literary",
-] as const;
+import { SUPERNATURAL_BEING_KINDS, TOPIC_TYPE_OPTIONS, validateTopicClassification } from "./utils/topic-taxonomy.mjs";
 
 const stories = defineCollection({
   schema: z.object({
@@ -46,10 +28,15 @@ const topics = defineCollection({
     item: z.string(),
     item_bn: z.string().optional(),
     wikidata_id: z.string().optional(),
-    types: z.array(z.enum(topicTypes)).min(1),
+    types: z.array(z.enum(TOPIC_TYPE_OPTIONS)).min(1),
+    subtype: z.string().optional(),
+    being_kind: z.enum(SUPERNATURAL_BEING_KINDS).optional(),
     description: z.string().nullable().optional(),
     latitude: z.number().optional(),
     longitude: z.number().optional(),
+  }).superRefine(({ types, subtype, being_kind }, context) => {
+    const message = validateTopicClassification(types, subtype, being_kind);
+    if (message) context.addIssue({ code: "custom", message });
   }),
 });
 

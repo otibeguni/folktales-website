@@ -4,6 +4,7 @@ cover_image: "https://res.cloudinary.com/dx0tajutq/image/upload/v1750584699/shah
 source_slug: "book-79"
 topic_slugs:
   - "satya-pir"
+  - "shotto-pirer-puthi"
 resource_slugs: []
 ---
 

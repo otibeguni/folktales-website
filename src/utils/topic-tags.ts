@@ -1,23 +1,8 @@
-export const TOPIC_TAG_ORDER = [
-  "Deity",
-  "Person",
-  "People",
-  "Place",
-  "Site",
-  "Kingdom",
-  "Being",
-  "Work",
-  "Religion",
-  "Event",
-  "Sacred",
-  "Historical",
-  "Legendary",
-  "Mythic",
-  "Natural",
-  "Literary",
-] as const;
+import { TOPIC_TYPE_OPTIONS as TOPIC_TAG_ORDER } from "./topic-taxonomy.mjs";
 
-const TOPIC_TAG_ORDER_INDEX = new Map(
+export { TOPIC_TAG_ORDER };
+
+const TOPIC_TAG_ORDER_INDEX = new Map<string, number>(
   TOPIC_TAG_ORDER.map((tag, index) => [tag, index]),
 );
 

@@ -7,6 +7,7 @@ topic_slugs:
   - "gour-govinda"
   - "nizamuddin-auliya"
   - "mecca"
+  - "shah-jalal-dargah"
 resource_slugs:
   - "resource-3-hazrat-shahjalal-mazar"
 ---

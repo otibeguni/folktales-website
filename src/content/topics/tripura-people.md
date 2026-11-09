@@ -4,5 +4,6 @@ item: Tripura People
 item_bn: ত্রিপুরা জনগোষ্ঠী
 wikidata_id: Q1287933
 types: ["People"]
+subtype: Community
 ---
 

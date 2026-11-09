@@ -1,3 +1,5 @@
+import { getTopicCategory, getTopicSubtype } from "./topic-taxonomy.mjs";
+
 export function buildTopicExplorerGraphData({
   topics,
   topicRelations,
@@ -26,6 +28,9 @@ export function buildTopicExplorerGraphData({
       description: topic.data.description?.trim() ?? "",
       itemBn: topic.data.item_bn,
       topicTypes: topic.data.types ?? [],
+      topicCategory: getTopicCategory(topic.data.types ?? []),
+      topicSubtype: getTopicSubtype(topic.data),
+      topicBeingKind: topic.data.being_kind,
     });
   }
 

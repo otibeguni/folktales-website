@@ -4,5 +4,6 @@ item: Dharmamangal Kavya
 item_bn: ধর্মমঙ্গল কাব্য
 wikidata_id: Q5269283
 types: ["Work", "Literary"]
+subtype: Narrative poem
 ---
 

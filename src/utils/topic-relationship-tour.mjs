@@ -1,15 +1,49 @@
-import { TOPIC_RELATION_LABELS } from './topic-relations.mjs';
+import { isSymmetricTopicRelation, TOPIC_RELATION_LABELS } from './topic-relations.mjs';
+import { getTopicCategory, SUPERNATURAL_BEING_KIND_LABELS } from './topic-taxonomy.mjs';
 
 /** @typedef {import('./content').TopicNeighborhoodNode} TopicNode */
 /** @typedef {import('./content').TopicNeighborhoodEdge} TopicEdge */
 /** @typedef {{ edge: TopicEdge, node: TopicNode }} TourRelation */
-/** @typedef {{ id: string, kind: 'intro' | 'relationship', label: string, verb: string, relations: TourRelation[], duration: number }} TourStep */
+/** @typedef {{ prefix?: string, connector: string, neighborsFirst?: boolean }} TourSentence */
+/** @typedef {{ id: string, kind: 'intro', label: string, relations: TourRelation[], duration: number } | { id: string, kind: 'relationship', label: string, heading?: string, sentence: TourSentence, relations: TourRelation[], duration: number }} TourStep */
 
-const VERBS = {
-  located_in: { outbound: 'is located in', inbound: 'contains' },
-  part_of_tradition: { outbound: 'belongs to the tradition of', inbound: 'includes' },
-  about: { outbound: 'is about', inbound: 'is the subject of' },
-  related_to: { outbound: 'is related to', inbound: 'is related to' },
+const RELATED_SENTENCE = { prefix: 'Explore connections linking ', connector: ' to ' };
+
+/** @type {Record<string, { outbound: TourSentence, inbound: TourSentence }>} */
+const SENTENCES = {
+  located_in: {
+    outbound: { prefix: 'Find ', connector: ' in ' },
+    inbound: { prefix: 'Find ', connector: ' in ', neighborsFirst: true },
+  },
+  part_of_tradition: {
+    outbound: { prefix: 'The collection associates ', connector: ' with ' },
+    inbound: { prefix: 'The collection associates ', connector: ' with ', neighborsFirst: true },
+  },
+  member_of: {
+    outbound: { connector: ' is a member of ' },
+    inbound: { connector: ' is a member of the group ', neighborsFirst: true },
+  },
+  about: {
+    outbound: { prefix: 'Read about ', connector: ' in ', neighborsFirst: true },
+    inbound: { prefix: 'Read about ', connector: ' in ' },
+  },
+  commemorates: {
+    outbound: { connector: ' commemorates ' },
+    inbound: { connector: ' is commemorated at ' },
+  },
+  related_to: { outbound: RELATED_SENTENCE, inbound: RELATED_SENTENCE },
+};
+
+/** @type {Partial<Record<string, [string, string]>>} */
+const TRADITION_CONNECTORS = {
+  Deity: [' is a deity in ', ' are deities in '],
+  Person: [' is a significant figure in ', ' are significant figures in '],
+  Group: [' are a group associated with ', ' are groups associated with '],
+  Place: [' is a place associated with ', ' are places associated with '],
+  Tradition: [' is part of the tradition of ', ' are part of the tradition of '],
+  'Sacred text': [' is a sacred text in ', ' are sacred texts in '],
+  'Named supernatural being': [' is a supernatural being in ', ' are supernatural beings in '],
+  'Class of supernatural beings': [' are a class of supernatural beings in ', ' are classes of supernatural beings in '],
 };
 
 /**
@@ -24,7 +58,7 @@ export function buildTopicRelationshipTour(graph) {
   const steps = [];
   if (!root) return { root, nodes: [], edges: [], steps };
 
-  /** @type {Map<string, { label: string, verb: string, relations: TourRelation[] }>} */
+  /** @type {Map<string, { label: string, showHeading: boolean, sentence: TourSentence, pluralConnector?: string, relations: TourRelation[] }>} */
   const groups = new Map();
   const visibleIds = new Set([root.id]);
   for (const edge of graph.edges) {
@@ -34,27 +68,85 @@ export function buildTopicRelationshipTour(graph) {
     if (!node) continue;
     visibleIds.add(node.id);
     const direction = outbound ? 'outbound' : 'inbound';
-    const key = `${edge.relationType}:${direction}`;
+    const symmetric = isSymmetricTopicRelation(edge.relationType);
+    const isTraditionLink = edge.relationType === 'part_of_tradition';
+    const groupByCategory = symmetric || isTraditionLink;
+    const category = node.beingKind
+      ? SUPERNATURAL_BEING_KIND_LABELS[node.beingKind]
+      : node.category ?? getTopicCategory(node.types) ?? 'Other topics';
+    const slideCategory = groupByCategory ? category : undefined;
+    const key = `${edge.relationType}:${symmetric ? 'symmetric' : direction}:${slideCategory ?? ''}`;
     if (!groups.has(key)) {
+      const target = outbound ? node : root;
+      const isGroupAssociation = isTraditionLink &&
+        (target.category ?? getTopicCategory(target.types)) === 'Group';
+      const label = isGroupAssociation
+        ? (outbound ? 'Associated group' : 'Associated with this group')
+        : TOPIC_RELATION_LABELS[edge.relationType]?.[outbound ? 'forward' : 'reverse'] ?? edge.label;
+      let sentence = SENTENCES[edge.relationType]?.[direction] ?? RELATED_SENTENCE;
+      let pluralConnector = edge.relationType === 'member_of' && !outbound
+        ? ' are members of the group '
+        : undefined;
+      const rootCategory = root.category ?? getTopicCategory(root.types);
+      if (symmetric && rootCategory === 'Group' && category === 'Place') {
+        sentence = { prefix: 'The group ', connector: ' is associated with ' };
+      } else if (symmetric && rootCategory === 'Place' && category === 'Group') {
+        sentence = { connector: ' is associated with ' };
+      } else if (isGroupAssociation) {
+        sentence = { prefix: 'Explore connections linking the group ', connector: ' to ', neighborsFirst: outbound };
+      } else if (isTraditionLink) {
+        const subject = outbound ? root : node;
+        const subjectCategory = subject.category ?? getTopicCategory(subject.types);
+        const connectorCategory = subject.beingKind
+          ? SUPERNATURAL_BEING_KIND_LABELS[subject.beingKind]
+          : subjectCategory;
+        const connectors = TRADITION_CONNECTORS[connectorCategory ?? ''];
+        if (connectors) {
+          sentence = {
+            prefix: subjectCategory === 'Group' ? 'The ' : undefined,
+            connector: connectors[0],
+            neighborsFirst: !outbound,
+          };
+          pluralConnector = connectors[1];
+        } else if (subjectCategory === 'Work') {
+          sentence = { prefix: 'Works associated with ', connector: ' include ', neighborsFirst: outbound };
+        } else if (subjectCategory === 'Supernatural being') {
+          sentence = { prefix: 'Supernatural beings in ', connector: ' include ', neighborsFirst: outbound };
+        }
+      }
       groups.set(key, {
-        label: TOPIC_RELATION_LABELS[edge.relationType]?.[outbound ? 'forward' : 'reverse'] ?? edge.label,
-        verb: VERBS[edge.relationType]?.[direction] ?? 'is connected to',
+        label: slideCategory ? `${label} · ${slideCategory}` : label,
+        showHeading: symmetric,
+        sentence,
+        pluralConnector,
         relations: [],
       });
     }
     groups.get(key).relations.push({ edge, node });
   }
 
-  steps.push({ id: 'intro', kind: 'intro', label: root.label, verb: '', relations: [], duration: 3000 });
+  steps.push({ id: 'intro', kind: 'intro', label: root.label, relations: [], duration: 3000 });
   for (const [key, group] of [...groups].sort((a, b) => a[1].label.localeCompare(b[1].label) || a[0].localeCompare(b[0]))) {
     group.relations.sort((a, b) => a.node.label.localeCompare(b.node.label) || a.edge.id.localeCompare(b.edge.id));
     for (let offset = 0; offset < group.relations.length; offset += 4) {
       const relations = group.relations.slice(offset, offset + 4);
+      const label = group.relations.length > 4 ? `${group.label} (${offset + 1}–${offset + relations.length})` : group.label;
+      const subject = group.sentence.neighborsFirst ? relations[0].node : root;
+      const hasMultipleSubjects = group.sentence.neighborsFirst && relations.length > 1;
+      const isTextCollection = !hasMultipleSubjects && subject.subtype === 'Collection of sacred texts';
+      const sentence = group.pluralConnector && (hasMultipleSubjects || isTextCollection)
+        ? {
+            ...group.sentence,
+            prefix: isTextCollection && !/^the\s/i.test(subject.label) ? 'The ' : group.sentence.prefix,
+            connector: group.pluralConnector,
+          }
+        : group.sentence;
       steps.push({
         id: `${key}:${offset}`,
         kind: 'relationship',
-        label: group.relations.length > 4 ? `${group.label} (${offset + 1}–${offset + relations.length})` : group.label,
-        verb: group.verb,
+        label,
+        heading: group.showHeading ? label : undefined,
+        sentence,
         relations,
         duration: Math.max(3500, relations.length * 1250),
       });
@@ -90,32 +182,48 @@ function wrapLabel(text, limit) {
 
 /** @param {TopicNode[]} nodes @param {string} rootId @param {number} availableWidth */
 export function layoutTopicRelationshipGraph(nodes, rootId, availableWidth) {
-  const width = Math.max(200, availableWidth);
-  const narrow = width < 360;
-  const nodeWidth = Math.min(124, narrow ? (width - 44) / 2 : (width - 90) / 3);
-  const limit = Math.max(4, Math.floor((nodeWidth - 14) / 6.6));
-  const lines = new Map(nodes.map((node) => [node.id, wrapLabel(node.label, limit)]));
-  // Wrap long names rather than shrinking labels into unreadable text on phones.
+  const width = Math.max(160, availableWidth);
   const fontSize = 11;
-  const nodeHeight = Math.max(60, ...[...lines.values()].map((label) => label.length * 13 + 14));
+  const margin = 12;
+  const gap = 22;
+  const root = nodes.find((node) => node.id === rootId);
   const peers = nodes.filter((node) => node.id !== rootId);
-  const half = Math.ceil(peers.length / 2);
-  const rootHeight = Math.max(72, nodeHeight);
-  const height = narrow
-    ? Math.max(400, 20 + rootHeight + 52 + half * (nodeHeight + 24))
-    : Math.max(400, half * (nodeHeight + 23) + 60);
-  const positions = new Map([[rootId, { x: width / 2, y: narrow ? 20 + rootHeight / 2 : height / 2, width: nodeWidth + 10, height: rootHeight }]]);
-  peers.forEach((node, index) => {
-    const right = narrow ? index % 2 === 1 : index >= half;
-    const row = narrow ? Math.floor(index / 2) : right ? index - half : index;
-    const count = right ? peers.length - half : half;
-    positions.set(node.id, {
-      x: right ? width - nodeWidth / 2 - 16 : nodeWidth / 2 + 16,
-      y: narrow ? 20 + rootHeight + 52 + nodeHeight / 2 + row * (nodeHeight + 24) : height * (row + 1) / (count + 1),
-      width: nodeWidth,
-      height: nodeHeight,
+  const rows = [];
+  for (let index = 0; index < peers.length; index += 2) {
+    rows.push(peers.slice(index, index + 2));
+  }
+  if (root) {
+    if (peers.length === 1 && width >= 220) rows[0].unshift(root);
+    else if (peers.length === 2 && width >= 320) rows[0].splice(1, 0, root);
+    else rows.splice(Math.floor(rows.length / 2), 0, [root]);
+  }
+
+  /** @type {Map<string, string[]>} */
+  const lines = new Map();
+  /** @type {Map<string, { x: number, y: number, width: number, height: number }>} */
+  const positions = new Map();
+  let top = margin;
+  for (const row of rows) {
+    const nodeWidth = Math.min(156, (width - margin * 2 - gap * (row.length - 1)) / row.length);
+    const limit = Math.max(4, Math.floor((nodeWidth - 14) / 6.6));
+    const heights = row.map((node) => {
+      const label = wrapLabel(node.label, limit);
+      lines.set(node.id, label);
+      return Math.max(node.id === rootId ? 40 : 34, label.length * 13 + 14);
     });
-  });
+    const rowHeight = Math.max(...heights);
+    const rowWidth = nodeWidth * row.length + gap * (row.length - 1);
+    row.forEach((node, index) => {
+      positions.set(node.id, {
+        x: (width - rowWidth + nodeWidth) / 2 + index * (nodeWidth + gap),
+        y: top + rowHeight / 2,
+        width: nodeWidth,
+        height: heights[index],
+      });
+    });
+    top += rowHeight + gap;
+  }
+  const height = rows.length ? top - gap + margin : margin * 2;
   return { width, height, positions, lines, fontSize };
 }
 

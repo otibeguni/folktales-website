@@ -122,6 +122,21 @@ test("duplicate attach returns unchanged", async () => {
   assert.equal(result.changed, false);
 });
 
+test("attaching the reverse of a symmetric relation returns the existing link", async () => {
+  const rootDir = await makeFixture();
+  const attach = (sourceTopicSlug, targetTopicSlug) => mutateTopicRelations({
+    rootDir,
+    isDev: true,
+    payload: { action: "attach-existing", sourceTopicSlug, targetTopicSlug, relationType: "related_to" },
+  });
+
+  const first = await attach("river-topic", "forest-topic");
+  const reversed = await attach("forest-topic", "river-topic");
+  assert.equal(first.changed, true);
+  assert.equal(reversed.changed, false);
+  assert.equal(reversed.relationSlug, first.relationSlug);
+});
+
 test("remove deletes outbound relation file", async () => {
   const rootDir = await makeFixture();
 

@@ -453,6 +453,32 @@ test("topic relation entity supports list/get and topic related includes typed l
   );
 });
 
+test("relation slices use subtype and preserve direction for directed edges", async () => {
+  const rootDir = await makeFixture();
+  await writeFile(rootDir, "src/content/topics/forest-topic.md", `---
+slug: forest-topic
+item: Forest Topic
+types: [Place, Natural]
+subtype: Natural feature
+---
+`);
+  await writeFile(rootDir, "src/content/topicRelations/related_to--forest-topic--river-topic.md", `---
+slug: related_to--forest-topic--river-topic
+source_topic_slug: forest-topic
+target_topic_slug: river-topic
+type: related_to
+---
+`);
+  const slice = async (end) => {
+    const result = await runCli(rootDir, ["list", "topic-relation", `--${end}-subtype`, "Natural feature", "--json"]);
+    assert.equal(result.code, 0);
+    return JSON.parse(result.stdout).map((relation) => [relation.type, relation.directed]);
+  };
+
+  assert.deepEqual(await slice("source"), [["located_in", true], ["related_to", false]]);
+  assert.deepEqual(await slice("target"), [["related_to", false]]);
+});
+
 test("help includes tui usage", async () => {
   const rootDir = await makeFixture();
   const help = await runCli(rootDir, ["help"]);

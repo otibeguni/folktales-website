@@ -13,6 +13,7 @@ topic_slugs:
   - "mecca"
   - "medina"
   - "prophet-muhammad"
+  - "bonobibi-jahuranama"
 resource_slugs:
   - "resource-78"
   - "resource-79"

@@ -1,7 +1,9 @@
 import { useDeferredValue, useState, type FormEvent } from 'react';
 
 import { TOPIC_RELATION_TYPE_OPTIONS } from '@/dev/story-relation-options.mjs';
-import { TOPIC_RELATION_LABELS } from '@/utils/topic-relations.mjs';
+import { isSymmetricTopicRelation, isTopicRelationType, TOPIC_RELATION_LABELS } from '@/utils/topic-relations.mjs';
+
+type TopicRelationType = keyof typeof TOPIC_RELATION_LABELS;
 
 type TopicOption = {
   slug: string;
@@ -11,7 +13,7 @@ type TopicOption = {
 
 type TopicRelationRecord = {
   slug: string;
-  relationType: string;
+  relationType: TopicRelationType;
   direction: 'outbound' | 'inbound';
   topicSlug: string;
   topicItem: string;
@@ -32,7 +34,7 @@ const TopicRelationEditor = ({
 }: TopicRelationEditorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [relationType, setRelationType] = useState(
+  const [relationType, setRelationType] = useState<TopicRelationType>(
     TOPIC_RELATION_TYPE_OPTIONS[0] ?? 'located_in',
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,15 +43,15 @@ const TopicRelationEditor = ({
   const deferredSearchQuery = useDeferredValue(searchQuery);
   const normalizedSearchQuery = deferredSearchQuery.trim().toLowerCase();
 
-  const existingOutboundKeys = new Set(
+  const existingKeys = new Set(
     currentRelations
-      .filter((relation) => relation.direction === 'outbound')
+      .filter((relation) => relation.direction === 'outbound' || isSymmetricTopicRelation(relation.relationType))
       .map((relation) => `${relation.relationType}:${relation.topicSlug}`),
   );
 
   const attachableTopics = availableTopics
     .filter((topic) => topic.slug !== topicSlug)
-    .filter((topic) => !existingOutboundKeys.has(`${relationType}:${topic.slug}`))
+    .filter((topic) => !existingKeys.has(`${relationType}:${topic.slug}`))
     .filter((topic) => {
       if (!normalizedSearchQuery) {
         return true;
@@ -168,7 +170,10 @@ const TopicRelationEditor = ({
                   </span>
                   <select
                     value={relationType}
-                    onChange={(event) => setRelationType(event.target.value)}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      if (isTopicRelationType(value)) setRelationType(value);
+                    }}
                     className="select select-bordered"
                   >
                     {TOPIC_RELATION_TYPE_OPTIONS.map((type) => (
@@ -243,6 +248,7 @@ const TopicRelationEditor = ({
                   {currentRelations.length > 0 ? (
                     <div className="flex flex-col divide-y divide-base-300">
                       {currentRelations.map((relation) => {
+                        const symmetric = isSymmetricTopicRelation(relation.relationType);
                         const label =
                           relation.direction === 'outbound'
                             ? TOPIC_RELATION_LABELS[relation.relationType].forward
@@ -258,9 +264,7 @@ const TopicRelationEditor = ({
                                 {label}
                               </span>
                               <span className="badge badge-outline">
-                                {relation.direction === 'outbound'
-                                  ? 'outbound'
-                                  : 'inbound'}
+                                {symmetric ? 'symmetric' : relation.direction}
                               </span>
                             </div>
                             <div>
@@ -269,7 +273,7 @@ const TopicRelationEditor = ({
                                 {relation.topicSlug}
                               </div>
                             </div>
-                            {relation.direction === 'outbound' && (
+                            {(symmetric || relation.direction === 'outbound') && (
                               <div>
                                 <button
                                   type="button"

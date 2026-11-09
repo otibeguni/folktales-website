@@ -6,5 +6,6 @@ type: video
 topic_slugs:
   - sylhet-division
   - shah-jalal
+  - shah-jalal-dargah
 ---
 

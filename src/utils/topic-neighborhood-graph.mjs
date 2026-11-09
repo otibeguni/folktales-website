@@ -1,3 +1,6 @@
+import { getTopicCategory, getTopicSubtype } from "./topic-taxonomy.mjs";
+import { isSymmetricTopicRelation } from "./topic-relations.mjs";
+
 export function buildTopicNeighborhoodGraphData({
   topics,
   topicRelations,
@@ -23,13 +26,18 @@ export function buildTopicNeighborhoodGraphData({
   const inboundTopicSlugs = new Map();
 
   for (const relation of validRelations) {
-    const { source_topic_slug: source, target_topic_slug: target } = relation.data;
+    const { source_topic_slug: source, target_topic_slug: target, type } = relation.data;
 
     if (!outboundTopicSlugs.has(source)) outboundTopicSlugs.set(source, new Set());
-    if (!inboundTopicSlugs.has(target)) inboundTopicSlugs.set(target, new Set());
 
     outboundTopicSlugs.get(source).add(target);
-    inboundTopicSlugs.get(target).add(source);
+    if (isSymmetricTopicRelation(type)) {
+      if (!outboundTopicSlugs.has(target)) outboundTopicSlugs.set(target, new Set());
+      outboundTopicSlugs.get(target).add(source);
+    } else {
+      if (!inboundTopicSlugs.has(target)) inboundTopicSlugs.set(target, new Set());
+      inboundTopicSlugs.get(target).add(source);
+    }
   }
 
   const depthByTopicSlug = new Map([[rootTopicSlug, 0]]);
@@ -68,6 +76,9 @@ export function buildTopicNeighborhoodGraphData({
         label: topic.data.item,
         href: `/topics/${topicSlug}`,
         types: topic.data.types ?? [],
+        category: getTopicCategory(topic.data.types ?? []),
+        subtype: getTopicSubtype(topic.data),
+        beingKind: topic.data.being_kind,
         depth,
         isRoot: topicSlug === rootTopicSlug,
       };

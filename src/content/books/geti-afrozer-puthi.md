@@ -13,6 +13,7 @@ topic_slugs:
   - azdaha
   - babylon
   - damascus
+  - geti-afroz
   - hamadan
   - jinn
   - kandahar

@@ -4,5 +4,6 @@ item: Yusuf and Zulaikha
 item_bn: ইউসুফ-জুলেখা
 wikidata_id: Q3350827
 types: ["Work", "Literary"]
+subtype: Narrative poem
 ---
 

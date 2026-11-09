@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import type { TopicNeighborhoodEdge, TopicNeighborhoodGraph, TopicNeighborhoodNode } from '@/utils/content';
 import {
   buildTopicRelationshipTour,
@@ -25,16 +25,21 @@ export default function TopicRelationshipTour({ graph, accessibleLabel }: Props)
   const [graphWidth, setGraphWidth] = useState(440);
   const graphRef = useRef<HTMLDivElement>(null);
   const elapsed = useRef(0);
-  const markerId = `tour-arrow-${useId().replace(/:/g, '')}`;
   const step = tour.steps[index] ?? tour.steps[0];
-  const layout = useMemo(() => layoutTopicRelationshipGraph(tour.nodes, graph.rootNodeId, graphWidth), [tour.nodes, graph.rootNodeId, graphWidth]);
-  const focusedNodes = new Set([graph.rootNodeId, ...(step?.relations.map(({ node }) => node.id) ?? [])]);
-  const focusedEdges = new Set(step?.relations.map(({ edge }) => edge.id) ?? []);
-  const showAll = step?.kind === 'intro';
-  const nodesById = useMemo(() => new Map(tour.nodes.map((node) => [node.id, node])), [tour.nodes]);
+  const nodesById = useMemo(() => {
+    const nodes = new Map<string, TopicNeighborhoodNode>();
+    if (tour.root) nodes.set(tour.root.id, tour.root);
+    for (const { node } of step?.relations ?? []) nodes.set(node.id, node);
+    return nodes;
+  }, [tour.root, step]);
+  const slideEdges = useMemo(() => step?.relations.map(({ edge }) => edge) ?? [], [step]);
+  const layout = useMemo(
+    () => layoutTopicRelationshipGraph([...nodesById.values()], graph.rootNodeId, graphWidth),
+    [nodesById, graph.rootNodeId, graphWidth],
+  );
   const edgeLanes = useMemo(() => {
     const pairs = new Map<string, TopicNeighborhoodEdge[]>();
-    for (const edge of tour.edges) {
+    for (const edge of slideEdges) {
       const key = [edge.source, edge.target].sort().join('\0');
       if (!pairs.has(key)) pairs.set(key, []);
       pairs.get(key)!.push(edge);
@@ -42,10 +47,10 @@ export default function TopicRelationshipTour({ graph, accessibleLabel }: Props)
     const lanes = new Map<string, number>();
     for (const edges of pairs.values()) edges.forEach((edge, i) => {
       const direction = edge.source.localeCompare(edge.target) <= 0 ? 1 : -1;
-      lanes.set(edge.id, (i - (edges.length - 1) / 2) * 32 * direction);
+      lanes.set(edge.id, (i - (edges.length - 1) / 2) * 16 * direction);
     });
     return lanes;
-  }, [tour.edges]);
+  }, [slideEdges]);
 
   useEffect(() => {
     const element = graphRef.current;
@@ -114,36 +119,38 @@ export default function TopicRelationshipTour({ graph, accessibleLabel }: Props)
 
   if (!tour.root || !step) return null;
 
+  const rootLink = <TopicLink node={tour.root} />;
+  const neighborLinks = step.relations.map(({ node, edge }, i) => (
+    <Fragment key={edge.id}>
+      {i > 0 && (i === step.relations.length - 1 ? (i === 1 ? ' and ' : ', and ') : ', ')}
+      <TopicLink node={node} />
+    </Fragment>
+  ));
+
   return (
     <section className="topic-relationship-tour" aria-label={accessibleLabel}>
       <div className="trt-content">
         <div className="trt-graph" ref={graphRef}>
           <svg viewBox={`0 0 ${layout.width} ${layout.height}`} width="100%" height={layout.height} role="group" aria-label={accessibleLabel}>
-            <desc>{`Connections around ${tour.root.label}. Highlighted connections match the current sentence. Choose a topic to visit its page.`}</desc>
-            <defs>
-              <marker id={markerId} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" />
-              </marker>
-            </defs>
+            <desc>{`Topics for the current slide around ${tour.root.label}. Choose a topic to visit its page.`}</desc>
             <g className="trt-edges">
-              {tour.edges.map((edge) => (
+              {slideEdges.map((edge) => (
                 <path
                   key={edge.id}
-                  className={`trt-edge ${showAll || focusedEdges.has(edge.id) ? 'is-focused' : 'is-dimmed'}`}
+                  className="trt-edge"
                   d={topicRelationshipEdgePath(edge, layout, graph.rootNodeId, edgeLanes.get(edge.id))}
                   fill="none"
-                  markerEnd={`url(#${markerId})`}
                 >
-                  <title>{`${nodesById.get(edge.source)?.label} → ${edge.label} → ${nodesById.get(edge.target)?.label}`}</title>
+                  <title>{`${nodesById.get(edge.source)?.label} · ${edge.label} · ${nodesById.get(edge.target)?.label}`}</title>
                 </path>
               ))}
             </g>
             <g>
-              {tour.nodes.map((node) => {
+              {Array.from(nodesById.values(), (node) => {
                 const position = layout.positions.get(node.id)!;
                 const lines = layout.lines.get(node.id) ?? [node.label];
                 return (
-                  <a key={node.id} href={node.href} aria-label={node.label} className={`trt-node ${node.id === graph.rootNodeId ? 'is-root' : ''} ${showAll || focusedNodes.has(node.id) ? 'is-focused' : 'is-dimmed'}`}>
+                  <a key={node.id} href={node.href} aria-label={node.label} className={`trt-node ${node.id === graph.rootNodeId ? 'is-root' : ''}`}>
                     <g transform={`translate(${position.x},${position.y})`}>
                       <rect x={-position.width / 2} y={-position.height / 2} width={position.width} height={position.height} rx="9" />
                       <text textAnchor="middle" fontSize={layout.fontSize}>
@@ -158,18 +165,16 @@ export default function TopicRelationshipTour({ graph, accessibleLabel }: Props)
           </svg>
         </div>
         <div className="trt-reading" aria-live="polite" aria-atomic="true" onFocusCapture={() => setPlaying(false)}>
+          {step.kind === 'relationship' && step.heading && <p className="trt-category">{step.heading}</p>}
           <p className="trt-sentence" key={step.id}>
             {step.kind === 'intro' ? (
-              <>Explore the connections around <TopicLink node={tour.root} />.</>
+              <>Explore the connections around {rootLink}.</>
             ) : (
               <>
-                <TopicLink node={tour.root} /> {step.verb}{' '}
-                {step.relations.map(({ node, edge }, i) => (
-                  <Fragment key={edge.id}>
-                    {i > 0 && (i === step.relations.length - 1 ? (i === 1 ? ' and ' : ', and ') : ', ')}
-                    <TopicLink node={node} />
-                  </Fragment>
-                ))}.
+                {step.sentence.prefix}
+                {step.sentence.neighborsFirst ? neighborLinks : rootLink}
+                {step.sentence.connector}
+                {step.sentence.neighborsFirst ? rootLink : neighborLinks}.
               </>
             )}
           </p>

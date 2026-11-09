@@ -19,16 +19,25 @@ test('tour includes only direct neighbors while retaining their cross-links as c
   assert.equal(tour.steps.at(-1).kind, 'relationship');
 });
 
-test('sentences preserve type and direction, including the reverse containment meaning', () => {
+test('sentences preserve which topic is the place, tradition, or work from either endpoint', () => {
   const tour = buildTopicRelationshipTour(graph(['root', 'place', 'region', 'saint', 'religion', 'work', 'subject'].map((id) => node(id)), [
     edge('contains', 'place', 'root', 'located_in'), edge('location', 'root', 'region', 'located_in'),
     edge('includes', 'saint', 'root', 'part_of_tradition'), edge('tradition', 'root', 'religion', 'part_of_tradition'),
     edge('subject', 'work', 'root', 'about'), edge('about', 'root', 'subject', 'about'),
   ]));
-  const verbs = new Map(tour.steps.filter((s) => s.kind === 'relationship').map((s) => [s.relations[0].edge.id, s.verb]));
-  assert.deepEqual(Object.fromEntries(verbs), {
-    about: 'is about', includes: 'includes', contains: 'contains', location: 'is located in',
-    tradition: 'belongs to the tradition of', subject: 'is the subject of',
+  const sentences = Object.fromEntries(tour.steps.filter((s) => s.kind === 'relationship').map((step) => {
+    const neighbor = step.relations[0].node.label;
+    const { prefix = '', connector, neighborsFirst } = step.sentence;
+    const [first, second] = neighborsFirst ? [neighbor, 'root'] : ['root', neighbor];
+    return [step.relations[0].edge.id, `${prefix}${first}${connector}${second}.`];
+  }));
+  assert.deepEqual(sentences, {
+    about: 'Read about subject in root.',
+    includes: 'saint is a place associated with root.',
+    contains: 'Find place in root.',
+    location: 'Find root in region.',
+    tradition: 'root is a place associated with religion.',
+    subject: 'Read about root in work.',
   });
 });
 
@@ -40,6 +49,79 @@ test('larger groups paginate deterministically without dropping or duplicating r
   assert.deepEqual(tour.steps.slice(1).map((s) => s.relations.length), [4, 4, 3]);
   assert.deepEqual(tour.steps.slice(1).flatMap((s) => s.relations.map((r) => r.node.label)), peers.map((n) => n.label).sort());
   assert.equal(new Set(tour.steps.map((s) => s.id)).size, tour.steps.length);
+});
+
+test('the tour groups symmetric links by neighbor category and reads a shrine link in reverse', () => {
+  const tour = buildTopicRelationshipTour(graph([
+    node('root'), node('left'), node('right'), node('shrine'),
+    { ...node('being'), types: ['Supernatural being'], category: 'Supernatural being' },
+  ], [
+    edge('left-link', 'left', 'root'),
+    edge('right-link', 'root', 'right'),
+    edge('being-link', 'root', 'being'),
+    edge('shrine-link', 'shrine', 'root', 'commemorates'),
+  ]));
+  const associations = tour.steps.filter((step) => step.label.startsWith('Related to'));
+  assert.deepEqual(associations.map((step) => step.label), ['Related to · Place', 'Related to · Supernatural being']);
+  assert.deepEqual(associations.map((step) => step.relations.map(({ node }) => node.id)), [['left', 'right'], ['being']]);
+  const shrine = tour.steps.find((step) => step.sentence?.connector === ' is commemorated at ');
+  assert.equal(shrine.relations[0].node.id, 'shrine');
+});
+
+test('a group slide lists its members as the subjects of one sentence', () => {
+  const tour = buildTopicRelationshipTour(graph([
+    { ...node('root'), types: ['People'] },
+    { ...node('first'), types: ['Person'] },
+    { ...node('second'), types: ['Person'] },
+  ], [
+    edge('first-member', 'first', 'root', 'member_of'),
+    edge('second-member', 'second', 'root', 'member_of'),
+  ]));
+  const members = tour.steps.find((step) => step.kind === 'relationship');
+  assert.equal(members.label, 'Members');
+  assert.equal(members.sentence.neighborsFirst, true);
+  assert.equal(members.sentence.connector, ' are members of the group ');
+  assert.deepEqual(members.relations.map(({ node }) => node.id), ['first', 'second']);
+});
+
+test('tradition slides use category-specific sentences without a heading', () => {
+  const tour = buildTopicRelationshipTour(graph([
+    { ...node('root'), types: ['Religion'] },
+    { ...node('deity'), types: ['Deity'] },
+    { ...node('group'), types: ['People'] },
+    { ...node('spirit'), types: ['Supernatural being', 'Mythic'], beingKind: 'class' },
+    { ...node('angel'), types: ['Supernatural being', 'Sacred'], beingKind: 'individual' },
+    { ...node('person'), types: ['Person'] },
+    { ...node('another-person'), types: ['Person'] },
+    node('place'),
+    { ...node('ritual'), types: ['Tradition'] },
+    { ...node('scripture'), types: ['Sacred text'] },
+    { ...node('text'), types: ['Work'] },
+  ], [
+    edge('deity-link', 'deity', 'root', 'part_of_tradition'),
+    edge('group-link', 'group', 'root', 'part_of_tradition'),
+    edge('spirit-link', 'spirit', 'root', 'part_of_tradition'),
+    edge('angel-link', 'angel', 'root', 'part_of_tradition'),
+    edge('person-link', 'person', 'root', 'part_of_tradition'),
+    edge('another-person-link', 'another-person', 'root', 'part_of_tradition'),
+    edge('place-link', 'place', 'root', 'part_of_tradition'),
+    edge('ritual-link', 'ritual', 'root', 'part_of_tradition'),
+    edge('scripture-link', 'scripture', 'root', 'part_of_tradition'),
+    edge('text-link', 'text', 'root', 'part_of_tradition'),
+  ]));
+  const slides = tour.steps.slice(1);
+  assert.deepEqual(slides.map((step) => [step.sentence.prefix, step.sentence.connector, step.relations.map(({ node }) => node.id)]), [
+    [undefined, ' are a class of supernatural beings in ', ['spirit']],
+    [undefined, ' is a deity in ', ['deity']],
+    ['The ', ' are a group associated with ', ['group']],
+    [undefined, ' is a supernatural being in ', ['angel']],
+    [undefined, ' are significant figures in ', ['another-person', 'person']],
+    [undefined, ' is a place associated with ', ['place']],
+    [undefined, ' is a sacred text in ', ['scripture']],
+    [undefined, ' is part of the tradition of ', ['ritual']],
+    ['Works associated with ', ' include ', ['text']],
+  ]);
+  assert.ok(slides.every((step) => step.heading === undefined));
 });
 
 test('isolated topics keep a readable introduction and missing roots return no tour', () => {

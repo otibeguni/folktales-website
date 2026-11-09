@@ -13,7 +13,7 @@ const makeTopic = (slug, item = slug) => ({
   data: { item, types: ["Person"] },
 });
 
-const makeRelation = (slug, source, target, type = "related_to") => ({
+const makeRelation = (slug, source, target, type = "located_in") => ({
   slug,
   data: {
     source_topic_slug: source,
@@ -52,7 +52,7 @@ test("topic neighborhood includes direct inbound relations and follows outbound 
 
 test("topic neighborhood does not expand inbound branches into the third layer", () => {
   const graph = buildTopicNeighborhoodGraphData({
-    topics: ["root", "one", "incoming", "outbound", "hidden"].map((slug) =>
+    topics: ["root", "one", "incoming", "outbound", "hidden", "symmetric"].map((slug) =>
       makeTopic(slug),
     ),
     topicRelations: [
@@ -60,6 +60,7 @@ test("topic neighborhood does not expand inbound branches into the third layer",
       makeRelation("incoming-one", "incoming", "one"),
       makeRelation("incoming-outbound", "incoming", "outbound"),
       makeRelation("hidden-incoming", "hidden", "incoming"),
+      makeRelation("symmetric-incoming", "symmetric", "incoming", "related_to"),
     ],
     rootTopicSlug: "root",
     maxDepth: 3,
@@ -71,6 +72,7 @@ test("topic neighborhood does not expand inbound branches into the third layer",
     "one",
     "incoming",
     "outbound",
+    "symmetric",
   ]);
   assert.equal(graph.nodes.some((node) => node.slug === "hidden"), false);
 });

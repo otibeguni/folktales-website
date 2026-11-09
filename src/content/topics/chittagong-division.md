@@ -2,5 +2,6 @@
 slug: chittagong-division
 item: Chittagong Division
 types: ["Place"]
+subtype: Settlement or region
 description: The southeastern administrative division of Bangladesh containing Chittagong District.
 ---

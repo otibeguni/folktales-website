@@ -7,5 +7,6 @@ language: bn
 categories: []
 topic_slugs:
   - satya-pir
+  - shotto-pirer-puthi
 ---
 

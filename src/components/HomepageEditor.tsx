@@ -95,7 +95,9 @@ function resolveDraftTiles(
 
   return config.tiles.flatMap((tile) => {
     const sourceKey = getSourceKey(tile.source);
-    let sourceItem = catalogByKey.get(sourceKey) ?? initialByKey.get(sourceKey);
+    const catalogItem = catalogByKey.get(sourceKey);
+    const initialTile = initialByKey.get(sourceKey);
+    let sourceItem = catalogItem ?? initialTile;
 
     if (!sourceItem && tile.source.type === "illustration") {
       sourceItem = makeIllustrationCatalogItem(tile.source);
@@ -103,14 +105,10 @@ function resolveDraftTiles(
 
     if (!sourceItem) return [];
 
-    const defaultTitle =
-      "defaultTitle" in sourceItem ? sourceItem.defaultTitle : sourceItem.title;
-    const defaultDescription =
-      "defaultDescription" in sourceItem
-        ? sourceItem.defaultDescription
-        : sourceItem.description;
-    const defaultImage =
-      "defaultImage" in sourceItem ? sourceItem.defaultImage : sourceItem.image;
+    const defaults = catalogItem ? undefined : initialTile;
+    const defaultTitle = defaults ? defaults.defaultTitle : sourceItem.title;
+    const defaultDescription = defaults ? defaults.defaultDescription : sourceItem.description;
+    const defaultImage = defaults ? defaults.defaultImage : sourceItem.image;
 
     return [
       {

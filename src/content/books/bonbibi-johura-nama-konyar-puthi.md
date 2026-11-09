@@ -13,5 +13,6 @@ topic_slugs:
   - bonbibi-deity
   - ganges-river
   - sundarbans
+  - bonobibi-jahuranama
 ---
 

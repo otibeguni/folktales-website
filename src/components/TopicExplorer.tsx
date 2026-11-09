@@ -1,8 +1,10 @@
 import { useDeferredValue, useEffect, useId, useMemo, useRef, useState } from 'react';
 import cytoscape from 'cytoscape';
-import type { Core, ElementDefinition, Stylesheet } from 'cytoscape';
+import type { Core, ElementDefinition, StylesheetJson } from 'cytoscape';
 
 import type { TopicExplorerGraph, TopicExplorerNode } from '@/utils/content';
+import { isSymmetricTopicRelation } from '@/utils/topic-relations.mjs';
+import { SUPERNATURAL_BEING_KIND_LABELS } from '@/utils/topic-taxonomy.mjs';
 
 const TOGGLEABLE_ENTITY_TYPES = ['story', 'resource', 'book'] as const;
 const ALL_VISIBLE_TOGGLEABLES = [...TOGGLEABLE_ENTITY_TYPES];
@@ -191,11 +193,12 @@ const TopicExplorer = ({ graphDataId, labels }: Props) => {
         data: {
           ...edge,
           edgeType: edge.type,
+          directed: edge.type === 'topic_relation' && !isSymmetricTopicRelation(edge.relationType),
         },
       })),
     ];
 
-    const stylesheet: Stylesheet[] = [
+    const stylesheet: StylesheetJson = [
       {
         selector: 'node',
         style: {
@@ -221,11 +224,11 @@ const TopicExplorer = ({ graphDataId, labels }: Props) => {
           'font-weight': 700,
           'text-background-color': '#ffffff',
           'text-background-opacity': 0.92,
-          'text-background-padding': 3,
+          'text-background-padding': '3px',
           'text-background-shape': 'roundrectangle',
           'text-margin-y': -22,
           'text-wrap': 'wrap',
-          'text-max-width': 120,
+          'text-max-width': '120px',
           width: 28,
         },
       },
@@ -240,10 +243,10 @@ const TopicExplorer = ({ graphDataId, labels }: Props) => {
           shape: 'round-rectangle',
           'text-background-color': '#ffffff',
           'text-background-opacity': 0.9,
-          'text-background-padding': 2,
+          'text-background-padding': '2px',
           'text-background-shape': 'roundrectangle',
           'text-margin-y': -18,
-          'text-max-width': 110,
+          'text-max-width': '110px',
           'text-wrap': 'wrap',
         },
       },
@@ -258,10 +261,10 @@ const TopicExplorer = ({ graphDataId, labels }: Props) => {
           shape: 'diamond',
           'text-background-color': '#ffffff',
           'text-background-opacity': 0.9,
-          'text-background-padding': 2,
+          'text-background-padding': '2px',
           'text-background-shape': 'roundrectangle',
           'text-margin-y': -18,
-          'text-max-width': 110,
+          'text-max-width': '110px',
           'text-wrap': 'wrap',
         },
       },
@@ -276,10 +279,10 @@ const TopicExplorer = ({ graphDataId, labels }: Props) => {
           shape: 'rectangle',
           'text-background-color': '#ffffff',
           'text-background-opacity': 0.9,
-          'text-background-padding': 2,
+          'text-background-padding': '2px',
           'text-background-shape': 'roundrectangle',
           'text-margin-y': -18,
-          'text-max-width': 110,
+          'text-max-width': '110px',
           'text-wrap': 'wrap',
         },
       },
@@ -297,10 +300,12 @@ const TopicExplorer = ({ graphDataId, labels }: Props) => {
         selector: 'edge[edgeType = "topic_relation"]',
         style: {
           'line-color': '#64748b',
-          'target-arrow-color': '#64748b',
-          'target-arrow-shape': 'triangle',
           width: 2.2,
         },
+      },
+      {
+        selector: 'edge[?directed]',
+        style: { 'target-arrow-color': '#64748b', 'target-arrow-shape': 'triangle' },
       },
       {
         selector: '.is-hidden',
@@ -678,7 +683,13 @@ const TopicExplorer = ({ graphDataId, labels }: Props) => {
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                      {entityLabels[selectedNode.type]}
+                      {[
+                        selectedNode.topicBeingKind
+                          ? SUPERNATURAL_BEING_KIND_LABELS[selectedNode.topicBeingKind]
+                          : selectedNode.topicCategory ?? entityLabels[selectedNode.type],
+                        selectedNode.topicSubtype !== selectedNode.topicCategory && selectedNode.topicSubtype,
+                      ]
+                        .filter(Boolean).join(' · ')}
                     </p>
                     <h3 className="mt-1 text-lg font-semibold leading-snug text-slate-900">
                       {selectedNode.label}

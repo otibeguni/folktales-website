@@ -74,6 +74,9 @@ export interface TopicExplorerNode {
   description?: string;
   itemBn?: string;
   topicTypes?: TopicEntry["data"]["types"];
+  topicCategory?: string | null;
+  topicSubtype?: string | null;
+  topicBeingKind?: TopicEntry["data"]["being_kind"];
   storyLanguages?: string[];
   resourceType?: string;
   bookLanguage?: string;
@@ -101,6 +104,9 @@ export interface TopicNeighborhoodNode {
   label: string;
   href: string;
   types: TopicEntry["data"]["types"];
+  category?: string | null;
+  subtype?: string | null;
+  beingKind?: TopicEntry["data"]["being_kind"];
   depth: number;
   isRoot: boolean;
 }
@@ -317,10 +323,9 @@ export async function getFolkloreAtlasEntries(): Promise<AtlasEntry[]> {
   ]);
 
   return topics
-    .filter((topic) => {
-      return typeof topic.data.latitude === "number" && typeof topic.data.longitude === "number";
-    })
-    .map((topic) => {
+    .flatMap((topic) => {
+      const { latitude, longitude } = topic.data;
+      if (typeof latitude !== "number" || typeof longitude !== "number") return [];
       const relatedStories = stories
         .filter(
           (story) =>
@@ -348,16 +353,16 @@ export async function getFolkloreAtlasEntries(): Promise<AtlasEntry[]> {
         })
         .filter((resource): resource is AtlasResourceLink => resource !== null);
 
-      return {
+      return [{
         slug: topic.slug,
         item: topic.data.item,
         description: topic.data.description?.trim() ?? "",
         types: topic.data.types,
-        latitude: topic.data.latitude,
-        longitude: topic.data.longitude,
+        latitude,
+        longitude,
         relatedStories,
         relatedResources,
-      };
+      }];
     })
     .sort((left, right) => left.item.localeCompare(right.item));
 }

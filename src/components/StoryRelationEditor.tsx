@@ -4,6 +4,7 @@ import {
   RESOURCE_TYPE_OPTIONS,
   TOPIC_TYPE_OPTIONS,
 } from '@/dev/story-relation-options.mjs';
+import { getTopicCategory, SUPERNATURAL_BEING_KINDS, SUPERNATURAL_BEING_KIND_LABELS, TOPIC_SUBTYPES_BY_CATEGORY } from '@/utils/topic-taxonomy.mjs';
 
 type TopicOption = {
   slug: string;
@@ -56,7 +57,10 @@ const StoryRelationEditor = ({
     latitude: '',
     longitude: '',
     types: [] as string[],
+    subtype: '',
+    beingKind: '',
   });
+  const topicCategory = getTopicCategory(topicForm.types);
   const [resourceForm, setResourceForm] = useState({
     slug: '',
     title: '',
@@ -180,12 +184,17 @@ const StoryRelationEditor = ({
   };
 
   const handleTopicTypeToggle = (type: string) => {
-    setTopicForm((current) => ({
-      ...current,
-      types: current.types.includes(type)
+    setTopicForm((current) => {
+      const types = current.types.includes(type)
         ? current.types.filter((value) => value !== type)
-        : [...current.types, type],
-    }));
+        : [...current.types, type];
+      const category = getTopicCategory(types);
+      const subtype = category && TOPIC_SUBTYPES_BY_CATEGORY[category].includes(current.subtype)
+        ? current.subtype
+        : '';
+      const beingKind = category === 'Supernatural being' ? current.beingKind : '';
+      return { ...current, types, subtype, beingKind };
+    });
   };
 
   const handleResourceTopicToggle = (slug: string) => {
@@ -215,6 +224,8 @@ const StoryRelationEditor = ({
               latitude: topicForm.latitude,
               longitude: topicForm.longitude,
               types: topicForm.types,
+              subtype: topicForm.subtype,
+              being_kind: topicForm.beingKind,
             },
           }
         : {
@@ -536,6 +547,48 @@ const StoryRelationEditor = ({
                         })}
                       </div>
                     </div>
+                    {!topicCategory && topicForm.types.length > 0 && (
+                      <p className="text-sm text-slate-600 md:col-span-2">
+                        Choose tags that describe one kind of topic, such as Person or Place.
+                      </p>
+                    )}
+                    {topicCategory && (
+                      <label className="form-control">
+                        <span className="mb-2 text-sm font-medium text-slate-700">
+                          {topicCategory} subtype
+                        </span>
+                        <select
+                          className="select select-bordered"
+                          value={topicForm.subtype}
+                          onChange={(event) =>
+                            setTopicForm((current) => ({ ...current, subtype: event.target.value }))
+                          }
+                        >
+                          <option value="">Unspecified</option>
+                          {TOPIC_SUBTYPES_BY_CATEGORY[topicCategory].map((subtype) => (
+                            <option key={subtype}>{subtype}</option>
+                          ))}
+                        </select>
+                      </label>
+                    )}
+                    {topicCategory === 'Supernatural being' && (
+                      <label className="form-control">
+                        <span className="mb-2 text-sm font-medium text-slate-700">Individual or class</span>
+                        <select
+                          className="select select-bordered"
+                          value={topicForm.beingKind}
+                          onChange={(event) =>
+                            setTopicForm((current) => ({ ...current, beingKind: event.target.value }))
+                          }
+                          required
+                        >
+                          <option value="">Choose a kind</option>
+                          {SUPERNATURAL_BEING_KINDS.map((kind) => (
+                            <option key={kind} value={kind}>{SUPERNATURAL_BEING_KIND_LABELS[kind]}</option>
+                          ))}
+                        </select>
+                      </label>
+                    )}
                   </div>
                 ) : (
                   <div className="grid gap-4 md:grid-cols-2">
@@ -675,7 +728,7 @@ const StoryRelationEditor = ({
                     className="btn btn-primary"
                     disabled={
                       isSubmitting ||
-                      (entityType === 'topic' && topicForm.types.length === 0)
+                      (entityType === 'topic' && !topicCategory)
                     }
                   >
                     {isSubmitting ? 'Saving...' : `Create ${label}`}

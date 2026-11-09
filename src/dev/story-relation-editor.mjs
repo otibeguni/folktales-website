@@ -4,6 +4,7 @@ import {
   loadContentContext,
   updateEntry,
 } from "../../tools/content-cli/lib/local-content.mjs";
+import { validateTopicClassification } from "../utils/topic-taxonomy.mjs";
 import {
   RESOURCE_TYPE_OPTIONS,
   TOPIC_TYPE_OPTIONS,
@@ -113,12 +114,19 @@ function validateTopic(topic, context) {
     );
   }
 
+  const subtype = cleanOptionalString(topic?.subtype);
+  const beingKind = cleanOptionalString(topic?.being_kind);
+  const classificationError = validateTopicClassification(types, subtype, beingKind);
+  if (classificationError) throw new StoryRelationEditorError(classificationError);
+
   return {
     slug: requireString(topic?.slug, "slug"),
     item: requireString(topic?.item, "item"),
     item_bn: cleanOptionalString(topic?.item_bn),
     wikidata_id: cleanOptionalString(topic?.wikidata_id),
     types,
+    subtype,
+    being_kind: beingKind,
     description: cleanOptionalString(topic?.description),
     latitude: validateOptionalNumber(topic?.latitude, "latitude"),
     longitude: validateOptionalNumber(topic?.longitude, "longitude"),

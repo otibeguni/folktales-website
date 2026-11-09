@@ -1,0 +1,8 @@
+---
+slug: member_of--hazrat-bayazid-bastami--twelve-saints-of-chittagong
+source_topic_slug: hazrat-bayazid-bastami
+target_topic_slug: twelve-saints-of-chittagong
+type: member_of
+---
+
+[Shah Mohsen’s shrine tradition](../mazarTraditions/hazrat-shah-mohsen.md) names this saint among the Twelve Saints associated with Chittagong.

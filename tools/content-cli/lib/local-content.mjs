@@ -5,9 +5,17 @@ import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import { pathToFileURL } from "node:url";
 import {
+  getTopicCategory,
+  getTopicSubtype,
+  TOPIC_TYPE_OPTIONS,
+  validateTopicClassification,
+} from "../../../src/utils/topic-taxonomy.mjs";
+import {
   TOPIC_RELATION_LABELS,
   TOPIC_RELATION_TYPES,
+  getMembershipEndpointError,
   getTopicRelationSlug,
+  isSymmetricTopicRelation,
   isTopicRelationType,
 } from "../../../src/utils/topic-relations.mjs";
 
@@ -58,6 +66,8 @@ export const ENTITY_DEFINITIONS = {
       { name: "item_bn", required: false, type: "string" },
       { name: "wikidata_id", required: false, type: "string" },
       { name: "types", required: true, type: "array" },
+      { name: "subtype", required: false, type: "string" },
+      { name: "being_kind", required: false, type: "string" },
       { name: "description", required: false, type: "string" },
       { name: "latitude", required: false, type: "number" },
       { name: "longitude", required: false, type: "number" },
@@ -636,6 +646,9 @@ export function summarizeEntry(entry, context) {
         slug: entry.slug,
         item: entry.data.item,
         types: entry.data.types || [],
+        category: getTopicCategory(entry.data.types || []),
+        subtype: getTopicSubtype(entry.data),
+        ...(entry.data.being_kind && { beingKind: entry.data.being_kind }),
         path: entry.relativePath,
       };
     case "topic-relation":
@@ -645,7 +658,8 @@ export function summarizeEntry(entry, context) {
         sourceTopicSlug: entry.data.source_topic_slug,
         targetTopicSlug: entry.data.target_topic_slug,
         type: entry.data.type,
-        label: `${entry.data.source_topic_slug} -> ${entry.data.target_topic_slug}`,
+        directed: !isSymmetricTopicRelation(entry.data.type),
+        label: `${entry.data.source_topic_slug} ${isSymmetricTopicRelation(entry.data.type) ? "—" : "→"} ${entry.data.target_topic_slug}`,
         path: entry.relativePath,
       };
     case "resource":
@@ -770,7 +784,26 @@ function matchesFilterValue(actual, expected) {
 
 export function applyEntityFilters(entries, context, entityName, options = {}) {
   const entity = resolveEntityName(entityName);
+  const matchEndpoint = (slug, end) => {
+    const category = options[`${end}-category`];
+    const subtype = options[`${end}-subtype`];
+    const beingKind = options[`${end}-being-kind`];
+    if (!category && !subtype && !beingKind) return true;
+    const topic = context.indexes.topicsBySlug.get(slug);
+    return Boolean(topic &&
+      (!category || getTopicCategory(topic.data.types || []) === category) &&
+      (!subtype || getTopicSubtype(topic.data) === subtype) &&
+      (!beingKind || topic.data.being_kind === beingKind));
+  };
   return entries.filter((entry) => {
+    if (entry.entity === "topic-relation") {
+      const { source_topic_slug: source, target_topic_slug: target, type } = entry.data;
+      const matchesOrder = matchEndpoint(source, "source") && matchEndpoint(target, "target");
+      const matchesReverse = isSymmetricTopicRelation(type) &&
+        matchEndpoint(target, "source") && matchEndpoint(source, "target");
+      if (!matchesOrder && !matchesReverse) return false;
+    }
+
     if (options.language && entry.entity === "story" && entry.language !== options.language) {
       return false;
     }
@@ -781,6 +814,8 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
         if ((resolved?.metadata?.category || null) !== options.category) {
           return false;
         }
+      } else if (entry.entity === "topic") {
+        if (getTopicCategory(entry.data.types || []) !== options.category) return false;
       } else {
         const categories = uniqueValues([
           entry.data.category,
@@ -790,6 +825,13 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
           return false;
         }
       }
+    }
+
+    if (options.subtype && (entry.entity !== "topic" || getTopicSubtype(entry.data) !== options.subtype)) {
+      return false;
+    }
+    if (options["being-kind"] && (entry.entity !== "topic" || entry.data.being_kind !== options["being-kind"])) {
+      return false;
     }
 
     if (options.topic) {
@@ -1078,6 +1120,7 @@ export function getRelatedEntries(context, entityName, slug, options = {}) {
             slug: targetTopic.slug,
             label: targetTopic.data.item,
             type: relation.data.type,
+            directed: !isSymmetricTopicRelation(relation.data.type),
             detail: getTopicRelationLabel(relation.data.type, "forward"),
           });
         }
@@ -1091,6 +1134,7 @@ export function getRelatedEntries(context, entityName, slug, options = {}) {
             slug: sourceTopic.slug,
             label: sourceTopic.data.item,
             type: relation.data.type,
+            directed: !isSymmetricTopicRelation(relation.data.type),
             detail: getTopicRelationLabel(relation.data.type, "reverse"),
           });
         }
@@ -1239,6 +1283,15 @@ export function validateContext(context, scope = "all") {
   const issues = [];
 
   const selectedEntities = scope === "all" ? ENTITY_ORDER : [resolveEntityName(scope)];
+
+  if (selectedEntities.includes("topic")) {
+    for (const topic of context.topics) {
+      const message = getTopicClassificationError(topic.data);
+      if (message) {
+        issues.push({ severity: "error", entity: "topic", slug: topic.slug, message, path: topic.relativePath });
+      }
+    }
+  }
 
   if (selectedEntities.includes("story")) {
     const routeSlugMap = new Map();
@@ -1401,8 +1454,10 @@ export function validateContext(context, scope = "all") {
     for (const relation of context.topicRelations) {
       const { slug, source_topic_slug: sourceTopicSlug, target_topic_slug: targetTopicSlug, type } =
         relation.data;
+      const source = context.indexes.topicsBySlug.get(sourceTopicSlug);
+      const target = context.indexes.topicsBySlug.get(targetTopicSlug);
 
-      if (!context.indexes.topicsBySlug.get(sourceTopicSlug)) {
+      if (!source) {
         issues.push({
           severity: "error",
           entity: "topic-relation",
@@ -1412,7 +1467,7 @@ export function validateContext(context, scope = "all") {
         });
       }
 
-      if (!context.indexes.topicsBySlug.get(targetTopicSlug)) {
+      if (!target) {
         issues.push({
           severity: "error",
           entity: "topic-relation",
@@ -1420,6 +1475,13 @@ export function validateContext(context, scope = "all") {
           message: `Broken target_topic_slug "${targetTopicSlug}"`,
           path: relation.relativePath,
         });
+      }
+
+      if (type === "member_of" && source && target) {
+        const message = getMembershipEndpointError(source.data, target.data);
+        if (message) {
+          issues.push({ severity: "error", entity: "topic-relation", slug, message, path: relation.relativePath });
+        }
       }
 
       if (sourceTopicSlug === targetTopicSlug) {
@@ -1631,8 +1693,22 @@ function getEntryFilePath(rootDir, entityName, data) {
   return path.join(getCollectionPath(rootDir, entityName), `${slug}.md`);
 }
 
+function getTopicClassificationError({ types, subtype, being_kind }) {
+  if (!Array.isArray(types) || types.some((type) => !TOPIC_TYPE_OPTIONS.includes(type))) {
+    return "Topic types must be an array of supported tags";
+  }
+  return validateTopicClassification(types, subtype, being_kind);
+}
+
+function assertTopicClassification(entityName, data) {
+  if (resolveEntityName(entityName) !== "topic") return;
+  const error = getTopicClassificationError(data);
+  if (error) throw new Error(error);
+}
+
 export async function createEntry(rootDir, entityName, data, body = "") {
   const nextData = ensureDefaults(entityName, data);
+  assertTopicClassification(entityName, nextData);
   const storyMetadataData = resolveEntityName(entityName) === "story"
     ? extractStoryMetadataData(nextData)
     : null;
@@ -1724,6 +1800,7 @@ export async function updateEntry(rootDir, entityName, slug, updates, options = 
   }
 
   const nextBody = updates.body !== undefined ? updates.body : entry.body;
+  assertTopicClassification(entityName, nextData);
   await fs.writeFile(entry.path, serializeDocument(nextData, nextBody), "utf8");
 
   if (nextMetadata) {

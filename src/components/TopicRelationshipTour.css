@@ -13,19 +13,17 @@
 }
 .topic-relationship-tour * { box-sizing: border-box; }
 .topic-relationship-tour .trt-content { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
-.topic-relationship-tour .trt-graph { min-width: 0; padding: 20px 0; border-right: 1px solid var(--trt-border); }
+.topic-relationship-tour .trt-graph { min-width: 0; display: grid; align-items: center; border-right: 1px solid var(--trt-border); }
 .topic-relationship-tour svg { display: block; max-width: 100%; }
-.topic-relationship-tour .trt-edge { stroke: var(--trt-accent); stroke-width: 2.3; opacity: .9; transition: stroke 800ms, opacity 800ms, stroke-width 800ms; }
-.topic-relationship-tour .trt-edge.is-dimmed { stroke: #b0b5bd; opacity: .2; stroke-width: 1; }
-.topic-relationship-tour .trt-node { transition: opacity 800ms, filter 800ms; }
+.topic-relationship-tour .trt-edge { stroke: var(--trt-accent); stroke-width: 1.8; }
 .topic-relationship-tour .trt-node rect { fill: #e3f3fb; stroke: #82c6e7; stroke-width: 2; transition: fill 800ms, stroke 800ms; }
 .topic-relationship-tour .trt-node text { font-family: inherit; fill: var(--trt-ink); pointer-events: none; }
 .topic-relationship-tour .trt-node.is-root rect { fill: var(--trt-accent); stroke: var(--trt-accent); }
 .topic-relationship-tour .trt-node.is-root text { fill: #fff; font-weight: 500; }
-.topic-relationship-tour .trt-node.is-dimmed { opacity: .32; filter: grayscale(1); }
 .topic-relationship-tour .trt-node:hover rect,
 .topic-relationship-tour .trt-node:focus-visible rect { stroke: #253142; stroke-width: 3; }
-.topic-relationship-tour .trt-reading { min-width: 0; padding: 42px 26px; overflow-wrap: anywhere; }
+.topic-relationship-tour .trt-reading { min-width: 0; align-self: center; padding: 20px 24px; overflow-wrap: anywhere; }
+.topic-relationship-tour .trt-category { color: var(--trt-muted); font-size: 14px; font-weight: 600; margin: 0 0 8px; }
 .topic-relationship-tour .trt-sentence { font-size: 23px; line-height: 1.85; letter-spacing: -.3px; margin: 0; animation: trt-reveal 650ms cubic-bezier(.22,.7,.16,1); }
 .topic-relationship-tour .trt-reading a { color: var(--trt-accent); text-decoration: underline; text-decoration-color: #7811a74d; text-underline-offset: 5px; }
 .topic-relationship-tour .trt-reading a:hover { text-decoration-color: var(--trt-accent); }
@@ -48,13 +46,11 @@
 @container (max-width: 700px) {
   .topic-relationship-tour .trt-content { grid-template-columns: minmax(0, 1fr); }
   .topic-relationship-tour .trt-graph { border-right: 0; border-bottom: 1px solid var(--trt-border); }
-  .topic-relationship-tour .trt-reading { padding: 26px 20px; }
+  .topic-relationship-tour .trt-reading { padding: 14px 20px; }
   .topic-relationship-tour .trt-sentence { font-size: 21px; line-height: 1.8; }
   .topic-relationship-tour .trt-controls { padding: 10px 16px 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .topic-relationship-tour .trt-edge,
-  .topic-relationship-tour .trt-node,
   .topic-relationship-tour .trt-node rect { transition: none; }
   .topic-relationship-tour .trt-sentence { animation: none; }
 }

@@ -3,5 +3,6 @@ slug: patala
 item: Pātāla
 wikidata_id: Q2362004
 types: ["Place", "Mythic"]
+subtype: Mythic place
 ---
 

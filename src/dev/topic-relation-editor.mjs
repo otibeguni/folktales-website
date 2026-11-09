@@ -7,7 +7,9 @@ import {
 } from "../../tools/content-cli/lib/local-content.mjs";
 import {
   TOPIC_RELATION_TYPES,
+  getMembershipEndpointError,
   getTopicRelationSlug,
+  isSymmetricTopicRelation,
 } from "../utils/topic-relations.mjs";
 import { StoryRelationEditorError } from "./story-relation-editor.mjs";
 
@@ -58,6 +60,12 @@ function validateTopicsExist(context, sourceTopicSlug, targetTopicSlug) {
 
 async function createTopicRelation({ rootDir, context, sourceTopicSlug, targetTopicSlug, relationType }) {
   validateTopicsExist(context, sourceTopicSlug, targetTopicSlug);
+  if (relationType === "member_of") {
+    const source = context.indexes.topicsBySlug.get(sourceTopicSlug);
+    const target = context.indexes.topicsBySlug.get(targetTopicSlug);
+    const error = getMembershipEndpointError(source.data, target.data);
+    if (error) throw new StoryRelationEditorError(error);
+  }
 
   const slug = getTopicRelationSlug(relationType, sourceTopicSlug, targetTopicSlug);
   if (context.indexes.topicRelationsBySlug.get(slug)) {
@@ -70,23 +78,30 @@ async function createTopicRelation({ rootDir, context, sourceTopicSlug, targetTo
 
   const inverseSlug = getTopicRelationSlug(relationType, targetTopicSlug, sourceTopicSlug);
   if (context.indexes.topicRelationsBySlug.get(inverseSlug)) {
+    if (isSymmetricTopicRelation(relationType)) {
+      return { action: "attach-existing", changed: false, relationSlug: inverseSlug };
+    }
     throw new StoryRelationEditorError(
       `Conflicting inverse relation already exists as "${inverseSlug}"`,
       409,
     );
   }
 
+  const [source, target] = isSymmetricTopicRelation(relationType)
+    ? [sourceTopicSlug, targetTopicSlug].sort()
+    : [sourceTopicSlug, targetTopicSlug];
+  const createdSlug = getTopicRelationSlug(relationType, source, target);
   const created = await createEntry(rootDir, "topic-relation", {
-    slug,
-    source_topic_slug: sourceTopicSlug,
-    target_topic_slug: targetTopicSlug,
+    slug: createdSlug,
+    source_topic_slug: source,
+    target_topic_slug: target,
     type: relationType,
   });
 
   return {
     action: "attach-existing",
     changed: true,
-    relationSlug: slug,
+    relationSlug: createdSlug,
     created: created.data,
   };
 }

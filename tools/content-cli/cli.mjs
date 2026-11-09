@@ -29,6 +29,10 @@ import {
 function printUsage() {
   console.log(`Usage:
   content list <entity> [filters] [--json]
+    topic filters: --category <category> --subtype <subtype> --being-kind <individual|class>
+    topic-relation filters: --type <type> --source-category <category> --target-category <category>
+                           --source-subtype <subtype> --target-subtype <subtype>
+                           --source-being-kind <kind> --target-being-kind <kind>
   content get <entity> <slug> [--language <en|bn>] [--json]
   content search <entity|all> --query <text> [filters] [--field title|body|metadata|all] [--json]
   content create <entity> [flags]
@@ -88,6 +92,7 @@ function pickPrimaryLabel(summary) {
     summary.title ||
     summary.name ||
     summary.item ||
+    summary.label ||
     summary.category ||
     summary.slug
   );
@@ -106,6 +111,7 @@ function printTable(items) {
     detail:
       item.detail ||
       item.language ||
+      (item.entity === "topic" ? [item.category, item.subtype, item.beingKind, item.types?.join(", ")].filter(Boolean).join(" / ") : "") ||
       item.category ||
       item.type ||
       (Array.isArray(item.types) ? item.types.join(", ") : "") ||
@@ -136,6 +142,8 @@ function printInspect(record) {
   if (record.path) console.log(`path: ${record.path}`);
   if (record.metadataCategory) console.log(`category: ${record.metadataCategory}`);
   if (record.category) console.log(`category: ${record.category}`);
+  if (record.subtype) console.log(`subtype: ${record.subtype}`);
+  if (record.beingKind) console.log(`being_kind: ${record.beingKind}`);
   if (record.author) console.log(`author: ${record.author}`);
   if (record.types) console.log(`types: ${record.types.join(", ")}`);
   if (record.sourceSlug) console.log(`source_slug: ${record.sourceSlug}`);
@@ -297,11 +305,16 @@ async function main() {
     if (getBooleanFlag(flags, "json")) {
       printJson(related);
     } else {
+      const symmetric = [...related.outbound, ...related.inbound].filter((item) => item.directed === false);
       console.log(`Entry: ${pickPrimaryLabel(related.entry)} (${related.entry.slug})`);
+      if (symmetric.length) {
+        console.log("Symmetric:");
+        printTable(symmetric.map((item) => ({ ...item, path: "" })));
+      }
       console.log("Outbound:");
-      printTable(related.outbound.map((item) => ({ ...item, path: "" })));
+      printTable(related.outbound.filter((item) => item.directed !== false).map((item) => ({ ...item, path: "" })));
       console.log("Inbound:");
-      printTable(related.inbound.map((item) => ({ ...item, path: "" })));
+      printTable(related.inbound.filter((item) => item.directed !== false).map((item) => ({ ...item, path: "" })));
     }
     return;
   }

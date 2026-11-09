@@ -35,7 +35,7 @@ const FolkloreAtlas = ({ entries, labels }: Props) => {
 
     void (async () => {
       const L = await import("leaflet");
-      await import("leaflet.markercluster/dist/leaflet.markercluster-src.js");
+      await import("leaflet.markercluster");
 
       const defaultIcon = L.icon({
         iconRetinaUrl: markerIcon2x.src,

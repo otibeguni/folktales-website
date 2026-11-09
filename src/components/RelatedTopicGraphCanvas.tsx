@@ -1,8 +1,9 @@
 import { useEffect, useId, useRef } from 'react';
 import cytoscape from 'cytoscape';
-import type { Core, ElementDefinition, Stylesheet } from 'cytoscape';
+import type { Core, ElementDefinition, StylesheetJson } from 'cytoscape';
 
 import type { TopicNeighborhoodGraph } from '@/utils/content';
+import { isSymmetricTopicRelation } from '@/utils/topic-relations.mjs';
 
 type GraphHeight = 'compact' | 'standard';
 
@@ -80,10 +81,10 @@ const RelatedTopicGraphCanvas = ({
         classes: node.isRoot ? 'is-root' : '',
       })),
       ...graph.edges.map((edge) => ({
-        data: edge,
+        data: { ...edge, directed: !isSymmetricTopicRelation(edge.relationType) },
       })),
     ];
-    const stylesheet: Stylesheet[] = [
+    const stylesheet: StylesheetJson = [
       {
         selector: 'node',
         style: {
@@ -96,11 +97,11 @@ const RelatedTopicGraphCanvas = ({
           height: 'data(nodeHeight)',
           label: 'data(label)',
           'overlay-opacity': 0,
-          padding: isNarrow ? 10 : 9,
+          padding: isNarrow ? '10px' : '9px',
           shape: 'roundrectangle',
           'text-halign': 'center',
           'text-margin-y': 0,
-          'text-max-width': isNarrow ? 120 : 144,
+          'text-max-width': isNarrow ? '120px' : '144px',
           'text-valign': 'center',
           'text-wrap': 'wrap',
           width: 'data(nodeWidth)',
@@ -114,8 +115,8 @@ const RelatedTopicGraphCanvas = ({
           'border-width': 5,
           color: '#ffffff',
           'font-size': isNarrow ? 17 : 15,
-          padding: isNarrow ? 13 : 12,
-          'text-max-width': 160,
+          padding: isNarrow ? '13px' : '12px',
+          'text-max-width': '160px',
         },
       },
       {
@@ -138,16 +139,19 @@ const RelatedTopicGraphCanvas = ({
           'line-color': '#94a3b8',
           'source-distance-from-node': 3,
           'target-arrow-color': '#64748b',
-          'target-arrow-shape': 'triangle',
           'target-distance-from-node': 3,
           'text-background-color': '#ffffff',
           'text-background-opacity': 0.96,
-          'text-background-padding': 3,
+          'text-background-padding': '3px',
           'text-background-shape': 'roundrectangle',
           'text-margin-y': -7,
           'text-rotation': 'autorotate',
           width: 1.8,
         },
+      },
+      {
+        selector: 'edge[?directed]',
+        style: { 'target-arrow-shape': 'triangle' },
       },
     ];
     const maximumDepth = Math.max(...graph.nodes.map((node) => node.depth), 0);
