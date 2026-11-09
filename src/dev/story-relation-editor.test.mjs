@@ -68,8 +68,8 @@ resource_slugs:
     `---
 slug: forest-topic
 item: Forest Topic
-types:
-  - Place
+category: Landscape
+subtype: Forest
 description: Existing forest topic.
 ---
 `,
@@ -81,8 +81,8 @@ description: Existing forest topic.
     `---
 slug: river-topic
 item: River Topic
-types:
-  - Natural
+category: Landscape
+subtype: River
 ---
 `,
   );
@@ -200,7 +200,8 @@ test("create topic writes file and patches story metadata", async () => {
       topic: {
         slug: "snake-prince",
         item: "Snake Prince",
-        types: ["Person", "Legendary"],
+        category: "Person",
+        subtype: "Other",
         description: "A new topic from the story page.",
       },
     },
@@ -209,13 +210,52 @@ test("create topic writes file and patches story metadata", async () => {
   assert.equal(result.changed, true);
   const topic = await readFrontmatter(rootDir, "src/content/topics/snake-prince.md");
   assert.equal(topic.item, "Snake Prince");
-  assert.deepEqual(topic.types, ["Person", "Legendary"]);
+  assert.equal(topic.category, "Person");
+  assert.equal(topic.subtype, "Other");
 
   const metadata = await readFrontmatter(
     rootDir,
     "src/content/storyMetadata/forest-story.md",
   );
   assert.deepEqual(metadata.topic_slugs, ["forest-topic", "snake-prince"]);
+});
+
+test("create and attach a place stores its category and subtype without tags", async () => {
+  const rootDir = await makeFixture();
+  const payload = {
+    action: "create-and-attach",
+    storySlug: "forest-story",
+    storyLanguage: "en",
+    topic: {
+      slug: "example-river",
+      item: "Example River",
+      category: "Landscape",
+      subtype: "River",
+    },
+  };
+  const createTopic = (topic) => mutateStoryRelations({
+    rootDir,
+    isDev: true,
+    relationType: "topic",
+    payload: { ...payload, topic },
+  });
+
+  await assert.rejects(
+    createTopic({ ...payload.topic, subtype: "District" }),
+    /Invalid subtype/,
+  );
+  await assert.rejects(
+    createTopic({ ...payload.topic, types: ["Natural"] }),
+    /replace the types field/,
+  );
+
+  assert.equal((await createTopic(payload.topic)).changed, true);
+  const topic = await readFrontmatter(rootDir, "src/content/topics/example-river.md");
+  assert.equal(topic.category, "Landscape");
+  assert.equal(topic.subtype, "River");
+  assert.equal(topic.types, undefined);
+  const metadata = await readFrontmatter(rootDir, "src/content/storyMetadata/forest-story.md");
+  assert.deepEqual(metadata.topic_slugs, ["forest-topic", "example-river"]);
 });
 
 test("create resource writes file, persists topic slugs, and patches story metadata", async () => {

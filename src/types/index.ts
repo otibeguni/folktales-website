@@ -28,8 +28,9 @@ export interface IMazarTraditionListItem {
 export interface WikidataItem {
   slug: string;
   item: string;
-  types: string[];
-  description?: string;
+  category: string;
+  subtype?: string;
+  description?: string | null;
   wikidata_id?: string;
   item_bn?: string;
   latitude?: number;

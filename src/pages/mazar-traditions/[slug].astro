@@ -1,4 +1,5 @@
 ---
+import { getTopicDisplayLabels } from "@/utils/topic-labels";
 import RelatedItemsList from "@/components/RelatedItemsList.astro";
 import TopicRelationshipTour from "@/components/TopicRelationshipTour";
 import Layout from "@/layouts/Layout.astro";
@@ -25,12 +26,12 @@ const pagePath = getMazarTraditionPath(entry.slug);
 const canonicalUrl = buildCanonicalUrl(pagePath, Astro.site);
 const relatedTopics = topics.map((topic) => ({
   name: topic.data.item,
-  types: topic.data.types,
+  badges: getTopicDisplayLabels(topic.data),
   url: `/topics/${topic.slug}`,
   isExternal: false,
 }));
 const saintTopic = topics.find(
-  (topic) => topic.slug === entry.slug && topic.data.types.includes("Person"),
+  (topic) => topic.slug === entry.slug && topic.data.category === "Person",
 );
 const topicGraph = saintTopic
   ? await getTopicNeighborhoodGraph(saintTopic.slug, 1)
@@ -63,7 +64,7 @@ const schemaData = {
     url: buildCanonicalUrl("/", Astro.site),
   },
   about: topics.map((topic) => ({
-    "@type": topic.data.types.includes("Person") ? "Person" : "Thing",
+    "@type": topic.data.category === "Person" ? "Person" : "Thing",
     name: topic.data.item,
     url: buildCanonicalUrl(`/topics/${topic.slug}`, Astro.site),
   })),

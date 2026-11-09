@@ -1,4 +1,5 @@
 ---
+import { getTopicDisplayLabels } from "@/utils/topic-labels";
 import ArticleTopic from "@/components/ArticleTopic.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
@@ -60,7 +61,7 @@ const availableTopicOptions = (await getAllTopics())
   .map((entry) => ({
     slug: entry.slug,
     item: entry.data.item,
-    types: entry.data.types || [],
+    classificationLabels: getTopicDisplayLabels(entry.data),
   }))
   .sort((left, right) => left.item.localeCompare(right.item));
 const currentTopicRelations = (await getAllTopicRelations())

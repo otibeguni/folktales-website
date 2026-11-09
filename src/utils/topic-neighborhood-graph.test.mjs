@@ -10,7 +10,7 @@ const labels = {
 
 const makeTopic = (slug, item = slug) => ({
   slug,
-  data: { item, types: ["Person"] },
+  data: { item, category: "Person" },
 });
 
 const makeRelation = (slug, source, target, type = "located_in") => ({

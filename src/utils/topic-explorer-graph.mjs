@@ -27,8 +27,7 @@ export function buildTopicExplorerGraphData({
       href: `/topics/${topic.slug}`,
       description: topic.data.description?.trim() ?? "",
       itemBn: topic.data.item_bn,
-      topicTypes: topic.data.types ?? [],
-      topicCategory: getTopicCategory(topic.data.types ?? []),
+      topicCategory: getTopicCategory(topic.data),
       topicSubtype: getTopicSubtype(topic.data),
       topicBeingKind: topic.data.being_kind,
     });

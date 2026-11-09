@@ -7,7 +7,6 @@ import { pathToFileURL } from "node:url";
 import {
   getTopicCategory,
   getTopicSubtype,
-  TOPIC_TYPE_OPTIONS,
   validateTopicClassification,
 } from "../../../src/utils/topic-taxonomy.mjs";
 import {
@@ -65,7 +64,7 @@ export const ENTITY_DEFINITIONS = {
       { name: "item", required: true, type: "string" },
       { name: "item_bn", required: false, type: "string" },
       { name: "wikidata_id", required: false, type: "string" },
-      { name: "types", required: true, type: "array" },
+      { name: "category", required: true, type: "string" },
       { name: "subtype", required: false, type: "string" },
       { name: "being_kind", required: false, type: "string" },
       { name: "description", required: false, type: "string" },
@@ -645,8 +644,7 @@ export function summarizeEntry(entry, context) {
         entity: entry.entity,
         slug: entry.slug,
         item: entry.data.item,
-        types: entry.data.types || [],
-        category: getTopicCategory(entry.data.types || []),
+        category: getTopicCategory(entry.data),
         subtype: getTopicSubtype(entry.data),
         ...(entry.data.being_kind && { beingKind: entry.data.being_kind }),
         path: entry.relativePath,
@@ -806,7 +804,7 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
     if (!category && !subtype && !beingKind) return true;
     const topic = context.indexes.topicsBySlug.get(slug);
     return Boolean(topic &&
-      (!category || getTopicCategory(topic.data.types || []) === category) &&
+      (!category || getTopicCategory(topic.data) === category) &&
       (!subtype || getTopicSubtype(topic.data) === subtype) &&
       (!beingKind || topic.data.being_kind === beingKind));
   };
@@ -830,7 +828,7 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
           return false;
         }
       } else if (entry.entity === "topic") {
-        if (getTopicCategory(entry.data.types || []) !== options.category) return false;
+        if (getTopicCategory(entry.data) !== options.category) return false;
       } else {
         const categories = uniqueValues([
           entry.data.category,
@@ -871,11 +869,7 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
     }
 
     if (options.type) {
-      if (entry.entity === "topic") {
-        if (!matchesFilterValue(entry.data.types || [], options.type)) {
-          return false;
-        }
-      } else if (entry.entity === "topic-relation") {
+      if (entry.entity === "topic-relation") {
         if (String(entry.data.type) !== String(options.type)) {
           return false;
         }
@@ -935,7 +929,7 @@ function getSearchFieldsForEntry(entry, context) {
     case "topic":
       return {
         title: [entry.slug, entry.data.item, entry.data.item_bn],
-        metadata: [...(entry.data.types || []), entry.data.description || ""],
+        metadata: [getTopicCategory(entry.data), getTopicSubtype(entry.data), entry.data.description || ""],
         body: [],
       };
     case "topic-relation":
@@ -1308,7 +1302,7 @@ export function validateContext(context, scope = "all") {
 
   if (selectedEntities.includes("topic")) {
     for (const topic of context.topics) {
-      const message = getTopicClassificationError(topic.data);
+      const message = validateTopicClassification(topic.data);
       if (message) {
         issues.push({ severity: "error", entity: "topic", slug: topic.slug, message, path: topic.relativePath });
       }
@@ -1715,16 +1709,9 @@ function getEntryFilePath(rootDir, entityName, data) {
   return path.join(getCollectionPath(rootDir, entityName), `${slug}.md`);
 }
 
-function getTopicClassificationError({ types, subtype, being_kind }) {
-  if (!Array.isArray(types) || types.some((type) => !TOPIC_TYPE_OPTIONS.includes(type))) {
-    return "Topic types must be an array of supported tags";
-  }
-  return validateTopicClassification(types, subtype, being_kind);
-}
-
 function assertTopicClassification(entityName, data) {
   if (resolveEntityName(entityName) !== "topic") return;
-  const error = getTopicClassificationError(data);
+  const error = validateTopicClassification(data);
   if (error) throw new Error(error);
 }
 
@@ -1898,7 +1885,8 @@ export function buildTemplate(entityName) {
   }
   if (resolveEntityName(entityName) === "topic") {
     data.item = "Example Topic";
-    data.types = ["Place"];
+    data.category = "Landscape";
+    data.subtype = "River";
   }
   if (resolveEntityName(entityName) === "topic-relation") {
     data.slug = "located_in--example-site--example-region";

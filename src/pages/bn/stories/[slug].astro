@@ -1,4 +1,5 @@
 ---
+import { getTopicDisplayLabels } from "@/utils/topic-labels";
 import Layout from "@/layouts/Layout.astro";
 import StoryHeader from "../../../components/StoryHeader.astro";
 import StoryMetadata from "../../../components/StoryMetadata.astro";
@@ -165,7 +166,7 @@ const relatedTopics = (resolvedStory.data.topic_slugs ?? [])
   .filter(Boolean)
   .map((topic) => ({
     name: topic.data.item,
-    types: topic.data.types || [],
+    badges: getTopicDisplayLabels(topic.data),
     url: `/topics/${topic.slug}`,
     isExternal: false,
   }));
@@ -207,7 +208,7 @@ const availableTopicOptions = [...allTopics]
   .map((topic) => ({
     slug: topic.slug,
     item: topic.data.item,
-    types: topic.data.types || [],
+    classificationLabels: getTopicDisplayLabels(topic.data),
   }))
   .sort((left, right) => left.item.localeCompare(right.item));
 const availableResourceOptions = [...allResources]

@@ -56,8 +56,8 @@ work/collection, and the cultural, religious, and geographic setting.
 - **Exclude** one-off characters and fictional places unique to this single tale.
 - For each candidate, **search existing topics first** (`search topic --query ...`). Decide
   **link existing** vs **create new**; avoid near-duplicates.
-- For each new topic, draft full metadata: `slug`, `item`, `item_bn` (if known), `types`
-  (one primary tag + modifiers), `subtype`, `being_kind` (supernatural only), `description`,
+- For each new topic, draft full metadata: `slug`, `item`, `item_bn` (if known), `category`,
+  `subtype`, `being_kind` (supernatural only), `description`,
   `wikidata_id` (only if verified), and `latitude`/`longitude` (real places).
 - Present the proposal grouped into **Link existing** and **Create new** (with the drafted
   metadata and a one-line rationale each). **Ask the user to approve or adjust before writing.**
@@ -65,11 +65,11 @@ work/collection, and the cultural, religious, and geographic setting.
 
 ### 4. Create and link (only after approval)
 
-Create each approved new topic (flags use underscores; `--types` is comma-separated):
+Create each approved new topic. Flags use underscores.
 
 ```bash
 node tools/content-cli/cli.mjs create topic --slug <slug> --item "<Label>" \
-  --types "<PrimaryTag,Modifier>" --subtype "<Subtype>" [--being_kind class|individual] \
+  --category "<Category>" [--subtype "<Subtype>"] [--being_kind class|individual] \
   [--item_bn "<বাংলা>"] [--wikidata_id Q...] [--description "<single line>"] \
   [--latitude <n> --longitude <n>]
 ```
@@ -99,7 +99,7 @@ Report: topics created, topics linked, and the story's new topic count.
 - **Confirm before any write** (creating topics or changing story metadata).
 - **Reuse** existing topics; search before creating.
 - **Never fabricate `wikidata_id`** — omit it when unsure.
-- One primary category tag per topic; `being_kind` only for supernatural beings.
+- Give each topic one category. Use `being_kind` for supernatural beings.
 - Keep descriptions single-line; mind shell quoting (edit the file directly for complex text).
 - Quality over quantity: a few well-chosen reusable topics beat many one-off entities.
 

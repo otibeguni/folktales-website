@@ -46,10 +46,10 @@ export function isSymmetricTopicRelation(type) {
 }
 
 export function getMembershipEndpointError(source, target) {
-  if (getTopicCategory(source.types ?? []) !== "Person") {
+  if (getTopicCategory(source) !== "Person") {
     return "A member_of relation must start at a Person topic";
   }
-  if (getTopicCategory(target.types ?? []) !== "Group" || target.subtype !== "Named collective") {
+  if (getTopicCategory(target) !== "Group" || target.subtype !== "Named collective") {
     return "A member_of relation must point to a Group topic with the Named collective subtype";
   }
   return null;

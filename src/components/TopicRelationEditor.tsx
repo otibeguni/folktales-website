@@ -8,7 +8,7 @@ type TopicRelationType = keyof typeof TOPIC_RELATION_LABELS;
 type TopicOption = {
   slug: string;
   item: string;
-  types: string[];
+  classificationLabels: string[];
 };
 
 type TopicRelationRecord = {
@@ -57,7 +57,7 @@ const TopicRelationEditor = ({
         return true;
       }
 
-      const searchableText = [topic.item, topic.slug, ...topic.types]
+      const searchableText = [topic.item, topic.slug, ...topic.classificationLabels]
         .join(' ')
         .toLowerCase();
       return searchableText.includes(normalizedSearchQuery);
@@ -211,7 +211,7 @@ const TopicRelationEditor = ({
                               {topic.slug}
                             </div>
                             <div className="mt-2 flex flex-wrap gap-2">
-                              {topic.types.map((type) => (
+                              {topic.classificationLabels.map((type) => (
                                 <span
                                   key={`${topic.slug}-${type}`}
                                   className="badge badge-soft badge-primary"

@@ -64,8 +64,8 @@ resource_slugs:
     `---
 slug: forest-topic
 item: Forest Topic
-types:
-  - Place
+category: Landscape
+subtype: Forest
 description: Sacred woodland topic.
 ---
 `,
@@ -77,9 +77,8 @@ description: Sacred woodland topic.
     `---
 slug: river-topic
 item: River Topic
-types:
-  - Place
-  - Natural
+category: Landscape
+subtype: River
 description: River topic.
 ---
 `,
@@ -328,8 +327,10 @@ test("create and update local entries preserve body and patch arrays", async () 
     "lake-topic",
     "--item",
     "Lake Topic",
-    "--types",
-    "Place,Natural",
+    "--category",
+    "Landscape",
+    "--subtype",
+    "Wetland",
   ]);
   assert.equal(create.code, 0);
 
@@ -453,13 +454,13 @@ test("topic relation entity supports list/get and topic related includes typed l
   );
 });
 
-test("relation slices use subtype and preserve direction for directed edges", async () => {
+test("relation slices use explicit place categories and subtypes and preserve directed edges", async () => {
   const rootDir = await makeFixture();
   await writeFile(rootDir, "src/content/topics/forest-topic.md", `---
 slug: forest-topic
 item: Forest Topic
-types: [Place, Natural]
-subtype: Natural feature
+category: Landscape
+subtype: Forest
 ---
 `);
   await writeFile(rootDir, "src/content/topicRelations/related_to--forest-topic--river-topic.md", `---
@@ -470,7 +471,7 @@ type: related_to
 ---
 `);
   const slice = async (end) => {
-    const result = await runCli(rootDir, ["list", "topic-relation", `--${end}-subtype`, "Natural feature", "--json"]);
+    const result = await runCli(rootDir, ["list", "topic-relation", `--${end}-category`, "Landscape", `--${end}-subtype`, "Forest", "--json"]);
     assert.equal(result.code, 0);
     return JSON.parse(result.stdout).map((relation) => [relation.type, relation.directed]);
   };

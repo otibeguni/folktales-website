@@ -1,7 +1,7 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 
 import type { IMazarTraditionListItem, WikidataItemAlt } from '@/types';
-import { sortTopicTags } from '@/utils/topic-tags';
+import { getTopicDisplayLabels } from '@/utils/topic-labels';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -90,7 +90,7 @@ const MazarTraditionList = ({
     .filter((topic) => !selectedTopics.includes(topic.slug))
     .filter((topic) => {
       if (!normalizedTopicQuery) return false;
-      return [topic.item, topic.slug, ...sortTopicTags(topic.types)]
+      return [topic.item, topic.slug, ...getTopicDisplayLabels(topic)]
         .join(' ')
         .toLowerCase()
         .includes(normalizedTopicQuery);
@@ -110,7 +110,7 @@ const MazarTraditionList = ({
         ...tradition.topics.flatMap((topic) => [
           topic.item,
           topic.slug,
-          ...topic.types,
+          ...getTopicDisplayLabels(topic),
         ]),
       ]
         .join(' ')
@@ -273,7 +273,7 @@ const MazarTraditionList = ({
                           {topic.item}
                         </span>
                         <span className="text-sm text-slate-600">
-                          {sortTopicTags(topic.types).join(' / ')}
+                          {getTopicDisplayLabels(topic).join(' / ')}
                         </span>
                       </button>
                     ))}

@@ -38,8 +38,8 @@ async function makeFixture() {
     `---
 slug: forest-topic
 item: Forest Topic
-types:
-  - Place
+category: Landscape
+subtype: Forest
 ---
 `,
   );
@@ -50,8 +50,8 @@ types:
     `---
 slug: river-topic
 item: River Topic
-types:
-  - Place
+category: Landscape
+subtype: River
 ---
 `,
   );
@@ -62,8 +62,8 @@ types:
     `---
 slug: hinduism-topic
 item: Hinduism Topic
-types:
-  - Religion
+category: Tradition
+subtype: Religion
 ---
 `,
   );

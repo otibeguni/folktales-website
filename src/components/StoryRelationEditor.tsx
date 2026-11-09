@@ -2,14 +2,13 @@ import { useDeferredValue, useState, type FormEvent } from 'react';
 
 import {
   RESOURCE_TYPE_OPTIONS,
-  TOPIC_TYPE_OPTIONS,
 } from '@/dev/story-relation-options.mjs';
-import { getTopicCategory, SUPERNATURAL_BEING_KINDS, SUPERNATURAL_BEING_KIND_LABELS, TOPIC_SUBTYPES_BY_CATEGORY } from '@/utils/topic-taxonomy.mjs';
+import { getTopicCategory, isPlaceCategory, TOPIC_CATEGORIES, SUPERNATURAL_BEING_KINDS, SUPERNATURAL_BEING_KIND_LABELS, TOPIC_SUBTYPES_BY_CATEGORY } from '@/utils/topic-taxonomy.mjs';
 
 type TopicOption = {
   slug: string;
   item: string;
-  types: string[];
+  classificationLabels: string[];
 };
 
 type ResourceOption = {
@@ -56,11 +55,11 @@ const StoryRelationEditor = ({
     description: '',
     latitude: '',
     longitude: '',
-    types: [] as string[],
+    category: '',
     subtype: '',
     beingKind: '',
   });
-  const topicCategory = getTopicCategory(topicForm.types);
+  const topicCategory = getTopicCategory(topicForm);
   const [resourceForm, setResourceForm] = useState({
     slug: '',
     title: '',
@@ -83,7 +82,7 @@ const StoryRelationEditor = ({
         return true;
       }
 
-      const searchableText = [topic.item, topic.slug, ...topic.types]
+      const searchableText = [topic.item, topic.slug, ...topic.classificationLabels]
         .join(' ')
         .toLowerCase();
       return searchableText.includes(normalizedSearchQuery);
@@ -111,7 +110,7 @@ const StoryRelationEditor = ({
       return true;
     }
 
-    const searchableText = [topic.item, topic.slug, ...topic.types]
+    const searchableText = [topic.item, topic.slug, ...topic.classificationLabels]
       .join(' ')
       .toLowerCase();
     return searchableText.includes(normalizedResourceTopicQuery);
@@ -183,20 +182,6 @@ const StoryRelationEditor = ({
     await postMutation(payload);
   };
 
-  const handleTopicTypeToggle = (type: string) => {
-    setTopicForm((current) => {
-      const types = current.types.includes(type)
-        ? current.types.filter((value) => value !== type)
-        : [...current.types, type];
-      const category = getTopicCategory(types);
-      const subtype = category && TOPIC_SUBTYPES_BY_CATEGORY[category].includes(current.subtype)
-        ? current.subtype
-        : '';
-      const beingKind = category === 'Supernatural being' ? current.beingKind : '';
-      return { ...current, types, subtype, beingKind };
-    });
-  };
-
   const handleResourceTopicToggle = (slug: string) => {
     setResourceForm((current) => ({
       ...current,
@@ -223,7 +208,7 @@ const StoryRelationEditor = ({
               description: topicForm.description,
               latitude: topicForm.latitude,
               longitude: topicForm.longitude,
-              types: topicForm.types,
+              category: topicForm.category,
               subtype: topicForm.subtype,
               being_kind: topicForm.beingKind,
             },
@@ -334,7 +319,7 @@ const StoryRelationEditor = ({
                               {topic.slug}
                             </div>
                             <div className="mt-2 flex flex-wrap gap-2">
-                              {topic.types.map((type) => (
+                              {topic.classificationLabels.map((type) => (
                                 <span
                                   key={`${topic.slug}-${type}`}
                                   className="badge badge-soft badge-primary"
@@ -522,36 +507,20 @@ const StoryRelationEditor = ({
                       />
                     </label>
 
-                    <div className="md:col-span-2">
-                      <div className="mb-2 text-sm font-medium text-slate-700">
-                        Types
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {TOPIC_TYPE_OPTIONS.map((type) => {
-                          const isSelected = topicForm.types.includes(type);
-
-                          return (
-                            <button
-                              key={type}
-                              type="button"
-                              className={`badge cursor-pointer border px-3 py-3 transition ${
-                                isSelected
-                                  ? 'badge-primary text-primary-content'
-                                  : 'badge-soft badge-primary'
-                              }`}
-                              onClick={() => handleTopicTypeToggle(type)}
-                            >
-                              {type}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                    {!topicCategory && topicForm.types.length > 0 && (
-                      <p className="text-sm text-slate-600 md:col-span-2">
-                        Choose tags that describe one kind of topic, such as Person or Place.
-                      </p>
-                    )}
+                    <label className="form-control">
+                      <span className="mb-2 text-sm font-medium text-slate-700">Category</span>
+                      <select
+                        className="select select-bordered"
+                        value={topicForm.category}
+                        onChange={(event) => {
+                          const category = event.target.value;
+                          setTopicForm((current) => ({ ...current, category, subtype: '', beingKind: '' }));
+                        }}
+                      >
+                        <option value="">Choose a category</option>
+                        {TOPIC_CATEGORIES.map((category) => <option key={category}>{category}</option>)}
+                      </select>
+                    </label>
                     {topicCategory && (
                       <label className="form-control">
                         <span className="mb-2 text-sm font-medium text-slate-700">
@@ -564,7 +533,7 @@ const StoryRelationEditor = ({
                             setTopicForm((current) => ({ ...current, subtype: event.target.value }))
                           }
                         >
-                          <option value="">Unspecified</option>
+                          <option value="">{isPlaceCategory(topicCategory) ? 'Choose a subtype' : 'Unspecified'}</option>
                           {TOPIC_SUBTYPES_BY_CATEGORY[topicCategory].map((subtype) => (
                             <option key={subtype}>{subtype}</option>
                           ))}
@@ -728,7 +697,7 @@ const StoryRelationEditor = ({
                     className="btn btn-primary"
                     disabled={
                       isSubmitting ||
-                      (entityType === 'topic' && !topicCategory)
+                      (entityType === 'topic' && (!topicCategory || (isPlaceCategory(topicCategory) && !topicForm.subtype)))
                     }
                   >
                     {isSubmitting ? 'Saving...' : `Create ${label}`}

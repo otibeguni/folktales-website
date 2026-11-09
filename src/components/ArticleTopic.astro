@@ -4,8 +4,8 @@ import BookListItem from '@/components/BookListItem';
 import RelatedItemsList from '@/components/RelatedItemsList.astro';
 import TopicRelationshipTour from '@/components/TopicRelationshipTour';
 import TopicRelationEditor from '@/components/TopicRelationEditor';
-import { sortTopicTags } from '@/utils/topic-tags';
-import { getTopicSubtype, SUPERNATURAL_BEING_KIND_LABELS } from '@/utils/topic-taxonomy.mjs';
+import { getTopicDisplayLabels } from '@/utils/topic-labels';
+import { SUPERNATURAL_BEING_KIND_LABELS } from '@/utils/topic-taxonomy.mjs';
 
 const {
   topic,
@@ -18,11 +18,9 @@ const {
   availableTopics = [],
   currentTopicRelations = [],
 } = Astro.props;
-const subtype = getTopicSubtype(topic);
 const beingKind = topic.being_kind as keyof typeof SUPERNATURAL_BEING_KIND_LABELS | undefined;
-const sortedTags = sortTopicTags((topic.types ?? []).filter((tag: string) =>
-  tag !== subtype && !(beingKind && tag === 'Supernatural being')
-));
+const badges = getTopicDisplayLabels(topic);
+if (beingKind) badges.push(SUPERNATURAL_BEING_KIND_LABELS[beingKind]);
 
 const relatedStories = stories.map(({ frontmatter }: { frontmatter: IStory }) => ({
   name: frontmatter.title,
@@ -51,10 +49,8 @@ const relatedResources = resources
   <article class="prose mx-auto max-w-4xl px-4 pb-12">
     <h1 class="mb-4 text-5xl leading-16">{topic.item}</h1>
     <div class="flex flex-wrap gap-2">
-      {subtype && <span class="badge badge-soft badge-primary">{subtype}</span>}
-      {beingKind && <span class="badge badge-soft badge-primary">{SUPERNATURAL_BEING_KIND_LABELS[beingKind]}</span>}
-      {sortedTags.map((tag) => (
-        <span class="badge badge-soft badge-primary">{tag}</span>
+      {badges.map((badge) => (
+        <span class="badge badge-soft badge-primary">{badge}</span>
       ))}
     </div>
 

@@ -2,7 +2,7 @@
 slug: goddess-ka-sngi
 item: Ka Sngi
 item_bn: "কা সেংগি"
-types: ["Deity"]
+category: Deity
 description: Khasi Sun Goddess
 ---
 

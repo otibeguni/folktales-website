@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { TOPIC_RELATION_TYPES } from "./utils/topic-relations.mjs";
-import { SUPERNATURAL_BEING_KINDS, TOPIC_TYPE_OPTIONS, validateTopicClassification } from "./utils/topic-taxonomy.mjs";
+import { SUPERNATURAL_BEING_KINDS, TOPIC_CATEGORIES, validateTopicClassification } from "./utils/topic-taxonomy.mjs";
 
 const stories = defineCollection({
   schema: z.object({
@@ -28,14 +28,15 @@ const topics = defineCollection({
     item: z.string(),
     item_bn: z.string().optional(),
     wikidata_id: z.string().optional(),
-    types: z.array(z.enum(TOPIC_TYPE_OPTIONS)).min(1),
+    category: z.enum(TOPIC_CATEGORIES),
+    types: z.never().optional(),
     subtype: z.string().optional(),
     being_kind: z.enum(SUPERNATURAL_BEING_KINDS).optional(),
     description: z.string().nullable().optional(),
     latitude: z.number().optional(),
     longitude: z.number().optional(),
-  }).superRefine(({ types, subtype, being_kind }, context) => {
-    const message = validateTopicClassification(types, subtype, being_kind);
+  }).superRefine((topic, context) => {
+    const message = validateTopicClassification(topic);
     if (message) context.addIssue({ code: "custom", message });
   }),
 });

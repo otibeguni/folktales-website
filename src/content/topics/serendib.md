@@ -2,8 +2,8 @@
 slug: serendib
 item: Serendib
 item_bn: সরণদ্বীপ
-types: ["Place"]
-subtype: Settlement or region
+category: Landscape
+subtype: Island
 description: An old Arabic and Persian name for the island of Sri Lanka, frequently appearing in legends like those of Sinbad the Sailor.
 latitude: 7.5554942
 longitude: 80.7137847

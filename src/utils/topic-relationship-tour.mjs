@@ -1,5 +1,5 @@
 import { isSymmetricTopicRelation, TOPIC_RELATION_LABELS } from './topic-relations.mjs';
-import { getTopicCategory, SUPERNATURAL_BEING_KIND_LABELS } from './topic-taxonomy.mjs';
+import { getTopicCategory, isPlaceCategory, SUPERNATURAL_BEING_KIND_LABELS } from './topic-taxonomy.mjs';
 
 /** @typedef {import('./content').TopicNeighborhoodNode} TopicNode */
 /** @typedef {import('./content').TopicNeighborhoodEdge} TopicEdge */
@@ -39,9 +39,14 @@ const TRADITION_CONNECTORS = {
   Deity: [' is a deity in ', ' are deities in '],
   Person: [' is a significant figure in ', ' are significant figures in '],
   Group: [' are a group associated with ', ' are groups associated with '],
-  Place: [' is a place associated with ', ' are places associated with '],
+  Landscape: [' is a natural feature associated with ', ' are natural features associated with '],
+  Settlement: [' is a settlement associated with ', ' are settlements associated with '],
+  Region: [' is a region associated with ', ' are regions associated with '],
+  Polity: [' is a historical polity associated with ', ' are historical polities associated with '],
+  Site: [' is a site associated with ', ' are sites associated with '],
+  Realm: [' is a mythical place associated with ', ' are mythical places associated with '],
   Tradition: [' is part of the tradition of ', ' are part of the tradition of '],
-  'Sacred text': [' is a sacred text in ', ' are sacred texts in '],
+  Scripture: [' is a sacred text in ', ' are sacred texts in '],
   'Named supernatural being': [' is a supernatural being in ', ' are supernatural beings in '],
   'Class of supernatural beings': [' are a class of supernatural beings in ', ' are classes of supernatural beings in '],
 };
@@ -73,13 +78,15 @@ export function buildTopicRelationshipTour(graph) {
     const groupByCategory = symmetric || isTraditionLink;
     const category = node.beingKind
       ? SUPERNATURAL_BEING_KIND_LABELS[node.beingKind]
-      : node.category ?? getTopicCategory(node.types) ?? 'Other topics';
-    const slideCategory = groupByCategory ? category : undefined;
+      : getTopicCategory(node) ?? 'Other topics';
+    const slideCategory = isTraditionLink && !outbound && node.subtype === 'Scripture'
+      ? 'Scripture'
+      : groupByCategory ? category : undefined;
     const key = `${edge.relationType}:${symmetric ? 'symmetric' : direction}:${slideCategory ?? ''}`;
     if (!groups.has(key)) {
       const target = outbound ? node : root;
       const isGroupAssociation = isTraditionLink &&
-        (target.category ?? getTopicCategory(target.types)) === 'Group';
+        getTopicCategory(target) === 'Group';
       const label = isGroupAssociation
         ? (outbound ? 'Associated group' : 'Associated with this group')
         : TOPIC_RELATION_LABELS[edge.relationType]?.[outbound ? 'forward' : 'reverse'] ?? edge.label;
@@ -87,19 +94,19 @@ export function buildTopicRelationshipTour(graph) {
       let pluralConnector = edge.relationType === 'member_of' && !outbound
         ? ' are members of the group '
         : undefined;
-      const rootCategory = root.category ?? getTopicCategory(root.types);
-      if (symmetric && rootCategory === 'Group' && category === 'Place') {
+      const rootCategory = getTopicCategory(root);
+      if (symmetric && rootCategory === 'Group' && isPlaceCategory(category)) {
         sentence = { prefix: 'The group ', connector: ' is associated with ' };
-      } else if (symmetric && rootCategory === 'Place' && category === 'Group') {
+      } else if (symmetric && isPlaceCategory(rootCategory) && category === 'Group') {
         sentence = { connector: ' is associated with ' };
       } else if (isGroupAssociation) {
         sentence = { prefix: 'Explore connections linking the group ', connector: ' to ', neighborsFirst: outbound };
       } else if (isTraditionLink) {
         const subject = outbound ? root : node;
-        const subjectCategory = subject.category ?? getTopicCategory(subject.types);
+        const subjectCategory = getTopicCategory(subject);
         const connectorCategory = subject.beingKind
           ? SUPERNATURAL_BEING_KIND_LABELS[subject.beingKind]
-          : subjectCategory;
+          : subject.subtype === 'Scripture' ? 'Scripture' : subjectCategory;
         const connectors = TRADITION_CONNECTORS[connectorCategory ?? ''];
         if (connectors) {
           sentence = {
@@ -133,11 +140,11 @@ export function buildTopicRelationshipTour(graph) {
       const label = group.relations.length > 4 ? `${group.label} (${offset + 1}–${offset + relations.length})` : group.label;
       const subject = group.sentence.neighborsFirst ? relations[0].node : root;
       const hasMultipleSubjects = group.sentence.neighborsFirst && relations.length > 1;
-      const isTextCollection = !hasMultipleSubjects && subject.subtype === 'Collection of sacred texts';
-      const sentence = group.pluralConnector && (hasMultipleSubjects || isTextCollection)
+      const isVedas = !hasMultipleSubjects && subject.slug === 'vedas';
+      const sentence = group.pluralConnector && (hasMultipleSubjects || isVedas)
         ? {
             ...group.sentence,
-            prefix: isTextCollection && !/^the\s/i.test(subject.label) ? 'The ' : group.sentence.prefix,
+            prefix: isVedas && !/^the\s/i.test(subject.label) ? 'The ' : group.sentence.prefix,
             connector: group.pluralConnector,
           }
         : group.sentence;

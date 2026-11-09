@@ -2,7 +2,7 @@
 slug: god-lainingthou-sanamahi
 item: Lainingthou Sanamahi
 item_bn: "লাইনিংথৌ সনামাহী"
-types: ["Deity"]
+category: Deity
 description: Supreme Guardian God of Sanamahism
 ---
 

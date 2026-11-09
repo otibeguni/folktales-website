@@ -180,8 +180,17 @@ collections:
       - { label: "Title", name: "item", widget: "string", required: true }
       - { label: "Bengali Title", name: "item_bn", widget: "string", required: false }
       - { label: "Wikidata ID", name: "wikidata_id", widget: "string", required: false }
-      - { label: "Type", name: "type", widget: "string", required: true }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Landscape", "Settlement", "Region", "Polity", "Site", "Realm", "Deity", "Person", "Group", "Supernatural being", "Work", "Tradition", "Event", "Object"]
+        required: true
+        hint: "Place categories also require a subtype."
+      - { label: "Subtype", name: "subtype", widget: "string", required: false }
+      - { label: "Individual or class", name: "being_kind", widget: "select", options: ["individual", "class"], required: false }
       - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Latitude", name: "latitude", widget: "number", value_type: "float", required: false }
+      - { label: "Longitude", name: "longitude", widget: "number", value_type: "float", required: false }
 
   - name: "books"
     label: "Books"

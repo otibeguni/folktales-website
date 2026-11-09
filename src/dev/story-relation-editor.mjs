@@ -7,7 +7,6 @@ import {
 import { validateTopicClassification } from "../utils/topic-taxonomy.mjs";
 import {
   RESOURCE_TYPE_OPTIONS,
-  TOPIC_TYPE_OPTIONS,
 } from "./story-relation-options.mjs";
 
 export class StoryRelationEditorError extends Error {
@@ -101,22 +100,13 @@ function ensureUniqueSlug(existingEntry, entityName, slug) {
   }
 }
 
-function validateTopic(topic, context) {
-  const types = normalizeStringArray(topic?.types);
-  if (types.length === 0) {
-    throw new StoryRelationEditorError('Missing required field "types"');
-  }
-
-  const invalidTypes = types.filter((type) => !TOPIC_TYPE_OPTIONS.includes(type));
-  if (invalidTypes.length > 0) {
-    throw new StoryRelationEditorError(
-      `Invalid topic type: ${invalidTypes.join(", ")}`,
-    );
-  }
-
-  const subtype = cleanOptionalString(topic?.subtype);
-  const beingKind = cleanOptionalString(topic?.being_kind);
-  const classificationError = validateTopicClassification(types, subtype, beingKind);
+function validateTopic(topic) {
+  const classification = {
+    category: cleanOptionalString(topic?.category),
+    subtype: cleanOptionalString(topic?.subtype),
+    being_kind: cleanOptionalString(topic?.being_kind),
+  };
+  const classificationError = validateTopicClassification({ ...classification, types: topic?.types });
   if (classificationError) throw new StoryRelationEditorError(classificationError);
 
   return {
@@ -124,9 +114,7 @@ function validateTopic(topic, context) {
     item: requireString(topic?.item, "item"),
     item_bn: cleanOptionalString(topic?.item_bn),
     wikidata_id: cleanOptionalString(topic?.wikidata_id),
-    types,
-    subtype,
-    being_kind: beingKind,
+    ...classification,
     description: cleanOptionalString(topic?.description),
     latitude: validateOptionalNumber(topic?.latitude, "latitude"),
     longitude: validateOptionalNumber(topic?.longitude, "longitude"),
@@ -191,7 +179,7 @@ async function attachExistingTopic({ rootDir, context, storySlug, storyLanguage,
 
 async function createAndAttachTopic({ rootDir, context, storySlug, storyLanguage, topic }) {
   assertStoryExists(context, storySlug, storyLanguage);
-  const validatedTopic = validateTopic(topic, context);
+  const validatedTopic = validateTopic(topic);
   ensureUniqueSlug(context.indexes.topicsBySlug.get(validatedTopic.slug), "Topic", validatedTopic.slug);
 
   const created = await createEntry(rootDir, "topic", validatedTopic);

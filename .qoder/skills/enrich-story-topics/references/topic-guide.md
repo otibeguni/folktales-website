@@ -1,6 +1,6 @@
 # Topic Guide
 
-Authoritative sources: `src/utils/topic-taxonomy.mjs` (tags, categories, subtypes, validation)
+Authoritative sources: `src/utils/topic-taxonomy.mjs` (categories, subtypes, validation)
 and `src/content.config.ts` (Zod schema). This guide summarizes them and adds curation judgment.
 Re-read the source files if they change.
 
@@ -20,7 +20,7 @@ Target these categories:
 - **Deities** (`Deity`): gods/goddesses and folk deities (Bonbibi, Dakshin Rai, Manasa, Shiva).
 - **Supernatural beings** (`Supernatural being`): classes (rakshasa, pari, jinn, byangoma) or
   named recurring beings (Raymoni).
-- **Source works / sacred texts** (`Work`, `Sacred text`): the collection or poem a story belongs
+- **Source works and scripture** (`Work`): the collection or poem a story belongs
   to (Thakurmar Jhuli, Maimansingha Gitika, Bonobibi Jahuranama, Vedas).
 - **Recurring magical objects** (`Object`): e.g. Parashmani, Aab-e Hayat.
 
@@ -28,18 +28,17 @@ Target these categories:
 
 - One-off characters invented for a single story's plot.
 - Fictional places that exist only in that one tale.
-- The `Person` subtype `Story character` unless the character genuinely recurs across stories.
 
 **Litmus test:** "Could this entity plausibly show up in another story here?" If yes → topic.
 If it only exists to serve this one narrative → skip it.
 
 ### Worked example (the pattern to emulate)
 
-`bonobibi-jahuranama` (11 topics) links: `bonbibi-deity` (Deity), `dakshin-rai` (Deity),
-`shah-jongoli` / `gulal-bibi` (saints), `raymoni` (named supernatural being), `prophet-muhammad`
-(Person/Prophet), `sundarbans` / `ganges-river` (Natural feature), `mecca` / `medina` (sacred
-places), and `bonobibi-jahuranama` (Work). It deliberately does **not** link Berahim and
-Phulbibi — the one-off devotee couple who drive this specific tale.
+`bonobibi-jahuranama` links nine topics, including `bonbibi-deity` and `dakshin-rai` (Deity),
+`shah-jongoli` (Person/Saint or mystic),
+`prophet-muhammad` (Person/Prophet), `sundarbans` (Landscape/Forest),
+`ganges-river` (Landscape/River), `mecca` and `medina` (Settlement/City),
+and `bonobibi-jahuranama` (Work). Gulal Bibi, Berahim, Phulbibi, and Raymoni appear in the story text.
 
 ## 2. Always search existing topics first
 
@@ -47,7 +46,7 @@ Phulbibi — the one-off devotee couple who drive this specific tale.
 
 ```bash
 node tools/content-cli/cli.mjs search topic --query "<name or Bengali label>" --json
-node tools/content-cli/cli.mjs list topic --category Place --json
+node tools/content-cli/cli.mjs list topic --category Landscape --json
 node tools/content-cli/cli.mjs get topic <slug> --json
 ```
 
@@ -56,34 +55,28 @@ Match candidates by `item`, `item_bn`, and `wikidata_id`, not just slug. If a to
 
 ## 3. Taxonomy
 
-`types` = **exactly one primary category tag** + optional **modifier tags**. Modifiers carry no
-category and never conflict: `Sacred`, `Historical`, `Legendary`, `Mythic`, `Natural`, `Literary`.
+Each topic has one `category`. The subtype must belong to that category.
 
-| Category | Primary tag(s) | Valid subtypes |
-|---|---|---|
-| Deity | `Deity` | Deity, Folk deity |
-| Person | `Person` | Saint or mystic, Prophet, Ruler or leader, Story character |
-| Group | `People` | Community, Social group, Named collective |
-| Place | `Place` / `Site` / `Kingdom` | Settlement or region, Polity, Natural feature, Sacred site, Archaeological site, Mythic place |
-| Supernatural being | `Supernatural being` | Angel, Spirit, Ghost, Asura, Ogre or demon, Mythic creature, Mythic figure |
-| Work | `Work` | Narrative poem, Story collection |
-| Sacred text | `Sacred text` | Collection of sacred texts |
-| Tradition | `Religion` / `Tradition` | Religion, Ritual, Devotional school, Folk tradition |
-| Event | `Event` | Conflict |
-| Object | `Object` | Magical object or substance |
+| Category | Valid subtypes |
+|---|---|
+| Landscape | River, Hill or mountain, Island, Wetland, Sea, Forest, Other |
+| Settlement | City, Town, Locality, Other |
+| Region | District, Administrative area, Geographic region, Other |
+| Polity | Kingdom, Other |
+| Site | Shrine / mazar, Temple, Archaeological site, Other |
+| Realm | Cosmological realm, Other |
+| Deity | Folk deity, Avatar |
+| Person | Saint or mystic, Prophet, Other Religious Figure, Ruler, Author or collector, Other |
+| Group | Community, Social group, Named collective |
+| Supernatural being | Spirit, Animal-like being, Other |
+| Work | Collection, Puthi, Epic, Narrative poetry, Scripture, Other |
+| Tradition | Religion, Ritual, Devotional school, Folk tradition |
+| Event | Conflict |
+| Object | Magical object or substance |
 
-**Place tag nuance:** use `Place` for regions/rivers/mythic realms/archaeological sites; add
-`Kingdom` for polities (`types: ["Place","Kingdom","Historical"]`, subtype `Polity`); use `Site`
-for shrines/sacred sites (`types: ["Site","Sacred"]`, subtype `Sacred site`). All three tags map
-to the single `Place` category, so combining `Place`+`Kingdom` is valid.
-
-**being_kind:** REQUIRED for `Supernatural being` — `class` for a race/type (rakshasa, pari,
-jinn), `individual` for a named being (Raymoni). FORBIDDEN for every other category.
-
-**Validation rules** (enforced by `create`/`update`/`validate`): types must resolve to exactly
-one category; `subtype` must belong to that category; supernatural beings need `being_kind`;
-`being_kind` is rejected elsewhere. Never put two primary tags that map to different categories
-(e.g. `Person` + `Deity`).
+Landscape, Settlement, Region, Polity, Site, and Realm require a subtype.
+Supernatural beings also require `being_kind`. Use `class` for a type such as
+jinn and `individual` for a named being such as Duldul.
 
 ## 4. Frontmatter fields
 
@@ -93,8 +86,8 @@ one category; `subtype` must belong to that category; supernatural beings need `
 | `item` | yes | English display label |
 | `item_bn` | no | Bengali label — include when known |
 | `wikidata_id` | no | `Q...` — **only if verified; never fabricate.** Omit if unsure |
-| `types` | yes | one primary tag + optional modifiers |
-| `subtype` | no (recommended) | from the category's list |
+| `category` | yes | one category from the table above |
+| `subtype` | conditional | required for place categories |
 | `being_kind` | conditional | required for supernatural beings only |
 | `description` | no | 1–2 sentences, single line: what it is + why it recurs |
 | `latitude` / `longitude` | no | numbers; real places only |
@@ -106,37 +99,37 @@ one category; `subtype` must belong to that category; supernatural beings need `
 
 ## 5. Create commands (illustrative — these topics already exist; adapt for new entities)
 
-Flags use **underscores** (`--item_bn`, `--wikidata_id`, `--being_kind`). `--types` is
-**comma-separated**. Keep `--description` a single line and mind shell quoting.
+Flags use **underscores** (`--item_bn`, `--wikidata_id`, `--being_kind`).
+Keep `--description` a single line and mind shell quoting.
 
 ```bash
 # Supernatural being (class)
 node tools/content-cli/cli.mjs create topic --slug pari --item "Pari" --item_bn "পরী" \
-  --wikidata_id Q1542990 --types "Supernatural being,Mythic" --subtype Spirit --being_kind class \
+  --wikidata_id Q1542990 --category "Supernatural being" --subtype Spirit --being_kind class \
   --description "Winged spirits of Persian and Bengali folklore, recurring across many tales."
 
 # Person (prophet)
 node tools/content-cli/cli.mjs create topic --slug prophet-muhammad --item "Prophet Muhammad" \
-  --types "Person,Sacred,Historical" --subtype Prophet
+  --category Person --subtype Prophet
 
-# Place (natural feature, with coordinates)
+# Region (district, with coordinates)
 node tools/content-cli/cli.mjs create topic --slug barishal --item "Barishal" \
-  --types "Place" --subtype "Settlement or region" --latitude 22.8 --longitude 90.37 \
+  --category Region --subtype District --latitude 22.8 --longitude 90.37 \
   --description "A riverine district in southern Bengal, a setting for regional legends."
 
 # Site (shrine)
 node tools/content-cli/cli.mjs create topic --slug kutub-shah-mazar --item "Kutub Shah Mazar" \
-  --types "Site,Sacred" --subtype "Sacred site" \
+  --category Site --subtype "Shrine / mazar" \
   --description "A Sylhet shrine dedicated to Shah Jalal's companion Kutub Shah."
 
 # Tradition / religion
 node tools/content-cli/cli.mjs create topic --slug sanamahism --item "Sanamahism" \
-  --types "Religion" --subtype Religion \
+  --category Tradition --subtype Religion \
   --description "The Meitei religious tradition behind the Sidaba Mapu and Helloi stories."
 
 # Work (source collection)
 node tools/content-cli/cli.mjs create topic --slug thakurmar-jhuli --item "Thakurmar Jhuli" \
-  --item_bn "ঠাকুরমার ঝুলি" --wikidata_id Q3350396 --types "Work,Literary" --subtype "Story collection" \
+  --item_bn "ঠাকুরমার ঝুলি" --wikidata_id Q3350396 --category Work --subtype "Collection" \
   --description "Dakshinaranjan Mitra Majumder's collection of Bengali folk and fairy tales."
 ```
 

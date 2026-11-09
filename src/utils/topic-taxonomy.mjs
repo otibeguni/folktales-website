@@ -1,58 +1,60 @@
-export const TOPIC_TYPE_OPTIONS = /** @type {const} */ ([
-  "Deity", "Person", "People", "Place", "Site", "Kingdom", "Supernatural being", "Work", "Sacred text",
-  "Religion", "Tradition", "Event", "Object", "Sacred", "Historical", "Legendary", "Mythic",
-  "Natural", "Literary",
-]);
-
 export const SUPERNATURAL_BEING_KINDS = /** @type {const} */ (["individual", "class"]);
 export const SUPERNATURAL_BEING_KIND_LABELS = {
   individual: "Named supernatural being",
   class: "Class of supernatural beings",
 };
 
-const CATEGORY_TAGS = {
-  "Supernatural being": ["Supernatural being"],
-  Deity: ["Deity"],
-  Person: ["Person"],
-  Group: ["People"],
-  Place: ["Place", "Site", "Kingdom"],
-  Work: ["Work"],
-  "Sacred text": ["Sacred text"],
-  Tradition: ["Religion", "Tradition"],
-  Event: ["Event"],
-  Object: ["Object"],
-};
+export const PLACE_CATEGORIES = /** @type {const} */ ([
+  "Landscape", "Settlement", "Region", "Polity", "Site", "Realm",
+]);
+
+export const TOPIC_CATEGORIES = /** @type {const} */ ([
+  ...PLACE_CATEGORIES, "Deity", "Person", "Group", "Supernatural being",
+  "Work", "Tradition", "Event", "Object",
+]);
+
+/** @param {string | null | undefined} category @returns {category is (typeof PLACE_CATEGORIES)[number]} */
+export function isPlaceCategory(category) {
+  return PLACE_CATEGORIES.some((option) => option === category);
+}
 
 export const TOPIC_SUBTYPES_BY_CATEGORY = {
-  "Supernatural being": ["Angel", "Spirit", "Ghost", "Asura", "Ogre or demon", "Mythic creature", "Mythic figure"],
-  Deity: ["Deity", "Folk deity"],
-  Person: ["Saint or mystic", "Prophet", "Ruler or leader", "Story character"],
+  Landscape: ["River", "Hill or mountain", "Island", "Wetland", "Sea", "Forest", "Other"],
+  Settlement: ["City", "Town", "Locality", "Other"],
+  Region: ["District", "Administrative area", "Geographic region", "Other"],
+  Polity: ["Kingdom", "Other"],
+  Site: ["Shrine / mazar", "Temple", "Archaeological site", "Other"],
+  Realm: ["Cosmological realm", "Other"],
+  "Supernatural being": ["Spirit", "Animal-like being", "Other"],
+  Deity: ["Folk deity", "Avatar"],
+  Person: ["Saint or mystic", "Prophet", "Other Religious Figure", "Ruler", "Author or collector", "Other"],
   Group: ["Community", "Social group", "Named collective"],
-  Place: ["Settlement or region", "Polity", "Natural feature", "Sacred site", "Archaeological site", "Mythic place"],
-  Work: ["Narrative poem", "Story collection"],
-  "Sacred text": ["Collection of sacred texts"],
+  Work: ["Collection", "Puthi", "Epic", "Narrative poetry", "Scripture", "Other"],
   Tradition: ["Religion", "Ritual", "Devotional school", "Folk tradition"],
   Event: ["Conflict"],
   Object: ["Magical object or substance"],
 };
 
-/** @param {readonly string[]} types */
-export function getTopicCategory(types) {
-  const categories = /** @type {(keyof typeof CATEGORY_TAGS)[]} */ (Object.keys(CATEGORY_TAGS));
-  const matches = categories.filter((category) => CATEGORY_TAGS[category].some((tag) => types.includes(tag)));
-  return matches.length === 1 ? matches[0] : null;
+/** @typedef {{category?: string | null, types?: unknown, subtype?: string | null, being_kind?: string}} TopicClassification */
+
+/** @param {TopicClassification} topic */
+export function getTopicCategory({ category }) {
+  return TOPIC_CATEGORIES.find((option) => option === category) ?? null;
 }
 
-/** @param {{types?: readonly string[], subtype?: string}} topic */
+/** @param {TopicClassification} topic */
 export function getTopicSubtype(topic) {
-  return topic.subtype ?? (topic.types?.includes("Deity") ? "Deity" : null);
+  return topic.subtype ?? null;
 }
 
-/** @param {readonly string[]} types @param {string} [subtype] @param {string} [beingKind] */
-export function validateTopicClassification(types, subtype, beingKind) {
-  const category = getTopicCategory(types);
-  if (!category) return "Topic tags must resolve to exactly one category";
-  if (subtype !== undefined && !TOPIC_SUBTYPES_BY_CATEGORY[category].includes(subtype)) {
+/** @param {TopicClassification} topic */
+export function validateTopicClassification(topic) {
+  const { types, subtype, being_kind: beingKind } = topic;
+  if (types !== undefined) return "Topic categories and subtypes replace the types field";
+  const category = getTopicCategory(topic);
+  if (!category) return "Topics require a valid category";
+  if (isPlaceCategory(category) && !subtype) return "Place topics require a subtype";
+  if (subtype !== undefined && !TOPIC_SUBTYPES_BY_CATEGORY[category].some((option) => option === subtype)) {
     return `Invalid subtype "${subtype}" for topic category "${category}"`;
   }
   if (category === "Supernatural being") {

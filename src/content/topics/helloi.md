@@ -2,7 +2,7 @@
 slug: helloi
 item: Helloi
 item_bn: "হেল্লোই"
-types: ["Supernatural being", "Mythic"]
+category: Supernatural being
 subtype: Spirit
 being_kind: class
 description: Nature Spirits in Meitei Tradition

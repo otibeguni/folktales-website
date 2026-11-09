@@ -2,7 +2,7 @@ import { useDeferredValue, useState } from 'react';
 
 import TopicListItem from '@/components/TopicListItem';
 import type { WikidataItemAlt } from '@/types';
-import { sortTopicTags } from '@/utils/topic-tags';
+import { getTopicCategory, getTopicSubtype } from '@/utils/topic-taxonomy.mjs';
 
 const MAX_TOPICS = 12;
 
@@ -18,64 +18,56 @@ const TopicList = ({
     resultsLabel: string;
     searchLabel: string;
     searchPlaceholder: string;
-    typesLabel: string;
+    categoryLabel: string;
+    subtypeLabel: string;
+    allCategoriesLabel: string;
+    allSubtypesLabel: string;
+    chooseCategoryForSubtypesLabel: string;
     searchHelperText: string;
     clearFiltersLabel: string;
     noTopicsFoundLabel: string;
   };
 }) => {
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubtype, setSelectedSubtype] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const deferredSearchQuery = useDeferredValue(searchQuery);
   const normalizedSearchQuery = deferredSearchQuery.trim().toLowerCase();
 
-  const filteredTopics = [
-    ...topics.filter((topic) => {
-      if (selectedTypes.length > 0) {
-        return selectedTypes.every((selectedType) =>
-          topic.types.includes(selectedType),
-        );
-      }
-      return true;
-    }).filter((topic) => {
-      if (!normalizedSearchQuery) {
-        return true;
-      }
+  const classifiedTopics = topics.map((topic) => ({
+    topic,
+    category: getTopicCategory(topic),
+    subtype: getTopicSubtype(topic),
+  }));
+  const categories = Array.from(new Set(classifiedTopics.flatMap(({ category }) => category ? [category] : []))).sort();
+  const categoryTopics = classifiedTopics.filter(({ category }) => !selectedCategory || category === selectedCategory);
+  const subtypes = Array.from(new Set(categoryTopics.flatMap(({ subtype }) => subtype ? [subtype] : []))).sort(
+    (a, b) => Number(a === 'Other') - Number(b === 'Other') || a.localeCompare(b),
+  );
 
-      const searchableText = [
-        topic.item,
-        topic.slug,
-        topic.description ?? '',
-        ...topic.types,
-      ]
-        .join(' ')
-        .toLowerCase();
-
-      return searchableText.includes(normalizedSearchQuery);
-    }),
-  ];
+  const filteredTopics = categoryTopics.filter(({ topic, category, subtype }) => {
+    if (selectedSubtype && selectedSubtype !== subtype) return false;
+    const searchableText = [
+      topic.item,
+      topic.item_bn,
+      topic.slug,
+      topic.description,
+      category,
+      subtype,
+    ].join(' ').toLowerCase();
+    return searchableText.includes(normalizedSearchQuery);
+  });
   const totalPages = Math.ceil(filteredTopics.length / MAX_TOPICS);
   const paginatedTopics = filteredTopics.slice(
     (currentPage - 1) * MAX_TOPICS,
     currentPage * MAX_TOPICS,
   );
-  const allTypes = sortTopicTags(
-    Array.from(new Set(topics.flatMap((topic) => topic.types))),
-  );
-
-  const toggleType = (tag: string) => {
-    setCurrentPage(1);
-    setSelectedTypes((current) =>
-      current.includes(tag)
-        ? current.filter((item) => item !== tag)
-        : [...current, tag],
-    );
-  };
 
   const clearFilters = () => {
     setCurrentPage(1);
-    setSelectedTypes([]);
+    setSelectedCategory('');
+    setSelectedSubtype('');
     setSearchQuery('');
   };
 
@@ -103,7 +95,7 @@ const TopicList = ({
               <button
                 type="button"
                 className="btn btn-ghost btn-sm self-start md:self-auto"
-                disabled={!searchQuery && selectedTypes.length === 0}
+                disabled={!searchQuery && !selectedCategory && !selectedSubtype}
                 onClick={clearFilters}
               >
                 {labels.clearFiltersLabel}
@@ -127,31 +119,65 @@ const TopicList = ({
                 />
               </label>
 
-              <div className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-slate-700">
-                  {labels.typesLabel}
-                </span>
+              <fieldset className="flex flex-col gap-2">
+                <legend className="mb-2 text-sm font-medium text-slate-700">{labels.categoryLabel}</legend>
                 <div className="flex flex-wrap gap-2">
-                  {allTypes.map((tag) => {
-                    const isSelected = selectedTypes.includes(tag);
-
+                  {['', ...categories].map((category) => {
+                    const isSelected = selectedCategory === category;
                     return (
                       <button
-                        key={tag}
+                        key={category}
                         type="button"
-                        className={`badge cursor-pointer border px-3 py-3 transition ${
+                        aria-pressed={isSelected}
+                        className={`badge h-auto cursor-pointer border px-3 py-2 transition ${
                           isSelected
                             ? 'badge-primary text-primary-content'
                             : 'badge-soft badge-primary'
                         }`}
-                        onClick={() => toggleType(tag)}
+                        onClick={() => {
+                          setSelectedCategory(isSelected ? '' : category);
+                          setSelectedSubtype('');
+                          setCurrentPage(1);
+                        }}
                       >
-                        {tag}
+                        {category || labels.allCategoriesLabel}
                       </button>
                     );
                   })}
                 </div>
-              </div>
+              </fieldset>
+
+              {!selectedCategory && (
+                <p className="text-sm text-slate-500">{labels.chooseCategoryForSubtypesLabel}</p>
+              )}
+              {selectedCategory && subtypes.length > 0 && (
+                <fieldset className="flex flex-col gap-2">
+                  <legend className="mb-2 text-sm font-medium text-slate-700">{labels.subtypeLabel}</legend>
+                  <div className="flex flex-wrap gap-2">
+                    {['', ...subtypes].map((subtype) => {
+                      const isSelected = selectedSubtype === subtype;
+                      return (
+                        <button
+                          key={subtype}
+                          type="button"
+                          aria-pressed={isSelected}
+                          className={`badge h-auto cursor-pointer border px-3 py-2 transition ${
+                            isSelected
+                              ? 'badge-primary text-primary-content'
+                              : 'badge-soft badge-primary'
+                          }`}
+                          onClick={() => {
+                            setSelectedSubtype(isSelected ? '' : subtype);
+                            setCurrentPage(1);
+                          }}
+                        >
+                          {subtype || labels.allSubtypesLabel}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+              )}
             </div>
 
             <p className="text-sm text-slate-500">{labels.searchHelperText}</p>
@@ -161,7 +187,7 @@ const TopicList = ({
 
       {paginatedTopics.length > 0 ? (
         <div className="mx-3 flex flex-col gap-4 xl:mx-0">
-          {paginatedTopics.map((topic) => (
+          {paginatedTopics.map(({ topic }) => (
             <TopicListItem key={`topic-${topic.slug}`} topic={topic} />
           ))}
         </div>

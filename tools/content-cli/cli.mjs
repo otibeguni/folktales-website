@@ -38,6 +38,7 @@ function printUsage() {
   content get <entity> <slug> [--language <en|bn>] [--json]
   content search <entity|all> --query <text> [filters] [--field title|body|metadata|all] [--json]
   content create <entity> [flags]
+    topics: --category <category> [--subtype <subtype>]
   content update <entity> <slug> [--set field=value] [--add field=value] [--remove field=value]
   content validate [entity|all] [--json]
   content related <entity> <slug> [--language <en|bn>] [--json]
@@ -113,10 +114,9 @@ function printTable(items) {
     detail:
       item.detail ||
       item.language ||
-      (item.entity === "topic" ? [item.category, item.subtype, item.beingKind, item.types?.join(", ")].filter(Boolean).join(" / ") : "") ||
+      (item.entity === "topic" ? [item.category, item.subtype, item.beingKind].filter(Boolean).join(" / ") : "") ||
       item.category ||
       item.type ||
-      (Array.isArray(item.types) ? item.types.join(", ") : "") ||
       item.path ||
       "",
   }));
@@ -147,7 +147,6 @@ function printInspect(record) {
   if (record.subtype) console.log(`subtype: ${record.subtype}`);
   if (record.beingKind) console.log(`being_kind: ${record.beingKind}`);
   if (record.author) console.log(`author: ${record.author}`);
-  if (record.types) console.log(`types: ${record.types.join(", ")}`);
   if (record.sourceSlug) console.log(`source_slug: ${record.sourceSlug}`);
   if (record.sourceLabel) console.log(`source_label: ${record.sourceLabel}`);
   if (record.sourceTextSlug) console.log(`source_text_slug: ${record.sourceTextSlug}`);

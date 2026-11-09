@@ -51,7 +51,8 @@ export interface AtlasEntry {
   slug: string;
   item: string;
   description: string;
-  types: TopicEntry["data"]["types"];
+  category?: TopicEntry["data"]["category"];
+  subtype?: string;
   latitude: number;
   longitude: number;
   relatedStories: AtlasStoryLink[];
@@ -73,7 +74,6 @@ export interface TopicExplorerNode {
   href?: string;
   description?: string;
   itemBn?: string;
-  topicTypes?: TopicEntry["data"]["types"];
   topicCategory?: string | null;
   topicSubtype?: string | null;
   topicBeingKind?: TopicEntry["data"]["being_kind"];
@@ -103,7 +103,6 @@ export interface TopicNeighborhoodNode {
   slug: string;
   label: string;
   href: string;
-  types: TopicEntry["data"]["types"];
   category?: string | null;
   subtype?: string | null;
   beingKind?: TopicEntry["data"]["being_kind"];
@@ -128,7 +127,8 @@ export interface TopicNeighborhoodGraph {
 export interface TopicRelationLink {
   slug: string;
   item: string;
-  types: TopicEntry["data"]["types"];
+  category?: TopicEntry["data"]["category"];
+  subtype?: string;
   href: string;
 }
 
@@ -239,7 +239,8 @@ function buildTopicRelationSections({
       .map((topic) => ({
         slug: topic.slug,
         item: topic.data.item,
-        types: topic.data.types ?? [],
+        category: topic.data.category,
+        subtype: topic.data.subtype,
         href: `/topics/${topic.slug}`,
       }))
       .sort((left, right) => left.item.localeCompare(right.item));
@@ -265,7 +266,8 @@ function buildTopicRelationSections({
       .map((topic) => ({
         slug: topic.slug,
         item: topic.data.item,
-        types: topic.data.types ?? [],
+        category: topic.data.category,
+        subtype: topic.data.subtype,
         href: `/topics/${topic.slug}`,
       }))
       .sort((left, right) => left.item.localeCompare(right.item));
@@ -357,7 +359,8 @@ export async function getFolkloreAtlasEntries(): Promise<AtlasEntry[]> {
         slug: topic.slug,
         item: topic.data.item,
         description: topic.data.description?.trim() ?? "",
-        types: topic.data.types,
+        category: topic.data.category,
+        subtype: topic.data.subtype,
         latitude,
         longitude,
         relatedStories,

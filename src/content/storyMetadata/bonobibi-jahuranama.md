@@ -8,8 +8,6 @@ topic_slugs:
   - "ganges-river"
   - "dakshin-rai"
   - "shah-jongoli"
-  - "raymoni"
-  - "gulal-bibi"
   - "mecca"
   - "medina"
   - "prophet-muhammad"

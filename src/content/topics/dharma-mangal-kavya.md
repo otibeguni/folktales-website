@@ -3,8 +3,8 @@ slug: dharma-mangal-kavya
 item: Dharmamangal Kavya
 item_bn: ধর্মমঙ্গল কাব্য
 wikidata_id: Q5269283
-types: ["Work", "Literary"]
-subtype: Narrative poem
+category: Work
+subtype: Narrative poetry
 description: "A genre of medieval Bengali narrative poetry centred on the folk god Dharmathakur, associated with the Rarh region."
 ---
 

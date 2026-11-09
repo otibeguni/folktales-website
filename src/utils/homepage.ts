@@ -1,3 +1,4 @@
+import { getTopicDisplayLabels } from "@/utils/topic-labels";
 import {
   bookHasDetailPage,
   getAllBooks,
@@ -156,10 +157,10 @@ export async function getHomepageCatalog(): Promise<HomepageCatalogItem[]> {
       title: topic.data.item,
       description: normalizeDescription(
         topic.data.description,
-        `${topic.data.types.join(" · ")} topic`,
+        `${getTopicDisplayLabels(topic.data).join(" · ")} topic`,
       ),
       href: `/topics/${topic.slug}`,
-      searchParts: [topic.slug, topic.data.item_bn, ...topic.data.types],
+      searchParts: [topic.slug, topic.data.item_bn, ...getTopicDisplayLabels(topic.data)],
     }),
   );
 

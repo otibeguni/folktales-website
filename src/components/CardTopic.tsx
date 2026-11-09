@@ -1,8 +1,8 @@
 import type { WikidataItemAlt } from '@/types';
-import { sortTopicTags } from '@/utils/topic-tags';
+import { getTopicDisplayLabels } from '@/utils/topic-labels';
 
 const CardTopic = (props: WikidataItemAlt) => {
-  const sortedTags = sortTopicTags(props.types);
+  const sortedTags = getTopicDisplayLabels(props);
 
   return (
     <div className="card bg-base-100 card-md shadow-sm transition hover:scale-105">
@@ -11,7 +11,7 @@ const CardTopic = (props: WikidataItemAlt) => {
           <div className="card-title">{props.item}</div>
           <div className="flex flex-col gap-2">
             <span className="text-xs font-bold uppercase tracking-wide text-slate-500">
-              Types
+              Classification
             </span>
             <div className="flex flex-wrap gap-2">
               {sortedTags.map((tag) => (

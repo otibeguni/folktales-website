@@ -2,7 +2,7 @@ import { useDeferredValue, useEffect, useState } from 'react';
 
 import BookListItem from '@/components/BookListItem';
 import type { SourceItemAlt, WikidataItemAlt } from '@/types';
-import { sortTopicTags } from '@/utils/topic-tags';
+import { getTopicDisplayLabels } from '@/utils/topic-labels';
 
 const MAX_BOOKS = 12;
 const DEFAULT_LANGUAGE = 'bn';
@@ -122,9 +122,6 @@ const BookList = ({
   );
   const deferredSearchQuery = useDeferredValue(searchQuery);
   const deferredTopicQuery = useDeferredValue(topicQuery);
-  const allTypes = sortTopicTags(
-    Array.from(new Set(availableTopics.flatMap((topic) => topic.types))),
-  );
   const normalizedTopicQuery = deferredTopicQuery.trim().toLowerCase();
   const topicSuggestions = availableTopics
     .filter((topic) => !selectedTopics.includes(topic.slug))
@@ -133,7 +130,7 @@ const BookList = ({
         return false;
       }
 
-      const sortedTags = sortTopicTags(topic.types);
+      const sortedTags = getTopicDisplayLabels(topic);
       const searchableText = [topic.item, topic.slug, ...sortedTags]
         .join(' ')
         .toLowerCase();
@@ -443,9 +440,7 @@ const BookList = ({
                   {topicSuggestions.length > 0 && (
                     <div className="bg-base-100 absolute z-10 mt-2 max-h-72 w-full overflow-y-auto rounded-2xl border border-base-300 shadow-lg">
                       {topicSuggestions.map((topic) => {
-                        const sortedTags = sortTopicTags(topic.types);
-                        const typeLabel =
-                          allTypes.length > 1 ? sortedTags.join(' / ') : '';
+                        const typeLabel = getTopicDisplayLabels(topic).join(' / ');
 
                         return (
                           <button

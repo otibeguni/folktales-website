@@ -1,8 +1,8 @@
 import type { WikidataItemAlt } from '@/types';
-import { sortTopicTags } from '@/utils/topic-tags';
+import { getTopicDisplayLabels } from '@/utils/topic-labels';
 
 const TopicListItem = ({ topic }: { topic: WikidataItemAlt }) => {
-  const sortedTags = sortTopicTags(topic.types);
+  const classificationLabels = getTopicDisplayLabels(topic);
   const description = topic.description?.trim();
 
   return (
@@ -20,9 +20,9 @@ const TopicListItem = ({ topic }: { topic: WikidataItemAlt }) => {
           </p>
         )}
         <div className="mt-3 flex flex-wrap items-center gap-2">
-          {sortedTags.map((tag) => (
-            <span key={tag} className="badge badge-soft badge-primary">
-              {tag}
+          {classificationLabels.map((label) => (
+            <span key={label} className="badge badge-soft badge-primary">
+              {label}
             </span>
           ))}
         </div>

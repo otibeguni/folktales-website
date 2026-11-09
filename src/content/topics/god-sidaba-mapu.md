@@ -2,7 +2,7 @@
 slug: god-sidaba-mapu
 item: Sidaba Mapu
 item_bn: "সিদাবা মাপু"
-types: ["Deity"]
+category: Deity
 description: Sky God from Sanamahism
 ---
 

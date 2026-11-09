@@ -1,14 +1,12 @@
 ---
 import { localizePath } from "@/utils/site-text";
 import ResourceTypeIcon from "@/components/ResourceTypeIcon.astro";
-import { sortTopicTags } from "@/utils/topic-tags";
 
 interface Item {
   name: string;
   subtitle?: string;
   badges?: string[];
   type?: string;
-  types?: string[];
   meta?: string;
   url?: string;
   isExternal?: boolean;
@@ -58,10 +56,7 @@ if ((!items || items.length === 0) && !title && !hasActions) {
             if (!linkUrl) return null;
 
             const subtitle = item.subtitle ?? item.meta;
-            const badges = item.badges ?? [
-              ...(item.types ? sortTopicTags(item.types) : []),
-              ...(item.type ? [item.type] : []),
-            ];
+            const badges = item.badges ?? (item.type ? [item.type] : []);
             return (
               <a
                 href={linkUrl}

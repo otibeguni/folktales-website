@@ -15,7 +15,6 @@ topic_slugs:
   - tangail-district
   - savar-upazila
   - bhut
-  - kaladut-shaladut
   - yajna
   - jiyon-kathi
 resource_slugs: []

@@ -1,4 +1,5 @@
 ---
+import { getTopicDisplayLabels } from "@/utils/topic-labels";
 import BookPdfViewer from "@/components/BookPdfViewer";
 import BookListItem from "@/components/BookListItem";
 import RelatedItemsList from "@/components/RelatedItemsList.astro";
@@ -86,7 +87,7 @@ const relatedTopics = (book.data.topic_slugs ?? [])
   .filter(Boolean)
   .map((topic) => ({
     name: topic.data.item,
-    types: topic.data.types ?? [],
+    badges: getTopicDisplayLabels(topic.data),
     url: `/topics/${topic.slug}`,
     isExternal: false,
   }));

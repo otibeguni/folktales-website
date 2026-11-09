@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from "react";
 import type { AtlasEntry } from "@/utils/content";
-import { sortTopicTags } from "@/utils/topic-tags";
+import { getTopicDisplayLabels } from "@/utils/topic-labels";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
@@ -107,7 +107,7 @@ const FolkloreAtlas = ({ entries, labels }: Props) => {
   }, [entries, mapId]);
 
   const selectedEntry = entries.find((entry) => entry.slug === selectedSlug);
-  const sortedTags = selectedEntry ? sortTopicTags(selectedEntry.types) : [];
+  const sortedTags = selectedEntry ? getTopicDisplayLabels(selectedEntry) : [];
   const isPanelOpen = Boolean(selectedEntry);
 
   return (

@@ -3,11 +3,12 @@ import test from "node:test";
 
 import { buildTopicExplorerGraphData } from "./topic-explorer-graph.mjs";
 
-const makeTopic = (slug, item, types, extra = {}) => ({
+const makeTopic = (slug, item, category, extra = {}) => ({
   slug,
   data: {
     item,
-    types,
+    category,
+    subtype: extra.subtype,
     description: extra.description,
     item_bn: extra.item_bn,
   },
@@ -57,8 +58,8 @@ const makeRelation = (slug, sourceTopicSlug, targetTopicSlug, type) => ({
 test("topic explorer graph emits topic relation and content link edges", () => {
   const graph = buildTopicExplorerGraphData({
     topics: [
-      makeTopic("forest-topic", "Forest", ["Place"]),
-      makeTopic("river-topic", "River", ["Natural"]),
+      makeTopic("forest-topic", "Forest", "Landscape"),
+      makeTopic("river-topic", "River", "Landscape"),
     ],
     topicRelations: [
       makeRelation(
@@ -97,7 +98,7 @@ test("topic explorer graph emits topic relation and content link edges", () => {
 
 test("topic explorer graph collapses story translations by canonical slug", () => {
   const graph = buildTopicExplorerGraphData({
-    topics: [makeTopic("forest-topic", "Forest", ["Place"])],
+    topics: [makeTopic("forest-topic", "Forest", "Landscape")],
     topicRelations: [],
     stories: [
       makeStory("forest-story", "Forest Story", "en", ["forest-topic"]),
@@ -130,8 +131,9 @@ test("topic explorer graph collapses story translations by canonical slug", () =
 test("topic explorer graph populates filter metadata and skips dangling topic references", () => {
   const graph = buildTopicExplorerGraphData({
     topics: [
-      makeTopic("forest-topic", "Forest", ["Place"], {
+      makeTopic("forest-topic", "Forest", "Landscape", {
         description: "Sacred forest.",
+        subtype: "Forest",
         item_bn: "বন",
       }),
     ],
@@ -169,7 +171,8 @@ test("topic explorer graph populates filter metadata and skips dangling topic re
 
   assert.equal(topicNode?.itemBn, "বন");
   assert.equal(topicNode?.description, "Sacred forest.");
-  assert.deepEqual(topicNode?.topicTypes, ["Place"]);
+  assert.equal(topicNode?.topicCategory, "Landscape");
+  assert.equal(topicNode?.topicSubtype, "Forest");
   assert.equal(bookNode?.bookLanguage, "en");
   assert.equal(bookNode?.bookCategory, "Legend");
   assert.equal(bookNode?.bookAvailability, "purchase");
