@@ -1,6 +1,7 @@
 ---
 slug: bonobibi-jahuranama
 item: Bonobibi Jahuranama
+item_bn: "বনবিবির জহুরানামা"
 types:
   - Work
   - Literary

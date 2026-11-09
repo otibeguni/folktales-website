@@ -1,6 +1,7 @@
 ---
 slug: barishal
 item: Barishal
+item_bn: "বরিশাল"
 wikidata_id: Q1763301
 types: ["Place"]
 subtype: Settlement or region

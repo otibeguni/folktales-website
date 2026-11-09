@@ -1,6 +1,7 @@
 ---
 slug: gokul-medh
 item: Gokul Medh
+item_bn: "গোকুল মেধ"
 wikidata_id: Q25588540
 types: ["Place", "Site", "Historical"]
 subtype: Archaeological site

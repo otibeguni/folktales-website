@@ -1,6 +1,7 @@
 ---
 slug: sylhet-division
 item: Sylhet Division
+item_bn: "সিলেট বিভাগ"
 wikidata_id: Q459732
 types: ["Place"]
 subtype: Settlement or region

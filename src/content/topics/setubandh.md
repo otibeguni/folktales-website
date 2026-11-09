@@ -8,5 +8,7 @@ types:
   - Legendary
 subtype: Natural feature
 description: "The legendary bridge between India and Lanka, also known as Adam's Bridge, whose stones recur as marvels in Bengali puthi."
+latitude: 9.1
+longitude: 79.4
 ---
 

@@ -1,6 +1,7 @@
 ---
 slug: kamakhya-temple
 item: Kamakhya Temple
+item_bn: "কামাখ্যা মন্দির"
 wikidata_id: Q3629418
 types: ["Place", "Site", "Sacred"]
 subtype: Sacred site

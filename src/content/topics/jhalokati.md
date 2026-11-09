@@ -1,6 +1,7 @@
 ---
 slug: jhalokati
 item: Jhalokati
+item_bn: "ঝালকাঠি"
 wikidata_id: Q2093327
 types: ["Place"]
 subtype: Settlement or region

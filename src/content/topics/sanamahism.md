@@ -1,6 +1,7 @@
 ---
 slug: sanamahism
 item: Sanamahism
+item_bn: "সনামাহীবাদ"
 types:
   - Religion
 subtype: Religion

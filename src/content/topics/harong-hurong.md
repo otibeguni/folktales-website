@@ -1,6 +1,7 @@
 ---
 slug: harong-hurong
 item: Harong Hurong
+item_bn: "হরং হুরং"
 wikidata_id: Q61360832
 types: ["Place"]
 subtype: Natural feature

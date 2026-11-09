@@ -1,6 +1,7 @@
 ---
 slug: buddhism
 item: Buddhism
+item_bn: "বৌদ্ধধর্ম"
 types:
   - Religion
 subtype: Religion

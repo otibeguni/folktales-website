@@ -1,6 +1,7 @@
 ---
 slug: gauda-kingdom
 item: Gauḍa Kingdom
+item_bn: "গৌড় রাজ্য"
 wikidata_id: Q17076645
 types: ["Place", "Kingdom", "Historical"]
 subtype: Polity

@@ -1,6 +1,7 @@
 ---
 slug: shah-jalal-dargah
 item: Shah Jalal Dargah
+item_bn: "হযরত শাহ জালালের দরগা"
 types:
   - Site
   - Sacred

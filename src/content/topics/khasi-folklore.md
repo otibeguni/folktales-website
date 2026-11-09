@@ -1,6 +1,7 @@
 ---
 slug: khasi-folklore
 item: Khasi Folklore
+item_bn: "খাসিয়া লোককথা"
 types:
   - Tradition
 subtype: Folk tradition
