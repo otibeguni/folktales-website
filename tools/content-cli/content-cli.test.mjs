@@ -486,4 +486,73 @@ test("help includes tui usage", async () => {
   assert.doesNotMatch(help.stdout, /content tui/);
   assert.doesNotMatch(help.stdout, /story-metadata/);
   assert.match(help.stdout, /source-text/);
+  assert.match(help.stdout, /--min-topics/);
+  assert.match(help.stdout, /--max-topics/);
+});
+
+test("list story filters by inclusive topic-count bounds", async () => {
+  const rootDir = await makeFixture();
+
+  // forest-story (fixture) has 1 topic; add a 0-topic and a 2-topic story.
+  await writeFile(rootDir, "src/content/stories/en/zero-story.md", `---
+title: Zero Story
+language: en
+---
+
+No topics here.
+`);
+  await writeFile(rootDir, "src/content/storyMetadata/zero-story.md", `---
+category: Folktale
+topic_slugs: []
+---
+`);
+  await writeFile(rootDir, "src/content/stories/en/two-story.md", `---
+title: Two Story
+language: en
+---
+
+Two topics here.
+`);
+  await writeFile(rootDir, "src/content/storyMetadata/two-story.md", `---
+category: Folktale
+topic_slugs:
+  - forest-topic
+  - river-topic
+---
+`);
+
+  const slugsFor = async (args) => {
+    const result = await runCli(rootDir, ["list", "story", ...args, "--json"]);
+    assert.equal(result.code, 0, result.stderr);
+    return JSON.parse(result.stdout).map((s) => `${s.slug}:${s.language}`).sort();
+  };
+
+  assert.deepEqual(await slugsFor(["--max-topics", "0"]), ["zero-story:en"]);
+  assert.deepEqual(await slugsFor(["--max-topics", "1"]), [
+    "forest-story:bn",
+    "forest-story:en",
+    "zero-story:en",
+  ]);
+  assert.deepEqual(await slugsFor(["--min-topics", "2"]), ["two-story:en"]);
+  assert.deepEqual(await slugsFor(["--min-topics", "1", "--max-topics", "1"]), [
+    "forest-story:bn",
+    "forest-story:en",
+  ]);
+  assert.deepEqual(await slugsFor(["--max-topics", "1", "--language", "en"]), [
+    "forest-story:en",
+    "zero-story:en",
+  ]);
+
+  const bad = await runCli(rootDir, ["list", "story", "--max-topics", "abc", "--json"]);
+  assert.equal(bad.code, 1);
+  assert.match(bad.stderr, /--max-topics expects a non-negative integer/);
+
+  const negative = await runCli(rootDir, ["list", "story", "--min-topics", "-1", "--json"]);
+  assert.equal(negative.code, 1);
+  assert.match(negative.stderr, /--min-topics expects a non-negative integer/);
+
+  // Non-story entities ignore the topic-count flags.
+  const topics = await runCli(rootDir, ["list", "topic", "--max-topics", "0", "--json"]);
+  assert.equal(topics.code, 0);
+  assert.equal(JSON.parse(topics.stdout).length, 2);
 });

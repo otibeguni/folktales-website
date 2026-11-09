@@ -29,6 +29,8 @@ import {
 function printUsage() {
   console.log(`Usage:
   content list <entity> [filters] [--json]
+    story filters: --category <category> --language <en|bn> --topic <slug>
+                   --min-topics <n> --max-topics <n>  (inclusive bounds on a story's topic count)
     topic filters: --category <category> --subtype <subtype> --being-kind <individual|class>
     topic-relation filters: --type <type> --source-category <category> --target-category <category>
                            --source-subtype <subtype> --target-subtype <subtype>

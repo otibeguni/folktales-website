@@ -11,6 +11,15 @@ topic_slugs:
   - balkh
   - ashwamedha-yagna
   - karotoa-river
+  - damascus
+  - shah-sultan-balkhi
+  - sandwip
+  - parashurama
+  - narasimha
+  - kshatriya
+  - mahabharata
+  - ramayana
+  - shila-devi-ghat
 resource_slugs:
   - resource-70-skonder-dhap-video
 ---

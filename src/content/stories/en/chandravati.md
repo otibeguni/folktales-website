@@ -4,7 +4,6 @@ url_slug: chandravati
 language: en
 ---
 
-
 On the banks of the gentle Phuleswari river, nestled like a picture postcard, was the village of Patpari. In this village lived a young girl named Chandravati. Near her home was a pond surrounded by a flower garden, vibrant with the colors of hibiscus, jasmine, and champak flowers. Every day, a graceful young girl and a handsome young man would come to the pond's edge to pick flowers.
 
 One day, the girl, Chandravati, finally spoke to the boy. "Who are you?" she asked. "You're not from our village, yet you come here every day, breaking branches and taking all the flowers."

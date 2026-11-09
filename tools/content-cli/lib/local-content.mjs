@@ -782,8 +782,23 @@ function matchesFilterValue(actual, expected) {
   return expectedValues.every((value) => actualValues.includes(value));
 }
 
+function parseCountFlag(value, flagName) {
+  if (value === undefined) return undefined;
+  if (typeof value !== "string" && typeof value !== "number") {
+    throw new Error(`${flagName} expects a non-negative integer`);
+  }
+  const text = String(value).trim();
+  const num = Number(text);
+  if (text === "" || !Number.isInteger(num) || num < 0) {
+    throw new Error(`${flagName} expects a non-negative integer, received "${value}"`);
+  }
+  return num;
+}
+
 export function applyEntityFilters(entries, context, entityName, options = {}) {
   const entity = resolveEntityName(entityName);
+  const minTopics = parseCountFlag(options["min-topics"], "--min-topics");
+  const maxTopics = parseCountFlag(options["max-topics"], "--max-topics");
   const matchEndpoint = (slug, end) => {
     const category = options[`${end}-category`];
     const subtype = options[`${end}-subtype`];
@@ -846,6 +861,13 @@ export function applyEntityFilters(entries, context, entityName, options = {}) {
       if (!matchesFilterValue(topicSlugs, options.topic)) {
         return false;
       }
+    }
+
+    if ((minTopics !== undefined || maxTopics !== undefined) && entry.entity === "story") {
+      const resolved = getResolvedStory(context, entry);
+      const topicCount = (resolved?.metadata?.topic_slugs || []).length;
+      if (minTopics !== undefined && topicCount < minTopics) return false;
+      if (maxTopics !== undefined && topicCount > maxTopics) return false;
     }
 
     if (options.type) {
