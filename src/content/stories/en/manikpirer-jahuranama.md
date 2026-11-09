@@ -5,7 +5,6 @@ url_slug: manikpirer-jahuranama
 language: en
 ---
 
-
 It was Allah’s divine will to send a prophet named Manik to the world—an avatar who would spread His word. In the age of Kali Yuga, this chosen one would come to Earth and enlighten people about Hajj, Ghazi, Muhammad, Rahim, Karim, Rasul, Paygamber, Izzat, and Mother.
 
 Badr stepped forward and said he was ready to take on this responsibility.
