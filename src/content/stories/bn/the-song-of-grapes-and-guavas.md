@@ -4,7 +4,6 @@ url_slug: the-song-of-grapes-and-guavas
 language: bn
 ---
 
-
 > ইসলামপুর রাজ্যের বাদশা হুসান ই আকবর,
 >
 > উজির নাজির মন্ত্রী সেপাই ছিল যে বিস্তর।।
