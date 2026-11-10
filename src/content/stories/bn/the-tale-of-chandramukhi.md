@@ -4,7 +4,6 @@ url_slug: the-tale-of-chandramukhi
 language: bn
 ---
 
-
 > আগেতে আল্লার নাম মনেতে করিআ।।
 > 
 > চন্দরমুখির কথা শুন মন দিআ
