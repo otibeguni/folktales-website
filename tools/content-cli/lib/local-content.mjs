@@ -1827,6 +1827,101 @@ export async function updateEntry(rootDir, entityName, slug, updates, options = 
   };
 }
 
+function stripArrayValue(values, value) {
+  return arrayify(values).filter((item) => item !== value);
+}
+
+function removeTopicLink(entry, topicSlug) {
+  const nextData = { ...entry.data };
+  const nextTopicSlugs = stripArrayValue(nextData.topic_slugs, topicSlug);
+  if (nextTopicSlugs.length > 0) {
+    nextData.topic_slugs = nextTopicSlugs;
+  } else {
+    delete nextData.topic_slugs;
+  }
+  return nextData;
+}
+
+export async function deleteEntry(rootDir, entityName, slug, options = {}) {
+  const context = await loadContentContext(rootDir);
+  const entity = resolveEntityName(entityName);
+  const entry = findEntry(context, entityName, slug, options);
+  if (!entry) {
+    throw new Error(`Could not find ${entityName} "${slug}"`);
+  }
+  if (entity !== "topic" && entity !== "topic-relation") {
+    throw new Error("delete supports only topics and topic relations");
+  }
+
+  const dryRun = Boolean(options.dryRun);
+  const removedReferences = {
+    storyMetadata: [],
+    books: [],
+    resources: [],
+    topicRelations: [],
+  };
+
+  if (entity === "topic") {
+    for (const metadata of context.storyMetadata) {
+      if (!arrayify(metadata.data.topic_slugs).includes(entry.slug)) continue;
+      removedReferences.storyMetadata.push({ slug: metadata.slug, path: metadata.relativePath });
+      if (!dryRun) {
+        await fs.writeFile(
+          metadata.path,
+          serializeDocument(removeTopicLink(metadata, entry.slug), metadata.body),
+          "utf8",
+        );
+      }
+    }
+
+    for (const book of context.books) {
+      if (!arrayify(book.data.topic_slugs).includes(entry.slug)) continue;
+      removedReferences.books.push({ slug: book.slug, path: book.relativePath });
+      if (!dryRun) {
+        await fs.writeFile(
+          book.path,
+          serializeDocument(removeTopicLink(book, entry.slug), book.body),
+          "utf8",
+        );
+      }
+    }
+
+    for (const resource of context.resources) {
+      if (!arrayify(resource.data.topic_slugs).includes(entry.slug)) continue;
+      removedReferences.resources.push({ slug: resource.slug, path: resource.relativePath });
+      if (!dryRun) {
+        await fs.writeFile(
+          resource.path,
+          serializeDocument(removeTopicLink(resource, entry.slug), resource.body),
+          "utf8",
+        );
+      }
+    }
+
+    for (const relation of context.topicRelations) {
+      const { source_topic_slug: sourceSlug, target_topic_slug: targetSlug } = relation.data;
+      if (sourceSlug !== entry.slug && targetSlug !== entry.slug) continue;
+      removedReferences.topicRelations.push({ slug: relation.slug, path: relation.relativePath });
+      if (!dryRun) {
+        await fs.unlink(relation.path);
+      }
+    }
+  }
+
+  if (!dryRun) {
+    await fs.unlink(entry.path);
+  }
+
+  return {
+    entity,
+    slug: entry.slug,
+    path: entry.path,
+    relativePath: entry.relativePath,
+    dryRun,
+    removedReferences,
+  };
+}
+
 export async function readBodyInput(flags) {
   if (flags["body-file"]) {
     const filePath = path.resolve(getRepoRoot(), flags["body-file"]);

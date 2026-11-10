@@ -9,6 +9,7 @@ import {
   buildStoryInspect,
   buildTemplate,
   createEntry,
+  deleteEntry,
   findEntry,
   getDoctorReport,
   getEntriesForEntity,
@@ -40,6 +41,7 @@ function printUsage() {
   content create <entity> [flags]
     topics: --category <category> [--subtype <subtype>]
   content update <entity> <slug> [--set field=value] [--add field=value] [--remove field=value]
+  content delete <topic|topic-relation> <slug> [--dry-run] [--json]
   content validate [entity|all] [--json]
   content related <entity> <slug> [--language <en|bn>] [--json]
   content template <entity>
@@ -340,6 +342,37 @@ async function main() {
         );
         if (result.snippet) {
           console.log(`  ${result.snippet}`);
+        }
+      }
+    }
+    return;
+  }
+
+  if (command === "delete") {
+    if (!maybeSlug) throw new Error("delete requires a slug");
+    const deleted = await deleteEntry(context.rootDir, entityArg, maybeSlug, {
+      dryRun: getBooleanFlag(flags, "dry-run"),
+    });
+    if (getBooleanFlag(flags, "json")) {
+      printJson(deleted);
+    } else {
+      console.log(
+        `${deleted.dryRun ? "Would delete" : "Deleted"} ${deleted.entity} ${deleted.slug} (${deleted.relativePath})`,
+      );
+      const references = [
+        ...deleted.removedReferences.storyMetadata.map((ref) => ["story-metadata", ref]),
+        ...deleted.removedReferences.books.map((ref) => ["book", ref]),
+        ...deleted.removedReferences.resources.map((ref) => ["resource", ref]),
+        ...deleted.removedReferences.topicRelations.map((ref) => ["topic-relation", ref]),
+      ];
+      if (references.length > 0) {
+        console.log(
+          `${deleted.dryRun ? "Would remove" : "Removed"} ${references.length} reference${
+            references.length === 1 ? "" : "s"
+          }:`,
+        );
+        for (const [entity, ref] of references) {
+          console.log(`  ${entity}  ${ref.slug}  (${ref.path})`);
         }
       }
     }

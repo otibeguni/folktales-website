@@ -372,6 +372,56 @@ test("update story can patch underlying metadata fields", async () => {
   assert.deepEqual(updated.metadata.resource_slugs, ["moon-resource"]);
 });
 
+test("delete topic removes links from metadata, books, resources, and relations", async () => {
+  const rootDir = await makeFixture();
+  const topicPath = path.join(rootDir, "src/content/topics/forest-topic.md");
+  const relationPath = path.join(
+    rootDir,
+    "src/content/topicRelations/located_in--forest-topic--river-topic.md",
+  );
+
+  const preview = await runCli(rootDir, ["delete", "topic", "forest-topic", "--dry-run", "--json"]);
+  assert.equal(preview.code, 0, preview.stderr);
+  const previewRecord = JSON.parse(preview.stdout);
+  assert.equal(previewRecord.dryRun, true);
+  assert.deepEqual(previewRecord.removedReferences.storyMetadata.map((ref) => ref.slug), ["forest-story"]);
+  assert.deepEqual(previewRecord.removedReferences.books.map((ref) => ref.slug), ["moon-book"]);
+  assert.deepEqual(previewRecord.removedReferences.resources.map((ref) => ref.slug), ["moon-resource"]);
+  assert.deepEqual(
+    previewRecord.removedReferences.topicRelations.map((ref) => ref.slug),
+    ["located_in--forest-topic--river-topic"],
+  );
+  await fs.access(topicPath);
+  await fs.access(relationPath);
+
+  const removed = await runCli(rootDir, ["delete", "topic", "forest-topic", "--json"]);
+  assert.equal(removed.code, 0, removed.stderr);
+  const removedRecord = JSON.parse(removed.stdout);
+  assert.equal(removedRecord.dryRun, false);
+
+  await assert.rejects(fs.access(topicPath), { code: "ENOENT" });
+  await assert.rejects(fs.access(relationPath), { code: "ENOENT" });
+
+  for (const relativePath of [
+    "src/content/storyMetadata/forest-story.md",
+    "src/content/books/moon-book.md",
+    "src/content/resources/moon-resource.md",
+  ]) {
+    const contents = await fs.readFile(path.join(rootDir, relativePath), "utf8");
+    assert.doesNotMatch(contents, /forest-topic/);
+  }
+
+  const validate = await runCli(rootDir, ["validate", "all", "--json"]);
+  assert.equal(validate.code, 0, validate.stdout);
+});
+
+test("delete rejects entity types it cannot cascade safely", async () => {
+  const rootDir = await makeFixture();
+  const result = await runCli(rootDir, ["delete", "story", "forest-story"]);
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /delete supports only topics and topic relations/);
+});
+
 test("story collection get and search include body and stories", async () => {
   const rootDir = await makeFixture();
   const get = await runCli(rootDir, ["get", "story-collection", "featured", "--json"]);

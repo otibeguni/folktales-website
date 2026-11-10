@@ -8,7 +8,6 @@ topic_slugs:
   - danava-spirit
   - daitya-asura
   - uttorbongo-geetika
-  - khandakar-mohammad-ali-samrat
   - khokkas
   - mayakathi
 resource_slugs: []

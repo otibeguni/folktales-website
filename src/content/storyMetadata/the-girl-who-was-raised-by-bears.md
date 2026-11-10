@@ -6,7 +6,6 @@ source_label: Bangla Academy Folklore Shongrohomala - 130
 topic_slugs:
   - bangla-academy-folklore-sangrahamala
   - danava-spirit
-  - bengali-folklore
   - qissa
   - rishi
   - sonar-kathi

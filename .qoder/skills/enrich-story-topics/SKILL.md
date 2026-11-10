@@ -1,6 +1,6 @@
 ---
 name: enrich-story-topics
-description: Curate reusable topics for folktales in this repo via the content CLI. Use when asked to find stories with few/low topics, enrich or expand a story's topics, suggest topics to link or create, or populate topic metadata. Workflow lists low-topic stories, lets the user pick one, reads it, then proposes existing topics to link and new reusable topics to create (significant figures, places, traditions, deities, supernatural beings, communities, source works) — never one-off characters or single-story fictional places — and finally creates, links, and validates.
+description: Curate reusable topics for folktales in this repo via the content CLI. Use when asked to find stories with few/low topics, enrich or expand a story's topics, suggest topics to link or create, or populate topic metadata. Workflow lists low-topic stories, lets the user pick one, reads it, then proposes existing topics to link and new reusable topics to create (significant figures, places, traditions, deities, supernatural beings, communities) — never one-off characters, single-story fictional places, source collections/works, authors or compilers, or catch-all culture labels like "Bengali folklore" — and finally creates, links, and validates.
 argument-hint: "[story-slug] [--max N]"
 ---
 
@@ -50,10 +50,14 @@ work/collection, and the cultural, religious, and geographic setting.
 
 ### 3. Propose topics (load `references/topic-guide.md`)
 
-- Identify **reusable entities only**: significant figures, communities, places (real and
-  recurring mythic), traditions/religions, deities, supernatural beings, source works/texts,
-  and recurring magical objects.
+- Identify **reusable entities only** — `Person` figures, `Group` communities, the place
+  categories (`Landscape`, `Settlement`, `Region`, `Polity`, `Site`, `Realm`), `Tradition`,
+  `Deity`, `Supernatural being`, `Event`, `Object`, and `Work` texts that appear inside stories.
+  Category/subtype names live in `src/utils/topic-taxonomy.mjs`; the guide mirrors them.
 - **Exclude** one-off characters and fictional places unique to this single tale.
+- **Never create provenance or catch-all topics**: no topics for the source collection/work a
+  story is published in, none for its author/compiler/translator, and none for broad culture
+  labels ("Bengali folklore", "Chakma folklore"). See the guide's exclusion list.
 - For each candidate, **search existing topics first** (`search topic --query ...`). Decide
   **link existing** vs **create new**; avoid near-duplicates.
 - For each new topic, draft full metadata: `slug`, `item`, `item_bn` (if known), `category`,
@@ -98,8 +102,17 @@ Report: topics created, topics linked, and the story's new topic count.
 
 - **Confirm before any write** (creating topics or changing story metadata).
 - **Reuse** existing topics; search before creating.
+- **No provenance topics**: never create `Work`/collection topics or author/compiler
+  (`Author or collector`) topics, and never link an existing one merely because the story comes
+  from that book or was written by that person.
+- **No catch-all culture topics**: avoid broad labels like "Bengali folklore", "Chakma
+  folklore", "Indian mythology", or "puthi literature"; link or create the specific entity
+  instead.
 - **Never fabricate `wikidata_id`** — omit it when unsure.
-- Give each topic one category. Use `being_kind` for supernatural beings.
+- **Respect the taxonomy**: one category per topic; the subtype must come from that category's
+  list and is required only for the six place categories (omit it when nothing fits — `Deity`
+  has no `Other`). Set `being_kind` (`class`/`individual`) only on supernatural beings. Never
+  write the removed `types` field.
 - Keep descriptions single-line; mind shell quoting (edit the file directly for complex text).
 - Quality over quantity: a few well-chosen reusable topics beat many one-off entities.
 

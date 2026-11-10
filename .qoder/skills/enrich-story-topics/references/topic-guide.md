@@ -11,38 +11,68 @@ collection — not a fixture of a single plot.
 
 Target these categories:
 
-- **Significant figures** (`Person`): saints/mystics, prophets, rulers, and recurring legendary
-  heroes (e.g. Hatim Al-Tai). Not the unique protagonist of one tale.
-- **Communities** (`People` → Group): ethnic/religious/social groups, named collectives.
-- **Places** (`Place`/`Site`/`Kingdom`): real regions, rivers, cities, sacred sites, shrines,
-  historic polities, and **recurring mythic realms** (Mount Qaf, Patala, Swarga, Kshira Sagara).
-- **Traditions / religions** (`Tradition`): e.g. Sanamahism, devotional schools, rituals.
-- **Deities** (`Deity`): gods/goddesses and folk deities (Bonbibi, Dakshin Rai, Manasa, Shiva).
+- **Significant figures** (`Person`): saints/mystics, prophets, other religious figures, rulers,
+  and recurring legendary heroes (e.g. Hatim Al-Tai). Not the unique protagonist of one tale.
+- **Communities and groups** (`Group`): ethnic/religious/social groups and named collectives
+  (Bede, Chakma, Brahmin, Baro-Bhuiyan).
+- **Places**, using the place categories: `Landscape` (rivers, hills, forests, islands,
+  wetlands, seas), `Settlement` (cities, towns, localities), `Region` (districts, administrative
+  areas, geographic regions), `Polity` (kingdoms and other historic states), `Site` (shrines,
+  temples, archaeological sites), and `Realm` (recurring mythic realms such as Mount Qaf,
+  Patala, Swarga, Kshira Sagara).
+- **Deities** (`Deity`): gods/goddesses, avatars, and folk deities (Bonbibi, Dakshin Rai,
+  Manasa, Shiva).
 - **Supernatural beings** (`Supernatural being`): classes (rakshasa, pari, jinn, byangoma) or
-  named recurring beings (Raymoni).
-- **Source works and scripture** (`Work`): the collection or poem a story belongs
-  to (Thakurmar Jhuli, Maimansingha Gitika, Bonobibi Jahuranama, Vedas).
-- **Recurring magical objects** (`Object`): e.g. Parashmani, Aab-e Hayat.
+  named recurring beings (Raymoni), with `being_kind` set to `class` or `individual`.
+- **Traditions / religions** (`Tradition`): religions, rituals, devotional schools, and folk
+  traditions (Sanamahism, Islam, annaprashan).
+- **Events** (`Event` → `Conflict`): named battles, conquests, and conflicts that recur across
+  stories (e.g. the Conquest of Sylhet).
+- **Texts within the story world** (`Work`): a scripture a character quotes, an epic a tale
+  retells, a poem recited on-page. This is not the collection the story is published in —
+  see the exclusions below.
+- **Recurring magical objects** (`Object` → `Magical object or substance`): e.g. Parashmani,
+  Aab-e Hayat.
 
 **Exclude:**
 
 - One-off characters invented for a single story's plot.
 - Fictional places that exist only in that one tale.
 
+**Never create:**
+
+- **Source collections / works** — the book, anthology, puthi, jhuli, or sangrahamala a story
+  comes from (e.g. Thakurmar Jhuli, Maimansingha Gitika, Chandramukhi Puthi). Provenance is
+  already modelled in story metadata (`source_slug`, `source_text_slug`) and in `books` /
+  `storyCollections`; duplicating it as a topic adds no connection between stories.
+- **Authors, collectors, compilers, translators, editors** (`Person` → `Author or collector`).
+  Credit belongs in the story/resource metadata, not in the topic graph.
+- **Catch-all culture or corpus topics** — broad labels such as "Bengali folklore", "Chakma
+  folklore", "Indian mythology", or "puthi literature". They are too general to relate specific
+  stories; link or create the concrete entity (a deity, people, place, or specific tradition)
+  instead.
+
+An existing collection/author topic may still be linked, but only when the text or person is
+actually part of the story's subject matter — never just because the story belongs to that
+collection or credits that person. Likewise, don't add an existing catch-all culture/corpus
+topic; propose the specific entity instead.
+
 **Litmus test:** "Could this entity plausibly show up in another story here?" If yes → topic.
-If it only exists to serve this one narrative → skip it.
+If it only exists to serve this one narrative → skip it. If it describes where the story was
+published or who wrote it down, rather than what the story is about → skip it.
 
 ### Worked example (the pattern to emulate)
 
-`bonobibi-jahuranama` links nine topics, including `bonbibi-deity` and `dakshin-rai` (Deity),
-`shah-jongoli` (Person/Saint or mystic),
-`prophet-muhammad` (Person/Prophet), `sundarbans` (Landscape/Forest),
-`ganges-river` (Landscape/River), `mecca` and `medina` (Settlement/City),
-and `bonobibi-jahuranama` (Work). Gulal Bibi, Berahim, Phulbibi, and Raymoni appear in the story text.
+`gazi-kalu-chompaboti` links ten content topics: `sundarbans` (Landscape/Forest),
+`gazi-pir` (Person/Saint or mystic), `dakshin-rai` (Deity/Folk deity), `khidr`
+(Person/Prophet), `god-shiva`, `goddess-parvati`, `rahu`, and `ganga-devi` (Deity),
+`patala` (Realm/Cosmological realm), and `mecca` (Settlement/City). Its source puthi and
+compiler live in `source_slug` / book metadata (`name`, `author`) and are deliberately not
+topics.
 
 ## 2. Always search existing topics first
 
-~198 topics already exist. Reuse instead of duplicating; watch for slug variants.
+Many topics already exist. Reuse instead of duplicating; watch for slug variants.
 
 ```bash
 node tools/content-cli/cli.mjs search topic --query "<name or Bengali label>" --json
@@ -74,9 +104,16 @@ Each topic has one `category`. The subtype must belong to that category.
 | Event | Conflict |
 | Object | Magical object or substance |
 
-Landscape, Settlement, Region, Polity, Site, and Realm require a subtype.
-Supernatural beings also require `being_kind`. Use `class` for a type such as
-jinn and `individual` for a named being such as Duldul.
+Place categories (`Landscape`, `Settlement`, `Region`, `Polity`, `Site`, `Realm`) require a
+subtype. Every other category's subtype is optional: omit it when no listed value fits
+(`Deity`, `Group`, `Tradition`, and `Event` have no `Other` subtype, so many topics leave it
+empty). `Supernatural being` also requires `being_kind` (`class` or `individual`); `being_kind`
+is invalid on every other category. The old `types` tag field was removed — writing it fails
+validation.
+
+The schema also allows `Work` and `Person / Author or collector`. Use them only for texts or
+people that are part of the story world, never for the story's source collection or its
+compiler (§1).
 
 ## 4. Frontmatter fields
 
@@ -87,8 +124,9 @@ jinn and `individual` for a named being such as Duldul.
 | `item_bn` | no | Bengali label — include when known |
 | `wikidata_id` | no | `Q...` — **only if verified; never fabricate.** Omit if unsure |
 | `category` | yes | one category from the table above |
-| `subtype` | conditional | required for place categories |
-| `being_kind` | conditional | required for supernatural beings only |
+| `subtype` | conditional | required for the six place categories; optional elsewhere |
+| `being_kind` | conditional | required for supernatural beings; invalid on other categories |
+| `types` | never | removed legacy tag list — use `category` + `subtype` |
 | `description` | no | 1–2 sentences, single line: what it is + why it recurs |
 | `latitude` / `longitude` | no | numbers; real places only |
 
@@ -127,11 +165,14 @@ node tools/content-cli/cli.mjs create topic --slug sanamahism --item "Sanamahism
   --category Tradition --subtype Religion \
   --description "The Meitei religious tradition behind the Sidaba Mapu and Helloi stories."
 
-# Work (source collection)
-node tools/content-cli/cli.mjs create topic --slug thakurmar-jhuli --item "Thakurmar Jhuli" \
-  --item_bn "ঠাকুরমার ঝুলি" --wikidata_id Q3350396 --category Work --subtype "Collection" \
-  --description "Dakshinaranjan Mitra Majumder's collection of Bengali folk and fairy tales."
+# Group (community)
+node tools/content-cli/cli.mjs create topic --slug bede-people --item "Bede People" \
+  --item_bn "বেদে" --category Group --subtype Community \
+  --description "Itinerant river-faring communities whose boats, healers, and snake charmers recur in Bengali tales."
 ```
+
+There is deliberately no `Work`/`Collection` or `Person`/`Author or collector` example here:
+do not create provenance topics for the source work or its compiler (§1).
 
 If a description needs embedded quotes or multiple lines, create with the core flags, then
 edit `src/content/topics/<slug>.md` directly and re-validate.
