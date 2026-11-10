@@ -5,7 +5,6 @@ url_slug: the-girl-who-was-raised-by-bears
 language: en
 ---
 
-
 King Jalal was deeply sad. He had such a large kingdom, but to whom could he entrust its rule and close his eyes in peace? One by one, he married seven times, but still, no child was born in any of his households. In his sorrow, the king entrusted the kingdom to his vizier and minister and began to walk towards the forest, taking only a bed and a pillow with him.
 
 As he walked, he suddenly saw a man sleeping on the bare ground. The king gave him the pillow. Then he started walking again. After going some distance, he saw another person lying on the ground, and the king gave him the bed. Then, at some point, he fell asleep. In a dream, the king met a sage who told him that if he walked east, he would find a forest. In the middle of that forest was a banana tree with many bunches of bananas. If he took the ripe bananas from a bunch and fed them to his queens, they would have children.
