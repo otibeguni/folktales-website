@@ -5,7 +5,6 @@ url_slug: komol-the-merchant
 language: en
 ---
 
-
 On the banks of the Karnaphuli river (known locally as Kãichya) was a city named Basanti Nagar. There lived Kamal Saodagar, the merchant. He had a grand two-story building surrounded by a garden filled with countless varieties of flowers and fruits. The sheer grandeur of the main gate of the merchant's house was so dazzling that it left all the townspeople in awe. The merchant's wife, Surongini, was unparalleled in beauty and virtue. Their home was brightened by their two sons—Chanmoni and Surjomoni. There was no lack of motherly affection for her golden, doll-like sons.
 
 Surongona also had a handmaiden named Moifula. Moifula had no children of her own, so she loved Chanmoni and Surjomoni as if they were her own sons. The merchant's moon and sun grew up surrounded by the love and affection of their mother and their "aunt," Moifula. But perhaps it is the nature of happiness that it does not last long. And so, one day, the merchant's wife fell ill and passed away. The two children cried inconsolably in the house, and seeing their tears, the father's eyes also filled with tears. Seeing the state of the household, the handmaiden Moifula, the boys' aunt, kept her own sorrow in her heart and took upon herself the entire burden of the household. And why wouldn't she? After all, before she died, Surongona had held her hand and entrusted the responsibility of the boys to her!
