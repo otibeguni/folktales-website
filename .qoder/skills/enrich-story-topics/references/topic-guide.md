@@ -7,12 +7,15 @@ Re-read the source files if they change.
 ## 1. What counts as a topic (selection criteria)
 
 A topic is a **reusable entity that can appear in, or be referenced by, other stories** in the
-collection — not a fixture of a single plot.
+collection — not a fixture of a single plot. This skill processes **one story per run**: a new
+topic starts with one story link and is not back-filled onto stories processed earlier. That
+makes the future-use question, not the current link count, the deciding test.
 
 Target these categories:
 
-- **Significant figures** (`Person`): saints/mystics, prophets, other religious figures, rulers,
-  and recurring legendary heroes (e.g. Hatim Al-Tai). Not the unique protagonist of one tale.
+- **Significant figures** (`Person`): saints/mystics, prophets, other religious figures, and
+  recurring legendary heroes (e.g. Hatim Al-Tai). Not the unique protagonist, eponymous ruler,
+  or supporting character of one tale.
 - **Communities and groups** (`Group`): ethnic/religious/social groups and named collectives
   (Bede, Chakma, Brahmin, Baro-Bhuiyan).
 - **Places**, using the place categories: `Landscape` (rivers, hills, forests, islands,
@@ -32,12 +35,20 @@ Target these categories:
   retells, a poem recited on-page. This is not the collection the story is published in —
   see the exclusions below.
 - **Recurring magical objects** (`Object` → `Magical object or substance`): e.g. Parashmani,
-  Aab-e Hayat.
+  Aab-e Hayat. Create the reusable motif, not a one-off plot prop.
 
 **Exclude:**
 
-- One-off characters invented for a single story's plot.
+- One-off characters invented for a single story's plot: protagonists, antagonists, eponymous
+  rulers, and supporting cast. A story named after a character is not evidence of reuse.
 - Fictional places that exist only in that one tale.
+- One-off plot props whose only function is to resolve this story.
+- Villages, wards, upazilas, and single landmarks when a city/region hub already covers the
+  setting; a place that exists as a topic only because of one legend.
+- Mundane food, drink, or clothing modeled as `Object` — `Object` is only for magical
+  objects/substances.
+- Relative/associate figures from one hagiographic story; keep only figures with independent
+  significance outside the plot.
 
 **Never create:**
 
@@ -57,9 +68,23 @@ actually part of the story's subject matter — never just because the story bel
 collection or credits that person. Likewise, don't add an existing catch-all culture/corpus
 topic; propose the specific entity instead.
 
-**Litmus test:** "Could this entity plausibly show up in another story here?" If yes → topic.
-If it only exists to serve this one narrative → skip it. If it describes where the story was
-published or who wrote it down, rather than what the story is about → skip it.
+**Litmus test (one-story runs):** Name a **specific unprocessed or planned story** in the
+collection that would link this entity. If you cannot, skip it — "it might recur" and "the wider
+tradition knows it" are not enough. If it only exists to serve this narrative → skip it. If it
+describes where the story was published or who wrote it down rather than what the story is about
+→ skip it.
+
+### Class before individual
+
+Before naming an individual, search for its type: `pari`, `daitya-asura`, `rakshasa`, `jinn`,
+`pir`, `zamindar`, `badshah`. If the graph already has the class, link the class unless the
+individual has independent significance outside the plot (a saint with a cult, a prophet, a
+recurring legendary hero). An individual created in a one-story run may stay a one-story node
+forever.
+
+Example: `gule-bakawali` already had `pari`, `daitya-asura`, `azdaha`, `god-indra`, and
+`patala`. The right enrichment was to link those; Bakawali and Ruh Afza are instances of `pari`,
+and Hammala is an instance of `daitya-asura`.
 
 ### Worked example (the pattern to emulate)
 
@@ -69,6 +94,57 @@ published or who wrote it down, rather than what the story is about → skip it.
 `patala` (Realm/Cosmological realm), and `mecca` (Settlement/City). Its source puthi and
 compiler live in `source_slug` / book metadata (`name`, `author`) and are deliberately not
 topics.
+
+### Worked anti-example (the pattern to avoid)
+
+A single puthi can tempt a topic-per-character list. `gule-bakawali` already had `pari`,
+`daitya-asura`, `azdaha`, `god-indra`, and `patala`. Creating `bakawali`, `ruh-afza`, `hammala`,
+`delbar-laksha`, `tajul-muluk`, `firdous-nagar`, `shorkostan`, and `bakawali-flower` added no
+reusable connections; all were removed in the 2026-11 audit. The durable additions were the
+existing class/realm links plus `indrasabha` and `fakir` where they genuinely fit.
+
+### Anti-patterns from the 2026-11 audit
+
+| Pattern | Removed examples | Instead |
+|---|---|---|
+| Fictional lead or eponymous hero | `khaybar-jung`, `bahram-badshah`, `tajul-muluk`, `bakawali`, `alal`, `dulal` | Link the tale's existing class/theme; do not create the individual. |
+| Supporting cast | `delbar-laksha`, `hammala`, `ruh-afza`, `salim-badshah`, `jagai-madhai` | Use `pari` / `daitya-asura` or omit. |
+| One-tale fictional place | `firdous-nagar`, `shorkostan` | Omit; the story page carries the setting. |
+| Granular real place | `ekachakra`, `katwa`, `khardaha`, `teknaf-upazila`, `tetulia-upazila`, `mathiners-well` | Link the city/region hub or omit. |
+| Plot prop | `bakawali-flower`, `pitha-tree`, `sonar-kathi`, `rupar-kathi` | Create the generic motif only if reusable; otherwise omit. |
+| Mundane item forced into `Object` | `alcohol`, `gumchak-fruit` | Use `Tradition / Folk tradition` if it is a custom, or omit. |
+| Continental label | `hindustan` | Use a concrete region or omit. |
+| Relative/associate overload | `lakshmipriya`, `vishnupriya`, `vishvarupa`, `shachidevi` | Keep only figures with independent significance. |
+
+### Place granularity
+
+Use the coarsest node that carries the story's geography. A village scene usually needs the
+city, district, or region, not the village. Do not create a topic for a landmark whose only
+claim is one legend. Retained examples: `nabadwip`, `kolkata`, `gaya`, `misr`, `isfahan`,
+`naf-river`, `bay-of-bengal`. Removed: `ekachakra`, `katwa`, `khardaha`, `teknaf-upazila`,
+`tetulia-upazila`, `mathiners-well`.
+
+### Object discipline
+
+`Object` is only for magical objects/substances. Create the reusable motif (`jadu-aaina` Magic
+Mirror, `magic-gourd`, `life-token-tree`, `sky-reaching-tree`), not the named prop
+(`bakawali-flower`, `pitha-tree`, `sonar-kathi`, `rupar-kathi`). Mundane items (`alcohol`,
+`gumchak-fruit`, `rinai`) are not Objects; model a custom under `Tradition / Folk tradition` or
+omit it.
+
+### Broad labels must anchor something
+
+A broad node is acceptable only if it anchors concrete children or spans multiple stories:
+`pir` anchors `gazi-pir`, `manik-pir`, and `madar-pir`; `fakir` spans six stories. `hindustan`
+and `alcohol` anchor nothing and were removed. Substances, abstract activities, and continental
+labels are not topics.
+
+### Soft budget
+
+Aim for **4–6 new topics per story**. If you have more candidates, rank them by (1) the concrete
+future story that would link them, (2) class/hub coverage, and (3) concreteness, then keep the
+strongest. Density was the leading indicator of one-offs in the audit: `nimai-sanyas` 19 new,
+`gul-e-bakawali` 10, `well-of-mathin` 7.
 
 ## 2. Always search existing topics first
 
@@ -80,8 +156,9 @@ node tools/content-cli/cli.mjs list topic --category Landscape --json
 node tools/content-cli/cli.mjs get topic <slug> --json
 ```
 
-Match candidates by `item`, `item_bn`, and `wikidata_id`, not just slug. If a topic exists,
-**link it** rather than creating a near-duplicate.
+Match candidates by `item`, `item_bn`, and `wikidata_id`, not just slug. Also search the type
+vocabulary (`fairy`, `pari`, `daitya`, `rakshasa`, `pir`, `zamindar`) so an existing class is not
+missed. If a topic exists, **link it** rather than creating a near-duplicate.
 
 ## 3. Taxonomy
 
@@ -114,6 +191,10 @@ validation.
 The schema also allows `Work` and `Person / Author or collector`. Use them only for texts or
 people that are part of the story world, never for the story's source collection or its
 compiler (§1).
+
+`Object` means magical object or substance; do not use it for mundane food, drink, or clothing.
+`Supernatural being` is for spirits and mythic creatures; a real animal does not belong there
+unless the tale makes it genuinely mythical.
 
 ## 4. Frontmatter fields
 
