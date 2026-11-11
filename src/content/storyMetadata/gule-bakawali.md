@@ -4,6 +4,20 @@ cover_image: "https://res.cloudinary.com/dx0tajutq/image/upload/v1750584702/shah
 source_slug: gule-bokowali
 topic_slugs:
   - pari
+  - bakawali
+  - tajul-muluk
+  - delbar-laksha
+  - hammala
+  - ruh-afza
+  - shorkostan
+  - firdous-nagar
+  - indrasabha
+  - bakawali-flower
+  - daitya-asura
+  - azdaha
+  - fakir
+  - god-indra
+  - patala
 resource_slugs:
   - gul-e-bakawali-1963
 ---
