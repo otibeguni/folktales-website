@@ -5,7 +5,6 @@ source_slug: bengali-household-tales
 topic_slugs:
   - rakhal
   - pitha
-  - pitha-tree
   - daini
 resource_slugs: []
 ---

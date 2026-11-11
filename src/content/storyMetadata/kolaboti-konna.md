@@ -9,8 +9,6 @@ topic_slugs:
   - jadu-aaina
   - magic-gourd
   - golden-fish
-  - rinai
-  - gumchak-fruit
 resource_slugs: []
 ---
 

@@ -8,8 +8,6 @@ topic_slugs:
   - danava-spirit
   - qissa
   - rishi
-  - sonar-kathi
-  - rupar-kathi
   - life-token-tree
 resource_slugs: []
 ---

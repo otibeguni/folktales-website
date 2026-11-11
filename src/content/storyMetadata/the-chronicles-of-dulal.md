@@ -10,9 +10,6 @@ topic_slugs:
   - daini
   - saudagar
   - sannyasi
-  - salim-badshah
-  - alal
-  - dulal
 resource_slugs: []
 ---
 

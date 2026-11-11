@@ -6,12 +6,10 @@ topic_slugs:
   - tripura-people
   - bhut
   - tripura-kingdom
-  - shukradeva
   - tantrik
   - tantra
   - mantra
   - tabej
-  - alcohol
 resource_slugs: []
 ---
 

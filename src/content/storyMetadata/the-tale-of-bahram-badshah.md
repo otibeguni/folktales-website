@@ -4,7 +4,6 @@ cover_image: "https://res.cloudinary.com/dx0tajutq/image/upload/v1750584700/shah
 source_slug: bangla-academy-folklore-songrohomala-33-kissa
 source_label: Bangla Academy Folklore Sangrahamala Volume 33
 topic_slugs:
-  - bahram-badshah
   - fakir
   - islam-religion
   - saudagar
