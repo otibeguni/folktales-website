@@ -5,7 +5,6 @@ url_slug: king-khaybar-jung
 language: en
 ---
 
-
 A long time ago, there was a happy kingdom named Jampur. The king there always stood by his subjects in their joys and sorrows. Under his rule, every family in the kingdom was happy, and the men treated their wives with kindness. But there was one incompleteness in the lives of the king and queen—they had no children.
 
 One day, in the middle of an important cabinet meeting, bad news arrived—the queen had fainted. After receiving care and regaining consciousness, the queen spoke of a terrifying dream. In her dream, a fearsome Brahmodaittya (a type of ghost) had warned her. The demon revealed that near the palace, deep within a pond filled with poisonous snakes, there was a secret chamber. If she did not sacrifice her son in that chamber, he would kill everyone in the royal lineage. Trembling with fear, she told the demon that she had no son. The demon laughed and replied, "In ten months, a son will be born to you. If you do not sacrifice him, disaster is inevitable!"
