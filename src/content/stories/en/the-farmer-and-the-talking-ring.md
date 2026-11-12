@@ -5,7 +5,6 @@ url_slug: the-farmer-and-the-talking-ring
 language: en
 ---
 
-
 In a village lived an old man and an old woman. They had two grandsons. The sons and daughters-in-law had passed away when the boys were still little, so it was their grandparents who raised them. The grandsons were strong and hardworking; they worked in the jhum fields. The old couple would spend the whole day sitting and waiting eagerly for their grandsons to return with food.
 
 One day, while working together, the grandsons became very tired. They searched the forest for food but found nothing. Then they climbed a tree and spotted a pigeon’s nest with four eggs. One by one, they ate all four eggs. In the evening, after returning home, they told their grandmother, “You know, today we ate pigeon eggs! Four of them. They were really tasty!”
