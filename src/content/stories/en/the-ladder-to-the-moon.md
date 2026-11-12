@@ -4,7 +4,6 @@ url_slug: the-ladder-to-the-moon
 language: en
 ---
 
-
 Long, long ago, in a place called Achik Asong, lived a hardworking man named Jarong. He was always busy, cutting wood from the forest and bamboo from the groves, selling them at the market, and buying everything his family needed.
 
 Jarong's wife was incredibly beautiful, and his son was like a little prince. More than anything else in the world, Jarong loved his wife and son. He would do everything in his power, and sometimes even more, to keep them happy. But his wife and son had a habit of getting upset and staying that way until they got whatever they asked for. They were never easily satisfied.
