@@ -4,7 +4,6 @@ url_slug: the-princess-and-the-royal-elephant
 language: en
 ---
 
-
 Many, many years ago, people and animals could understand each other’s language. They considered one another as relatives and openly asked for help when needed.
 
 In one household, the wife was expecting a child, and at the same time, their cow was also going to have a calf. Both were in the courtyard. The wife was sitting on the veranda weaving cloth when suddenly the shuttle (used for weaving) fell from her hand. She then called out to the cow, “Sister cow, could you please bring me the shuttle?”
