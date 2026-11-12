@@ -4,7 +4,6 @@ url_slug: sleeping-princess
 language: en
 ---
 
-
 There was once a prince whose beauty lit up the entire palace and whose virtues were too many for people to count. One day, the prince decided he would travel the world. A sadness fell over the kingdom. The queen gave up food and sleep, but the king simply said:
 
 > Very well, let him go.
