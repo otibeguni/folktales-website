@@ -1,10 +1,16 @@
 ---
-category: "Indigenous Folktale"
+category: Indigenous Folktale
 cover_image: "https://res.cloudinary.com/dx0tajutq/image/upload/v1750584698/shahriarhaque_painting_of_an_evil_indian_merman_2766da2a-50de-4e80-85fa-8d695a986133_pasxjp.webp"
-source_slug: "bangla-kingbodonti-asaduzzaman-juel"
+source_slug: bangla-kingbodonti-asaduzzaman-juel
 topic_slugs:
-  - "garo-people"
+  - garo-people
+  - garo-hills
+  - rongdik-river
+  - merman
+  - jolpari
+  - underwater-kingdom
+  - crocodile
 resource_slugs:
-  - "resource-44-exploring-garo-hills-and-dombe-wari"
+  - resource-44-exploring-garo-hills-and-dombe-wari
 ---
 
