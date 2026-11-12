@@ -4,7 +4,6 @@ url_slug: the-fox-who-played-pretend
 language: en
 ---
 
-
 There once was a fox whose father had left him nothing but a wall. But the son, not to be outdone, had a grand idea of his own. Twirling his magnificent whiskers, the fox opened a grand school in the middle of a reed forest.
 
 His students were a motley crew: tiny crickets, chirping grasshoppers, the children of dragonflies, tortoises, and millipedes with their thousand legs. There were earthworms, centipedes, beetles, cockroaches, frogs, and crabs with their spindly legs. The fox-teacher's school was filled with students, and the reed forest buzzed day and night with their lessons.
