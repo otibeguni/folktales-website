@@ -4,6 +4,20 @@ cover_image: "https://res.cloudinary.com/dx0tajutq/image/upload/v1750584694/shah
 source_slug: book-96
 topic_slugs:
   - prophet-yusuf
+  - misr
+  - islam-religion
+  - quran
+  - allah-deity
+  - god-indra
+  - transformation-water
+  - dasi-handmaiden
+  - badshah
+  - durbar
+  - fakir
+  - nikah
+  - saudagar
+  - prophet-yaqub
+  - nile-river
 resource_slugs: []
 ---
 
