@@ -1,9 +1,8 @@
 ---
-title: The quest for the three-legged, three-headed creature
+title: "The quest for the three-legged, three-headed creature"
 url_slug: the-quest-for-the-three-legged-three-headed-creature
 language: en
 ---
-
 
 There was once a kingdom ruled by a wise King who had a single son. The Prince lived a life of ease, studying various arts, enjoying the company of his friends, and hunting in the royal forests. In this way, his days passed without a care.
 
