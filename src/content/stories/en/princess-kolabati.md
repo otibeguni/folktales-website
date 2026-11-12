@@ -4,7 +4,6 @@ url_slug: princess-kolabati
 language: en
 ---
 
-
 There was once a king who had seven queens. His kingdom was vast, his palace magnificent, filled with elephants and horses, jewels and gold. His court bustled with ministers, courtiers, and soldiers. But for all his wealth, the king knew no happiness. Not one of his seven queens had given him a child, and a deep sorrow lay over the entire kingdom.
 
 One day, as the queens were bathing at the river, a holy ascetic appeared. He placed the root of a plant in the eldest queen’s hand and said:
