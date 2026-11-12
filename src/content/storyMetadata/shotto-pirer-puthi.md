@@ -4,6 +4,22 @@ cover_image: "https://res.cloudinary.com/dx0tajutq/image/upload/v1750584699/shah
 source_slug: book-79
 topic_slugs:
   - satya-pir
+  - dakini
+  - daini
+  - rakshasa
+  - pir
+  - sannyasi
+  - saudagar
+  - shraddha
+  - mantra
+  - puja
+  - chandi-deity
+  - god-vishnu
+  - swayamvara
+  - satyanarayan-puja
+  - hooghly
+  - kaur-desh
+  - jadibooti
 resource_slugs: []
 ---
 
