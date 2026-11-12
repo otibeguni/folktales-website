@@ -4,7 +4,6 @@ url_slug: seven-champa-brothers
 language: en
 ---
 
-
 A king had seven queens. The older queens were so arrogant their feet barely touched the ground, but the youngest queen was gentle and quiet. For this reason, the king loved her more than all the others.
 
 For many years, however, the king had no children. He would often lament, who would inherit his vast kingdom? But one day, joy filled the palace. The youngest queen was going to have a child. The king’s happiness knew no bounds. He opened the royal treasury and made a proclamation across the land: anyone could come and take as many sweets, jewels, and precious stones as they could carry.
