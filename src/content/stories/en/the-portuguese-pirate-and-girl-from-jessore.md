@@ -4,7 +4,6 @@ url_slug: the-portuguese-pirate-and-girl-from-jessore
 language: en
 ---
 
-
 A long time ago, long before the British ruled these lands, our coastal villages used to be frequently raided by Portugese pirates. One such village was Godkhali (গদখালী) in the Jessore region.
 
 It was said that Modalosha, the daughter of the village-head of Godkhali, was the most beautiful woman of the region. Hearts would skip a beat, and time would seem to come to a standstill for anyone who laid eyes on her. Her father, spared no expense and lavishly decorated their house to match Modalosha's exceptional beauty. But one horrible night, screams and bloodshed stained the walls of the village-head's residence.
