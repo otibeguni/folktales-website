@@ -5,7 +5,6 @@ url_slug: the-farmer-and-the-beggar-from-a-foreign-land
 language: en
 ---
 
-
 A long, long time ago, in a certain country, lived a poor farmer's family. They lived from hand to mouth. While the crops of other farmers in the vicinity grew well, theirs, unfortunately, were always very poor. However, every member of the family was very kind and free from greed. As a result, despite having so little wealth and often no rice in the pot, they always had smiles on their faces. They felt no envy towards their neighbors. Although they were somewhat disheartened by their own situation, they never blamed others. Their days passed in this state of hardship.
 
 Suddenly, one night, a beggar from a foreign land came and knocked on their door. Exhausted from his long journey, the beggar asked them for a meal and shelter for one night. Without a second thought, they welcomed the guest with great warmth. The beggar was extremely pleased with such a beautiful reception. As he was leaving in the morning, he called the whole family and said,
