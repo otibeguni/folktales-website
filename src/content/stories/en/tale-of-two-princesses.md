@@ -4,7 +4,6 @@ url_slug: tale-of-two-princesses
 language: en
 ---
 
-
 A king had two daughters. Even though the princesses were supposed to live in the four walls of the castle – but these two princesses were a bit different. Two sisters used to go out of the Rajmahal if they got a chance together. One day we met them with a crow. The crow was bringing a pretty ripe fruit on his lips. The princesses want to eat after seeing the fruit. They said- "Oh what a sweet and toastous fruit! ”
 
 Listening to the princesses, the crow threw the fruit in front of them. Princesses play that fruit. The daughters of the king do not have any shortage of food anymore, if ordered, eight grains will be present. But they have never eaten such fruit in their life, it tastes so good. One fruit does not fill the hearts of two. So they started walking the road the crow came through. If fruit trees are available!
