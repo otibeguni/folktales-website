@@ -5,6 +5,20 @@ source_slug: book-85-the-adventures-of-hatim-tai
 topic_slugs:
   - hatim-al-tai
   - khorasan
+  - kotwal
+  - kamar-blacksmith
+  - badshah
+  - shahzada
+  - saudagar
+  - dacoit
+  - fakir
+  - midwife-dai
+  - durbar
+  - raja-dharma
+  - mehmani-hospitality
+  - kalnag
+  - angel
+  - kumar-potter
 resource_slugs: []
 ---
 
